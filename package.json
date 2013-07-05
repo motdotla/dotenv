@@ -1,0 +1,32 @@
+{
+  "name": "dotenv",
+  "version": "0.0.1",
+  "description": "Loads environment variables from .env",
+  "main": "lib/main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/scottmotte/dotenv.git"
+  },
+  "keywords": [
+    "dotenv",
+    "env",
+    ".env",
+    "environment",
+    "variables",
+    "config",
+    "settings"
+  ],
+  "readmeFilename": "README.md",
+  "author": "scottmotte",
+  "license": "BSD",
+  "devDependencies": {
+    "mocha": "",
+    "should": ""
+  }
+}
