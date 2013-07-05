@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Dotenv by scottmotte</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Dotenv</h1>
+        <p>Loads environment variables from .env for nodejs projects.</p>
+
+        <p class="view"><a href="https://github.com/scottmotte/dotenv">View the Project on GitHub <small>scottmotte/dotenv</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/scottmotte/dotenv/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/scottmotte/dotenv/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/scottmotte/dotenv">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="dotenv" class="anchor" href="#dotenv"><span class="octicon octicon-link"></span></a>dotenv</h1>
+
+<p>Dotenv loads environment variables from .env into ENV (process.env).</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>As early as possible in your application require dotenv and load the .env variables. </p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">dotenv</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'dotenv'</span><span class="p">);</span>
+<span class="nx">dotenv</span><span class="p">.</span><span class="nx">load</span><span class="p">();</span>
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Add your application configuration to your .env file in the root of your project:</p>
+
+<pre><code>S3_BUCKET=YOURS3BUCKET
+SECRET_KEY=YOURSECRETKEYGOESHERE
+SENDGRID_USERNAME=YOURSENDGRIDUSERNAME
+SENDGRID_PASSWORD=YOURSENDGRIDPASSWORDGOESHERE
+</code></pre>
+
+<p>Whenever your application loads, these variables will be available in <code>process.env</code>:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">sendgrid_username</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">SENDGRID_USERNAME</span><span class="p">;</span>
+</pre></div>
+
+<h2>
+<a name="should-i-commit-my-env-file" class="anchor" href="#should-i-commit-my-env-file"><span class="octicon octicon-link"></span></a>Should I commit my .env file?</h2>
+
+<p>Try not to commit your .env file to version control. It is best to keep it local to your machine and local on any machine you deploy to. Keep production credential .envs on your production machines, and keep development .envs on your local machine.</p>
+
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Contributions are very welcome. To run the tests, run:</p>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h2>
+<a name="running-tests" class="anchor" href="#running-tests"><span class="octicon octicon-link"></span></a>Running tests</h2>
+
+<div class="highlight"><pre>npm <span class="nb">test</span>
+</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/scottmotte">scottmotte</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
