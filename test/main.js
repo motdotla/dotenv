@@ -5,9 +5,16 @@ var assert      = require('assert'),
 var result;
 
 describe('dotenv', function() {
+  before(function() {
+    result = dotenv();
+  });
+
+  it('version should be set', function() {
+    result.version.should.eql("0.0.2"); 
+  });
+
   describe('.load()', function() {
     before(function() {
-      result = dotenv();
       result.load();
     });
 
@@ -21,6 +28,5 @@ describe('dotenv', function() {
     it('sets single quotes environment variables', function() {
       process.env.SINGLE_QUOTES.should.eql("single_quotes");
     });
-
   });
 });
