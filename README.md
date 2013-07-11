@@ -7,7 +7,7 @@ Dotenv loads environment variables from .env into ENV (process.env).
 As early as possible in your application require dotenv and load the .env variables. 
 
 ```javascript
-var dotenv = require('dotenv');
+var dotenv = require('dotenv')();
 dotenv.load();
 ```
 
