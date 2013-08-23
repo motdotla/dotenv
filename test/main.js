@@ -28,5 +28,10 @@ describe('dotenv', function() {
     it('sets single quotes environment variables', function() {
       process.env.SINGLE_QUOTES.should.eql("single_quotes");
     });
+    it('expands newlines but only if double quoted', function() {
+      process.env.EXPAND_NEWLINES.should.eql("expand\nnewlines");
+      process.env.DONT_EXPAND_NEWLINES_1.should.eql("dontexpand\\nnewlines");
+      process.env.DONT_EXPAND_NEWLINES_2.should.eql("dontexpand\\nnewlines");
+    });
   });
 });
