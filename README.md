@@ -43,6 +43,7 @@ Try not to commit your .env file to version control. It is best to keep it local
 ## Running tests
 
 ```bash
+npm install
 npm test
 ```
 
