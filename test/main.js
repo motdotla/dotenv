@@ -10,7 +10,7 @@ describe('dotenv', function() {
   });
 
   it('version should be set', function() {
-    result.version.should.eql("0.0.5"); 
+    result.version.should.eql("0.1.0"); 
   });
 
   describe('.load()', function() {
@@ -40,8 +40,13 @@ describe('dotenv', function() {
       process.env.FROM_DEVELOPMENT_ENV.should.eql("from_development_env");
     });
 
+    it('overrides any values in .env with .env.environment', function() {
+      process.env.ENVIRONMENT_OVERRIDE.should.eql("development");
+    });
+
     it('reads from a skipped line in .env.development', function() {
       process.env.AFTER_LINE.should.eql("after_line");
     });
+
   });
 });
