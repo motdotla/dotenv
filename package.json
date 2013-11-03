@@ -1,13 +1,13 @@
 {
   "name": "dotenv",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Loads environment variables from .env",
   "main": "lib/main.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/*.js"
+    "test": "./node_modules/.bin/mocha test/*.js"
   },
   "repository": {
     "type": "git",
