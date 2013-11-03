@@ -6,11 +6,11 @@ var result;
 
 describe('dotenv', function() {
   before(function() {
-    result = dotenv();
+    result = dotenv;
   });
 
   it('version should be set', function() {
-    result.version.should.eql("0.1.2"); 
+    result.version.should.eql("0.2.0"); 
   });
 
   describe('.load()', function() {
