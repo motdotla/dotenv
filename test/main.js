@@ -10,7 +10,7 @@ describe('dotenv', function() {
   });
 
   it('version should be set', function() {
-    result.version.should.eql("0.1.0"); 
+    result.version.should.eql("0.1.1"); 
   });
 
   describe('.load()', function() {
@@ -48,5 +48,16 @@ describe('dotenv', function() {
       process.env.AFTER_LINE.should.eql("after_line");
     });
 
+  });
+
+  describe('.load() after an ENV was already set on the machine', function() {
+    before(function() {
+      process.env.BASIC = "set_on_machine";
+      result.load();
+    });
+
+    it('sets using the value set on the machine', function() {
+      process.env.BASIC.should.eql("set_on_machine");
+    });
   });
 });
