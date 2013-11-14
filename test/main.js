@@ -48,6 +48,10 @@ describe('dotenv', function() {
       process.env.AFTER_LINE.should.eql("after_line");
     });
 
+    it('respects equals signs in values', function() {
+      process.env.EQUAL_SIGNS.should.eql("equals==");
+    });
+
   });
 
   describe('.load() after an ENV was already set on the machine', function() {
