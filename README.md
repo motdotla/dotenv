@@ -20,7 +20,7 @@ var dotenv = require('dotenv');
 dotenv.load();
 ```
 
-IMPORTANT: In pre `0.2.0`, you instantiated dotenv like the following with the bagels. 
+IMPORTANT: In pre `0.2.2`, you instantiated dotenv like the following with the bagels. 
 
 ```javascript
 var dotenv = require('dotenv')();
