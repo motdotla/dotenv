@@ -47,6 +47,10 @@ describe('dotenv', function() {
     it('reads from a skipped line in .env.development', function() {
       process.env.AFTER_LINE.should.eql("after_line");
     });
+    
+    it('ignores commented lines', function() {
+      should.not.exist(process.env.COMMENTS);
+    });
 
     it('respects equals signs in values', function() {
       process.env.EQUAL_SIGNS.should.eql("equals==");
