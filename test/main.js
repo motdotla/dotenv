@@ -2,11 +2,33 @@ var assert      = require('assert'),
     should      = require('should'),
     dotenv      = require('../lib/main');
 
-var result;
+var result, originalEnv=[];
+
+
+function captureEnvironment() {
+  var env = [];
+  for (prop in process.env) {
+    env[prop] = process.env[prop];
+  }
+  return env;
+}
+
+function resetEnvironment() {
+  for (prop in process.env) {
+    delete process.env[prop];
+  }
+  for (prop in originalEnv) {
+    process.env[prop] = originalEnv[prop];
+  }
+}
+
 
 describe('dotenv', function() {
   before(function() {
+    // we must make the working directory /test so that dotenv._loadDefaults() works as expected
+    process.chdir("./test");
     result = dotenv;
+    originalEnv = captureEnvironment();
   });
 
   it('version should be set', function() {
@@ -68,4 +90,25 @@ describe('dotenv', function() {
       process.env.ENVIRONMENT_OVERRIDE.should.eql("set_on_machine");
     });
   });
+
+
+  describe('.load(pathname)', function() {
+    beforeEach(function() {
+      resetEnvironment();
+    });
+
+    it('can read values from arbitrary files', function() {
+      result.load("environment");
+      process.env.LOADED_FROM_FILE.should.eql("environment");
+    });
+
+    it('returns false if trying to load from a missing file', function() {
+      var loaded = result.load("file_does_not_exist");
+      loaded.should.eql(false);
+    });
+
+  });
+
+
+
 });
