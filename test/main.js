@@ -2,11 +2,31 @@ var assert      = require('assert'),
     should      = require('should'),
     dotenv      = require('../lib/main');
 
-var result;
+var result, originalEnv=[];
+
+
+function captureEnvironment() {
+  var env = [];
+  for (prop in process.env) {
+    env[prop] = process.env[prop];
+  }
+  return env;
+}
+
+function resetEnvironment() {
+  for (prop in process.env) {
+    delete process.env[prop];
+  }
+  for (prop in originalEnv) {
+    process.env[prop] = originalEnv[prop];
+  }
+}
+
 
 describe('dotenv', function() {
   before(function() {
     result = dotenv;
+    originalEnv = captureEnvironment();
   });
 
   it('version should be set', function() {
@@ -68,4 +88,18 @@ describe('dotenv', function() {
       process.env.ENVIRONMENT_OVERRIDE.should.eql("set_on_machine");
     });
   });
+
+
+  describe('.load(pathname)', function() {
+    before(function() {
+      resetEnvironment();
+      result.load("environment");
+    });
+
+    it('can read values from arbitrary files', function() {
+      process.env.LOADED_FROM_FILE.should.eql("environment");
+    });
+
+  });
+
 });
