@@ -93,15 +93,22 @@ describe('dotenv', function() {
 
 
   describe('.load(pathname)', function() {
-    before(function() {
+    beforeEach(function() {
       resetEnvironment();
-      result.load("environment");
     });
 
     it('can read values from arbitrary files', function() {
+      result.load("environment");
       process.env.LOADED_FROM_FILE.should.eql("environment");
     });
 
+    it('returns false if trying to load from a missing file', function() {
+      var loaded = result.load("file_does_not_exist");
+      loaded.should.eql(false);
+    });
+
   });
+
+
 
 });
