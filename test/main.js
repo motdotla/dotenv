@@ -25,6 +25,8 @@ function resetEnvironment() {
 
 describe('dotenv', function() {
   before(function() {
+    // we must make the working directory /test so that dotenv._loadDefaults() works as expected
+    process.chdir("./test");
     result = dotenv;
     originalEnv = captureEnvironment();
   });
