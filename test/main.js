@@ -2,16 +2,15 @@ var assert      = require('assert'),
     should      = require('should'),
     dotenv      = require('../lib/main');
 
-var result, originalEnv=[];
+// process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-
-function captureEnvironment() {
+var originalEnv = (function captureEnvironment() {
   var env = [];
   for (prop in process.env) {
     env[prop] = process.env[prop];
   }
   return env;
-}
+})();
 
 function resetEnvironment() {
   for (prop in process.env) {
@@ -22,25 +21,31 @@ function resetEnvironment() {
   }
 }
 
+function load(directory, path) {
+    var originalDir = process.cwd();
+    process.chdir(directory);
+    var returnValue = dotenv.load(path);
+    process.chdir(originalDir);
+    return returnValue;
+}
 
 describe('dotenv', function() {
-  before(function() {
-    // we must make the working directory /test so that dotenv._loadDefaults() works as expected
-    process.chdir("./test");
-    result = dotenv;
-    originalEnv = captureEnvironment();
-  });
+
 
   it('version should be set', function() {
-    result.version.should.eql("0.2.2"); 
+    dotenv.version.should.eql("0.2.2"); 
   });
 
   describe('.load()', function() {
     before(function() {
-      result.load();
+      load(__dirname + "/fixtures/basic");
     });
 
+    after(resetEnvironment);
+
     it('sets the basic environment variables', function() {
+      // process.env.should.have.property("BASIC").and.eql("basic");
+      should.exist(process.env.BASIC);
       process.env.BASIC.should.eql("basic");
     });
 
@@ -57,6 +62,23 @@ describe('dotenv', function() {
       process.env.DONT_EXPAND_NEWLINES_1.should.eql("dontexpand\\nnewlines");
       process.env.DONT_EXPAND_NEWLINES_2.should.eql("dontexpand\\nnewlines");
     });
+    
+    it('ignores commented lines', function() {
+      should.not.exist(process.env.COMMENTS);
+    });
+
+    it('respects equals signs in values', function() {
+      process.env.EQUAL_SIGNS.should.eql("equals==");
+    });
+
+  });
+
+  describe('.load() environment-specific overrides', function() {
+    before(function() {
+      load(__dirname + "/fixtures/override");
+    });
+
+    after(resetEnvironment);
 
     it('reads from .env.development', function() {
       process.env.FROM_DEVELOPMENT_ENV.should.eql("from_development_env");
@@ -69,21 +91,12 @@ describe('dotenv', function() {
     it('reads from a skipped line in .env.development', function() {
       process.env.AFTER_LINE.should.eql("after_line");
     });
-    
-    it('ignores commented lines', function() {
-      should.not.exist(process.env.COMMENTS);
-    });
-
-    it('respects equals signs in values', function() {
-      process.env.EQUAL_SIGNS.should.eql("equals==");
-    });
-
   });
 
   describe('.load() after an ENV was already set on the machine', function() {
     before(function() {
       process.env.ENVIRONMENT_OVERRIDE = "set_on_machine";
-      result.load();
+      load(__dirname + "/fixtures/basic");
     });
 
     it('sets using the value set on the machine', function() {
@@ -92,23 +105,21 @@ describe('dotenv', function() {
   });
 
 
-  describe('.load(pathname)', function() {
-    beforeEach(function() {
-      resetEnvironment();
-    });
+  describe('.load(filename)', function() {
+    beforeEach(resetEnvironment);
+
+    after(resetEnvironment);
 
     it('can read values from arbitrary files', function() {
-      result.load("environment");
+      load(__dirname + "/fixtures/filename", "environment");
       process.env.LOADED_FROM_FILE.should.eql("environment");
     });
 
     it('returns false if trying to load from a missing file', function() {
-      var loaded = result.load("file_does_not_exist");
+      var loaded = load(__dirname + "/fixtures/filename", "file_does_not_exist");
       loaded.should.eql(false);
     });
 
   });
-
-
 
 });
