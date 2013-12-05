@@ -60,7 +60,7 @@ describe('dotenv', function() {
   describe('.load() environment-specific overrides', function() {
     before(function() {
       process.env.NODE_ENV = "development";
-      load(__dirname + "/fixtures/override");
+      load(__dirname + "/fixtures/development");
     });
 
     after(function() {
@@ -106,18 +106,18 @@ describe('dotenv', function() {
     after(dotenv.reset);
 
     it('can read values from arbitrary files', function() {
-      load(__dirname + "/fixtures/filename", "environment");
+      load(__dirname + "/fixtures/override", "environment");
       process.env.LOADED_FROM_FILE.should.eql("environment");
     });
 
     it('returns false if trying to load from a missing file', function() {
-      var loaded = load(__dirname + "/fixtures/filename", "file_does_not_exist");
+      var loaded = load(__dirname + "/fixtures/override", "file_does_not_exist");
       loaded.should.eql(false);
     });
 
     it('will override previously set values', function() {
-      load(__dirname + "/fixtures/filename");
-      load(__dirname + "/fixtures/filename", "environment");
+      load(__dirname + "/fixtures/override");
+      load(__dirname + "/fixtures/override", "environment");
       process.env.ENVIRONMENT_OVERRIDE.should.eql("file");
     });
 
