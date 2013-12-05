@@ -88,6 +88,26 @@ describe('dotenv', function() {
     });
   });
 
+
+  describe('.load() only using NODE_ENV', function() {
+    before(function() {
+      load(__dirname + "/fixtures/node_env");
+    });
+
+    after(function() {
+      dotenv.reset();
+      delete process.env.NODE_ENV;
+    });
+
+
+    testBasic();
+
+    it('overrides any values in .env with .env.environment', function() {
+      process.env.ENVIRONMENT_OVERRIDE.should.eql("not_development");
+    });
+  });
+
+
   describe('.load() after an ENV was already set on the machine', function() {
     before(function() {
       process.env.ENVIRONMENT_OVERRIDE = "set_on_machine";
