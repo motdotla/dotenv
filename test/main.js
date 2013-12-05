@@ -11,20 +11,7 @@ function load(directory, path) {
     return returnValue;
 }
 
-
-describe('dotenv', function() {
-
-  it('version should be set', function() {
-    dotenv.version.should.eql("0.2.2"); 
-  });
-
-  describe('.load()', function() {
-    before(function() {
-      load(__dirname + "/fixtures/basic");
-    });
-
-    after(dotenv.reset);
-
+function testBasic() {
     it('sets the basic environment variables', function() {
       process.env.BASIC.should.eql("basic");
     });
@@ -58,6 +45,23 @@ describe('dotenv', function() {
     it('reads from a skipped line in .env.development', function() {
       process.env.AFTER_LINE.should.eql("after_line");
     });
+};
+
+
+describe('dotenv', function() {
+
+  it('version should be set', function() {
+    dotenv.version.should.eql("0.2.2"); 
+  });
+
+  describe('.load()', function() {
+    before(function() {
+      load(__dirname + "/fixtures/basic");
+    });
+
+    after(dotenv.reset);
+
+    testBasic();
 
   });
 
@@ -71,6 +75,9 @@ describe('dotenv', function() {
       dotenv.reset();
       delete process.env.NODE_ENV;
     });
+
+
+    testBasic();
 
     it('reads from .env.development', function() {
       process.env.FROM_DEVELOPMENT_ENV.should.eql("from_development_env");
