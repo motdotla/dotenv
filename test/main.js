@@ -54,6 +54,10 @@ describe('dotenv', function() {
     it('trims leading and trailing whitespace', function() {
       process.env.WHITESPACE.should.eql("stripped");
     });
+    
+    it('reads from a skipped line in .env.development', function() {
+      process.env.AFTER_LINE.should.eql("after_line");
+    });
 
   });
 
@@ -74,10 +78,6 @@ describe('dotenv', function() {
 
     it('overrides any values in .env with .env.environment', function() {
       process.env.ENVIRONMENT_OVERRIDE.should.eql("development");
-    });
-
-    it('reads from a skipped line in .env.development', function() {
-      process.env.AFTER_LINE.should.eql("after_line");
     });
   });
 
