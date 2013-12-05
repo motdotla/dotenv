@@ -59,10 +59,14 @@ describe('dotenv', function() {
 
   describe('.load() environment-specific overrides', function() {
     before(function() {
+      process.env.NODE_ENV = "development";
       load(__dirname + "/fixtures/override");
     });
 
-    after(dotenv.reset);
+    after(function() {
+      dotenv.reset();
+      delete process.env.NODE_ENV;
+    });
 
     it('reads from .env.development', function() {
       process.env.FROM_DEVELOPMENT_ENV.should.eql("from_development_env");
@@ -84,6 +88,7 @@ describe('dotenv', function() {
     });
 
     after(function() {
+      dotenv.reset();
       delete process.env.ENVIRONMENT_OVERRIDE;
     });
 
@@ -94,7 +99,9 @@ describe('dotenv', function() {
 
 
   describe('.load(filename)', function() {
-    beforeEach(dotenv.reset);
+    beforeEach(function() {
+      dotenv.reset();
+    });
 
     after(dotenv.reset);
 
