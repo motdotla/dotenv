@@ -31,21 +31,43 @@
         <h1>
 <a name="dotenv" class="anchor" href="#dotenv"><span class="octicon octicon-link"></span></a>dotenv</h1>
 
-<p>Dotenv loads environment variables from .env into ENV (process.env).</p>
+<p>Dotenv loads environment variables from .env into ENV (process.env). It is a superior alternative to <a href="https://github.com/flatiron/nconf">nconf</a> and other variants.</p>
+
+<p><a href="https://travis-ci.org/scottmotte/dotenv"><img src="https://travis-ci.org/scottmotte/dotenv.png?branch=master" alt="BuildStatus"></a>
+<a href="http://badge.fury.io/js/dotenv"><img src="https://badge.fury.io/js/dotenv.png" alt="NPM version"></a></p>
+
+<blockquote>
+<p>"Storing <a href="http://www.12factor.net/config">configuration in the environment</a> is one of the tenets of a <a href="http://www.12factor.net/">twelve-factor app</a>. Anything that is likely to change between deployment environments–such as resource handles for databases or credentials for external services–should be extracted from the code into environment variables.</p>
+
+<p>But it is not always practical to set environment variables on development machines or continuous integration servers where multiple projects are run. Dotenv load variables from a <code>.env</code> file into ENV when the environment is bootstrapped."</p>
+
+<p><a href="https://github.com/bkeepers/dotenv">Brandon Keepers' Dotenv in Ruby</a></p>
+</blockquote>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>As early as possible in your application require dotenv and load the .env variables. </p>
+<p>Add it to your package.json file.</p>
 
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">dotenv</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'dotenv'</span><span class="p">);</span>
-<span class="nx">dotenv</span><span class="p">.</span><span class="nx">load</span><span class="p">();</span>
+<div class="highlight highlight-javascript"><pre><span class="p">{</span>
+  <span class="p">...</span>
+  <span class="s2">"dependencies"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="s2">"dotenv"</span><span class="o">:</span> <span class="s2">"0.2.4"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>Add your application configuration to your .env file in the root of your project:</p>
+<p>As early as possible in your application require dotenv and load the <code>.env</code> variables: </p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">dotenv</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'dotenv'</span><span class="p">);</span>
+<span class="nx">dotenv</span><span class="p">.</span><span class="nx">load</span><span class="p">();</span>
+</pre></div>
+
+<p>Then, create a <code>.env</code> file in the root directory of your project. Add the application configuration you want. For example:</p>
 
 <pre><code>S3_BUCKET=YOURS3BUCKET
 SECRET_KEY=YOURSECRETKEYGOESHERE
@@ -55,8 +77,11 @@ SENDGRID_PASSWORD=YOURSENDGRIDPASSWORDGOESHERE
 
 <p>Whenever your application loads, these variables will be available in <code>process.env</code>:</p>
 
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">sendgrid_username</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">SENDGRID_USERNAME</span><span class="p">;</span>
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">sendgrid_username</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">SENDGRID_USERNAME</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">secret_key</span>        <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">SECRET_KEY</span><span class="p">;</span>
 </pre></div>
+
+<p>That's it. You're done.</p>
 
 <h2>
 <a name="should-i-commit-my-env-file" class="anchor" href="#should-i-commit-my-env-file"><span class="octicon octicon-link"></span></a>Should I commit my .env file?</h2>
@@ -75,7 +100,8 @@ SENDGRID_PASSWORD=YOURSENDGRIDPASSWORDGOESHERE
 </ol><h2>
 <a name="running-tests" class="anchor" href="#running-tests"><span class="octicon octicon-link"></span></a>Running tests</h2>
 
-<div class="highlight"><pre>npm <span class="nb">test</span>
+<div class="highlight highlight-bash"><pre>npm install
+npm <span class="nb">test</span>
 </pre></div>
       </section>
       <footer>
