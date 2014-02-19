@@ -1,6 +1,6 @@
 # dotenv
 
-Dotenv loads environment variables from .env into ENV (process.env).
+Dotenv loads environment variables from .env into ENV (process.env). It is a superior alternative to [nconf](https://github.com/flatiron/nconf) and other variants.
 
 [![BuildStatus](https://travis-ci.org/scottmotte/dotenv.png?branch=master)](https://travis-ci.org/scottmotte/dotenv)
 [![NPM version](https://badge.fury.io/js/dotenv.png)](http://badge.fury.io/js/dotenv)
@@ -22,7 +22,7 @@ dotenv.load();
 
 ## Usage
 
-Add your application configuration to your .env file in the root of your project:
+Add your application configuration to your `.env` file in the root of your project:
 
 ```
 S3_BUCKET=YOURS3BUCKET
