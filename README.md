@@ -27,7 +27,7 @@ Add it to your package.json file.
 
 ## Usage
 
-As early as possible in your application require dotenv and load the `.env` variables. 
+As early as possible in your application require dotenv and load the `.env` variables: 
 
 ```javascript
 var dotenv = require('dotenv');
@@ -49,6 +49,8 @@ Whenever your application loads, these variables will be available in `process.e
 var sendgrid_username = process.env.SENDGRID_USERNAME;
 var secret_key        = process.env.SECRET_KEY;
 ```
+
+That's it. You're done.
 
 ## Should I commit my .env file?
 
