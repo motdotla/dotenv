@@ -13,16 +13,28 @@ Dotenv loads environment variables from .env into ENV (process.env). It is a sup
 
 ## Installation
 
-As early as possible in your application require dotenv and load the .env variables. 
+Add it to your package.json file.
+
+```javascript
+{
+  ...
+  "dependencies": {
+    ...
+    "dotenv": "0.2.4"
+  }
+}
+```
+
+## Usage
+
+As early as possible in your application require dotenv and load the `.env` variables. 
 
 ```javascript
 var dotenv = require('dotenv');
 dotenv.load();
 ```
 
-## Usage
-
-Add your application configuration to your `.env` file in the root of your project:
+Then, create a `.env` file in the root directory of your project. Add the application configuration you want. For example:
 
 ```
 S3_BUCKET=YOURS3BUCKET
@@ -35,6 +47,7 @@ Whenever your application loads, these variables will be available in `process.e
 
 ```javascript
 var sendgrid_username = process.env.SENDGRID_USERNAME;
+var secret_key        = process.env.SECRET_KEY;
 ```
 
 ## Should I commit my .env file?
