@@ -56,6 +56,10 @@ describe('dotenv', function() {
       process.env.EQUAL_SIGNS.should.eql("equals==");
     });
 
+    it('respect mongo database urls', function() {
+      process.env.MONGO_DATABASE_URL.should.eql("user:pass@troup.mongohq.com:port/db");
+    });
+
   });
 
   describe('.load() after an ENV was already set on the machine', function() {
