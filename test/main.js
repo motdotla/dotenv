@@ -57,7 +57,7 @@ describe('dotenv', function() {
     });
 
     it('respect mongo database urls', function() {
-      process.env.MONGO_DATABASE_URL.should.eql("user:pass@troup.mongohq.com:port/db");
+      process.env.MONGO_DATABASE_URL.should.eql("user-admin:pass_82@troup.mongohq.com:1004/db-Test");
     });
 
   });
