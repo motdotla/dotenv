@@ -75,6 +75,7 @@ npm test
 
 Here's a list of apps/sites/libraries using dotenv. It's in no way a complete list. 
 
+* [sendgrid-nodejs](https://github.com/sendgrid/sendgrid-nodejs)
 * [handshake.js](https://github.com/handshakejs/handshakejs-api)
 * [xavi](http://xavi.io/)
 * [google-oauth2-service-account](https://github.com/jacoblwe20/google-oauth2-service-account)
