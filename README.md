@@ -71,3 +71,15 @@ npm install
 npm test
 ```
 
+## Who's using dotenv
+
+Here's a list of apps/sites/libraries using dotenv. It's in no way a complete list. 
+
+* [handshake.js](https://github.com/handshakejs/handshakejs-api)
+* [xavi](http://xavi.io/)
+* [google-oauth2-service-account](https://github.com/jacoblwe20/google-oauth2-service-account)
+* [kibble](https://github.com/scottmotte/kibble)
+* [flossedtoday](https://github.com/scottmotte/flossedtoday)
+* [github-streaker](https://github.com/scottmotte/github-streaker)
+
+[Create a pull request](https://github.com/scottmotte/dotenv/pulls) and add yours to the list.
