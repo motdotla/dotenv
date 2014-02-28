@@ -56,8 +56,8 @@ describe('dotenv', function() {
       process.env.EQUAL_SIGNS.should.eql("equals==");
     });
 
-    it('respect mongo database urls', function() {
-      process.env.MONGO_DATABASE_URL.should.eql("user-admin:pass_82@troup.mongohq.com:1004/db-Test");
+    it('should handle zero width unicode characters', function() {
+      process.env.ZERO_WIDTH_CHARACTER.should.eql("user:pass@troup.mongohq.com:1004/dude");
     });
 
   });
