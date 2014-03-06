@@ -15,6 +15,7 @@ describe('dotenv', function() {
 
   describe('.load()', function() {
     before(function() {
+      process.env.ENV_VARIABLE="variable";
       result.load();
     });
 
@@ -28,6 +29,10 @@ describe('dotenv', function() {
 
     it('sets single quotes environment variables', function() {
       process.env.SINGLE_QUOTES.should.eql("single_quotes");
+    });
+
+    it('sets environment variables from other environment variables', function() {
+      process.env.ENVIRONMENT_INCLUDE.should.eql("variable");
     });
 
     it('expands newlines but only if double quoted', function() {
