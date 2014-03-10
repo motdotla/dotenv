@@ -1,5 +1,6 @@
 var assert      = require('assert'),
     should      = require('should'),
+    fs          = require('fs'),
     dotenv      = require('../lib/main');
 
 var result;
@@ -72,4 +73,23 @@ describe('dotenv', function() {
       process.env.ENVIRONMENT_OVERRIDE.should.eql("set_on_machine");
     });
   });
+
+  describe('.parse()', function(){
+    it('should return an object', function(){
+      dotenv.parse('').should.be.an.Object;
+    });
+    var buffer;
+    before(function(done){
+      fs.readFile('.env', function(err,res){
+        buffer = res;
+        done();
+      })
+    });
+
+    it('should parse a buffer from a file into an object', function(){
+      var payload = dotenv.parse( buffer );
+      payload.should.be.an.Object;
+      payload.should.have.property('BASIC', 'basic');
+    })
+  })
 });
