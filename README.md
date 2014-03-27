@@ -54,7 +54,7 @@ That's it. You're done.
 
 ### Dotenv.parse
 
-Also added in `0.2.6` the method `parse` has been exposed. This is how `dotenv` internally parses multiline buffers or strings into a object to place into the `process.env` object. 
+Also added in `0.2.6` the method `parse` has been exposed. This is how `dotenv` internally parses multiline buffers or strings into an object to place into the `process.env` object. 
 
 ```javascript
 var dotenv  = require('dotenv');
