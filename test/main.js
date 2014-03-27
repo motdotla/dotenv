@@ -23,6 +23,10 @@ describe('dotenv', function() {
       process.env.BASIC.should.eql("basic");
     });
 
+    it('sets empty enviroment variable', function () {
+      process.env.EMPTY.should.eql("");
+    });
+
     it('sets double quotes environment variables', function() {
       process.env.DOUBLE_QUOTES.should.eql("double_quotes");
     });
