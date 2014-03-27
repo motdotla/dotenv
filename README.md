@@ -52,6 +52,17 @@ var secret_key        = process.env.SECRET_KEY;
 
 That's it. You're done.
 
+### Dotenv.parse
+
+Also added in `0.2.6` the method `parse` has been exposed. This is how `dotenv` internally parses multiline buffers or strings into a object to place into the `process.env` object. 
+
+```javascript
+var dotenv  = require('dotenv');
+var file    = fs.readFileSync('./config/staging');
+var config  = dotenv.parse(file); // passing in a buffer
+console.log( typeof config, config ) // object { API : 'http://this.is.a/example' }
+```
+
 ## Should I commit my .env file?
 
 Try not to commit your .env file to version control. It is best to keep it local to your machine and local on any machine you deploy to. Keep production credential .envs on your production machines, and keep development .envs on your local machine.
