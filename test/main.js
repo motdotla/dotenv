@@ -41,12 +41,12 @@ describe('dotenv', function() {
       process.env.DONT_EXPAND_NEWLINES_2.should.eql("dontexpand\\nnewlines");
     });
 
-    it('reads from .env.development', function() {
-      process.env.FROM_DEVELOPMENT_ENV.should.eql("from_development_env");
+    it('reads from .env.staging', function() {
+      process.env.FROM_STAGING_ENV.should.eql("from_staging_env");
     });
 
     it('overrides any values in .env with .env.environment', function() {
-      process.env.ENVIRONMENT_OVERRIDE.should.eql("development");
+      process.env.ENVIRONMENT_OVERRIDE.should.eql("staging");
     });
 
     it('reads from a skipped line in .env.development', function() {
@@ -75,6 +75,32 @@ describe('dotenv', function() {
 
     it('sets using the value set on the machine', function() {
       process.env.ENVIRONMENT_OVERRIDE.should.eql("set_on_machine");
+      delete process.env.ENVIRONMENT_OVERRIDE; //clean up for other tests
+    });
+  });
+
+  describe('.load() if NODE_ENV is set in .env', function() {
+    before(function() {
+      result.load();
+    });
+
+    it('ENVIRONMENT_OVERRIDE should equal the value set in the .env.staging', function() {
+      process.env.ENVIRONMENT_OVERRIDE.should.eql('staging');
+      delete process.env.NODE_ENV; //cleanup for other tests
+      delete process.env.ENVIRONMENT_OVERRIDE;
+    });
+  });
+
+  describe('.load() if NODE_ENV is set in .env but NODE_ENV is already set on machine', function() {
+    before(function() {
+      process.env.NODE_ENV = "development"
+      result.load();
+    });
+
+    it('ENVIRONMENT_OVERRIDE should equal the value set in the .env.development because that is the environment being set by the machine. machine wins here.', function() {
+      process.env.ENVIRONMENT_OVERRIDE.should.eql('development');
+      delete process.env.NODE_ENV; //clean up for other tests
+      delete process.env.ENVIRONMENT_OVERRIDE;
     });
   });
 
