@@ -78,6 +78,16 @@ describe('dotenv', function() {
     });
   });
 
+  describe('.load() if NODE_ENV is set in .env', function() {
+    before(function() {
+      result.load();
+    });
+
+    it('ENVIRONMENT_OVERRIDE should equal the value set in the .env.environment', function() {
+      process.env.ENVIRONMENT_OVERRIDE.should.eql('production');
+    });
+  });
+
   describe('.parse()', function(){
     it('should return an object', function(){
       dotenv.parse('').should.be.an.Object;
