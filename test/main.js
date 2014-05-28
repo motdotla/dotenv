@@ -110,7 +110,7 @@ describe('dotenv', function() {
       result.load('filepath/');
     });
 
-    it('sets the basic environment variables', function() {
+    it('should load .env from specific filepath', function() {
       process.env.FILEPATH.should.eql("filepath/.env");
     });
   });
