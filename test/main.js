@@ -11,7 +11,7 @@ describe('dotenv', function() {
   });
 
   it('version should be set', function() {
-    result.version.should.eql("0.2.8"); 
+    result.version.should.eql("0.2.9"); 
   });
 
   describe('.load()', function() {
@@ -67,6 +67,7 @@ describe('dotenv', function() {
 
   });
 
+
   describe('.load() after an ENV was already set on the machine', function() {
     before(function() {
       process.env.ENVIRONMENT_OVERRIDE = "set_on_machine";
@@ -101,6 +102,16 @@ describe('dotenv', function() {
       process.env.ENVIRONMENT_OVERRIDE.should.eql('development');
       delete process.env.NODE_ENV; //clean up for other tests
       delete process.env.ENVIRONMENT_OVERRIDE;
+    });
+  });
+
+  describe('.load(filepath) with location of .env', function() {
+    before(function() {
+      result.load('filepath/');
+    });
+
+    it('sets the basic environment variables', function() {
+      process.env.FILEPATH.should.eql("filepath/.env");
     });
   });
 

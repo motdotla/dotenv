@@ -20,7 +20,7 @@ Add it to your package.json file.
   ...
   "dependencies": {
     ...
-    "dotenv": "0.2.8"
+    "dotenv": "0.2.9"
   }
 }
 ```
@@ -41,6 +41,13 @@ S3_BUCKET=YOURS3BUCKET
 SECRET_KEY=YOURSECRETKEYGOESHERE
 SENDGRID_USERNAME=YOURSENDGRIDUSERNAME
 SENDGRID_PASSWORD=YOURSENDGRIDPASSWORDGOESHERE
+```
+
+If you do not have access to your root directory(using a sym link), load the filepath to your .env file: 
+
+```javascript
+var dotenv = require('dotenv');
+dotenv.load('/var/lib/env/');
 ```
 
 Whenever your application loads, these variables will be available in `process.env`:
