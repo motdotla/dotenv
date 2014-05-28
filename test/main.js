@@ -107,11 +107,11 @@ describe('dotenv', function() {
 
   describe('.load(filepath) with location of .env', function() {
     before(function() {
-      result.load('filepath/');
+      result.load('filePath/');
     });
 
     it('should load .env from specific filepath', function() {
-      process.env.FILEPATH.should.eql("filepath/.env");
+      process.env.FILEPATH.should.eql("filePath/.env");
     });
   });
 
