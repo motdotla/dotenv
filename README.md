@@ -52,6 +52,18 @@ var secret_key        = process.env.SECRET_KEY;
 
 That's it. You're done.
 
+### Custom .env location path
+
+The generally accepted standard is to keep your .env file in the root of your project directory. But you might find yourself wanting to place it elsewhere on your server. Here is how to do that.
+
+```
+var dotenv = require('dotenv');
+dotenv._getKeyAndValueFromLine('/custom/path/to/your/.env');
+dotenv._setEnvs();
+```
+
+That's it. It ends up being just one extra line of code.
+
 ### Dotenv.parse
 
 Also added in `0.2.6` the method `parse` has been exposed. This is how `dotenv` internally parses multiline buffers or strings into an object to place into the `process.env` object. 
