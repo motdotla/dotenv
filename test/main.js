@@ -7,6 +7,7 @@ var result;
 
 describe('dotenv', function() {
   before(function() {
+    process.env["MACHINE"] = "my_computer";
     result = dotenv;
   });
 
@@ -21,6 +22,33 @@ describe('dotenv', function() {
 
     it('sets the basic environment variables', function() {
       process.env.BASIC.should.eql("basic");
+    });
+
+    it('expands environment variables', function() {
+      process.env.BASIC_EXPAND.should.eql("basic");
+    });
+
+    it('expands undefined variables to an empty string', function() {
+      process.env.UNDEFINED_EXPAND.should.eql("");
+    });
+
+    //it('expands variables in quoted strings', function() {
+    //  process.env.QUOTED_EXPAND.should.equal("quoted basic");
+    //});
+
+    describe('machine environment variables are already set', function() {
+      before(function() {
+        process.env.MACHINE="my_computer";
+        process.env.BASIC="should_not_be_chosen_because_exists_in_local_env";
+      });
+
+      it('prioritizes local file set value', function() {
+        process.env.BASIC_EXPAND.should.eql("basic");
+      });
+
+      it('defers to the machine set value', function() {
+        process.env.MACHINE_EXPAND.should.eql("my_computer");
+      });
     });
 
     it('sets empty enviroment variable', function () {
