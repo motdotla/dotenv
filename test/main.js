@@ -64,6 +64,11 @@ describe('dotenv', function() {
     it('should handle zero width unicode characters', function() {
       process.env.ZERO_WIDTH_CHARACTER.should.eql("user:pass@troup.mongohq.com:1004/dude");
     });
+    
+    it ('retains inner quotes', function() {
+      process.env.RETAIN_INNER_QUOTES.should.eql('{"foo": "bar"}');
+    });
+
 
   });
 
