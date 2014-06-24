@@ -32,9 +32,9 @@ describe('dotenv', function() {
       process.env.UNDEFINED_EXPAND.should.eql("");
     });
 
-    //it('expands variables in quoted strings', function() {
-    //  process.env.QUOTED_EXPAND.should.equal("quoted basic");
-    //});
+    it('does not expand escaped variables', function() {
+      process.env.ESCAPED_EXPAND.should.equal("$ESCAPED");
+    });
 
     describe('machine environment variables are already set', function() {
       before(function() {
