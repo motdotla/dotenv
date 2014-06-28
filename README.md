@@ -20,7 +20,7 @@ Add it to your package.json file.
   ...
   "dependencies": {
     ...
-    "dotenv": "0.3.0"
+    "dotenv": "0.4.0"
   }
 }
 ```
