@@ -12,7 +12,7 @@ describe('dotenv', function() {
   });
 
   it('version should be set', function() {
-    result.version.should.eql("0.3.0"); 
+    result.version.should.eql("0.4.0"); 
   });
 
   describe('.load()', function() {
@@ -95,6 +95,7 @@ describe('dotenv', function() {
     
     it ('retains inner quotes', function() {
       process.env.RETAIN_INNER_QUOTES.should.eql('{"foo": "bar"}');
+      process.env.RETAIN_INNER_QUOTES_AS_STRING.should.eql('{"foo": "bar"}');
     });
 
 
