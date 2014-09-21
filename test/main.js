@@ -77,6 +77,10 @@ describe('dotenv', function() {
       process.env.ENVIRONMENT_OVERRIDE.should.eql("staging");
     });
 
+    it('reads from .env.local', function() {
+      process.env.FROM_LOCAL_ENV.should.eql("from_local_env");
+    });
+
     it('reads from a skipped line in .env.development', function() {
       process.env.AFTER_LINE.should.eql("after_line");
     });
