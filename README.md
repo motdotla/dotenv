@@ -2,7 +2,7 @@
 
 Dotenv loads environment variables from .env into ENV (process.env). It is a superior alternative to [nconf](https://github.com/flatiron/nconf) and other variants.
 
-[![BuildStatus](https://travis-ci.org/scottmotte/dotenv.png?branch=master)](https://travis-ci.org/scottmotte/dotenv)
+[![BuildStatus](https://travis-ci.org/motdotla/dotenv.png?branch=master)](https://travis-ci.org/motdotla/dotenv)
 [![NPM version](https://badge.fury.io/js/dotenv.png)](http://badge.fury.io/js/dotenv)
 
 > "Storing [configuration in the environment](http://www.12factor.net/config) is one of the tenets of a [twelve-factor app](http://www.12factor.net/). Anything that is likely to change between deployment environments–such as resource handles for databases or credentials for external services–should be extracted from the code into environment variables.
@@ -102,8 +102,8 @@ Here's a list of apps/sites/libraries using dotenv. It's in no way a complete li
 * [handshake.js](https://github.com/handshakejs/handshakejs-api)
 * [xavi](http://xavi.io/)
 * [google-oauth2-service-account](https://github.com/jacoblwe20/google-oauth2-service-account)
-* [kibble](https://github.com/scottmotte/kibble)
-* [flossedtoday](https://github.com/scottmotte/flossedtoday)
-* [github-streaker](https://github.com/scottmotte/github-streaker)
+* [kibble](https://github.com/motdotla/kibble)
+* [flossedtoday](https://github.com/motdotla/flossedtoday)
+* [github-streaker](https://github.com/motdotla/github-streaker)
 
-[Create a pull request](https://github.com/scottmotte/dotenv/pulls) and add yours to the list.
+[Create a pull request](https://github.com/motdotla/dotenv/pulls) and add yours to the list.
