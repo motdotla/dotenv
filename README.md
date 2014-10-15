@@ -58,7 +58,7 @@ The generally accepted standard is to keep your .env file in the root of your pr
 
 ```
 var dotenv = require('dotenv');
-dotenv._getKeyAndValueFromLine('/custom/path/to/your/.env');
+dotenv._getKeysAndValuesFromEnvFilePath('/custom/path/to/your/.env');
 dotenv._setEnvs();
 ```
 
