@@ -1,5 +1,7 @@
 # dotenv
 
+<img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.png" alt="dotenv" />
+
 Dotenv loads environment variables from `.env` into `ENV` (process.env).
 
 [![BuildStatus](https://travis-ci.org/motdotla/dotenv.png?branch=master)](https://travis-ci.org/motdotla/dotenv)
