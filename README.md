@@ -1,6 +1,6 @@
 # dotenv
 
-Dotenv loads environment variables from .env into ENV (process.env). It is a superior alternative to [nconf](https://github.com/flatiron/nconf) and other variants.
+Dotenv loads environment variables from `.env` into `ENV` (process.env).
 
 [![BuildStatus](https://travis-ci.org/motdotla/dotenv.png?branch=master)](https://travis-ci.org/motdotla/dotenv)
 [![NPM version](https://badge.fury.io/js/dotenv.png)](http://badge.fury.io/js/dotenv)
