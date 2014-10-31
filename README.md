@@ -1,6 +1,6 @@
 # dotenv
 
-<img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.png" alt="dotenv" />
+<img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.png" alt="dotenv" align="right" />
 
 Dotenv loads environment variables from `.env` into `ENV` (process.env).
 
