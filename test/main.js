@@ -100,7 +100,7 @@ describe('dotenv', function() {
 
     it ('recursively expands ${VARIABLES} within the value', function() {
         process.env.VAR_TEST0.should.eql('Test0');
-        process.env.VAR_TEST1.should.eql('Test1-Test2-Test3-Test0');
+        process.env.VAR_TEST1.should.eql('Test1-Test2-Test3-Test0-Test4!');
         process.env.VAR_TEST2.should.eql('Test2-Test3-Test0');
         process.env.VAR_TEST3.should.eql('Test3-Test0');
     });
