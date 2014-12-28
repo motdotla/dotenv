@@ -105,6 +105,11 @@ describe('dotenv', function() {
         process.env.VAR_TEST3.should.eql('Test3-Test0');
     });
 
+    it ('does not remove ${VARIABLES} without a replacement value', function() {
+      process.env.VAR_TEST5.should.eql('Has${NO_REPLACEMENT_VALUE_%^#!}');
+    });
+
+
   });
 
   describe('.load() after an ENV was already set on the machine', function() {
