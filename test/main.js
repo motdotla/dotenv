@@ -12,7 +12,7 @@ describe('dotenv', function() {
   });
 
   it('version should be set', function() {
-    result.version.should.eql("0.4.0"); 
+    result.version.should.eql("0.4.0");
   });
 
   describe('.load()', function() {
@@ -80,7 +80,7 @@ describe('dotenv', function() {
     it('reads from a skipped line in .env.development', function() {
       process.env.AFTER_LINE.should.eql("after_line");
     });
-    
+
     it('ignores commented lines', function() {
       should.not.exist(process.env.COMMENTS);
     });
@@ -92,12 +92,22 @@ describe('dotenv', function() {
     it('should handle zero width unicode characters', function() {
       process.env.ZERO_WIDTH_CHARACTER.should.eql("user:pass@troup.mongohq.com:1004/dude");
     });
-    
+
     it ('retains inner quotes', function() {
       process.env.RETAIN_INNER_QUOTES.should.eql('{"foo": "bar"}');
       process.env.RETAIN_INNER_QUOTES_AS_STRING.should.eql('{"foo": "bar"}');
     });
 
+    it('should return true if .env file exists', function() {
+      result.load().should.eql(true);
+    });
+
+    it('should return false if .env file does not exists', function() {
+      var tmp = process.env.NODE_ENV;
+      process.env.NODE_ENV = 'DNE';
+      result.load().should.eql(false);
+      process.env.NODE_ENV = tmp; // reset for future tests
+    });
 
   });
 
