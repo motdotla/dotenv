@@ -12,7 +12,7 @@ describe('dotenv', function() {
   });
 
   it('version should be set', function() {
-    result.version.should.eql("0.4.0");
+    result.version.should.eql("0.5.0");
   });
 
   describe('.load()', function() {
