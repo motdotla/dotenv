@@ -1,17 +1,17 @@
 {
   "name": "dotenv",
-  "version": "0.4.0",
-  "description": "Loads environment variables from .env",
+  "version": "1.0.0",
+  "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/*.js"
+    "test": "gulp ci"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/scottmotte/dotenv.git"
+    "url": "git://github.com/motdotla/dotenv.git"
   },
   "keywords": [
     "dotenv",
@@ -26,7 +26,13 @@
   "author": "scottmotte",
   "license": "BSD",
   "devDependencies": {
-    "mocha": "",
-    "should": ""
+    "gulp": "3.4.0",
+    "gulp-coveralls": "0.1.3",
+    "gulp-eslint": "0.2.0",
+    "gulp-istanbul": "0.5.0",
+    "gulp-mocha": "2.0.0",
+    "mocha-lcov-reporter": "0.0.1",
+    "should": "4.4.2",
+    "sinon": "1.12.2"
   }
 }

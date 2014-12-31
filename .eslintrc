@@ -1,0 +1,8 @@
+{
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "no-spaced-func": true
+  }
+}

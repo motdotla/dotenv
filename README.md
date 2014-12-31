@@ -5,12 +5,13 @@
 Dotenv loads environment variables from `.env` into `ENV` (process.env).
 
 [![BuildStatus](https://travis-ci.org/motdotla/dotenv.png?branch=master)](https://travis-ci.org/motdotla/dotenv)
+[![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv.svg)](https://coveralls.io/r/motdotla/dotenv)
 [![NPM version](https://badge.fury.io/js/dotenv.png)](http://badge.fury.io/js/dotenv)
 
 > "Storing [configuration in the environment](http://www.12factor.net/config) is one of the tenets of a [twelve-factor app](http://www.12factor.net/). Anything that is likely to change between deployment environments–such as resource handles for databases or credentials for external services–should be extracted from the code into environment variables.
-> 
+>
 > But it is not always practical to set environment variables on development machines or continuous integration servers where multiple projects are run. Dotenv loads variables from a `.env` file into ENV when the environment is bootstrapped."
-> 
+>
 > [Brandon Keepers' Dotenv in Ruby](https://github.com/bkeepers/dotenv)
 
 ## Installation
@@ -29,7 +30,7 @@ Add it to your package.json file.
 
 ## Usage
 
-As early as possible in your application require dotenv and load the `.env` variables: 
+As early as possible in your application require dotenv and load the `.env` variables:
 
 ```javascript
 var dotenv = require('dotenv');
@@ -68,7 +69,7 @@ That's it. It ends up being just one extra line of code.
 
 ### Dotenv.parse
 
-Also added in `0.2.6` the method `parse` has been exposed. This is how `dotenv` internally parses multiline buffers or strings into an object to place into the `process.env` object. 
+Also added in `0.2.6` the method `parse` has been exposed. This is how `dotenv` internally parses multiline buffers or strings into an object to place into the `process.env` object.
 
 ```javascript
 var dotenv  = require('dotenv');
@@ -79,7 +80,7 @@ console.log( typeof config, config ) // object { API : 'http://this.is.a/example
 
 ## Should I commit my .env file?
 
-Try not to commit your .env file to version control. It is best to keep it local to your machine and local on any machine you deploy to. Keep production credential .envs on your production machines, and keep development .envs on your local machine.
+No. We **strongly** recommend against committing your .env file to version control. It is best to keep it local to your machine and local on any machine you deploy to. Keep production credential .envs on your production machines, and keep development .envs on your local machine.
 
 ## Contributing
 
@@ -98,7 +99,7 @@ npm test
 
 ## Who's using dotenv
 
-Here's a list of apps/sites/libraries using dotenv. It's in no way a complete list. 
+Here's a list of apps/sites/libraries using dotenv. It's in no way a complete list.
 
 * [sendgrid-nodejs](https://github.com/sendgrid/sendgrid-nodejs)
 * [handshake.js](https://github.com/handshakejs/handshakejs-api)
