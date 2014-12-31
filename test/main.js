@@ -78,7 +78,7 @@ describe("dotenv", function() {
     it("should parse a buffer from a file into an object", function(){
       var buffer = new Buffer("BASIC=basic");
 
-      var payload = dotenv.parse( buffer );
+      var payload = dotenv.parse(buffer);
       payload.should.have.property("BASIC", "basic");
     });
 
@@ -103,7 +103,7 @@ describe("dotenv", function() {
         parsed.BASIC_EXPAND.should.eql("basic");
       });
 
-      it("defers to the machine set value", function() {
+      it("defers to process.env", function() {
         // from `before`
         parsed.TEST_EXPAND.should.eql("test");
       });
