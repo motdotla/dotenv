@@ -12,7 +12,7 @@ describe('dotenv', function() {
   });
 
   it('version should be set', function() {
-    result.version.should.eql("0.5.0");
+    result.version.should.eql("0.5.1");
   });
 
   describe('.load()', function() {
@@ -102,11 +102,17 @@ describe('dotenv', function() {
       result.load().should.eql(true);
     });
 
-    it('should return false if .env file does not exists', function() {
+    it('should return true if .env.ENVIRONMENT file does not exists', function() {
       var tmp = process.env.NODE_ENV;
       process.env.NODE_ENV = 'DNE';
-      result.load().should.eql(false);
+      result.load().should.eql(true);
       process.env.NODE_ENV = tmp; // reset for future tests
+    });
+
+    it('should return false if .env file does not exist', function() {
+      fs.renameSync('.env', '.tmpenv');
+      result.load().should.eql(false);
+      fs.renameSync('.tmpenv', '.env');
     });
 
   });
