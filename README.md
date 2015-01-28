@@ -22,7 +22,7 @@ Add it to your package.json file.
   ...
   "dependencies": {
     ...
-    "dotenv": "0.5.0"
+    "dotenv": "0.5.1"
   }
 }
 ```
