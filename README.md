@@ -85,6 +85,18 @@ Added in `0.5.0`, the method `load` returns a boolean to indicate your .env file
 
 Try not to commit your .env file to version control. It is best to keep it local to your machine and local on any machine you deploy to. Keep production credential .envs on your production machines, and keep development .envs on your local machine.
 
+## Environment-specific .env files
+
+Dotenv will load environment-specific files in addition to .env, based on the pattern .env.<process.env.NODE_ENV>. For example, .env.staging will be loaded if the node environment is set to "staging." This is useful for setting default values and overrides.
+
+Overrides for matching environment variables occurs in this order:
+
+1. Existing variables set on the machine prior to dotenv
+2. Environment-specific variables
+3. .env
+
+This means for services like Heroku or continuous integration platforms, values will **not** be overridden by .env files loaded by dotenv.
+
 ## Contributing
 
 1. Fork it
