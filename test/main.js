@@ -115,15 +115,38 @@ describe('dotenv', function() {
       fs.renameSync('.tmpenv', '.env');
     });
 
-    it('recursively expands ${VARIABLES} within the value', function() {
-      process.env.VAR_TEST0.should.eql('Test0');
-      process.env.VAR_TEST1.should.eql('Test1-Test2-Test3-Test0-Test4!');
-      process.env.VAR_TEST2.should.eql('Test2-Test3-Test0');
-      process.env.VAR_TEST3.should.eql('Test3-Test0');
-    });
+    describe('variables', function() {
+      it('expands a single variable', function() {
+        process.env.SINGLE_VARIABLE.should.eql('basic');
+      });
 
-    it('does not remove ${VARIABLES} without a replacement value', function() {
-      process.env.VAR_TEST5.should.eql('Has${NO_REPLACEMENT_VALUE_%^#!}');
+      it('expands a single variable with a string', function() {
+        process.env.SINGLE_VARIABLE_WITH_STRING.should.eql('string-basic');
+      });
+
+      it('expands two variables with a string', function() {
+        process.env.TWO_VARIABLES_WITH_STRING.should.eql('string-basic-single_quotes');
+      });
+
+      it('expands a variable having a space', function() {
+        process.env.SINGLE_VARIABLE_HAVING_A_SPACE.should.eql('string-basic');
+      });
+
+      it('expands a variable having a tailing space', function() {
+        process.env.SINGLE_VARIABLE_HAVING_A_TAILING_SPACE.should.eql('string-basic');
+      });
+
+      it('expands a variable having multiple spaces', function() {
+        process.env.SINGLE_VARIABLE_HAVING_MULTIPLE_SPACES.should.eql('string-basic');
+      });
+
+      it('expands a variable from a later on set ENV value', function() {
+        process.env.SINGLE_VARIABLE_OF_LATER_VARIABLE.should.eql('string-string-basic');
+      });
+
+      xit('does not remove ${VARIABLES} without a replacement value', function() {
+        process.env.SINGLE_VARIABLE_WITHOUT_REPLACEMENT.should.eql('Has${NO_REPLACEMENT_VALUE_%^#!}');
+      });
     });
   });
 
