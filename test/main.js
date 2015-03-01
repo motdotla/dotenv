@@ -173,11 +173,6 @@ describe('dotenv', function () {
       done()
     })
 
-    it('handles zero width unicode characters', function (done) {
-      parsed.ZERO_WIDTH_CHARACTER.should.eql('user:pass@troup.mongohq.com:1004/dude')
-      done()
-    })
-
     it('retains inner quotes', function (done) {
       parsed.RETAIN_INNER_QUOTES.should.eql('{\"foo\": \"bar\"}')
       parsed.RETAIN_INNER_QUOTES_AS_STRING.should.eql('{\"foo\": \"bar\"}')
