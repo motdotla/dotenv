@@ -115,6 +115,39 @@ describe('dotenv', function() {
       fs.renameSync('.tmpenv', '.env');
     });
 
+    describe('variables', function() {
+      it('expands a single variable', function() {
+        process.env.SINGLE_VARIABLE.should.eql('basic');
+      });
+
+      it('expands a single variable with a string', function() {
+        process.env.SINGLE_VARIABLE_WITH_STRING.should.eql('string-basic');
+      });
+
+      it('expands two variables with a string', function() {
+        process.env.TWO_VARIABLES_WITH_STRING.should.eql('string-basic-single_quotes');
+      });
+
+      it('expands a variable having a space', function() {
+        process.env.SINGLE_VARIABLE_HAVING_A_SPACE.should.eql('string-basic');
+      });
+
+      it('expands a variable having a tailing space', function() {
+        process.env.SINGLE_VARIABLE_HAVING_A_TAILING_SPACE.should.eql('string-basic');
+      });
+
+      it('expands a variable having multiple spaces', function() {
+        process.env.SINGLE_VARIABLE_HAVING_MULTIPLE_SPACES.should.eql('string-basic');
+      });
+
+      it('expands a variable from a later on set ENV value', function() {
+        process.env.SINGLE_VARIABLE_OF_LATER_VARIABLE.should.eql('string-string-basic');
+      });
+
+      xit('does not remove ${VARIABLES} without a replacement value', function() {
+        process.env.SINGLE_VARIABLE_WITHOUT_REPLACEMENT.should.eql('Has${NO_REPLACEMENT_VALUE_%^#!}');
+      });
+    });
   });
 
   describe('.load() after an ENV was already set on the machine', function() {
