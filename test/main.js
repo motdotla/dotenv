@@ -117,6 +117,18 @@ describe('dotenv', function() {
 
   });
 
+  describe('.overload', function() {
+    before(function () {
+      process.env.OVERLOAD_THIS_VAR = 'not overloaded';
+    });
+
+    it('overload a existing environment variable', function() {
+      process.env.OVERLOAD_THIS_VAR.should.eql('not overloaded');
+      result.overload();
+      process.env.OVERLOAD_THIS_VAR.should.eql('overloaded');
+    });
+  });
+
   describe('.load() after an ENV was already set on the machine', function() {
     before(function() {
       process.env.ENVIRONMENT_OVERRIDE = "set_on_machine";
