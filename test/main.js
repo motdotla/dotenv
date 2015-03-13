@@ -1,175 +1,182 @@
-var assert      = require('assert'),
-    should      = require('should'),
-    fs          = require('fs'),
-    dotenv      = require('../lib/main');
+'use strict'
 
-var result;
+require('should')
+var sinon = require('sinon')
+var Lab = require('lab')
+var lab = exports.lab = Lab.script()
+var describe = lab.experiment
+var before = lab.before
+var beforeEach = lab.beforeEach
+var afterEach = lab.afterEach
+var it = lab.test
+var fs = require('fs')
+var dotenv = require('../lib/main')
+var s
 
-describe('dotenv', function() {
-  before(function() {
-    process.env["MACHINE"] = "my_computer";
-    result = dotenv;
-  });
+describe('dotenv', function () {
+  beforeEach(function (done) {
+    s = sinon.sandbox.create()
+    done()
+  })
 
-  it('version should be set', function() {
-    result.version.should.eql("0.5.1");
-  });
+  afterEach(function (done) {
+    s.restore()
+    done()
+  })
 
-  describe('.load()', function() {
-    before(function() {
-      result.load();
-    });
+  describe('config', function () {
+    var readFileSyncStub, parseStub
 
-    it('sets the basic environment variables', function() {
-      process.env.BASIC.should.eql("basic");
-    });
+    beforeEach(function (done) {
+      readFileSyncStub = s.stub(fs, 'readFileSync').returns('test=val')
+      parseStub = s.stub(dotenv, 'parse').returns({test: 'val'})
+      done()
+    })
 
-    it('expands environment variables', function() {
-      process.env.BASIC_EXPAND.should.eql("basic");
-    });
+    it('takes option for path', function (done) {
+      var testPath = 'test/.env'
+      dotenv.config({path: testPath})
 
-    it('expands undefined variables to an empty string', function() {
-      process.env.UNDEFINED_EXPAND.should.eql("");
-    });
+      readFileSyncStub.args[0][0].should.eql(testPath)
+      done()
+    })
 
-    it('does not expand escaped variables', function() {
-      process.env.ESCAPED_EXPAND.should.equal("$ESCAPED");
-    });
+    it('takes option for encoding', function (done) {
+      var testEncoding = 'base64'
+      dotenv.config({encoding: testEncoding})
 
-    describe('machine environment variables are already set', function() {
-      before(function() {
-        process.env.MACHINE="my_computer";
-        process.env.BASIC="should_not_be_chosen_because_exists_in_local_env";
-      });
+      readFileSyncStub.args[0][1].should.have.property('encoding', testEncoding)
+      done()
+    })
 
-      it('prioritizes local file set value', function() {
-        process.env.BASIC_EXPAND.should.eql("basic");
-      });
+    it('reads path with encoding, parsing output to process.env', function (done) {
+      dotenv.config()
 
-      it('defers to the machine set value', function() {
-        process.env.MACHINE_EXPAND.should.eql("my_computer");
-      });
-    });
+      readFileSyncStub.callCount.should.eql(1)
+      parseStub.callCount.should.eql(1)
+      done()
+    })
 
-    it('sets empty enviroment variable', function () {
-      process.env.EMPTY.should.eql("");
-    });
+    it('does not write over keys already in process.env', function (done) {
+      process.env.TEST = 'test'
+      // 'val' returned as value in `beforeEach`. should keep this 'test'
+      dotenv.config()
 
-    it('sets double quotes environment variables', function() {
-      process.env.DOUBLE_QUOTES.should.eql("double_quotes");
-    });
+      process.env.TEST.should.eql('test')
+      done()
+    })
 
-    it('sets single quotes environment variables', function() {
-      process.env.SINGLE_QUOTES.should.eql("single_quotes");
-    });
+    it('catches any errors thrown from reading file or parsing', function (done) {
+      var errorStub = s.stub(console, 'error')
+      readFileSyncStub.throws()
 
-    it('expands newlines but only if double quoted', function() {
-      process.env.EXPAND_NEWLINES.should.eql("expand\nnewlines");
-      process.env.DONT_EXPAND_NEWLINES_1.should.eql("dontexpand\\nnewlines");
-      process.env.DONT_EXPAND_NEWLINES_2.should.eql("dontexpand\\nnewlines");
-    });
+      dotenv.config().should.eql(false)
+      errorStub.callCount.should.eql(1)
+      done()
+    })
 
-    it('reads from .env.staging', function() {
-      process.env.FROM_STAGING_ENV.should.eql("from_staging_env");
-    });
+  })
 
-    it('overrides any values in .env with .env.environment', function() {
-      process.env.ENVIRONMENT_OVERRIDE.should.eql("staging");
-    });
+  describe('parse', function () {
+    var parsed
+    before(function (done) {
+      process.env.TEST = 'test'
+      parsed = dotenv.parse(fs.readFileSync('test/.env', {encoding: 'utf8'}))
+      done()
+    })
 
-    it('reads from a skipped line in .env.development', function() {
-      process.env.AFTER_LINE.should.eql("after_line");
-    });
+    it('should return an object', function (done) {
+      parsed.should.be.an.instanceOf(Object)
+      done()
+    })
 
-    it('ignores commented lines', function() {
-      should.not.exist(process.env.COMMENTS);
-    });
+    it('should parse a buffer from a file into an object', function (done) {
+      var buffer = new Buffer('BASIC=basic')
 
-    it('respects equals signs in values', function() {
-      process.env.EQUAL_SIGNS.should.eql("equals==");
-    });
+      var payload = dotenv.parse(buffer)
+      payload.should.have.property('BASIC', 'basic')
+      done()
+    })
 
-    it('should handle zero width unicode characters', function() {
-      process.env.ZERO_WIDTH_CHARACTER.should.eql("user:pass@troup.mongohq.com:1004/dude");
-    });
+    it('sets basic environment variable', function (done) {
+      parsed.BASIC.should.eql('basic')
+      done()
+    })
 
-    it ('retains inner quotes', function() {
-      process.env.RETAIN_INNER_QUOTES.should.eql('{"foo": "bar"}');
-      process.env.RETAIN_INNER_QUOTES_AS_STRING.should.eql('{"foo": "bar"}');
-    });
+    it('reads after a skipped line', function (done) {
+      parsed.AFTER_LINE.should.eql('after_line')
+      done()
+    })
 
-    it('should return true if .env file exists', function() {
-      result.load().should.eql(true);
-    });
-
-    it('should return true if .env.ENVIRONMENT file does not exists', function() {
-      var tmp = process.env.NODE_ENV;
-      process.env.NODE_ENV = 'DNE';
-      result.load().should.eql(true);
-      process.env.NODE_ENV = tmp; // reset for future tests
-    });
-
-    it('should return false if .env file does not exist', function() {
-      fs.renameSync('.env', '.tmpenv');
-      result.load().should.eql(false);
-      fs.renameSync('.tmpenv', '.env');
-    });
-
-  });
-
-  describe('.load() after an ENV was already set on the machine', function() {
-    before(function() {
-      process.env.ENVIRONMENT_OVERRIDE = "set_on_machine";
-      result.load();
-    });
-
-    it('sets using the value set on the machine', function() {
-      process.env.ENVIRONMENT_OVERRIDE.should.eql("set_on_machine");
-      delete process.env.ENVIRONMENT_OVERRIDE; //clean up for other tests
-    });
-  });
-
-  describe('.load() if NODE_ENV is set in .env', function() {
-    before(function() {
-      result.load();
-    });
-
-    it('ENVIRONMENT_OVERRIDE should equal the value set in the .env.staging', function() {
-      process.env.ENVIRONMENT_OVERRIDE.should.eql('staging');
-      delete process.env.NODE_ENV; //cleanup for other tests
-      delete process.env.ENVIRONMENT_OVERRIDE;
-    });
-  });
-
-  describe('.load() if NODE_ENV is set in .env but NODE_ENV is already set on machine', function() {
-    before(function() {
-      process.env.NODE_ENV = "development"
-      result.load();
-    });
-
-    it('ENVIRONMENT_OVERRIDE should equal the value set in the .env.development because that is the environment being set by the machine. machine wins here.', function() {
-      process.env.ENVIRONMENT_OVERRIDE.should.eql('development');
-      delete process.env.NODE_ENV; //clean up for other tests
-      delete process.env.ENVIRONMENT_OVERRIDE;
-    });
-  });
-
-  describe('.parse()', function(){
-    it('should return an object', function(){
-      dotenv.parse('').should.be.an.Object;
-    });
-    var buffer;
-    before(function(done){
-      fs.readFile('.env', function(err,res){
-        buffer = res;
-        done();
+    describe('expanding variables', function () {
+      before(function (done) {
+        process.env.BASIC = 'should_not_be_chosen_because_exists_in_local_env'
+        done()
       })
-    });
 
-    it('should parse a buffer from a file into an object', function(){
-      var payload = dotenv.parse( buffer );
-      payload.should.be.an.Object;
-      payload.should.have.property('BASIC', 'basic');
+      it('expands environment variables like $BASIC', function (done) {
+        parsed.BASIC_EXPAND.should.eql('basic')
+        done()
+      })
+
+      it('prioritizes .env file value (if exists)', function (done) {
+        parsed.BASIC_EXPAND.should.eql('basic')
+        done()
+      })
+
+      it('defers to process.env', function (done) {
+        // from `before`
+        parsed.TEST_EXPAND.should.eql('test')
+        done()
+      })
+
+      it('defaults missing variables to an empty string', function (done) {
+        parsed.UNDEFINED_EXPAND.should.eql('')
+        done()
+      })
+
+      it('does not expand escaped variables', function (done) {
+        parsed.ESCAPED_EXPAND.should.equal('$ESCAPED')
+        done()
+      })
+    })
+
+    it('defaults empty values to empty string', function (done) {
+      parsed.EMPTY.should.eql('')
+      done()
+    })
+
+    it('escapes double quoted values', function (done) {
+      parsed.DOUBLE_QUOTES.should.eql('double_quotes')
+      done()
+    })
+
+    it('escapes single quoted values', function (done) {
+      parsed.SINGLE_QUOTES.should.eql('single_quotes')
+      done()
+    })
+
+    it('expands newlines but only if double quoted', function (done) {
+      parsed.EXPAND_NEWLINES.should.eql('expand\nnewlines')
+      parsed.DONT_EXPAND_NEWLINES_1.should.eql('dontexpand\\nnewlines')
+      parsed.DONT_EXPAND_NEWLINES_2.should.eql('dontexpand\\nnewlines')
+      done()
+    })
+
+    it('ignores commented lines', function (done) {
+      parsed.should.not.have.property('COMMENTS')
+      done()
+    })
+
+    it('respects equals signs in values', function (done) {
+      parsed.EQUAL_SIGNS.should.eql('equals==')
+      done()
+    })
+
+    it('retains inner quotes', function (done) {
+      parsed.RETAIN_INNER_QUOTES.should.eql('{\"foo\": \"bar\"}')
+      parsed.RETAIN_INNER_QUOTES_AS_STRING.should.eql('{\"foo\": \"bar\"}')
+      done()
     })
   })
-});
+})

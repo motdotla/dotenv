@@ -13,104 +13,126 @@ Dotenv loads environment variables from `.env` into `ENV` (process.env).
 >
 > [Brandon Keepers' Dotenv in Ruby](https://github.com/bkeepers/dotenv)
 
-## Installation
+## Install
 
-Add it to your package.json file.
-
-```javascript
-{
-  ...
-  "dependencies": {
-    ...
-    "dotenv": "0.5.1"
-  }
-}
+```bash
+npm install dotenv --save
 ```
 
 ## Usage
 
-As early as possible in your application require dotenv and load the `.env` variables:
+Create a `.env` file in the root directory of your project. Add environment-specific variables on new lines in the form of "NAME=VAL".
+
+```
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=s1mpl3
+```
+
+As early as possible in your application, configure environment variables:
 
 ```javascript
-var dotenv = require('dotenv');
-dotenv.load();
+require("dotenv").config();
 ```
 
-Then, create a `.env` file in the root directory of your project. Add the application configuration you want. For example:
-
-```
-S3_BUCKET=YOURS3BUCKET
-SECRET_KEY=YOURSECRETKEYGOESHERE
-SENDGRID_USERNAME=YOURSENDGRIDUSERNAME
-SENDGRID_PASSWORD=YOURSENDGRIDPASSWORDGOESHERE
-```
-
-Whenever your application loads, these variables will be available in `process.env`:
+`process.env` now has the keys and values you defined in your `.env` file.
 
 ```javascript
-var sendgrid_username = process.env.SENDGRID_USERNAME;
-var secret_key        = process.env.SECRET_KEY;
+db.connect({
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS
+});
 ```
 
-That's it. You're done.
+## Config
 
-### Custom .env location path
+`config` is the primary way to use dotenv. It will read your .env file, parse the contents, and assign it to `process.env`.
 
-The generally accepted standard is to keep your .env file in the root of your project directory. But you might find yourself wanting to place it elsewhere on your server. Here is how to do that.
+### Options
 
+#### Path
+
+Default: `.env`
+
+You can specify a custom path if your file containing environment variables is named or located differently.
+
+```js
+require("dotenv").config({path: "/custom/path/to/your/env/vars"});
 ```
-var dotenv = require('dotenv');
-dotenv._getKeysAndValuesFromEnvFilePath('/custom/path/to/your/.env');
-dotenv._setEnvs();
+
+#### Encoding
+
+Default: `utf8`
+
+You may specify the encoding of your file containing environment variables using this option.
+
+```js
+require("dotenv").config({encoding: "base64"});
 ```
 
-That's it. It ends up being just one extra line of code.
+## Parse
 
-### Dotenv.parse
+The engine which parses the contents of your file containing environment variables is available to use. It accepts a String or Buffer and will return an Object with the parsed keys and values.
 
-Also added in `0.2.6` the method `parse` has been exposed. This is how `dotenv` internally parses multiline buffers or strings into an object to place into the `process.env` object.
-
-```javascript
+```js
 var dotenv  = require('dotenv');
-var file    = fs.readFileSync('./config/staging');
-var config  = dotenv.parse(file); // passing in a buffer
-console.log( typeof config, config ) // object { API : 'http://this.is.a/example' }
+var buf    = new Buffer("BASIC=basic");
+var config  = dotenv.parse(buf); // will return an object
+console.log(typeof config, config) // object { BASIC : "basic" }
 ```
 
-### Dotenv.load
+### Rules
 
-Added in `0.5.0`, the method `load` returns a boolean to indicate your .env file has been loaded without error. The most likely cause of error is not finding or reading your .env file(s).
+The parsing engine currently supports the following rules:
 
-## Should I commit my .env file?
+- `BASIC=basic` becomes `{BASIC: "basic"}`
+- empty lines are skipped
+- lines beginning with `#` are treated as comments
+- empty values become empty strings (`EMPTY=` becomes `{EMPTY: ""}`)
+- single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
+- new lines are expanded if in double quotes (`MULTILINE="new\nline"` becomes
 
-Try not to commit your .env file to version control. It is best to keep it local to your machine and local on any machine you deploy to. Keep production credential .envs on your production machines, and keep development .envs on your local machine.
+```
+{MULTILINE: "new
+line"}
+```
+- inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
 
-## Environment-specific .env files
+#### Expanding Variables
 
-Dotenv will load environment-specific files in addition to .env, based on the pattern .env.<process.env.NODE_ENV>. For example, .env.staging will be loaded if the node environment is set to "staging." This is useful for setting default values and overrides.
+Basic variable expansion is supported.
 
-Overrides for matching environment variables occurs in this order:
+```
+BASIC=basic
+TEST=$BASIC
+```
 
-1. Existing variables set on the machine prior to dotenv
-2. Environment-specific variables
-3. .env
+Parsing that would result in `{BASIC: "basic", TEST: "basic"}`. You can escape variables by quoting or beginning with `\` (e.g. `TEST=\$BASIC`). If the variable is not found in the file, `process.env` is checked. Missing variables result in an empty string.
 
-This means for services like Heroku or continuous integration platforms, values will **not** be overridden by .env files loaded by dotenv.
+```
+BASIC=basic
+TEST=$TEST
+DNE=$DNE
+```
+
+```bash
+TEST=example node -e 'require("dotenv").config();'
+```
+
+- `process.env.BASIC` would equal `basic`
+- `process.env.TEST` would equal `example`
+- `process.env.DNE` would equal `""`
+
+## FAQ
+
+### Should I commit my .env file?
+
+No. We **strongly** recommend against committing your .env file to version control. It should only include environment-specific values such as database passwords or API keys. Your production database should have a different password than your development database.
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
-
-## Running tests
-
-```bash
-npm install
-npm test
-```
+See [Contributing Guide](Contributing.md)
 
 ## Who's using dotenv
 
