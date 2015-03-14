@@ -7,9 +7,16 @@ Dotenv loads environment variables from `.env` into `ENV` (process.env).
 [![BuildStatus](https://travis-ci.org/motdotla/dotenv.png?branch=master)](https://travis-ci.org/motdotla/dotenv)
 [![NPM version](https://badge.fury.io/js/dotenv.png)](http://badge.fury.io/js/dotenv)
 
-> "Storing [configuration in the environment](http://www.12factor.net/config) is one of the tenets of a [twelve-factor app](http://www.12factor.net/). Anything that is likely to change between deployment environments–such as resource handles for databases or credentials for external services–should be extracted from the code into environment variables.
+> "Storing [configuration in the environment](http://www.12factor.net/config) 
+> is one of the tenets of a [twelve-factor app](http://www.12factor.net/). 
+> Anything that is likely to change between deployment environments–such as 
+> resource handles for databases or credentials for external services–should be 
+> extracted from the code into environment variables.
 >
-> But it is not always practical to set environment variables on development machines or continuous integration servers where multiple projects are run. Dotenv loads variables from a `.env` file into ENV when the environment is bootstrapped."
+> But it is not always practical to set environment variables on development 
+> machines or continuous integration servers where multiple projects are run. 
+> Dotenv loads variables from a `.env` file into ENV when the environment is 
+> bootstrapped."
 >
 > [Brandon Keepers' Dotenv in Ruby](https://github.com/bkeepers/dotenv)
 
@@ -21,7 +28,15 @@ npm install dotenv --save
 
 ## Usage
 
-Create a `.env` file in the root directory of your project. Add environment-specific variables on new lines in the form of "NAME=VAL".
+As early as possible in your application, require and load dotenv.
+
+```javascript
+require("dotenv").load();
+```
+
+Create a `.env` file in the root directory of your project. Add 
+environment-specific variables on new lines in the form of `NAME=VALUE`.
+For example:
 
 ```
 DB_HOST=localhost
@@ -29,11 +44,7 @@ DB_USER=root
 DB_PASS=s1mpl3
 ```
 
-As early as possible in your application, configure environment variables:
-
-```javascript
-require("dotenv").config();
-```
+That's it.
 
 `process.env` now has the keys and values you defined in your `.env` file.
 
@@ -47,7 +58,11 @@ db.connect({
 
 ## Config
 
-`config` is the primary way to use dotenv. It will read your .env file, parse the contents, and assign it to `process.env`.
+`config` read your .env file, parse the contents, and assign it to 
+`process.env` - just like `load`. But you can additionally, pass options
+to `config`.
+
+Note: `config` and `load` are synonyms. You can use either.
 
 ### Options
 
@@ -55,7 +70,8 @@ db.connect({
 
 Default: `.env`
 
-You can specify a custom path if your file containing environment variables is named or located differently.
+You can specify a custom path if your file containing environment variables is 
+named or located differently.
 
 ```js
 require("dotenv").config({path: "/custom/path/to/your/env/vars"});
@@ -65,7 +81,8 @@ require("dotenv").config({path: "/custom/path/to/your/env/vars"});
 
 Default: `utf8`
 
-You may specify the encoding of your file containing environment variables using this option.
+You may specify the encoding of your file containing environment variables 
+using this option.
 
 ```js
 require("dotenv").config({encoding: "base64"});
@@ -73,7 +90,9 @@ require("dotenv").config({encoding: "base64"});
 
 ## Parse
 
-The engine which parses the contents of your file containing environment variables is available to use. It accepts a String or Buffer and will return an Object with the parsed keys and values.
+The engine which parses the contents of your file containing environment 
+variables is available to use. It accepts a String or Buffer and will return 
+an Object with the parsed keys and values.
 
 ```js
 var dotenv  = require('dotenv');
@@ -108,7 +127,10 @@ BASIC=basic
 TEST=$BASIC
 ```
 
-Parsing that would result in `{BASIC: "basic", TEST: "basic"}`. You can escape variables by quoting or beginning with `\` (e.g. `TEST=\$BASIC`). If the variable is not found in the file, `process.env` is checked. Missing variables result in an empty string.
+Parsing that would result in `{BASIC: "basic", TEST: "basic"}`. You can escape 
+variables by quoting or beginning with `\` (e.g. `TEST=\$BASIC`). If the 
+variable is not found in the file, `process.env` is checked. Missing variables 
+result in an empty string.
 
 ```
 BASIC=basic
@@ -128,7 +150,10 @@ TEST=example node -e 'require("dotenv").config();'
 
 ### Should I commit my .env file?
 
-No. We **strongly** recommend against committing your .env file to version control. It should only include environment-specific values such as database passwords or API keys. Your production database should have a different password than your development database.
+No. We **strongly** recommend against committing your .env file to version 
+control. It should only include environment-specific values such as database 
+passwords or API keys. Your production database should have a different 
+password than your development database.
 
 ## Contributing
 
@@ -136,14 +161,13 @@ See [Contributing Guide](Contributing.md)
 
 ## Who's using dotenv
 
-Here's a list of apps/sites/libraries using dotenv. It's in no way a complete list.
+Here's just a few of many repositories using dotenv:
 
+* [npm](https://github.com/npm/newww)
 * [sendgrid-nodejs](https://github.com/sendgrid/sendgrid-nodejs)
 * [handshake.js](https://github.com/handshakejs/handshakejs-api)
 * [xavi](http://xavi.io/)
 * [google-oauth2-service-account](https://github.com/jacoblwe20/google-oauth2-service-account)
 * [kibble](https://github.com/motdotla/kibble)
-* [flossedtoday](https://github.com/motdotla/flossedtoday)
 * [github-streaker](https://github.com/motdotla/github-streaker)
 
-[Create a pull request](https://github.com/motdotla/dotenv/pulls) and add yours to the list.
