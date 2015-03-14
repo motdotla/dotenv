@@ -4,8 +4,8 @@
 
 Dotenv loads environment variables from `.env` into `ENV` (process.env).
 
-[![BuildStatus](https://travis-ci.org/motdotla/dotenv.png?branch=master)](https://travis-ci.org/motdotla/dotenv)
-[![NPM version](https://badge.fury.io/js/dotenv.png)](http://badge.fury.io/js/dotenv)
+[![BuildStatus](https://img.shields.io/travis/motdotla/dotenv.svg?style=flat-square)](https://travis-ci.org/motdotla/dotenv)
+[![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
 
 > "Storing [configuration in the environment](http://www.12factor.net/config) 
