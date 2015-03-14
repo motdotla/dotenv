@@ -58,11 +58,11 @@ db.connect({
 
 ## Config
 
-`config` read your .env file, parse the contents, and assign it to 
-`process.env` - just like `load`. But you can additionally, pass options
-to `config`.
+`config` will read your .env file, parse the contents, and assign it to 
+`process.env` - just like `load` does. You can additionally, pass options to
+`config`.
 
-Note: `config` and `load` are synonyms. You can use either.
+Note: `config` and `load` are synonyms. You can pass options to either.
 
 ### Options
 
