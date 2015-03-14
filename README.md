@@ -31,7 +31,7 @@ npm install dotenv --save
 As early as possible in your application, require and load dotenv.
 
 ```javascript
-require("dotenv").load();
+require('dotenv').load();
 ```
 
 Create a `.env` file in the root directory of your project. Add 
@@ -74,7 +74,7 @@ You can specify a custom path if your file containing environment variables is
 named or located differently.
 
 ```js
-require("dotenv").config({path: "/custom/path/to/your/env/vars"});
+require('dotenv').config({path: '/custom/path/to/your/env/vars'});
 ```
 
 #### Encoding
@@ -85,7 +85,7 @@ You may specify the encoding of your file containing environment variables
 using this option.
 
 ```js
-require("dotenv").config({encoding: "base64"});
+require('dotenv').config({encoding: 'base64'});
 ```
 
 ## Parse
@@ -96,25 +96,25 @@ an Object with the parsed keys and values.
 
 ```js
 var dotenv  = require('dotenv');
-var buf    = new Buffer("BASIC=basic");
+var buf    = new Buffer('BASIC=basic');
 var config  = dotenv.parse(buf); // will return an object
-console.log(typeof config, config) // object { BASIC : "basic" }
+console.log(typeof config, config) // object { BASIC : 'basic' }
 ```
 
 ### Rules
 
 The parsing engine currently supports the following rules:
 
-- `BASIC=basic` becomes `{BASIC: "basic"}`
+- `BASIC=basic` becomes `{BASIC: 'basic'}`
 - empty lines are skipped
 - lines beginning with `#` are treated as comments
-- empty values become empty strings (`EMPTY=` becomes `{EMPTY: ""}`)
-- single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
-- new lines are expanded if in double quotes (`MULTILINE="new\nline"` becomes
+- empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
+- single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: 'quoted'}`)
+- new lines are expanded if in double quotes (`MULTILINE='new\nline'` becomes
 
 ```
-{MULTILINE: "new
-line"}
+{MULTILINE: 'new
+line'}
 ```
 - inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
 
@@ -127,7 +127,7 @@ BASIC=basic
 TEST=$BASIC
 ```
 
-Parsing that would result in `{BASIC: "basic", TEST: "basic"}`. You can escape 
+Parsing that would result in `{BASIC: 'basic', TEST: 'basic'}`. You can escape 
 variables by quoting or beginning with `\` (e.g. `TEST=\$BASIC`). If the 
 variable is not found in the file, `process.env` is checked. Missing variables 
 result in an empty string.
