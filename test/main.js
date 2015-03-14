@@ -57,6 +57,14 @@ describe('dotenv', function () {
       done()
     })
 
+    it('makes load a synonym of config', function (done) {
+      dotenv.load()
+
+      readFileSyncStub.callCount.should.eql(1)
+      parseStub.callCount.should.eql(1)
+      done()
+    })
+
     it('does not write over keys already in process.env', function (done) {
       process.env.TEST = 'test'
       // 'val' returned as value in `beforeEach`. should keep this 'test'
