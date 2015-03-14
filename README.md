@@ -6,6 +6,7 @@ Dotenv loads environment variables from `.env` into `ENV` (process.env).
 
 [![BuildStatus](https://travis-ci.org/motdotla/dotenv.png?branch=master)](https://travis-ci.org/motdotla/dotenv)
 [![NPM version](https://badge.fury.io/js/dotenv.png)](http://badge.fury.io/js/dotenv)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
 
 > "Storing [configuration in the environment](http://www.12factor.net/config) 
 > is one of the tenets of a [twelve-factor app](http://www.12factor.net/). 
