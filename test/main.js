@@ -41,6 +41,17 @@ describe('dotenv', function () {
       done()
     })
 
+    it('takes option for path and returns on null error on success to callback', function (done) {
+      var testPath = 'test/.env'
+      var callback = sinon.spy()
+      dotenv.config({path: testPath}, callback)
+
+      readFileSyncStub.args[0][0].should.eql(testPath)
+      callback.called.should.eql(true)
+      callback.firstCall.args.should.eql([null])
+      done()
+    })
+
     it('takes option for encoding', function (done) {
       var testEncoding = 'base64'
       dotenv.config({encoding: testEncoding})
@@ -54,6 +65,17 @@ describe('dotenv', function () {
 
       readFileSyncStub.callCount.should.eql(1)
       parseStub.callCount.should.eql(1)
+      done()
+    })
+
+    it('reads path with encoding, parsing output to process.env and passes null error on success to callback', function (done) {
+      var callback = sinon.spy()
+      dotenv.config(callback)
+
+      readFileSyncStub.callCount.should.eql(1)
+      parseStub.callCount.should.eql(1)
+      callback.called.should.eql(true)
+      callback.firstCall.args.should.eql([null])
       done()
     })
 
@@ -81,6 +103,26 @@ describe('dotenv', function () {
       dotenv.config().should.eql(false)
       errorStub.callCount.should.eql(1)
       done()
+    })
+
+    it('catches error, but omits if omitError is passed by options', function (done) {
+      var errorStub = s.stub(console, 'error')
+      readFileSyncStub.throws()
+
+      dotenv.config({ omitError: true }).should.eql(false)
+      errorStub.callCount.should.eql(0)
+      done()
+    })
+
+    it('catches error, but omits if omitError is passed by options and passes the error to a user specified callback', function (done) {
+      var errorStub = s.stub(console, 'error')
+      readFileSyncStub.throws()
+
+      dotenv.config({ omitError: true }, function (err) {
+        errorStub.callCount.should.eql(0)
+        err.should.not.eql(null)
+        done()
+      }).should.eql(false)
     })
 
   })
