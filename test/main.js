@@ -83,6 +83,15 @@ describe('dotenv', function () {
       done()
     })
 
+    it('takes option for silencing errors', function (done) {
+      var errorStub = s.stub(console, 'error')
+      readFileSyncStub.throws()
+
+      dotenv.config({silent: true}).should.eql(false)
+      errorStub.called.should.be.false
+      done()
+    })
+
   })
 
   describe('parse', function () {
