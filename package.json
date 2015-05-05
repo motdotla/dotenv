@@ -21,7 +21,7 @@
   ],
   "readmeFilename": "README.md",
   "author": "scottmotte",
-  "license": "BSD",
+  "license": "BSD-2-Clause",
   "devDependencies": {
     "lab": "^5.3.0",
     "should": "4.4.2",
