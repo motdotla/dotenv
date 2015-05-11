@@ -67,6 +67,17 @@ Note: `config` and `load` are synonyms. You can pass options to either.
 
 ### Options
 
+#### Silent
+
+Default: `false`
+
+Dotenv outputs a warning to your console if missing a `.env` file. Suppress 
+this warning using silent.
+
+```js
+require('dotenv').config({silent: true});
+```
+
 #### Path
 
 Default: `.env`
