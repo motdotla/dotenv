@@ -195,5 +195,10 @@ describe('dotenv', function () {
       parsed.RETAIN_INNER_QUOTES_AS_STRING.should.eql('{\"foo\": \"bar\"}')
       done()
     })
+
+    it('retains spaces in string', function (done) {
+      parsed.INCLUDE_SPACE.should.eql('some spaced out string')
+      done()
+    })
   })
 })
