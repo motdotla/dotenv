@@ -28,8 +28,8 @@ describe('dotenv', function () {
     var readFileSyncStub, parseStub
 
     beforeEach(function (done) {
-      readFileSyncStub = s.stub(fs, 'readFileSync').returns('test=val')
-      parseStub = s.stub(dotenv, 'parse').returns({test: 'val'})
+      readFileSyncStub = s.stub(fs, 'readFileSync').returns('TEST=val')
+      parseStub = s.stub(dotenv, 'parse').returns({TEST: 'val'})
       done()
     })
 
@@ -46,6 +46,15 @@ describe('dotenv', function () {
       dotenv.config({encoding: testEncoding})
 
       readFileSyncStub.args[0][1].should.have.property('encoding', testEncoding)
+      done()
+    })
+
+    it('takes option for overwrite', function (done) {
+      process.env.TEST = 'test'
+      // 'val' returned as value in `beforeEach`. should keep this 'test'
+      dotenv.config({overwrite: true})
+
+      process.env.TEST.should.eql('val')
       done()
     })
 
