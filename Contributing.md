@@ -18,8 +18,8 @@ npm test
 
 ## Code Style
 
-We use [eslint](http://eslint.org) and [editorconfig](http://editorconfig.org) to maintain code style and best practices. Please make sure your PR adheres to the guides by running:
+We use [standard](https://www.npmjs.com/package/standard) and [editorconfig](http://editorconfig.org) to maintain code style and best practices. Please make sure your PR adheres to the guides by running:
 
 ```
-gulp lint
+npm run lint
 ```
