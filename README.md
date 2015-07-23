@@ -173,6 +173,27 @@ TEST=example node -e 'require("dotenv").config();'
 - `process.env.TEST` would equal `example`
 - `process.env.DNE` would equal `""`
 
+#### Variable Interpolation
+
+Basic variable Interpolation is supported.
+
+```
+BASIC=basic
+TEST={$BASIC}test
+```
+
+Parsing that would result in `{BASIC: 'basic', TEST: 'basictest'}`.
+
+You can also use.
+
+```
+BASIC=basic
+TEST1={$BASIC} test
+TEST2="{$BASIC} test"
+```
+
+Parsing that would result in `{BASIC: 'basic', TEST1: 'basic test', TEST2: 'basic test'}`.
+
 ## FAQ
 
 ### Should I commit my .env file?
