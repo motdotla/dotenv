@@ -175,12 +175,20 @@ TEST=example node -e 'require("dotenv").config();'
 
 ## FAQ
 
-### Should I commit my .env file?
+### Should I commit my `.env` file?
 
-No. We **strongly** recommend against committing your .env file to version
+No. We **strongly** recommend against committing your `.env` file to version
 control. It should only include environment-specific values such as database
 passwords or API keys. Your production database should have a different
 password than your development database.
+
+### Should I have multiple `.env` files?
+
+No. We **strongly** recommend against having a "main" `.env` file and an "environment" `.env` file like `.env.test`. Your config should vary between deploys, and you should not be sharing values between environments.
+
+> In a twelve-factor app, env vars are granular controls, each fully orthogonal to other env vars. They are never grouped together as “environments”, but instead are independently managed for each deploy. This is a model that scales up smoothly as the app naturally expands into more deploys over its lifetime.
+>
+> – [The Twelve-Factor App](http://12factor.net/config)
 
 ## Contributing
 
