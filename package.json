@@ -7,6 +7,7 @@
     "test": "lab test/* --coverage && standard",
     "lint": "standard"
   },
+  "bin": "./cli.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/motdotla/dotenv.git"
