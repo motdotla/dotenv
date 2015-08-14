@@ -91,7 +91,6 @@ describe('dotenv', function () {
       errorStub.called.should.be.false
       done()
     })
-
   })
 
   describe('parse', function () {
