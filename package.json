@@ -28,7 +28,7 @@
     "semver": "^4.3.6",
     "should": "4.4.2",
     "sinon": "1.12.2",
-    "standard": "^2.10.0"
+    "standard": "^5.1.0"
   },
   "dependencies": {}
 }
