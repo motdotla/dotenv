@@ -4,7 +4,8 @@
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "scripts": {
-    "test": "lab test/* --coverage && standard",
+    "test": "lab test/* --coverage",
+    "posttest": "npm run lint",
     "lint": "standard"
   },
   "repository": {
