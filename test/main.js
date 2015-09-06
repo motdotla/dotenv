@@ -49,6 +49,13 @@ describe('dotenv', function () {
       done()
     })
 
+    it('takes option for returns', function (done) {
+      var obj = dotenv.config({returns: 'Object'})
+
+      obj.test.should.eql('val')
+      done()
+    })
+
     it('reads path with encoding, parsing output to process.env', function (done) {
       dotenv.config()
 

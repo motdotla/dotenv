@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.png" alt="dotenv" align="right" />
 
-Dotenv loads environment variables from `.env` into `ENV` (process.env).
+Dotenv loads environment variables from `.env` into `ENV` (process.env for default).
 
 [![BuildStatus](https://img.shields.io/travis/motdotla/dotenv/master.svg?style=flat-square)](https://travis-ci.org/motdotla/dotenv)
 [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
@@ -114,6 +114,13 @@ using this option.
 ```js
 require('dotenv').config({encoding: 'base64'});
 ```
+
+#### Returns
+
+Default: `Boolean`
+
+You may specify the returns using `Boolean` which extends environment to
+`process.env` or use `Object` which returns you object with environment values.
 
 ## Parse
 
