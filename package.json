@@ -25,6 +25,7 @@
   "author": "scottmotte",
   "license": "BSD-2-Clause",
   "devDependencies": {
+    "babel": "^5.8.23",
     "lab": "^5.3.0",
     "semver": "^4.3.6",
     "should": "4.4.2",

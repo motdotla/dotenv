@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# TODO: make sure node version >1.6.0
+
+node -r ../../config.js index.js
