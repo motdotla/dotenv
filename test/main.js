@@ -199,5 +199,19 @@ describe('dotenv', function () {
       parsed.INCLUDE_SPACE.should.eql('some spaced out string')
       done()
     })
+
+    describe('retaining expanded variable types', function () {
+      it('retains boolean types', function (done) {
+        parsed.TRUE_BOOLEAN.should.eql(true)
+        parsed.FALSE_BOOLEAN.should.eql(false)
+        done()
+      })
+
+      it('retains number types', function (done) {
+        parsed.INT_NUMBER.should.eql(21)
+        parsed.FLOAT_NUMBER.should.eql(3.1416)
+        done()
+      })
+    })
   })
 })
