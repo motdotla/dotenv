@@ -155,6 +155,31 @@ describe('dotenv', function () {
         parsed.ESCAPED_EXPAND.should.equal('$ESCAPED')
         done()
       })
+
+      it('expands variables surrounded by braces', function (done) {
+        parsed.SINGLE_QUOTED_INLINE_EXPAND.should.equal('inline${BASIC}ally')
+        done()
+      })
+
+      it('expands inline environment variables', function (done) {
+        parsed.INLINE_EXPAND.should.equal('inlinebasically')
+        done()
+      })
+
+      it('does not expands inline escaped variables', function (done) {
+        parsed.ESCAPED_INLINE_EXPAND.should.equal('inline${BASIC}ally')
+        done()
+      })
+
+      it('does not expands inline variables in single quoted strings', function (done) {
+        parsed.SINGLE_QUOTED_INLINE_EXPAND.should.equal('inline${BASIC}ally')
+        done()
+      })
+
+      it('does not expands inline variables with unclosed braces', function (done) {
+        parsed.UNCLOSED_INLINE_EXPAND.should.equal('inline${BASICally')
+        done()
+      })
     })
 
     it('defaults empty values to empty string', function (done) {
