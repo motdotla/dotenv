@@ -199,5 +199,10 @@ describe('dotenv', function () {
       parsed.INCLUDE_SPACE.should.eql('some spaced out string')
       done()
     })
+
+    it('respects values like variable expansion', function (done) {
+      parsed.ALWAYS_VARIABLE.should.eql('a0${beep}${b00p}')
+      done()
+    })
   })
 })
