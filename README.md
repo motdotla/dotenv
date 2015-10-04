@@ -204,3 +204,5 @@ Here's just a few of many repositories using dotenv:
 
 * [npm](https://github.com/npm/newww)
 * [jaws](https://github.com/jaws-framework/jaws-core-js)
+* [node-lambda](https://github.com/motdotla/node-lambda)
+* [resume-cli](https://www.npmjs.com/package/resume-cli)
