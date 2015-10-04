@@ -203,8 +203,4 @@ See [Contributing Guide](Contributing.md)
 Here's just a few of many repositories using dotenv:
 
 * [npm](https://github.com/npm/newww)
-* [sendgrid-nodejs](https://github.com/sendgrid/sendgrid-nodejs)
-* [handshake.js](https://github.com/handshakejs/handshakejs-api)
-* [google-oauth2-service-account](https://github.com/jacoblwe20/google-oauth2-service-account)
-* [kibble](https://github.com/motdotla/kibble)
-* [github-streaker](https://github.com/motdotla/github-streaker)
+* [jaws](https://github.com/jaws-framework/jaws-core-js)
