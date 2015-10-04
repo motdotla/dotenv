@@ -206,3 +206,7 @@ Here's just a few of many repositories using dotenv:
 * [jaws](https://github.com/jaws-framework/jaws-core-js)
 * [node-lambda](https://github.com/motdotla/node-lambda)
 * [resume-cli](https://www.npmjs.com/package/resume-cli)
+* [phant](https://www.npmjs.com/package/phant)
+* [adafruit-io-node](https://github.com/adafruit/adafruit-io-node)
+* [mockbin](https://www.npmjs.com/package/mockbin)
+* [and many more...](https://www.npmjs.com/browse/depended/dotenv)
