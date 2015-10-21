@@ -2,24 +2,11 @@
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.png" alt="dotenv" align="right" />
 
-Dotenv loads environment variables from `.env` into `ENV` (process.env).
+Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](http://12factor.net/config) methodology.
 
 [![BuildStatus](https://img.shields.io/travis/motdotla/dotenv/master.svg?style=flat-square)](https://travis-ci.org/motdotla/dotenv)
 [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
-
-> "Storing [configuration in the environment](http://www.12factor.net/config)
-> is one of the tenets of a [twelve-factor app](http://www.12factor.net/).
-> Anything that is likely to change between deployment environments–such as
-> resource handles for databases or credentials for external services–should be
-> extracted from the code into environment variables.
->
-> But it is not always practical to set environment variables on development
-> machines or continuous integration servers where multiple projects are run.
-> Dotenv loads variables from a `.env` file into ENV when the environment is
-> bootstrapped."
->
-> [Brandon Keepers' Dotenv in Ruby](https://github.com/bkeepers/dotenv)
 
 ## Install
 
@@ -29,10 +16,10 @@ npm install dotenv --save
 
 ## Usage
 
-As early as possible in your application, require and load dotenv.
+As early as possible in your application, require and configure dotenv.
 
 ```javascript
-require('dotenv').load();
+require('dotenv').config();
 ```
 
 Create a `.env` file in the root directory of your project. Add
@@ -74,11 +61,11 @@ $ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/your/e
 
 ## Config
 
-`config` will read your .env file, parse the contents, and assign it to
-`process.env` - just like `load` does. You can additionally, pass options to
-`config`.
+_Alias: `load`_
 
-Note: `config` and `load` are synonyms. You can pass options to either.
+`config` will read your .env file, parse the contents, and assign it to
+[`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). You can additionally, pass options to
+`config`.
 
 ### Options
 
@@ -145,34 +132,6 @@ line'}
 ```
 - inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
 
-#### Expanding Variables
-
-Basic variable expansion is supported.
-
-```
-BASIC=basic
-TEST=$BASIC
-```
-
-Parsing that would result in `{BASIC: 'basic', TEST: 'basic'}`. You can escape
-variables by quoting or beginning with `\` (e.g. `TEST=\$BASIC`). If the
-variable is not found in the file, `process.env` is checked. Missing variables
-result in an empty string.
-
-```
-BASIC=basic
-TEST=$TEST
-DNE=$DNE
-```
-
-```bash
-TEST=example node -e 'require("dotenv").config();'
-```
-
-- `process.env.BASIC` would equal `basic`
-- `process.env.TEST` would equal `example`
-- `process.env.DNE` would equal `""`
-
 ## FAQ
 
 ### Should I commit my `.env` file?
@@ -192,11 +151,19 @@ No. We **strongly** recommend against having a "main" `.env` file and an "enviro
 
 ### What about variable expansion?
 
-People have expressed interest in variable expansion [many](https://github.com/motdotla/dotenv/issues/39) [times](https://github.com/motdotla/dotenv/pull/97), and it is a problem we haven't solved. The biggest challenge is coming up with a syntax that wouldn't interfere with the randomness of other environment variables like API keys. We welcome solutions! Test cases have been added to help come up with something that's backwards compatible. In the meantime, Shell and JavaScript have their own variable expansion capabilities that are well tested and reliable. 
+We haven't been presented a compelling use case for expanding variables and believe it leads to env vars that are not "fully orthogonal" as [The Twelve-Factor App](http://12factor.net/config) outlines.<sup>[1](https://github.com/motdotla/dotenv/issues/39)[2](https://github.com/motdotla/dotenv/pull/97)</sup> Please open an issue if you have a compelling use case.
 
-## Contributing
+## Contributing Guide
 
-See [Contributing Guide](Contributing.md)
+See [Contributing.md](Contributing.md)
+
+## Change Log
+
+See [CHANGELOG.md](CHANGELOG.md)
+
+## License
+
+See [LICENSE](LICENSE)
 
 ## Who's using dotenv
 
