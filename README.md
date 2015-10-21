@@ -151,11 +151,11 @@ No. We **strongly** recommend against having a "main" `.env` file and an "enviro
 
 ### What about variable expansion?
 
-We haven't been presented a compelling use case for expanding variables and believe it leads to env vars that are not "fully orthogonal" as [The Twelve-Factor App](http://12factor.net/config) outlines.<sup>[1](https://github.com/motdotla/dotenv/issues/39)[2](https://github.com/motdotla/dotenv/pull/97)</sup> Please open an issue if you have a compelling use case.
+We haven't been presented with a compelling use case for expanding variables and believe it leads to env vars that are not "fully orthogonal" as [The Twelve-Factor App](http://12factor.net/config) outlines.<sup>[[1](https://github.com/motdotla/dotenv/issues/39)][[2](https://github.com/motdotla/dotenv/pull/97)]</sup> Please open an issue if you have a compelling use case.
 
 ## Contributing Guide
 
-See [Contributing.md](Contributing.md)
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Change Log
 
