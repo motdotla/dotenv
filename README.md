@@ -190,6 +190,10 @@ No. We **strongly** recommend against having a "main" `.env` file and an "enviro
 >
 > – [The Twelve-Factor App](http://12factor.net/config)
 
+### What happens to environment variables that were already set?
+
+We will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped. This behavior allows you to override all `.env` configurations with a machine-specific environment, although it is not recommended.
+
 ### What about variable expansion?
 
 People have expressed interest in variable expansion [many](https://github.com/motdotla/dotenv/issues/39) [times](https://github.com/motdotla/dotenv/pull/97), and it is a problem we haven't solved. The biggest challenge is coming up with a syntax that wouldn't interfere with the randomness of other environment variables like API keys. We welcome solutions! Test cases have been added to help come up with something that's backwards compatible. In the meantime, Shell and JavaScript have their own variable expansion capabilities that are well tested and reliable. 
