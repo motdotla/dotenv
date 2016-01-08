@@ -204,5 +204,10 @@ describe('dotenv', function () {
       parsed.ALWAYS_VARIABLE.should.eql('a0${beep}${b00p}')
       done()
     })
+
+    it('ignores leading export', function (done) {
+      parsed.EXPORTED.should.eql('exported')
+      done()
+    })
   })
 })
