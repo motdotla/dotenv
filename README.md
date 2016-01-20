@@ -153,9 +153,25 @@ No. We **strongly** recommend against having a "main" `.env` file and an "enviro
 
 We will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped. This behavior allows you to override all `.env` configurations with a machine-specific environment, although it is not recommended.
 
+### Can I customize/write plugins for dotenv?
+
+For `dotenv@2.x.x`: Yes. `dotenv.config()` now returns an object representing
+the parsed `.env` file. This gives you everything you need to continue
+setting values on `process.env`. For example:
+
+```js
+var dotenv = require('dotenv')
+var variableExpansion = require('dotenv-expand')
+const myEnv = dotenv.config()
+variableExpansion(myEnv)
+```
+
 ### What about variable expansion?
 
-We haven't been presented with a compelling use case for expanding variables and believe it leads to env vars that are not "fully orthogonal" as [The Twelve-Factor App](http://12factor.net/config) outlines.<sup>[[1](https://github.com/motdotla/dotenv/issues/39)][[2](https://github.com/motdotla/dotenv/pull/97)]</sup> Please open an issue if you have a compelling use case.
+For `dotenv@2.x.x`: Use [dotenv-expand](https://github.com/motdotla/dotenv-expand).
+
+For `dotenv@1.x.x`: We haven't been presented with a compelling use case for expanding variables and believe it leads to env vars that are not "fully orthogonal" as [The Twelve-Factor App](http://12factor.net/config) outlines.<sup>[[1](https://github.com/motdotla/dotenv/issues/39)][[2](https://github.com/motdotla/dotenv/pull/97)]</sup> Please open an issue if you have a compelling use case.
+
 
 ## Contributing Guide
 
