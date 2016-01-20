@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - LICENSE to be more explicit about what was defined in `package.json`. Linked to from README
 - Testing nodejs v4 on travis-ci
 - added examples of how to use dotenv in different ways
+- return parsed object on success rather than boolean true
 
 ### Changed
 - README has shorter description not referencing ruby gem since we don't have or want feature parity
