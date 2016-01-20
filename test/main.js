@@ -124,39 +124,6 @@ describe('dotenv', function () {
       done()
     })
 
-    describe('expanding variables', function () {
-      before(function (done) {
-        process.env.BASIC = 'should_not_be_chosen_because_exists_in_local_env'
-        done()
-      })
-
-      it('expands environment variables like $BASIC', function (done) {
-        parsed.BASIC_EXPAND.should.eql('basic')
-        done()
-      })
-
-      it('prioritizes .env file value (if exists)', function (done) {
-        parsed.BASIC_EXPAND.should.eql('basic')
-        done()
-      })
-
-      it('defers to process.env', function (done) {
-        // from `before`
-        parsed.TEST_EXPAND.should.eql('test')
-        done()
-      })
-
-      it('defaults missing variables to an empty string', function (done) {
-        parsed.UNDEFINED_EXPAND.should.eql('')
-        done()
-      })
-
-      it('does not expand escaped variables', function (done) {
-        parsed.ESCAPED_EXPAND.should.equal('$ESCAPED')
-        done()
-      })
-    })
-
     it('defaults empty values to empty string', function (done) {
       parsed.EMPTY.should.eql('')
       done()
@@ -197,11 +164,6 @@ describe('dotenv', function () {
 
     it('retains spaces in string', function (done) {
       parsed.INCLUDE_SPACE.should.eql('some spaced out string')
-      done()
-    })
-
-    it('respects values like variable expansion', function (done) {
-      parsed.ALWAYS_VARIABLE.should.eql('a0${beep}${b00p}')
       done()
     })
   })
