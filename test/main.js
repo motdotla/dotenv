@@ -66,11 +66,11 @@ describe('dotenv', function () {
     })
 
     it('does not write over keys already in process.env', function (done) {
-      process.env.TEST = 'test'
+      process.env.test = 'test'
       // 'val' returned as value in `beforeEach`. should keep this 'test'
       dotenv.config()
 
-      process.env.TEST.should.eql('test')
+      process.env.test.should.eql('test')
       done()
     })
 
