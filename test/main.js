@@ -65,12 +65,30 @@ describe('dotenv', function () {
       done()
     })
 
-    it('does not write over keys already in process.env', function (done) {
+    it('does not write over keys already in process.env by default', function (done) {
       process.env.TEST = 'test'
       // 'val' returned as value in `beforeEach`. should keep this 'test'
       dotenv.config()
 
       process.env.TEST.should.eql('test')
+      done()
+    })
+
+    it('writes over keys already in process.env when force option is enabled', function (done) {
+      process.env.test = 'test'
+      // 'val' returned as value in `beforeEach`
+      dotenv.config({ force: true })
+
+      process.env.test.should.eql('val')
+      done()
+    })
+
+    it('does not write over keys already in process.env when force option is disabled', function (done) {
+      process.env.test = 'test'
+      // 'val' returned as value in `beforeEach`
+      dotenv.config({ force: false })
+
+      process.env.test.should.eql('test')
       done()
     })
 

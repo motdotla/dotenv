@@ -102,6 +102,17 @@ using this option.
 require('dotenv').config({encoding: 'base64'});
 ```
 
+#### Force
+
+Default: `false`
+
+By default, dotenv **will not** write over existing environment variables in `process.env`.
+You can change this behavior by setting this option to `true`.
+
+```js
+require('dotenv').config({force: true});
+```
+
 ## Parse
 
 The engine which parses the contents of your file containing environment
@@ -151,7 +162,7 @@ No. We **strongly** recommend against having a "main" `.env` file and an "enviro
 
 ### What happens to environment variables that were already set?
 
-We will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped. This behavior allows you to override all `.env` configurations with a machine-specific environment, although it is not recommended.
+By default, this module will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped unless using the [force option](#force).
 
 ### Can I customize/write plugins for dotenv?
 
