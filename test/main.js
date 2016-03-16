@@ -74,6 +74,15 @@ describe('dotenv', function () {
       done()
     })
 
+    it('writes over keys already in process.env if override is set to true', function (done) {
+      process.env.TEST = 'test'
+      // 'val' returned as value in `beforeEach`.
+      dotenv.config({override: true})
+
+      process.env.TEST.should.eql('val')
+      done()
+    })
+
     it('catches any errors thrown from reading file or parsing', function (done) {
       var errorStub = s.stub(console, 'error')
       readFileSyncStub.throws()
