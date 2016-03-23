@@ -215,5 +215,10 @@ describe('dotenv', function () {
       parsed.export.should.eql('export')
       done()
     })
+
+    it('not confused by variable name starting with export', function (done) {
+      parsed.exportedKey.should.eql('foo')
+      done()
+    })
   })
 })
