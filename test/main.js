@@ -166,5 +166,10 @@ describe('dotenv', function () {
       parsed.INCLUDE_SPACE.should.eql('some spaced out string')
       done()
     })
+
+    it('parses email addresses completely', function (done) {
+      parsed.should.have.property('USERNAME', 'therealnerdybeast@example.tld')
+      done()
+    })
   })
 })
