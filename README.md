@@ -69,6 +69,16 @@ _Alias: `load`_
 
 ### Options
 
+#### Cache
+
+Default: `true`
+
+You may want to set caching to false in case you want to reload `.env` file using process signals.
+
+```js
+require('dotenv').config({caching: 'false'});
+```
+
 #### Silent
 
 Default: `false`
