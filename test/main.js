@@ -91,6 +91,22 @@ describe('dotenv', function () {
       errorStub.called.should.be.false
       done()
     })
+
+    it('does not overwrite keys in process env if option override is falsy', function (done) {
+      var testOverride = false
+      process.env.test = 'bar'
+      dotenv.config({override: testOverride})
+      process.env.test.should.eql('bar')
+      done()
+    })
+
+    it('overwrites keys in process env if option override is truthy', function (done) {
+      var testOverride = true
+      process.env.test = 'bar'
+      dotenv.config({override: testOverride})
+      process.env.test.should.eql('val')
+      done()
+    })
   })
 
   describe('parse', function () {
