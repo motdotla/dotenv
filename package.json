@@ -4,7 +4,7 @@
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "scripts": {
-    "test": "lab test/* --coverage",
+    "test": "lab test/* -r lcov | coveralls",
     "posttest": "npm run lint",
     "lint": "standard"
   },
@@ -26,6 +26,7 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "babel": "5.8.23",
+    "coveralls": "^2.11.9",
     "lab": "5.17.0",
     "semver": "5.0.3",
     "should": "7.1.0",
