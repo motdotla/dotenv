@@ -166,5 +166,15 @@ describe('dotenv', function () {
       parsed.INCLUDE_SPACE.should.eql('some spaced out string')
       done()
     })
+
+    it('should override basic environment if cache is set to false', function (done) {
+      var testPath = 'test/.env'
+      dotenv.config({path: testPath})
+      process.env.BASIC.should.eql('basic')
+      process.env.BASIC = 'test'
+      dotenv.config({path: testPath, chache: false})
+      process.env.BASIC.should.eql('test')
+      done()
+    })
   })
 })
