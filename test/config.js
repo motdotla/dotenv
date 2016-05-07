@@ -52,6 +52,6 @@ describe('config', function () {
           done()
         }
       )
-    });
+    })
   })
 })
