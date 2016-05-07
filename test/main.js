@@ -171,5 +171,10 @@ describe('dotenv', function () {
       parsed.should.have.property('USERNAME', 'therealnerdybeast@example.tld')
       done()
     })
+
+    it('should not remove leading "=" in variable', function (done) {
+      parsed.LEADING_EQUAL_SIGN.should.eql('=FOO')
+      done()
+    })
   })
 })
