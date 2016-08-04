@@ -74,6 +74,16 @@ describe('dotenv', function () {
       done()
     })
 
+    it('does not write to process.env when assignToProcessEnv is false', function (done) {
+        // 'val' returned as value in `beforeEach`. should keep this 'test'
+        var res = dotenv.config({ assignToProcessEnv: false})
+        res.test.should.eql('val')
+
+        process.env.should.not.have.property('test')
+        done()
+    })
+
+
     it('catches any errors thrown from reading file or parsing', function (done) {
       var errorStub = s.stub(console, 'error')
       readFileSyncStub.throws()
