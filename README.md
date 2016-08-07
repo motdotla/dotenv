@@ -113,7 +113,7 @@ an Object with the parsed keys and values.
 var dotenv  = require('dotenv');
 var buf    = new Buffer('BASIC=basic');
 var config  = dotenv.parse(buf); // will return an object
-console.log(typeof config, config) // object { BASIC : 'basic' }
+console.log(typeof config, config); // object { BASIC : 'basic' }
 ```
 
 ### Rules
@@ -161,10 +161,10 @@ the parsed `.env` file. This gives you everything you need to continue
 setting values on `process.env`. For example:
 
 ```js
-var dotenv = require('dotenv')
-var variableExpansion = require('dotenv-expand')
-const myEnv = dotenv.config()
-variableExpansion(myEnv)
+var dotenv = require('dotenv');
+var variableExpansion = require('dotenv-expand');
+const myEnv = dotenv.config();
+variableExpansion(myEnv);
 ```
 
 ### What about variable expansion?
