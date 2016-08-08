@@ -6,6 +6,7 @@
   "scripts": {
     "test": "lab test/* -r lcov | coveralls",
     "posttest": "npm run lint",
+    "postlint": "npm run lint-md",
     "lint": "standard",
     "lint-md": "standard-markdown"
   },
