@@ -20,7 +20,7 @@ npm install dotenv --save
 As early as possible in your application, require and configure dotenv.
 
 ```javascript
-require('dotenv').config();
+require('dotenv').config()
 ```
 
 Create a `.env` file in the root directory of your project. Add
@@ -38,11 +38,12 @@ That's it.
 `process.env` now has the keys and values you defined in your `.env` file.
 
 ```javascript
+var db = require('db')
 db.connect({
   host: process.env.DB_HOST,
   username: process.env.DB_USER,
   password: process.env.DB_PASS
-});
+})
 ```
 
 ### Preload
@@ -78,7 +79,7 @@ Dotenv outputs a warning to your console if missing a `.env` file. Suppress
 this warning using silent.
 
 ```js
-require('dotenv').config({silent: true});
+require('dotenv').config({silent: true})
 ```
 
 #### Path
@@ -89,7 +90,7 @@ You can specify a custom path if your file containing environment variables is
 named or located differently.
 
 ```js
-require('dotenv').config({path: '/custom/path/to/your/env/vars'});
+require('dotenv').config({path: '/custom/path/to/your/env/vars'})
 ```
 
 #### Encoding
@@ -100,7 +101,7 @@ You may specify the encoding of your file containing environment variables
 using this option.
 
 ```js
-require('dotenv').config({encoding: 'base64'});
+require('dotenv').config({encoding: 'base64'})
 ```
 
 ## Parse
@@ -110,9 +111,9 @@ variables is available to use. It accepts a String or Buffer and will return
 an Object with the parsed keys and values.
 
 ```js
-var dotenv  = require('dotenv');
-var buf    = new Buffer('BASIC=basic');
-var config  = dotenv.parse(buf); // will return an object
+var dotenv = require('dotenv')
+var buf = new Buffer('BASIC=basic')
+var config = dotenv.parse(buf) // will return an object
 console.log(typeof config, config) // object { BASIC : 'basic' }
 ```
 
