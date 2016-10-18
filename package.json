@@ -29,12 +29,15 @@
   "devDependencies": {
     "babel": "5.8.23",
     "coveralls": "^2.11.9",
-    "lab": "5.17.0",
+    "lab": "11.1.0",
     "semver": "5.3.0",
-    "should": "7.1.0",
+    "should": "11.1.1",
     "sinon": "1.17.6",
-    "standard": "5.3.0",
+    "standard": "8.4.0",
     "standard-markdown": "2.2.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "engines": {
+    "node": ">=4.6.0"
+  }
 }
