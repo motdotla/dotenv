@@ -79,16 +79,16 @@ describe('dotenv', function () {
       readFileSyncStub.throws()
 
       dotenv.config().should.eql(false)
-      errorStub.callCount.should.eql(1)
+      errorStub.called.should.be.false // because verbose is off
       done()
     })
 
-    it('takes option for silencing errors', function (done) {
+    it('takes option for exposing errors', function (done) {
       var errorStub = s.stub(console, 'error')
       readFileSyncStub.throws()
 
-      dotenv.config({silent: true}).should.eql(false)
-      errorStub.called.should.be.false
+      dotenv.config({verbose: true}).should.eql(false)
+      errorStub.callCount.should.eql(1)
       done()
     })
   })
@@ -157,8 +157,8 @@ describe('dotenv', function () {
     })
 
     it('retains inner quotes', function (done) {
-      parsed.RETAIN_INNER_QUOTES.should.eql('{\"foo\": \"bar\"}')
-      parsed.RETAIN_INNER_QUOTES_AS_STRING.should.eql('{\"foo\": \"bar\"}')
+      parsed.RETAIN_INNER_QUOTES.should.eql('{"foo": "bar"}')
+      parsed.RETAIN_INNER_QUOTES_AS_STRING.should.eql('{"foo": "bar"}')
       done()
     })
 
