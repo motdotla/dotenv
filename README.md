@@ -104,6 +104,16 @@ using this option.
 require('dotenv').config({encoding: 'base64'})
 ```
 
+#### Override
+
+Default: `false`
+
+You may specify that system environemnt variables should be overridden by those in a `.env` file.
+
+```js
+require('dotenv').config({override: true});
+```
+
 ## Parse
 
 The engine which parses the contents of your file containing environment
@@ -154,6 +164,8 @@ No. We **strongly** recommend against having a "main" `.env` file and an "enviro
 ### What happens to environment variables that were already set?
 
 We will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped. This behavior allows you to override all `.env` configurations with a machine-specific environment, although it is not recommended.
+
+**Note**: This behavior can be overriden by setting the `override` config option to `true`.
 
 ### Can I customize/write plugins for dotenv?
 
