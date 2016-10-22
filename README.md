@@ -155,6 +155,18 @@ No. We **strongly** recommend against having a "main" `.env` file and an "enviro
 
 We will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped. This behavior allows you to override all `.env` configurations with a machine-specific environment, although it is not recommended.
 
+If you want to override `process.env` you can do something like this:
+
+```javascript
+const fs = require('fs')
+const dotenv = require('dotenv')
+const envConfig = dotenv.parse(fs.readFileSync('.env.override'))
+for (var k in envConfig) {
+  process.env[k] = envConfig[k]
+}
+```
+
+
 ### Can I customize/write plugins for dotenv?
 
 For `dotenv@2.x.x`: Yes. `dotenv.config()` now returns an object representing
