@@ -123,9 +123,9 @@ The parsing engine currently supports the following rules:
 
 - `BASIC=basic` becomes `{BASIC: 'basic'}`
 - empty lines are skipped
-- lines beginning with `#` are treated as comments
 - empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
 - single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
+- leading/trailing whitespace gets trimmed, unless within quotes
 - new lines are expanded if in double quotes (`MULTILINE="new\nline"` becomes
 
 ```
@@ -133,6 +133,7 @@ The parsing engine currently supports the following rules:
 line'}
 ```
 - inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
+- ` #` indicates a comment for the rest of the line unless it's quoted (`HASH='here # there' # a comment` becomes `{HASH: "here # there"}`). lines starting with `#` are entirely skipped.
 
 ## FAQ
 
