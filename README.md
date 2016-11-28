@@ -104,6 +104,12 @@ using this option.
 require('dotenv').config({encoding: 'base64'})
 ```
 
+#### Assign to process.env
+
+Default: `true`
+
+Specify whether you want to assign to `process.env`. If this is set to `false`, it simply returns an `Object` with the parsed keys and values without touching `process.env`.
+
 ## Parse
 
 The engine which parses the contents of your file containing environment
