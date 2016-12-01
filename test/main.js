@@ -183,12 +183,6 @@ describe('dotenv', function () {
       done()
     })
 
-    it('retains quoted leading/trailing whitespace', function (done) {
-      parsed.QUOTED_WHITESPACE_NOTRIM_1.should.eql('  dont trim me   ')
-      parsed.QUOTED_WHITESPACE_NOTRIM_2.should.eql('  dont trim me   ')
-      done()
-    })
-
     it('parses email addresses completely', function (done) {
       parsed.should.have.property('USERNAME', 'therealnerdybeast@example.tld')
       done()
@@ -197,7 +191,6 @@ describe('dotenv', function () {
     it('handles severe combinations of the above', function (done) {
       parsed.PARSER_QA_1.should.eql("a'b'c'd'e")
       parsed.PARSER_QA_2.should.eql('"  mismatched\\nquotes  \'')
-      parsed.PARSER_QA_3.should.eql('  # yes\n  # yes\n')
       done()
     })
   })

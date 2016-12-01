@@ -125,7 +125,7 @@ The parsing engine currently supports the following rules:
 - empty lines are skipped
 - empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
 - single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
-- leading/trailing whitespace gets trimmed, unless within quotes
+- leading/trailing whitespace gets trimmed
 - new lines are expanded if in double quotes (`MULTILINE="new\nline"` becomes
 
 ```
