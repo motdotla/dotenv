@@ -151,6 +151,17 @@ describe('dotenv', function () {
       done()
     })
 
+    it('ignores comments at the end of lines', function (done) {
+      parsed.EOL_COMMENTS.should.eql('good')
+      done()
+    })
+
+    it('respects comment-lookalikes if quoted', function (done) {
+      parsed.QUOTED_HASH_1.should.eql('should be # included')
+      parsed.QUOTED_HASH_2.should.eql('should be # included')
+      done()
+    })
+
     it('respects equals signs in values', function (done) {
       parsed.EQUAL_SIGNS.should.eql('equals==')
       done()
@@ -167,8 +178,19 @@ describe('dotenv', function () {
       done()
     })
 
+    it('trims leading/trailing whitespace', function (done) {
+      parsed.WHITESPACE_TRIM.should.eql('trim me')
+      done()
+    })
+
     it('parses email addresses completely', function (done) {
       parsed.should.have.property('USERNAME', 'therealnerdybeast@example.tld')
+      done()
+    })
+
+    it('handles severe combinations of the above', function (done) {
+      parsed.PARSER_QA_1.should.eql("a'b'c'd'e")
+      parsed.PARSER_QA_2.should.eql('"  mismatched\\nquotes  \'')
       done()
     })
   })
