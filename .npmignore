@@ -4,3 +4,6 @@ test/
 .editorconfig
 .travis.yml
 Contributing.md
+.npmignore
+dotenv.png
+CONTRIBUTING.md
