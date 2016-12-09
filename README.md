@@ -165,7 +165,6 @@ for (var k in envConfig) {
 }
 ```
 
-
 ### Can I customize/write plugins for dotenv?
 
 For `dotenv@2.x.x`: Yes. `dotenv.config()` now returns an object representing
@@ -185,7 +184,6 @@ For `dotenv@2.x.x`: Use [dotenv-expand](https://github.com/motdotla/dotenv-expan
 
 For `dotenv@1.x.x`: We haven't been presented with a compelling use case for expanding variables and believe it leads to env vars that are not "fully orthogonal" as [The Twelve-Factor App](http://12factor.net/config) outlines.<sup>[[1](https://github.com/motdotla/dotenv/issues/39)][[2](https://github.com/motdotla/dotenv/pull/97)]</sup> Please open an issue if you have a compelling use case.
 
-
 ## Contributing Guide
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
@@ -202,7 +200,6 @@ See [LICENSE](LICENSE)
 
 Here's just a few of many repositories using dotenv:
 
-* [npm](https://github.com/npm/newww)
 * [jaws](https://github.com/jaws-framework/jaws-core-js)
 * [node-lambda](https://github.com/motdotla/node-lambda)
 * [resume-cli](https://www.npmjs.com/package/resume-cli)

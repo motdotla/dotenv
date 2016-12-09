@@ -3,7 +3,8 @@
 // therefore we'll preload babel's register function
 // run this example by executing the "run_me" script: ./run_me
 
-import dotenv from '../../lib/main'
-dotenv.config()
+import { config } from '../../lib/main'
+
+config()
 
 console.log(process.env.ES6)
