@@ -2,5 +2,7 @@ coverage/
 examples/
 test/
 .editorconfig
+.npmignore
 .travis.yml
-Contributing.md
+CONTRIBUTING.md
+dotenv.png
