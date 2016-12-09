@@ -71,15 +71,14 @@ _Alias: `load`_
 
 ### Options
 
-#### Silent
+#### Verbose
 
 Default: `false`
 
-Dotenv outputs a warning to your console if missing a `.env` file. Suppress
-this warning using silent.
+All errors are suppressed by default. Set this to `true` for more logging.
 
 ```js
-require('dotenv').config({silent: true})
+require('dotenv').config({verbose: true})
 ```
 
 #### Path
