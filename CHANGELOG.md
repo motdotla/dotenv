@@ -4,6 +4,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [3.0.0]
+### Added
+
+- `verbose` option will log any error messages. Off by default.
+- parses email addresses correctly
+- allow importing config method directly in ES6
+
+### Changed
+
+- Suppress error messages by default ([#154](https://github.com/motdotla/dotenv/pull/154))
+- Ignoring more files for NPM to make package download smaller
+
+### Fixed
+
+- False positive test due to case-sensitive variable ([#124](https://github.com/motdotla/dotenv/pull/124))
+
+### Removed
+
+- `silent` option removed in favor of `verbose`
+
 ## [2.0.0] - 2016-01-20
 ### Added
 - CHANGELOG to ["make it easier for users and contributors to see precisely what notable changes have been made between each release"](http://keepachangelog.com/). Linked to from README
