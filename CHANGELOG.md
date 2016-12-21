@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+
+- Return Object with parsed content or error instead of false ([#165](https://github.com/motdotla/dotenv/pull/165)).
+
+
+### Removed
+
+- `verbose` option removed in favor of returning result.
+
 
 ## [3.0.0]
 ### Added
