@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [4.0.0] - 2016-12-23
 ### Changed
 
 - Return Object with parsed content or error instead of false ([#165](https://github.com/motdotla/dotenv/pull/165)).
@@ -13,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `verbose` option removed in favor of returning result.
 
 
-## [3.0.0]
+## [3.0.0] - 2016-12-20
 ### Added
 
 - `verbose` option will log any error messages. Off by default.
@@ -65,7 +67,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - support for multiple `.env` files. should always use one `.env` file for the current environment
 
-[Unreleased]: https://github.com/motdotla/dotenv/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/motdotla/dotenv/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/motdotla/dotenv/compare/v3.0.0...v4.0.0
+[3.0.0]: https://github.com/motdotla/dotenv/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/motdotla/dotenv/compare/v1.2.0...v2.0.0
 [1.2.0]: https://github.com/motdotla/dotenv/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/motdotla/dotenv/compare/v1.0.0...v1.1.0
