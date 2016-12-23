@@ -65,21 +65,12 @@ $ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/your/e
 
 _Alias: `load`_
 
-`config` will read your .env file, parse the contents, and assign it to
-[`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). You can additionally, pass options to
-`config`.
+`config` will read your .env file, parse the contents, assign it to
+[`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
+and return an Object with a _parsed_ key containing the loaded content or an _error_ key if it failed.  
+You can additionally, pass options to `config`.
 
 ### Options
-
-#### Verbose
-
-Default: `false`
-
-All errors are suppressed by default. Set this to `true` for more logging.
-
-```js
-require('dotenv').config({verbose: true})
-```
 
 #### Path
 

@@ -74,21 +74,20 @@ describe('dotenv', function () {
       done()
     })
 
-    it('catches any errors thrown from reading file or parsing', function (done) {
-      var errorStub = s.stub(console, 'error')
-      readFileSyncStub.throws()
+    it('returns parsed object', function (done) {
+      var env = dotenv.config()
 
-      dotenv.config().should.eql(false)
-      errorStub.called.should.be.false // because verbose is off
+      env.should.not.have.property('error')
+      env.parsed.should.eql({ test: 'val' })
       done()
     })
 
-    it('takes option for exposing errors', function (done) {
-      var errorStub = s.stub(console, 'error')
+    it('returns any errors thrown from reading file or parsing', function (done) {
       readFileSyncStub.throws()
 
-      dotenv.config({verbose: true}).should.eql(false)
-      errorStub.callCount.should.eql(1)
+      var env = dotenv.config()
+      env.should.have.property('error')
+      env.error.should.be.instanceOf(Error)
       done()
     })
   })
