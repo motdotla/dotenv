@@ -113,7 +113,7 @@ The parsing engine currently supports the following rules:
 
 - `BASIC=basic` becomes `{BASIC: 'basic'}`
 - empty lines are skipped
-- a hash `#` turn what follows in a comment (any space character before it will be ignored aswell)
+- a hash `#` preceded by one or more whitespaces turns what follows in a comment
 - empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
 - single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
 - new lines are expanded if in double quotes (`MULTILINE="new\nline"` becomes

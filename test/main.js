@@ -162,6 +162,12 @@ describe('dotenv', function () {
       done()
     })
 
+    it('keeps the value if there are no spaces before the hash', function (done) {
+      parsed.NOT_COMMENT_IF_NO_SPACE_BEFORE.should.eql('hash_part_of_the_value# Not a comment')
+      parsed.HASH_IN_THE_END.should.eql('is_part_of_the_value#')
+      done()
+    })
+
     it('respects equals signs in values', function (done) {
       parsed.EQUAL_SIGNS.should.eql('equals==')
       done()
