@@ -150,6 +150,24 @@ describe('dotenv', function () {
       done()
     })
 
+    it('ignores commented part of the lines', function (done) {
+      parsed.COMMENTS_AFTER.should.not.eql('work_too # Little comment about this variable')
+      parsed.COMMENTS_AFTER.should.eql('work_too')
+      done()
+    })
+
+    it('ignores commented part of the lines with more spaces', function (done) {
+      parsed.COMMENTS_WITH_ANY_NUMBER_OF_SPACES.should.not.eql('work_aswell    # Little comment about this variable')
+      parsed.COMMENTS_WITH_ANY_NUMBER_OF_SPACES.should.eql('work_aswell')
+      done()
+    })
+
+    it('keeps the value if there are no spaces before the hash', function (done) {
+      parsed.NOT_COMMENT_IF_NO_SPACE_BEFORE.should.eql('hash_part_of_the_value# Not a comment')
+      parsed.HASH_IN_THE_END.should.eql('is_part_of_the_value#')
+      done()
+    })
+
     it('respects equals signs in values', function (done) {
       parsed.EQUAL_SIGNS.should.eql('equals==')
       done()
