@@ -46,6 +46,11 @@ db.connect({
 })
 ```
 
+If You don't want to show error if .env file does not exist You can pass `silent: true` option during config
+```javascript
+require('dotenv').config({silent: true})
+```
+
 ### Preload
 
 If you are using iojs-v1.6.0 or later, you can use the `--require` (`-r`) command line option to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
