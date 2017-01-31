@@ -150,6 +150,11 @@ describe('dotenv', function () {
       done()
     })
 
+    it('includes export lines', function (done) {
+      parsed.should.have.property('EXPORTED')
+      done()
+    })
+
     it('respects equals signs in values', function (done) {
       parsed.EQUAL_SIGNS.should.eql('equals==')
       done()
