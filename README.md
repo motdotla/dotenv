@@ -124,6 +124,17 @@ line'}
 ```
 - inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
 
+## Troubleshooting
+
+#### React
+
+Note that for React applications, namespacing variables in the .env file with `REACT_APP_` is required. For example:
+
+```
+REACT_APP_DB_HOST=localhost
+```
+
+
 ## FAQ
 
 ### Should I commit my `.env` file?
