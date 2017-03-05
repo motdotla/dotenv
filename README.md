@@ -124,6 +124,32 @@ line'}
 ```
 - inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
 
+## Command line interface
+
+Interface for command line usage is essential when you need to use .env file with `browserify` and `envify`.
+Greatly inspired by [cross-env](https://github.com/kentcdodds/cross-env).
+
+```
+Usage: dotenv [options] [inline env] [child command]
+
+Standard Options:
+
+    --path         Custom path if your file containing environment variables is named or located differently (default: .env).
+
+    --encoding     Encoding of your file containing environment variables (default: utf8).
+```
+
+### Example ###
+
+```
+{
+  "scripts": {
+      "watch": "dotenv watchify src/index.js -v -o dist/build.js",
+      "build": "dotenv browserify src/index.js -v -o dist/build.js"
+  }
+}
+```
+
 ## FAQ
 
 ### Should I commit my `.env` file?
