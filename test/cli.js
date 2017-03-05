@@ -113,7 +113,10 @@ describe('cli', function () {
   describe('get command args env vars', function () {
     it('should returns no future command and args', function (done) {
       process.env.FOO = 'BAR'
-      var [command, args, env] = cli.getCommandArgsAndEnvVars()
+      var res = cli.getCommandArgsAndEnvVars()
+      var command = res[0]
+      var args = res[1]
+      var env = res[2]
       should(command).eql(null)
       args.should.be.instanceOf(Array)
       args.should.be.empty()
@@ -123,7 +126,10 @@ describe('cli', function () {
     })
 
     it('should returns future command, args, and .env variables', function (done) {
-      var [command, args, env] = cli.getCommandArgsAndEnvVars(['--path=./test/.env', 'FOO=BAR', 'command', '--foo=bar'])
+      var res = cli.getCommandArgsAndEnvVars(['--path=./test/.env', 'FOO=BAR', 'command', '--foo=bar'])
+      var command = res[0]
+      var args = res[1]
+      var env = res[2]
       should(command).eql('command')
       args.should.be.instanceOf(Array)
       args.should.have.length(1)
