@@ -1,13 +1,14 @@
 'use strict'
 
 var should = require('should')
+var sinon = require('sinon')
 var Lab = require('lab')
 var lab = exports.lab = Lab.script()
 var describe = lab.experiment
 var beforeEach = lab.beforeEach
 var afterEach = lab.afterEach
+var after = lab.after
 var it = lab.test
-var isWindows = require('is-windows')
 var cli = require('../lib/cli')
 
 describe('cli', function () {
@@ -45,6 +46,12 @@ describe('cli', function () {
       cli.getCommand(['FOO=BAR'], enVars)
       enVars.should.be.instanceOf(Object)
       enVars.should.have.ownProperty('FOO', 'BAR')
+      cli.getCommand(['BAR="BAR"'], enVars)
+      enVars.should.be.instanceOf(Object)
+      enVars.should.have.ownProperty('BAR', 'BAR')
+      cli.getCommand(['BAZ=\'BAR\''], enVars)
+      enVars.should.be.instanceOf(Object)
+      enVars.should.have.ownProperty('BAZ', 'BAR')
       done()
     })
 
@@ -58,6 +65,13 @@ describe('cli', function () {
   })
 
   describe('command convert', function () {
+    var nativeOSType = process.env.OSTYPE
+
+    after(function (done) {
+      process.env.OSTYPE = nativeOSType
+      done()
+    })
+
     it('should returns undefined', function (done) {
       should(cli.convertCommand()).eql(undefined)
       done()
@@ -74,8 +88,11 @@ describe('cli', function () {
     })
 
     it('should returns an env variable usage to be appropriate for the current OS', function (done) {
-      should(cli.convertCommand('$foo_bar')).eql(isWindows() ? '%foo_bar%' : '$foo_bar')
-      should(cli.convertCommand('%foo_bar%')).eql(isWindows() ? '%foo_bar%' : '$foo_bar')
+      should(cli.convertCommand('$foo_bar')).eql('$foo_bar')
+      should(cli.convertCommand('%foo_bar%')).eql('$foo_bar')
+      process.env.OSTYPE = 'cygwin' // Tricky hock for fake is-windows module >:D
+      should(cli.convertCommand('$foo_bar')).eql('%foo_bar%')
+      should(cli.convertCommand('%foo_bar%')).eql('%foo_bar%')
       done()
     })
   })
@@ -85,6 +102,12 @@ describe('cli', function () {
       process.env.FOO = 'BAR'
       should(cli.getEnvVars()).ownProperty('FOO', 'BAR')
       delete process.env.FOO
+      done()
+    })
+
+    it('should be forward APPDATA variable if set (windows)', function (done) {
+      process.env.APPDATA = 0
+      should(cli.getEnvVars()).ownProperty('APPDATA', 0)
       done()
     })
 
@@ -156,8 +179,34 @@ describe('cli', function () {
   })
 
   describe('forward env into child process', function () {
+    var s, childProcessStub
+
+    beforeEach(function (done) {
+      s = sinon.sandbox.create()
+      done()
+    })
+
+    afterEach(function (done) {
+      s.restore()
+      done()
+    })
+
     it('should returns null', function (done) {
       should(cli()).eql(null)
+      done()
+    })
+
+    it('should returns child process', function (done) {
+      var childProcess = cli(['node', '-e', 'setTimeout(() => {}, 0)'])
+      var sigs = ['SIGTERM', 'SIGINT', 'SIGBREAK', 'SIGHUP']
+      childProcessStub = s.stub(childProcess, 'kill').returns(0)
+      sigs.forEach(sig => process.emit(sig))
+      childProcessStub.calledThrice.should.be.ok
+      childProcessStub.returnValues.should.be.containEql(0, 0, 0)
+      // Kill child process without exit parent
+      childProcessStub.restore()
+      childProcess.removeListener('exit', process.exit)
+      childProcess.kill()
       done()
     })
   })
