@@ -30,6 +30,8 @@ describe('dotenv', function () {
     beforeEach(function (done) {
       readFileSyncStub = s.stub(fs, 'readFileSync').returns('test=val')
       parseStub = s.stub(dotenv, 'parse').returns({test: 'val'})
+      delete process.env.test // clean up
+
       done()
     })
 
@@ -79,6 +81,24 @@ describe('dotenv', function () {
 
       env.should.not.have.property('error')
       env.parsed.should.eql({ test: 'val' })
+      done()
+    })
+
+    it('returns inserted object', function (done) {
+      var env = dotenv.config()
+
+      env.should.not.have.property('error')
+      env.inserted.should.eql({ test: 'val' })
+      done()
+    })
+
+    it('returns inserted values and parsed values (which can be different if already preset)', function (done) {
+      process.env.test = 'test'
+
+      var env = dotenv.config()
+
+      env.parsed.should.eql({ test: 'val' })
+      env.inserted.should.eql({ test: 'test' })
       done()
     })
 
