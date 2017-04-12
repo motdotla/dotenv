@@ -41,6 +41,14 @@ describe('dotenv', function () {
       done()
     })
 
+    it('takes option for json file path', function (done) {
+      var testPath = 'test/.env.json'
+      dotenv.config({path: testPath})
+
+      readFileSyncStub.args[0][0].should.eql(testPath)
+      done()
+    })
+
     it('takes option for encoding', function (done) {
       var testEncoding = 'base64'
       dotenv.config({encoding: testEncoding})
