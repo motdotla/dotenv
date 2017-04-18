@@ -170,5 +170,10 @@ describe('dotenv', function () {
       parsed.should.have.property('USERNAME', 'therealnerdybeast@example.tld')
       done()
     })
+
+    it('parses `export KEY=VAL` syntax', function (done) {
+      parsed.should.have.property('EXPORTED', 'exported-value')
+      done()
+    })
   })
 })
