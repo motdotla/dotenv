@@ -74,6 +74,15 @@ describe('dotenv', function () {
       done()
     })
 
+    it('does not write over keys already in process.env if the key has a falsy value', function (done) {
+      process.env.test = ''
+      // 'val' returned as value in `beforeEach`. should keep this ''
+      dotenv.config()
+
+      process.env.test.should.eql('')
+      done()
+    })
+
     it('returns parsed object', function (done) {
       var env = dotenv.config()
 
