@@ -67,7 +67,18 @@ _Alias: `load`_
 
 `config` will read your .env file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
-and return an Object with a _parsed_ key containing the loaded content or an _error_ key if it failed.  
+and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.  
+
+```js
+const result = dotenv.config()
+
+if (result.error) {
+  throw result.error
+}
+
+console.log(result.parsed)
+```
+
 You can additionally, pass options to `config`.
 
 ### Options
