@@ -67,7 +67,18 @@ _Alias: `load`_
 
 `config` will read your .env file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
-and return an Object with a _parsed_ key containing the loaded content or an _error_ key if it failed.  
+and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.  
+
+```js
+const result = dotenv.config()
+
+if (result.error) {
+  throw result.error
+}
+
+console.log(result.parsed)
+```
+
 You can additionally, pass options to `config`.
 
 ### Options
@@ -123,6 +134,7 @@ The parsing engine currently supports the following rules:
 line'}
 ```
 - inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
+- whitespace is removed from both ends of the value (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO="  some value  "` becomes `{FOO: 'some value'}`)
 
 ## FAQ
 
@@ -174,6 +186,40 @@ variableExpansion(myEnv)
 For `dotenv@2.x.x`: Use [dotenv-expand](https://github.com/motdotla/dotenv-expand).
 
 For `dotenv@1.x.x`: We haven't been presented with a compelling use case for expanding variables and believe it leads to env vars that are not "fully orthogonal" as [The Twelve-Factor App](http://12factor.net/config) outlines.<sup>[[1](https://github.com/motdotla/dotenv/issues/39)][[2](https://github.com/motdotla/dotenv/pull/97)]</sup> Please open an issue if you have a compelling use case.
+
+### How do I use dotenv with `import`?
+
+ES2015 and beyond offers modules that allow you to `export` any top-level `function`, `class`, `var`, `let`, or `const`.
+
+> When you run a module containing an `import` declaration, the modules it imports are loaded first, then each module body is executed in a depth-first traversal of the dependency graph, avoiding cycles by skipping anything already executed.
+>
+> – [ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)
+
+You must run `dotenv.config()` before referencing any environment variables. Here's an example of problematic code:
+
+`errorReporter.js`:
+
+```js
+import { Client } from 'best-error-reporting-service'
+
+export const client = new Client(process.env.BEST_API_KEY)
+```
+
+`index.js`:
+
+```js
+import dotenv from 'dotenv'
+dotenv.config()
+
+import errorReporter from './errorReporter'
+errorReporter.client.report(new Error('faq example'))
+```
+
+`client` will not be configured correctly because it was constructed before `dotenv.config()` was executed. There are (at least) 3 ways to make this work.
+
+1. Preload dotenv: `node --require dotenv/config index.js` (_Note: you do not need to `import` dotenv with this approach_)
+2. Import `dotenv/config` instead of `dotenv` (_Note: you do not need to call `dotenv.config()` and must pass options via the command line with this approach_)
+3. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
 
 ## Contributing Guide
 
