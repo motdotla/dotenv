@@ -179,5 +179,15 @@ describe('dotenv', function () {
       parsed.should.have.property('USERNAME', 'therealnerdybeast@example.tld')
       done()
     })
+
+    it('parses exported variables properly', function (done) {
+      parsed.should.have.property('EXPORT_VAR', 'exported var')
+      done()
+    })
+
+    it('does not chop variable names that start with "export"', function (done) {
+      parsed.should.have.property('export_foo', 'is not chopped off')
+      done()
+    })
   })
 })
