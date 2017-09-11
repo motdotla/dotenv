@@ -13,11 +13,13 @@ var describe = lab.experiment
 var it = lab.test
 var nodeBinary = process.argv[0]
 
+console.log('process.env', process.env)
+
 describe('config', function () {
   describe('preload', function () {
     it('loads .env', function (done) {
       // preloading was introduced in v1.6.0 so skip test for other environments
-      if (semver.lt(process.env.npm_config_node_version, '1.6.0')) {
+      if (process.env.npm_config_node_version && semver.lt(process.env.npm_config_node_version, '1.6.0')) {
         return done()
       }
 
