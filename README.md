@@ -67,7 +67,7 @@ _Alias: `load`_
 
 `config` will read your .env file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
-and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.  
+and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
 
 ```js
 const result = dotenv.config()
@@ -103,6 +103,16 @@ using this option.
 
 ```js
 require('dotenv').config({encoding: 'base64'})
+```
+
+#### Assign
+
+Default: `true`
+
+You can specify whether or not to assign the `process.env` the variables.
+
+```js
+require('dotenv').config({assign: false});
 ```
 
 ## Parse
