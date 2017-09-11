@@ -13,8 +13,6 @@ var describe = lab.experiment
 var it = lab.test
 var nodeBinary = process.argv[0]
 
-console.log('process.env', process.env)
-
 describe('config', function () {
   describe('preload', function () {
     it('loads .env', function (done) {
