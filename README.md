@@ -105,6 +105,17 @@ using this option.
 require('dotenv').config({encoding: 'base64'})
 ```
 
+#### Overwrite
+
+Default: `false`
+
+You may want to allow for existing environment variables to be overwritten
+if they have been modified in your env file.
+
+```js
+require('dotenv').config({overwrite: true})
+```
+
 ## Parse
 
 The engine which parses the contents of your file containing environment
@@ -157,15 +168,12 @@ No. We **strongly** recommend against having a "main" `.env` file and an "enviro
 
 We will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped. This behavior allows you to override all `.env` configurations with a machine-specific environment, although it is not recommended.
 
-If you want to override `process.env` you can do something like this:
-
-```javascript
-const fs = require('fs')
-const dotenv = require('dotenv')
-const envConfig = dotenv.parse(fs.readFileSync('.env.override'))
-for (var k in envConfig) {
-  process.env[k] = envConfig[k]
-}
+However, if you find a need to overwrite variables already defined in `process.env`
+you can do so by adding `overwrite: true` into the options passed to `config`.
+e.g.
+```js
+var dotenv = require('dotenv')
+dotenv.config({overwrite: true})
 ```
 
 ### Can I customize/write plugins for dotenv?

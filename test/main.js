@@ -57,6 +57,14 @@ describe('dotenv', function () {
       done()
     })
 
+    it('takes option for overwritting', function (done) {
+      process.env.BASIC = 'test'
+      dotenv.config({overwrite: true})
+
+      process.env.BASIC.should.eql('test')
+      done()
+    })
+
     it('makes load a synonym of config', function (done) {
       dotenv.load()
 
