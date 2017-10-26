@@ -252,3 +252,4 @@ Here's some projects that expand on dotenv. Check them out.
 * [require-environment-variables](https://github.com/bjoshuanoah/require-environment-variables)
 * [dotenv-safe](https://github.com/rolodato/dotenv-safe)
 * [envalid](https://github.com/af/envalid)
+* [lookenv](https://github.com/RodrigoEspinosa/lookenv)
