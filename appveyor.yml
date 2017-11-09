@@ -1,0 +1,3 @@
+version: 4.0.{build}
+build:
+  verbosity: minimal
