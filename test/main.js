@@ -179,5 +179,11 @@ describe('dotenv', function () {
       parsed.should.have.property('USERNAME', 'therealnerdybeast@example.tld')
       done()
     })
+
+    it('parses booleans correctly', function (done) {
+      parsed.should.have.property('FALSEY_VALUE', false)
+      parsed.should.have.property('TRUTHY_VALUE', true)
+      done()
+    })
   })
 })
