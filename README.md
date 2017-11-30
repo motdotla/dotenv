@@ -253,3 +253,4 @@ Here's some projects that expand on dotenv. Check them out.
 * [dotenv-safe](https://github.com/rolodato/dotenv-safe)
 * [envalid](https://github.com/af/envalid)
 * [lookenv](https://github.com/RodrigoEspinosa/lookenv)
+* [run.env](https://www.npmjs.com/package/run.env)
