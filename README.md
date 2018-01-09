@@ -254,3 +254,4 @@ Here's some projects that expand on dotenv. Check them out.
 * [envalid](https://github.com/af/envalid)
 * [lookenv](https://github.com/RodrigoEspinosa/lookenv)
 * [run.env](https://www.npmjs.com/package/run.env)
+* [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack)
