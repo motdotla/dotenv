@@ -96,7 +96,7 @@ describe('dotenv', function () {
 
       var env = dotenv.config()
       env.should.have.property('error')
-      env.error.should.be.instanceOf(Error)
+      env.error[0].should.be.instanceOf(Error)
       done()
     })
   })
