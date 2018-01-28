@@ -97,10 +97,7 @@ require('dotenv').config({path: '/custom/path/to/your/env/vars'})
 You can also use an array for the path. 
 The function will return the first found file with variables.
 ```js
-require('dotenv').config({path: [ 
-  '.env',
-  '/custom/path/to/your/env/vars',
-  ]})
+require('dotenv').config({path: ['.env', '/custom/path/to/your/env/vars']})
 ```
 
 #### Encoding
