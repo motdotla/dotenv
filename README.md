@@ -5,6 +5,7 @@
 Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](http://12factor.net/config) methodology.
 
 [![BuildStatus](https://img.shields.io/travis/motdotla/dotenv/master.svg?style=flat-square)](https://travis-ci.org/motdotla/dotenv)
+[![Build status](https://ci.appveyor.com/api/projects/status/rnba2pyi87hgc8xw/branch/master?svg=true)](https://ci.appveyor.com/project/maxbeatty/dotenv/branch/master)
 [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
 [![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
@@ -38,7 +39,7 @@ That's it.
 `process.env` now has the keys and values you defined in your `.env` file.
 
 ```javascript
-var db = require('db')
+const db = require('db')
 db.connect({
   host: process.env.DB_HOST,
   username: process.env.DB_USER,
@@ -48,8 +49,7 @@ db.connect({
 
 ### Preload
 
-If you are using iojs-v1.6.0 or later, you can use the `--require` (`-r`) command line option to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
-
+You can use the `--require` (`-r`) command line option to preload dotenv. By doing this, you do not need to require and load dotenv in your application code. This is the preferred approach when using `import` instead of `require`.
 
 ```bash
 $ node -r dotenv/config your_script.js
@@ -85,13 +85,13 @@ You can additionally, pass options to `config`.
 
 #### Path
 
-Default: `.env`
+Default: `path.resolve(process.cwd(), '.env')`
 
 You can specify a custom path if your file containing environment variables is
 named or located differently.
 
 ```js
-require('dotenv').config({path: '/custom/path/to/your/env/vars'})
+require('dotenv').config({path: '/full/custom/path/to/your/env/vars'})
 ```
 
 #### Encoding
@@ -112,9 +112,9 @@ variables is available to use. It accepts a String or Buffer and will return
 an Object with the parsed keys and values.
 
 ```js
-var dotenv = require('dotenv')
-var buf = new Buffer('BASIC=basic')
-var config = dotenv.parse(buf) // will return an object
+const dotenv = require('dotenv')
+const buf = new Buffer('BASIC=basic')
+const config = dotenv.parse(buf) // will return an object
 console.log(typeof config, config) // object { BASIC : 'basic' }
 ```
 
