@@ -10,7 +10,7 @@ var beforeEach = lab.beforeEach
 var afterEach = lab.afterEach
 var it = lab.test
 var fs = require('fs')
-var dotenv = require('../lib/main')
+var dotenv = require('../build/main')
 var s
 
 describe('dotenv', function () {

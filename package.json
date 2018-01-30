@@ -2,13 +2,16 @@
   "name": "dotenv",
   "version": "5.0.0",
   "description": "Loads environment variables from .env file",
-  "main": "lib/main.js",
+  "main": "build/main.js",
   "scripts": {
-    "pretest": "npm run lint",
+    "clean": "rm -rf build && mkdir build",
+    "build": "npm run clean && babel lib/main.js -o build/main.js",
+    "pretest": "npm run build && npm run lint",
     "test": "lab test/* -r lcov | coveralls",
     "lint": "standard",
     "postlint": "npm run lint-md",
-    "lint-md": "standard-markdown"
+    "lint-md": "standard-markdown",
+    "precommit": "npm run test"
   },
   "repository": {
     "type": "git",
@@ -28,7 +31,10 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "babel": "5.8.23",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "coveralls": "^2.11.9",
+    "husky": "^0.14.3",
     "lab": "11.1.0",
     "should": "11.1.1",
     "sinon": "1.17.6",
@@ -37,6 +43,11 @@
   },
   "dependencies": {},
   "engines": {
-    "node": ">=4.6.0"
+    "node": ">=0.12"
+  },
+  "standard": {
+    "ignore": [
+      "/build"
+    ]
   }
 }
