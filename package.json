@@ -35,7 +35,9 @@
     "standard": "8.4.0",
     "standard-markdown": "2.2.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "parse-key-value-pair": "^1.1.0"
+  },
   "engines": {
     "node": ">=4.6.0"
   }
