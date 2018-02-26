@@ -5,7 +5,8 @@
   "main": "lib/main.js",
   "scripts": {
     "pretest": "npm run lint",
-    "test": "lab test/* -r lcov | coveralls",
+    "test": "lab",
+    "ci:coverage": "lab test/* -r lcov | coveralls",
     "lint": "standard",
     "postlint": "npm run lint-md",
     "lint-md": "standard-markdown"
@@ -29,7 +30,7 @@
   "devDependencies": {
     "babel": "5.8.23",
     "coveralls": "^2.11.9",
-    "lab": "11.1.0",
+    "lab": "^14.3.2",
     "should": "11.1.1",
     "sinon": "1.17.6",
     "standard": "8.4.0",

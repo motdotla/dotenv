@@ -24,12 +24,14 @@ describe('dotenv', function () {
     done()
   })
 
+  const mockParseResponse = {test: 'val'}
+
   describe('config', function () {
-    var readFileSyncStub, parseStub
+    var readFileSyncStub
 
     beforeEach(function (done) {
       readFileSyncStub = s.stub(fs, 'readFileSync').returns('test=val')
-      parseStub = s.stub(dotenv, 'parse').returns({test: 'val'})
+      s.stub(dotenv, 'parse').returns(mockParseResponse)
       done()
     })
 
@@ -50,26 +52,32 @@ describe('dotenv', function () {
     })
 
     it('reads path with encoding, parsing output to process.env', function (done) {
-      dotenv.config()
+      const res = dotenv.config()
+      res.parsed.should.deepEqual(mockParseResponse)
 
       readFileSyncStub.callCount.should.eql(1)
-      parseStub.callCount.should.eql(1)
       done()
     })
 
     it('makes load a synonym of config', function (done) {
-      dotenv.load()
+      const env = dotenv.load()
+      env.should.have.property('parsed')
+      env.parsed.should.deepEqual(mockParseResponse)
 
       readFileSyncStub.callCount.should.eql(1)
-      parseStub.callCount.should.eql(1)
       done()
     })
 
     it('does not write over keys already in process.env', function (done) {
       process.env.test = 'test'
       // 'val' returned as value in `beforeEach`. should keep this 'test'
-      dotenv.config()
+      const env = dotenv.config()
 
+      env.should.have.property('parsed')
+      env.parsed.should.have.property('test')
+      env.parsed.test.should.eql(mockParseResponse.test)
+
+      process.env.should.have.property('test')
       process.env.test.should.eql('test')
       done()
     })
@@ -77,9 +85,15 @@ describe('dotenv', function () {
     it('does not write over keys already in process.env if the key has a falsy value', function (done) {
       process.env.test = ''
       // 'val' returned as value in `beforeEach`. should keep this ''
-      dotenv.config()
+      const env = dotenv.config()
 
-      process.env.test.should.eql('')
+      env.should.have.property('parsed')
+      env.parsed.should.have.property('test')
+      env.parsed.test.should.eql(mockParseResponse.test)
+
+      process.env.should.have.property('test')
+      // NB: process.env.test becomes undefined on Windows
+      Boolean(process.env.test).should.eql(false)
       done()
     })
 
@@ -87,7 +101,7 @@ describe('dotenv', function () {
       var env = dotenv.config()
 
       env.should.not.have.property('error')
-      env.parsed.should.eql({ test: 'val' })
+      env.parsed.should.eql(mockParseResponse)
       done()
     })
 
