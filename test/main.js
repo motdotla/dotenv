@@ -24,12 +24,14 @@ describe('dotenv', function () {
     done()
   })
 
+  const mockParseResponse = {test: 'val'}
+
   describe('config', function () {
-    var readFileSyncStub, parseStub
+    var readFileSyncStub
 
     beforeEach(function (done) {
       readFileSyncStub = s.stub(fs, 'readFileSync').returns('test=val')
-      parseStub = s.stub(dotenv, 'parse').returns({test: 'val'})
+      s.stub(dotenv, 'parse').returns(mockParseResponse)
       done()
     })
 
@@ -50,18 +52,18 @@ describe('dotenv', function () {
     })
 
     it('reads path with encoding, parsing output to process.env', function (done) {
-      dotenv.config()
+      const res = dotenv.config()
+      res.parsed.should.deepEqual(mockParseResponse)
 
       readFileSyncStub.callCount.should.eql(1)
-      parseStub.callCount.should.eql(1)
       done()
     })
 
     it('makes load a synonym of config', function (done) {
-      dotenv.load()
+      const res = dotenv.load()
+      res.parsed.should.deepEqual(mockParseResponse)
 
       readFileSyncStub.callCount.should.eql(1)
-      parseStub.callCount.should.eql(1)
       done()
     })
 
