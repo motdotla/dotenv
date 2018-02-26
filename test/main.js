@@ -60,8 +60,9 @@ describe('dotenv', function () {
     })
 
     it('makes load a synonym of config', function (done) {
-      const res = dotenv.load()
-      res.parsed.should.deepEqual(mockParseResponse)
+      const env = dotenv.load()
+      env.should.have.property('parsed')
+      env.parsed.should.deepEqual(mockParseResponse)
 
       readFileSyncStub.callCount.should.eql(1)
       done()
@@ -70,8 +71,13 @@ describe('dotenv', function () {
     it('does not write over keys already in process.env', function (done) {
       process.env.test = 'test'
       // 'val' returned as value in `beforeEach`. should keep this 'test'
-      dotenv.config()
+      const env = dotenv.config()
 
+      env.should.have.property('parsed')
+      env.parsed.should.have.property('test')
+      env.parsed.test.should.eql(mockParseResponse.test)
+
+      process.env.should.have.property('test')
       process.env.test.should.eql('test')
       done()
     })
@@ -79,8 +85,13 @@ describe('dotenv', function () {
     it('does not write over keys already in process.env if the key has a falsy value', function (done) {
       process.env.test = ''
       // 'val' returned as value in `beforeEach`. should keep this ''
-      dotenv.config()
+      const env = dotenv.config()
 
+      env.should.have.property('parsed')
+      env.parsed.should.have.property('test')
+      env.parsed.test.should.eql(mockParseResponse.test)
+
+      process.env.should.have.property('test')
       process.env.test.should.eql('')
       done()
     })
@@ -89,7 +100,7 @@ describe('dotenv', function () {
       var env = dotenv.config()
 
       env.should.not.have.property('error')
-      env.parsed.should.eql({ test: 'val' })
+      env.parsed.should.eql(mockParseResponse)
       done()
     })
 
