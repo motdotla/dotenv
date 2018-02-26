@@ -6,7 +6,7 @@
   "scripts": {
     "pretest": "npm run lint",
     "test": "lab --ignore WebAssembly",
-    "posttest": "lab test/* -r lcov | coveralls",
+    "ci:coverage": "lab test/* -r lcov | coveralls",
     "lint": "standard",
     "postlint": "npm run lint-md",
     "lint-md": "standard-markdown"
