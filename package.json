@@ -4,11 +4,11 @@
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "scripts": {
-    "pretest": "npm run lint",
-    "test": "lab -r lcov | coveralls",
+    "test": "lab",
     "lint": "standard",
     "postlint": "npm run lint-md",
-    "lint-md": "standard-markdown"
+    "lint-md": "standard-markdown",
+    "coverage": "lab -r lcov | coveralls"
   },
   "repository": {
     "type": "git",

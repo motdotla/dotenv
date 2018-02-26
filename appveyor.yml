@@ -10,4 +10,5 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - npm install
 test_script:
-  - npm test
+  - npm run lint
+  - npm run test
