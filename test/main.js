@@ -1,6 +1,6 @@
 'use strict'
 
-require('should')
+const should = require('should')
 var sinon = require('sinon')
 var Lab = require('lab')
 var lab = exports.lab = Lab.script()
@@ -77,8 +77,8 @@ describe('dotenv', function () {
       env.parsed.should.have.property('test')
       env.parsed.test.should.eql(mockParseResponse.test)
 
-      process.env.should.have.property('test')
-      process.env.test.should.eql('test')
+      should(process.env).have.property('test')
+      should(process.env.test).eql('test')
       done()
     })
 
@@ -91,8 +91,8 @@ describe('dotenv', function () {
       env.parsed.should.have.property('test')
       env.parsed.test.should.eql(mockParseResponse.test)
 
-      process.env.should.have.property('test')
-      process.env.test.should.eql('')
+      should(process.env).have.property('test')
+      should(process.env.test).eql('')
       done()
     })
 
