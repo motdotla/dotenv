@@ -79,7 +79,7 @@ describe('dotenv', function () {
       // 'val' returned as value in `beforeEach`. should keep this ''
       dotenv.config()
 
-      process.env.test.should.eql('')
+      Boolean(process.env.test).should.eql(false)
       done()
     })
 
