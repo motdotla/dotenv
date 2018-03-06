@@ -2,6 +2,7 @@
 
 require('should')
 var cp = require('child_process')
+var Lab = require('lab')
 var lab = exports.lab = Lab.script()
 var describe = lab.experiment
 var it = lab.test
