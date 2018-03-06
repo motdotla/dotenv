@@ -3,24 +3,21 @@
 require('should')
 var cp = require('child_process')
 var Lab = require('lab')
-var lab = exports.lab = Lab.script()
-var describe = lab.experiment
-var it = lab.test
+var { experiment: describe, test: it } = exports.lab = Lab.script()
 var nodeBinary = process.argv[0]
 
-describe('config', function () {
-  describe('preload', function () {
-    it('loads .env', function (done) {
+describe('config', () => {
+  describe('preload', () => {
+    it('loads .env', done => {
       // NB: `nodeBinary` is quoted for Windows
       cp.exec(
         '"' + nodeBinary + '" -r ../config -e "console.log(process.env.BASIC)" dotenv_config_path=./test/.env',
-        function (err, stdout, stderr) {
+        (err, stdout, stderr) => {
           if (err) {
             return done(err)
           }
 
           stdout.trim().should.eql('basic')
-
           done()
         }
       )
