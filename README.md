@@ -13,7 +13,11 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 ## Install
 
 ```bash
-npm install dotenv --save
+# with npm
+npm i dotenv 
+
+# or with yarn
+yarn add dotenv
 ```
 
 ## Usage
