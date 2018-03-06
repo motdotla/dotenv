@@ -13,11 +13,7 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 ## Install
 
 ```bash
-# with npm
-npm i dotenv 
-
-# or with yarn
-yarn add dotenv
+npm install dotenv --save
 ```
 
 ## Usage
@@ -259,4 +255,3 @@ Here's some projects that expand on dotenv. Check them out.
 * [lookenv](https://github.com/RodrigoEspinosa/lookenv)
 * [run.env](https://www.npmjs.com/package/run.env)
 * [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack)
-* [handy-browser-env](https://github.com/yTakkar/Handy-Browser-Env)
