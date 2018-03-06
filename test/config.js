@@ -2,8 +2,9 @@
 
 require('should')
 var cp = require('child_process')
-var Lab = require('lab')
-var { experiment: describe, test: it } = exports.lab = Lab.script()
+var lab = exports.lab = Lab.script()
+var describe = lab.experiment
+var it = lab.test
 var nodeBinary = process.argv[0]
 
 describe('config', () => {

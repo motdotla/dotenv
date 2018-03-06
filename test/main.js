@@ -2,10 +2,13 @@
 
 require('should')
 let sinon = require('sinon')
-let Lab = require('lab')
-let {
-  experiment: describe, before, beforeEach, afterEach, test: it
-} = exports.lab = Lab.script()
+var Lab = require('lab')
+var lab = exports.lab = Lab.script()
+var describe = lab.experiment
+var before = lab.before
+var beforeEach = lab.beforeEach
+var afterEach = lab.afterEach
+var it = lab.test
 let fs = require('fs')
 let dotenv = require('../lib/main')
 let s
