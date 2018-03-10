@@ -10,7 +10,7 @@ var beforeEach = lab.beforeEach
 var afterEach = lab.afterEach
 var it = lab.test
 var fs = require('fs')
-var dotenv = require('../lib/main')
+var dotenv = require('../lib/index')
 var s
 
 describe('dotenv', function () {
@@ -24,7 +24,7 @@ describe('dotenv', function () {
     done()
   })
 
-  const mockParseResponse = {test: 'val'}
+  const mockParseResponse = { test: 'val' }
 
   describe('config', function () {
     var readFileSyncStub
@@ -37,7 +37,7 @@ describe('dotenv', function () {
 
     it('takes option for path', function (done) {
       var testPath = 'test/.env'
-      dotenv.config({path: testPath})
+      dotenv.config({ path: testPath })
 
       readFileSyncStub.args[0][0].should.eql(testPath)
       done()
@@ -45,7 +45,7 @@ describe('dotenv', function () {
 
     it('takes option for encoding', function (done) {
       var testEncoding = 'base64'
-      dotenv.config({encoding: testEncoding})
+      dotenv.config({ encoding: testEncoding })
 
       readFileSyncStub.args[0][1].should.have.property('encoding', testEncoding)
       done()
@@ -119,7 +119,7 @@ describe('dotenv', function () {
     var parsed
     before(function (done) {
       process.env.TEST = 'test'
-      parsed = dotenv.parse(fs.readFileSync('test/.env', {encoding: 'utf8'}))
+      parsed = dotenv.parse(fs.readFileSync('test/.env', { encoding: 'utf8' }))
       done()
     })
 

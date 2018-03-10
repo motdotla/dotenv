@@ -7,5 +7,5 @@
     }
   })
 
-  require('./lib/main').config(options)
+  require('./lib/index').config(options)
 })()
