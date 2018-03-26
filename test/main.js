@@ -193,5 +193,10 @@ describe('dotenv', function () {
       parsed.should.have.property('USERNAME', 'therealnerdybeast@example.tld')
       done()
     })
+
+    it('remove export statement from beginning', function (done) {
+      parsed.should.have.property('EXPORT_STATEMENT', 'should be stripped')
+      done()
+    })
   })
 })
