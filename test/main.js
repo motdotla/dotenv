@@ -113,6 +113,53 @@ describe('dotenv', function () {
       env.error.should.be.instanceOf(Error)
       done()
     })
+
+    describe('get', function () {
+      it('returns a value', function (done) {
+        process.env.test = 'val'
+        const env = dotenv.config()
+        env.get('test').should.be.a.String()
+        done()
+      })
+
+      it('returns a default value', function (done) {
+        process.env.test = 'val'
+        const env = dotenv.config()
+        env.get('testing', 'test value').should.eql('test value')
+        done()
+      })
+    })
+
+    describe('set', function () {
+      it('sets a value', function (done) {
+        process.env.test = 'val'
+        const env = dotenv.config()
+        env.set('test', 'Jeff')
+        env.get('test').should.eql('Jeff')
+        process.env.test.should.eql('Jeff')
+        done()
+      })
+    })
+
+    describe('add', function () {
+      it('does not add a value', function (done) {
+        process.env.test = 'val'
+        const env = dotenv.config()
+        env.add('test', 'new value')
+        env.get('test').should.eql('val')
+        process.env.test.should.eql('val')
+        done()
+      })
+
+      it('adds a value', function (done) {
+        process.env.test = 'val'
+        const env = dotenv.config()
+        env.add('test2', 'val2')
+        env.get('test2').should.eql('val2')
+        process.env.test2.should.eql('val2')
+        done()
+      })
+    })
   })
 
   describe('parse', function () {
