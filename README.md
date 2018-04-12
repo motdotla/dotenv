@@ -149,6 +149,30 @@ control. It should only include environment-specific values such as database
 passwords or API keys. Your production database should have a different
 password than your development database.
 
+### How can I create a version-control-safe `.env` file?
+
+Encrypt your `.env` file as `.env.crypt` and check this file into version
+control, without risk of leaking sensitive details. For this to work, you
+will need to either set the `DOTENVCRYPT` environment variable with your
+decryption password or store the password in a `.env.cryptkey` file that is
+not checked into version control.
+
+If you'd like to use the `DOTENVCRYPT` environment variable, use this:
+
+```shell
+export DOTENVCRYPT='my-secret-password'
+openssl aes-256-cbc    -a -pass env:DOTENVCRYPT -in .env -out .env.crypt  # to encrypt
+openssl aes-256-cbc -d -a -pass env:DOTENVCRYPT -in .env.crypt            # to decrypt
+```
+
+If you'd like to use a `.env.cryptkey` file, use this:
+
+```shell
+echo 'my-secret-password' > .env.cryptkey
+openssl aes-256-cbc    -a -pass file:.env.cryptkey -in .env -out .env.crypt  # to encrypt
+openssl aes-256-cbc -d -a -pass file:.env.cryptkey -in .env.crypt            # to decrypt
+```
+
 ### Should I have multiple `.env` files?
 
 No. We **strongly** recommend against having a "main" `.env` file and an "environment" `.env` file like `.env.test`. Your config should vary between deploys, and you should not be sharing values between environments.
