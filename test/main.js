@@ -1,6 +1,7 @@
 'use strict'
 
 require('should')
+var path = require('path')
 var sinon = require('sinon')
 var Lab = require('lab')
 var lab = exports.lab = Lab.script()
@@ -38,6 +39,24 @@ describe('dotenv', function () {
     it('takes option for path', function (done) {
       var testPath = 'test/.env'
       dotenv.config({path: testPath})
+
+      readFileSyncStub.args[0][0].should.eql(testPath)
+      done()
+    })
+
+    it('takes option for path (file url, relative)', function (done) {
+      var testPath = 'test/.env'
+      var testUrl = 'file://' + testPath
+      dotenv.config({path: testUrl})
+
+      readFileSyncStub.args[0][0].should.eql(testPath)
+      done()
+    })
+
+    it('takes option for path (file url, absolute)', function (done) {
+      var testPath = path.join(__dirname, 'test', '.env')
+      var testUrl = 'file://' + testPath
+      dotenv.config({path: testUrl})
 
       readFileSyncStub.args[0][0].should.eql(testPath)
       done()
