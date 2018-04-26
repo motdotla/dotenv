@@ -38,6 +38,6 @@
   },
   "dependencies": {},
   "engines": {
-    "node": ">=4.6.0"
+    "node": ">=6.0.0"
   }
 }
