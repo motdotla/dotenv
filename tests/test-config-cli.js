@@ -13,7 +13,7 @@ test('config preload loads .env', t => {
     '"' + nodeBinary + '" -r ../config -e "console.log(process.env.BASIC)" dotenv_config_encoding=utf8',
     {
       cwd: path.resolve(__dirname),
-      timeout: 500,
+      timeout: 5000,
       encoding: 'utf8'
     }
   )
