@@ -5,8 +5,7 @@
   "main": "lib/main.js",
   "scripts": {
     "pretest": "npm run lint",
-    "test": "lab",
-    "ci:coverage": "lab test/* -r lcov | coveralls",
+    "test": "tap tests/*.js --100",
     "lint": "standard",
     "postlint": "npm run lint-md",
     "lint-md": "standard-markdown"
@@ -28,16 +27,14 @@
   "author": "scottmotte",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "babel": "5.8.23",
-    "coveralls": "^2.11.9",
-    "lab": "^14.3.2",
-    "should": "11.1.1",
-    "sinon": "1.17.6",
-    "standard": "8.4.0",
-    "standard-markdown": "2.2.0"
+    "babel": "^5.8.23",
+    "sinon": "^5.0.2",
+    "standard": "^11.0.1",
+    "standard-markdown": "^4.0.2",
+    "tap": "^11.1.4"
   },
   "dependencies": {},
   "engines": {
-    "node": ">=4.6.0"
+    "node": ">=6"
   }
 }

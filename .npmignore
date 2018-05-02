@@ -1,4 +1,5 @@
 coverage/
+.nyc_output/
 examples/
 test/
 .editorconfig
