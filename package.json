@@ -27,7 +27,6 @@
   "author": "scottmotte",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "babel": "^5.8.23",
     "sinon": "^5.0.2",
     "standard": "^11.0.1",
     "standard-markdown": "^4.0.2",
