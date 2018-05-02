@@ -12,6 +12,7 @@ test('config preload loads .env', t => {
     function (err, stdout) {
       t.error(err)
       t.equal(stdout.trim(), 'basic')
+      t.end() // explicit for Windows
     }
   )
 })
