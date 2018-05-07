@@ -8,9 +8,15 @@ const nodeBinary = process.argv[0]
 test('config preload loads .env', t => {
   t.plan(1)
 
-  // NB: `nodeBinary` is quoted for Windows
-  const stdout = cp.execSync(
-    '"' + nodeBinary + '" -r ../config -e "console.log(process.env.BASIC)" dotenv_config_encoding=utf8',
+  const { stdout } = cp.spawnSync(
+    nodeBinary,
+    [
+      '-r',
+      '../config',
+      '-e',
+      'console.log(process.env.BASIC)',
+      'dotenv_config_encoding=utf8'
+    ],
     {
       cwd: path.resolve(__dirname),
       timeout: 5000,
