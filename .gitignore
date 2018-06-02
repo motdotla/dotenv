@@ -1,5 +1,6 @@
 # Coverage directory used by tools like istanbul
 coverage
+.nyc_output
 
 # Dependency directory
 # Commenting this out is preferred by some people, see

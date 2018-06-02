@@ -1,3 +1,0 @@
-#!/bin/bash
-
-node -r babel/register -r ../../config.js index.js
