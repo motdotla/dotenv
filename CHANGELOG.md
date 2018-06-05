@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [6.0.0] - 2018-06-02
+
+### Changed
+
+- *Breaking:* drop support for Node v4 ([#304](https://github.com/motdotla/dotenv/pull/304))
+
 ## [5.0.0] - 2018-01-29
 
 ### Added
@@ -86,7 +92,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - support for multiple `.env` files. should always use one `.env` file for the current environment
 
-[Unreleased]: https://github.com/motdotla/dotenv/compare/v5.0.0...HEAD
+[Unreleased]: https://github.com/motdotla/dotenv/compare/v6.0.0...HEAD
+[6.0.0]: https://github.com/motdotla/dotenv/compare/v5.0.0...v6.0.0
 [5.0.0]: https://github.com/motdotla/dotenv/compare/v4.0.0...v5.0.0
 [4.0.0]: https://github.com/motdotla/dotenv/compare/v3.0.0...v4.0.0
 [3.0.0]: https://github.com/motdotla/dotenv/compare/v2.0.0...v3.0.0
