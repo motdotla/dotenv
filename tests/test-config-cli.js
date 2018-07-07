@@ -15,10 +15,11 @@ test('config preload loads .env', t => {
       '../config',
       '-e',
       'console.log(process.env.BASIC)',
-      'dotenv_config_encoding=utf8'
+      'dotenv_config_encoding=utf8',
+      'dotenv_config_path=./tests/.env'
     ],
     {
-      cwd: path.resolve(__dirname),
+      cwd: path.resolve(__dirname, '..'),
       timeout: 5000,
       encoding: 'utf8'
     }
