@@ -109,6 +109,16 @@ using this option.
 require('dotenv').config({encoding: 'base64'})
 ```
 
+#### Environment Variables Override
+
+Default: false
+
+You may specify the behavior of config to return parsed values with updated overridden environment variables values if found using this option.
+
+```js
+require('dotenv').config({syncWithEnv: true})
+```
+
 ## Parse
 
 The engine which parses the contents of your file containing environment

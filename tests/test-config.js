@@ -38,6 +38,15 @@ t.test('takes option for encoding', ct => {
   ct.equal(readFileSyncStub.args[0][1].encoding, testEncoding)
 })
 
+// t.test('takes option for syncWithEnv', ct => {
+//   ct.plan(1)
+
+//   const testSyncWithEnv = true
+//   dotenv.config({syncWithEnv: testSyncWithEnv})
+
+//   ct.equal(readFileSyncStub.args[0][1].encoding, testSyncWithEnv)
+// })
+
 t.test('reads path with encoding, parsing output to process.env', ct => {
   ct.plan(2)
 
