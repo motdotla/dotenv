@@ -38,6 +38,17 @@ t.test('takes option for encoding', ct => {
   ct.equal(readFileSyncStub.args[0][1].encoding, testEncoding)
 })
 
+t.test('takes option for overwrite', ct => {
+  ct.plan(2)
+
+  const existing = 'bar'
+  process.env.test = existing
+  const env = dotenv.config({ overwrite: true })
+
+  ct.equal(env.parsed.test, mockParseResponse.test)
+  ct.equal(process.env.test, mockParseResponse.test)
+})
+
 t.test('reads path with encoding, parsing output to process.env', ct => {
   ct.plan(2)
 
