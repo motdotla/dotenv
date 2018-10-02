@@ -71,7 +71,7 @@ _Alias: `load`_
 
 `config` will read your .env file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
-and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.  
+and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
 
 ```js
 const result = dotenv.config()
@@ -95,7 +95,7 @@ You can specify a custom path if your file containing environment variables is
 named or located differently.
 
 ```js
-require('dotenv').config({path: '/full/custom/path/to/your/env/vars'})
+require('dotenv').config({ path: '/full/custom/path/to/your/env/vars' })
 ```
 
 #### Encoding
@@ -106,7 +106,7 @@ You may specify the encoding of your file containing environment variables
 using this option.
 
 ```js
-require('dotenv').config({encoding: 'base64'})
+require('dotenv').config({ encoding: 'base64' })
 ```
 
 ## Parse

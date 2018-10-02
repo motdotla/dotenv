@@ -5,7 +5,7 @@ const t = require('tap')
 const dotenv = require('../lib/main')
 
 process.env.TEST = 'test'
-const parsed = dotenv.parse(fs.readFileSync('tests/.env', {encoding: 'utf8'}))
+const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
 
 t.plan(16)
 

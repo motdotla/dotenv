@@ -5,7 +5,7 @@ const sinon = require('sinon')
 
 const dotenv = require('../lib/main')
 
-const mockParseResponse = {test: 'foo'}
+const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 
 t.beforeEach(done => {
@@ -24,7 +24,7 @@ t.test('takes option for path', ct => {
   ct.plan(1)
 
   const testPath = 'tests/.env'
-  dotenv.config({path: testPath})
+  dotenv.config({ path: testPath })
 
   ct.equal(readFileSyncStub.args[0][0], testPath)
 })
@@ -33,7 +33,7 @@ t.test('takes option for encoding', ct => {
   ct.plan(1)
 
   const testEncoding = 'base64'
-  dotenv.config({encoding: testEncoding})
+  dotenv.config({ encoding: testEncoding })
 
   ct.equal(readFileSyncStub.args[0][1].encoding, testEncoding)
 })
