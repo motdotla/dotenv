@@ -41,11 +41,11 @@ t.test('takes option for encoding', ct => {
 t.test('takes option for debug', ct => {
   ct.plan(1)
 
-  const warnStub = sinon.stub(console, 'warn')
+  const logStub = sinon.stub(console, 'debug')
   dotenv.config({ debug: true })
 
-  ct.ok(warnStub.called)
-  warnStub.restore()
+  ct.ok(logStub.called)
+  logStub.restore()
 })
 
 t.test('reads path with encoding, parsing output to process.env', ct => {

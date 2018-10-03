@@ -16,8 +16,7 @@ test('config preload loads .env', t => {
       '-e',
       'console.log(process.env.BASIC)',
       'dotenv_config_encoding=utf8',
-      'dotenv_config_path=./tests/.env',
-      'dotenv_config_debug=true'
+      'dotenv_config_path=./tests/.env'
     ],
     {
       cwd: path.resolve(__dirname, '..'),
