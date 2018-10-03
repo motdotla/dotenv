@@ -41,7 +41,7 @@ t.test('takes option for encoding', ct => {
 t.test('takes option for debug', ct => {
   ct.plan(1)
 
-  const logStub = sinon.stub(console, 'debug')
+  const logStub = sinon.stub(console, 'log')
   dotenv.config({ debug: true })
 
   ct.ok(logStub.called)

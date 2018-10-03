@@ -44,7 +44,7 @@ const payload = dotenv.parse(Buffer.from('BASIC=basic'))
 t.equal(payload.BASIC, 'basic', 'should parse a buffer from a file into an object')
 
 // test debug path
-const logStub = sinon.stub(console, 'debug')
+const logStub = sinon.stub(console, 'log')
 dotenv.parse(Buffer.from('what is this'), { debug: true })
 t.ok(logStub.called)
 logStub.restore()
