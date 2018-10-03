@@ -1,7 +1,7 @@
 const fs = require('fs')
 
-const t = require('tap')
 const sinon = require('sinon')
+const t = require('tap')
 
 const dotenv = require('../lib/main')
 
@@ -38,12 +38,22 @@ t.test('takes option for encoding', ct => {
   ct.equal(readFileSyncStub.args[0][1].encoding, testEncoding)
 })
 
+t.test('takes option for debug', ct => {
+  ct.plan(1)
+
+  const warnStub = sinon.stub(console, 'warn')
+  dotenv.config({ debug: true })
+
+  ct.ok(warnStub.called)
+  warnStub.restore()
+})
+
 t.test('reads path with encoding, parsing output to process.env', ct => {
   ct.plan(2)
 
   const res = dotenv.config()
-  ct.same(res.parsed, mockParseResponse)
 
+  ct.same(res.parsed, mockParseResponse)
   ct.equal(readFileSyncStub.callCount, 1)
 })
 
@@ -51,6 +61,7 @@ t.test('makes load a synonym of config', ct => {
   ct.plan(2)
 
   const env = dotenv.load()
+
   ct.same(env.parsed, mockParseResponse)
   ct.equal(readFileSyncStub.callCount, 1)
 })

@@ -91,7 +91,7 @@ You can additionally, pass options to `config`.
 
 Default: `path.resolve(process.cwd(), '.env')`
 
-You can specify a custom path if your file containing environment variables is
+You may specify a custom path if your file containing environment variables is
 named or located differently.
 
 ```js
@@ -109,6 +109,16 @@ using this option.
 require('dotenv').config({ encoding: 'base64' })
 ```
 
+#### Debug
+
+Default: `false`
+
+You may turn on logging to help debug why certain keys or values are not being set as you expect.
+
+```js
+require('dotenv').config({ debug: process.env.DEBUG })
+```
+
 ## Parse
 
 The engine which parses the contents of your file containing environment
@@ -120,6 +130,22 @@ const dotenv = require('dotenv')
 const buf = Buffer.from('BASIC=basic')
 const config = dotenv.parse(buf) // will return an object
 console.log(typeof config, config) // object { BASIC : 'basic' }
+```
+
+### Options
+
+#### Debug
+
+Default: `false`
+
+You may turn on logging to help debug why certain keys or values are not being set as you expect.
+
+```js
+const dotenv = require('dotenv')
+const buf = Buffer.from('hello world')
+const opt = { debug: true }
+const config = dotenv.parse(buf, opt)
+// expect a debug message because the buffer is not in KEY=VAL form
 ```
 
 ### Rules

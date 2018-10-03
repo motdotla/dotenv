@@ -26,7 +26,7 @@
   "readmeFilename": "README.md",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "sinon": "^6.3.4",
+    "sinon": "^6.3.5",
     "standard": "^12.0.1",
     "standard-markdown": "^5.0.1",
     "tap": "^12.0.1"
