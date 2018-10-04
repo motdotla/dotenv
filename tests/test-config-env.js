@@ -46,11 +46,12 @@ t.test('takes absolute path to dotenv file from env', ct => {
   ct.plan(1)
 
   const testPath = '/tmp/.env2'
+  const expectedPath = path.resolve(process.cwd(), testPath)
 
   process.env.DOTENV_CONFIG_PATH = testPath
   dotenv.config()
 
-  ct.equal(readFileSyncStub.args[0][0], testPath)
+  ct.equal(readFileSyncStub.args[0][0], expectedPath)
 })
 
 t.test('takes encoding for dotenv file from env', ct => {
