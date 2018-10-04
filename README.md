@@ -65,6 +65,11 @@ The configuration options below are supported as command line arguments in the f
 $ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/your/env/vars
 ```
 
+Also the configuration options can be taken from already existing environment variables in the format `DOTENV_CONFIG_<OPTION>=value`
+```dotenv
+DOTENV_CONFIG_PATH=/custom/path/to/your/env/vars
+```
+
 ## Config
 
 _Alias: `load`_
