@@ -36,5 +36,10 @@
   "dependencies": {},
   "engines": {
     "node": ">=6"
+  },
+  "standard": {
+    "ignore": [
+      "flow-typed/"
+    ]
   }
 }
