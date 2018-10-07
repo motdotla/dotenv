@@ -1,3 +1,5 @@
+/* @flow */
+
 const cp = require('child_process')
 const path = require('path')
 
@@ -25,5 +27,5 @@ test('config preload loads .env', t => {
     }
   )
 
-  t.equal(stdout.trim(), 'basic')
+  t.equal(stdout, 'basic\n')
 })

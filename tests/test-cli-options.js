@@ -1,3 +1,5 @@
+/* @flow */
+
 const t = require('tap')
 
 const options = require('../lib/cli-options')
