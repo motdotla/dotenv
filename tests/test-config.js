@@ -1,22 +1,25 @@
+/* @flow */
+
 const fs = require('fs')
 
-const t = require('tap')
 const sinon = require('sinon')
+const t = require('tap')
 
 const dotenv = require('../lib/main')
 
 const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
+let parseStub
 
 t.beforeEach(done => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
-  sinon.stub(dotenv, 'parse').returns(mockParseResponse)
+  parseStub = sinon.stub(dotenv, 'parse').returns(mockParseResponse)
   done()
 })
 
 t.afterEach(done => {
   readFileSyncStub.restore()
-  dotenv.parse.restore()
+  parseStub.restore()
   done()
 })
 
@@ -38,12 +41,22 @@ t.test('takes option for encoding', ct => {
   ct.equal(readFileSyncStub.args[0][1].encoding, testEncoding)
 })
 
+t.test('takes option for debug', ct => {
+  ct.plan(1)
+
+  const logStub = sinon.stub(console, 'log')
+  dotenv.config({ debug: 'true' })
+
+  ct.ok(logStub.called)
+  logStub.restore()
+})
+
 t.test('reads path with encoding, parsing output to process.env', ct => {
   ct.plan(2)
 
   const res = dotenv.config()
-  ct.same(res.parsed, mockParseResponse)
 
+  ct.same(res.parsed, mockParseResponse)
   ct.equal(readFileSyncStub.callCount, 1)
 })
 
@@ -51,6 +64,7 @@ t.test('makes load a synonym of config', ct => {
   ct.plan(2)
 
   const env = dotenv.load()
+
   ct.same(env.parsed, mockParseResponse)
   ct.equal(readFileSyncStub.callCount, 1)
 })
@@ -63,7 +77,7 @@ t.test('does not write over keys already in process.env', ct => {
   // 'foo' returned as value in `beforeEach`. should keep this 'bar'
   const env = dotenv.config()
 
-  ct.equal(env.parsed.test, mockParseResponse.test)
+  ct.equal(env.parsed && env.parsed.test, mockParseResponse.test)
   ct.equal(process.env.test, existing)
 })
 
@@ -75,7 +89,7 @@ t.test('does not write over keys already in process.env if the key has a falsy v
   // 'foo' returned as value in `beforeEach`. should keep this ''
   const env = dotenv.config()
 
-  ct.equal(env.parsed.test, mockParseResponse.test)
+  ct.equal(env.parsed && env.parsed.test, mockParseResponse.test)
   // NB: process.env.test becomes undefined on Windows
   ct.notOk(process.env.test)
 })
