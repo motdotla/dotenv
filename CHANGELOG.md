@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [6.1.0] - 2018-10-08
+
+### Added
+
+- `debug` option for `config` and `parse` methods will turn on logging
+
 ## [6.0.0] - 2018-06-02
 
 ### Changed
@@ -18,7 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Documentation on trim behavior of values
 - Documentation on how to use with `import`
 
-### Changed 
+### Changed
 
 - *Breaking*: default `path` is now `path.resolve(process.cwd(), '.env')`
 - *Breaking*: does not write over keys already in `process.env` if the key has a falsy value
@@ -92,7 +98,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - support for multiple `.env` files. should always use one `.env` file for the current environment
 
-[Unreleased]: https://github.com/motdotla/dotenv/compare/v6.0.0...HEAD
+[Unreleased]: https://github.com/motdotla/dotenv/compare/v6.1.0...HEAD
+[6.1.0]: https://github.com/motdotla/dotenv/compare/v6.0.0...v6.1.0
 [6.0.0]: https://github.com/motdotla/dotenv/compare/v5.0.0...v6.0.0
 [5.0.0]: https://github.com/motdotla/dotenv/compare/v4.0.0...v5.0.0
 [4.0.0]: https://github.com/motdotla/dotenv/compare/v3.0.0...v4.0.0
