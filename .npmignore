@@ -1,6 +1,8 @@
 .nyc_output/
+flow-typed/
 tests/
 .editorconfig
+.flowconfig
 .npmignore
 .travis.yml
 appveyor.yml
