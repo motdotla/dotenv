@@ -7,11 +7,11 @@ os:
   - windows
 
 node_js:
-  - 6
-  - 8
-  - 9
-  - 10
-  - 11
+  - "6"
+  - "8"
+  - "9"
+  - "10"
+  - "11"
 
 cache: npm
 
@@ -19,5 +19,5 @@ jobs:
   include:
     - stage: type checks
       os: linux
-      node_js: 8
+      node_js: "8"
       script: npm run dtslint && npm run flow
