@@ -10,8 +10,7 @@
     "postlint": "npm run lint-md",
     "lint-md": "standard-markdown",
     "pretest": "npm run lint",
-    "test": "tap tests/*.js --100",
-    "posttest": "npm run dtslint && npm run flow"
+    "test": "tap tests/*.js --100"
   },
   "repository": {
     "type": "git",

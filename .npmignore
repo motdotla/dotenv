@@ -5,6 +5,5 @@ tests/
 .flowconfig
 .npmignore
 .travis.yml
-appveyor.yml
 CONTRIBUTING.md
 dotenv.png
