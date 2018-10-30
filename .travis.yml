@@ -15,9 +15,9 @@ node_js:
 
 cache: npm
 
-jobs:
-  include:
-    - stage: type checks
-      os: linux
-      node_js: "8"
-      script: npm run dtslint && npm run flow
+matrix:
+  fast_finish: true
+  allow_failures:
+  - os: windows
+
+after_success: if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then npm run dtslint && npm run flow; fi

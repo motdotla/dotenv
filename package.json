@@ -7,8 +7,7 @@
     "dtslint": "dtslint types",
     "flow": "flow",
     "lint": "standard",
-    "postlint": "npm run lint-md",
-    "lint-md": "standard-markdown",
+    "postlint": "standard-markdown",
     "pretest": "npm run lint",
     "test": "tap tests/*.js --100"
   },
