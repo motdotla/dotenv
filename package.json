@@ -4,7 +4,6 @@
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "scripts": {
-    "dtslint": "dtslint types",
     "flow": "flow",
     "lint": "standard",
     "postlint": "standard-markdown",
@@ -27,8 +26,6 @@
   "readmeFilename": "README.md",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "@types/node": "^10.12.0",
-    "dtslint": "^0.3.0",
     "flow-bin": "^0.84.0",
     "sinon": "^6.3.5",
     "standard": "^12.0.1",
@@ -43,6 +40,5 @@
     "ignore": [
       "flow-typed/"
     ]
-  },
-  "types": "types"
+  }
 }

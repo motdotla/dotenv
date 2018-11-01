@@ -20,4 +20,4 @@ matrix:
   allow_failures:
   - os: windows
 
-after_success: if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then npm run dtslint && npm run flow; fi
+after_success: if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then npm run flow; fi
