@@ -1,7 +1,23 @@
 language: node_js
+
 sudo: false
+
+os:
+  - linux
+  - windows
+
 node_js:
-  - 6
-  - 8
-  - 9
-  - 10
+  - "6"
+  - "8"
+  - "9"
+  - "10"
+  - "11"
+
+cache: npm
+
+matrix:
+  fast_finish: true
+  allow_failures:
+  - os: windows
+
+after_success: if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then npm run flow; fi

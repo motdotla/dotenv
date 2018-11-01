@@ -91,8 +91,7 @@ You can additionally, pass options to `config`.
 
 Default: `path.resolve(process.cwd(), '.env')`
 
-You may specify a custom path if your file containing environment variables is
-named or located differently.
+You may specify a custom path if your file containing environment variables is located elsewhere.
 
 ```js
 require('dotenv').config({ path: '/full/custom/path/to/your/env/vars' })
@@ -102,8 +101,7 @@ require('dotenv').config({ path: '/full/custom/path/to/your/env/vars' })
 
 Default: `utf8`
 
-You may specify the encoding of your file containing environment variables
-using this option.
+You may specify the encoding of your file containing environment variables.
 
 ```js
 require('dotenv').config({ encoding: 'base64' })
@@ -163,6 +161,7 @@ The parsing engine currently supports the following rules:
 {MULTILINE: 'new
 line'}
 ```
+
 - inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
 - whitespace is removed from both ends of the value (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO="  some value  "` becomes `{FOO: 'some value'}`)
 
@@ -193,7 +192,7 @@ If you want to override `process.env` you can do something like this:
 const fs = require('fs')
 const dotenv = require('dotenv')
 const envConfig = dotenv.parse(fs.readFileSync('.env.override'))
-for (var k in envConfig) {
+for (let k in envConfig) {
   process.env[k] = envConfig[k]
 }
 ```
