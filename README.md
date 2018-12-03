@@ -65,8 +65,8 @@ The configuration options below are supported as command line arguments in the f
 $ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/your/env/vars
 ```
 
-Note, some IDEs like Webstorm and IntellJ might have trouble properly passing `dotenv_config_path` to node. This does not impact command line use, just when configuring run options within the IDE. 
-As an alternative for this situation, you can also set `dotenv_config_path` as an environment variable in your IDE run configuration instead of as a command line argument  
+If you are having trouble passing the `dotenv_config_<option>=value` part via the CLI, you can use environment variables instead. When using environment variables, be sure to use uppercase names, `DOTENV_CONFIG_<OPTION>=value`. 
+  
 
 ## Config
 
