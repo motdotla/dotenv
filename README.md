@@ -53,7 +53,7 @@ db.connect({
 
 ### Preload
 
-You can use the `--require` (`-r`) command line option to preload dotenv. By doing this, you do not need to require and load dotenv in your application code. This is the preferred approach when using `import` instead of `require`.
+You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#cli_r_require_module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code. This is the preferred approach when using `import` instead of `require`.
 
 ```bash
 $ node -r dotenv/config your_script.js
@@ -63,6 +63,16 @@ The configuration options below are supported as command line arguments in the f
 
 ```bash
 $ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/your/env/vars
+```
+
+Additionally, you can use environment variables to set configuration options. Command line arguments will precede these.
+
+```bash
+$ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
+```
+
+```bash
+$ DOTENV_CONFIG_ENCODING=base64 node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
 
 ## Config
@@ -212,9 +222,7 @@ variableExpansion(myEnv)
 
 ### What about variable expansion?
 
-For `dotenv@2.x.x`: Use [dotenv-expand](https://github.com/motdotla/dotenv-expand).
-
-For `dotenv@1.x.x`: We haven't been presented with a compelling use case for expanding variables and believe it leads to env vars that are not "fully orthogonal" as [The Twelve-Factor App](http://12factor.net/config) outlines.<sup>[[1](https://github.com/motdotla/dotenv/issues/39)][[2](https://github.com/motdotla/dotenv/pull/97)]</sup> Please open an issue if you have a compelling use case.
+Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
 ### How do I use dotenv with `import`?
 

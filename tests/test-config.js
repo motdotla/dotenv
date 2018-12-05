@@ -11,6 +11,8 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
+t.plan(9)
+
 t.beforeEach(done => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
   parseStub = sinon.stub(dotenv, 'parse').returns(mockParseResponse)
@@ -81,18 +83,21 @@ t.test('does not write over keys already in process.env', ct => {
   ct.equal(process.env.test, existing)
 })
 
-t.test('does not write over keys already in process.env if the key has a falsy value', ct => {
-  ct.plan(2)
+t.test(
+  'does not write over keys already in process.env if the key has a falsy value',
+  ct => {
+    ct.plan(2)
 
-  const existing = ''
-  process.env.test = existing
-  // 'foo' returned as value in `beforeEach`. should keep this ''
-  const env = dotenv.config()
+    const existing = ''
+    process.env.test = existing
+    // 'foo' returned as value in `beforeEach`. should keep this ''
+    const env = dotenv.config()
 
-  ct.equal(env.parsed && env.parsed.test, mockParseResponse.test)
-  // NB: process.env.test becomes undefined on Windows
-  ct.notOk(process.env.test)
-})
+    ct.equal(env.parsed && env.parsed.test, mockParseResponse.test)
+    // NB: process.env.test becomes undefined on Windows
+    ct.notOk(process.env.test)
+  }
+)
 
 t.test('returns parsed object', ct => {
   ct.plan(2)

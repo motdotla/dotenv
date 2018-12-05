@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [6.2.0] - 2018-12-03
+
+### Added
+
+- Support preload configuration via environment variables ([#351](https://github.com/motdotla/dotenv/issues/351))
+
 ## [6.1.0] - 2018-10-08
 
 ### Added
@@ -32,7 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-- Testing aginst Node v7
+- Testing against Node v7
 
 
 ## [4.0.0] - 2016-12-23
@@ -98,7 +104,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - support for multiple `.env` files. should always use one `.env` file for the current environment
 
-[Unreleased]: https://github.com/motdotla/dotenv/compare/v6.1.0...HEAD
+[Unreleased]: https://github.com/motdotla/dotenv/compare/v6.2.0...HEAD
+[6.2.0]: https://github.com/motdotla/dotenv/compare/v6.1.0...v6.2.0
 [6.1.0]: https://github.com/motdotla/dotenv/compare/v6.0.0...v6.1.0
 [6.0.0]: https://github.com/motdotla/dotenv/compare/v5.0.0...v6.0.0
 [5.0.0]: https://github.com/motdotla/dotenv/compare/v4.0.0...v5.0.0
