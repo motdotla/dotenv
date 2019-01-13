@@ -72,7 +72,7 @@ $ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
 ```
 
 ```bash
-$ DOTENV_CONFIG_ENCODING=base64 node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
+$ DOTENV_CONFIG_ENCODING=latin1 node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
 
 ## Config
@@ -114,7 +114,7 @@ Default: `utf8`
 You may specify the encoding of your file containing environment variables.
 
 ```js
-require('dotenv').config({ encoding: 'base64' })
+require('dotenv').config({ encoding: 'latin1' })
 ```
 
 #### Debug

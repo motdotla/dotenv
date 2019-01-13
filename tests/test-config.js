@@ -37,7 +37,7 @@ t.test('takes option for path', ct => {
 t.test('takes option for encoding', ct => {
   ct.plan(1)
 
-  const testEncoding = 'base64'
+  const testEncoding = 'latin1'
   dotenv.config({ encoding: testEncoding })
 
   ct.equal(readFileSyncStub.args[0][1].encoding, testEncoding)
