@@ -127,6 +127,20 @@ You may turn on logging to help debug why certain keys or values are not being s
 require('dotenv').config({ debug: process.env.DEBUG })
 ```
 
+#### Parser
+
+You may implement your own parser, this can be useful for different env 
+file formats e.g. JSON. Dotenv will work as long as custom parser 
+returns object in expected format `{ KEY: 'value', KEY1: 'value1' }`. 
+Check default `parse` function for the reference.
+
+```js
+const customParser = function (src, options) {
+  return JSON.parse(src)
+}
+require('dotenv').config({ path: '.env.json', parser: customParser })
+```
+
 ## Parse
 
 The engine which parses the contents of your file containing environment
