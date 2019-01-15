@@ -36,7 +36,7 @@ delete process.env.DOTENV_CONFIG_DEBUG
 t.same(options(), {})
 
 // sets encoding option
-testOption('DOTENV_CONFIG_ENCODING', 'base64', { encoding: 'base64' })
+testOption('DOTENV_CONFIG_ENCODING', 'latin1', { encoding: 'latin1' })
 
 // sets path option
 testOption('DOTENV_CONFIG_PATH', '~/.env.test', { path: '~/.env.test' })
