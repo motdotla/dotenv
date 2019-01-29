@@ -25,7 +25,7 @@ yarn add dotenv
 As early as possible in your application, require and configure dotenv.
 
 ```javascript
-require('dotenv').config()
+require('dotenv').config();
 ```
 
 Create a `.env` file in the root directory of your project. Add
