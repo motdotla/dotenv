@@ -11,7 +11,7 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
-t.plan(9)
+t.plan(10)
 
 t.beforeEach(done => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
@@ -41,6 +41,18 @@ t.test('takes option for encoding', ct => {
   dotenv.config({ encoding: testEncoding })
 
   ct.equal(readFileSyncStub.args[0][1].encoding, testEncoding)
+})
+
+t.test('overrides the value in process.env if override option is truthy', ct => {
+  ct.plan(2)
+
+  const existing = 'bar'
+  process.env.test = existing
+  // 'foo' returned as value in `beforeEach`. should keep this 'bar'
+  const env = dotenv.config({ override: true })
+
+  ct.equal(env.parsed && env.parsed.test, mockParseResponse.test)
+  ct.equal(process.env.test, 'foo')
 })
 
 t.test('takes option for debug', ct => {

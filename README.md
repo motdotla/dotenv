@@ -117,6 +117,23 @@ You may specify the encoding of your file containing environment variables.
 require('dotenv').config({ encoding: 'latin1' })
 ```
 
+#### Override
+
+Default: `false`
+
+When set to `true`, the environment variables from your env file override what is set in `process.env`.
+
+```txt
+# .env
+PORT=8080
+```
+
+```js
+process.env['PORT'] = '3000'
+require('dotenv').config({ override: true })
+console.log(process.env['PORT']) // prints 8080
+```
+
 #### Debug
 
 Default: `false`
@@ -194,17 +211,14 @@ No. We **strongly** recommend against having a "main" `.env` file and an "enviro
 
 ### What happens to environment variables that were already set?
 
-We will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped. This behavior allows you to override all `.env` configurations with a machine-specific environment, although it is not recommended.
+By default we will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped. If you want to override it you can set the `override` option for `config()` function to `true`. This behavior allows you to override all `.env` configurations with a machine-specific environment, although it is not recommended.
 
 If you want to override `process.env` you can do something like this:
 
 ```javascript
 const fs = require('fs')
 const dotenv = require('dotenv')
-const envConfig = dotenv.parse(fs.readFileSync('.env.override'))
-for (let k in envConfig) {
-  process.env[k] = envConfig[k]
-}
+const envConfig = dotenv.config({ override: true })
 ```
 
 ### Can I customize/write plugins for dotenv?
