@@ -8,9 +8,9 @@ const t = require('tap')
 const dotenv = require('../lib/main')
 
 process.env.TEST = 'test'
-const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
+let parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
 
-t.plan(17)
+t.plan(21)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -44,6 +44,25 @@ t.equal(parsed['USERNAME'], 'therealnerdybeast@example.tld', 'parses email addre
 
 const payload = dotenv.parse(Buffer.from('BASIC=basic'))
 t.equal(payload.BASIC, 'basic', 'should parse a buffer from a file into an object')
+
+// test callback
+
+parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }), {}, (k, v) => {
+  if (k === 'USERNAME') {
+    return undefined
+  }
+  if (v === '') {
+    return '""'
+  }
+  if (v !== '' && v[0] === 'b') {
+    return '<' + v + '>'
+  }
+  return v
+})
+t.equal(parsed.BASIC, '<basic>', 'sets basic environment variable')
+t.equal(parsed.EMPTY, '""', 'defaults empty values to empty string')
+t.notOk(parsed.USERNAME, 'var not removed')
+t.equal(parsed.INCLUDE_SPACE, 'some spaced out string', 'retains spaces in string')
 
 // test debug path
 const logStub = sinon.stub(console, 'log')
