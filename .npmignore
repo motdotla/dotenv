@@ -1,4 +1,5 @@
 .nyc_output/
+examples/
 flow-typed/
 tests/
 .editorconfig
