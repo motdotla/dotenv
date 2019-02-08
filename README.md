@@ -38,8 +38,6 @@ DB_USER=root
 DB_PASS=s1mpl3
 ```
 
-That's it.
-
 `process.env` now has the keys and values you defined in your `.env` file.
 
 ```javascript
@@ -77,7 +75,7 @@ $ DOTENV_CONFIG_ENCODING=latin1 node -r dotenv/config your_script.js dotenv_conf
 
 ## Config
 
-`config` will read your .env file, parse the contents, assign it to
+`config` will read your `.env` file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
 and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
 
@@ -162,16 +160,16 @@ The parsing engine currently supports the following rules:
 - empty lines are skipped
 - lines beginning with `#` are treated as comments
 - empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
+- inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
+- whitespace is removed from both ends of unquoted values (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO=  some value  ` becomes `{FOO: 'some value'}`)
 - single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
-- new lines are expanded if in double quotes (`MULTILINE="new\nline"` becomes
+- single and double quoted values maintain whitespace from both ends (`FOO="  some value  "` becomes `{FOO: '  some value  '}`)
+- double quoted values expand new lines (`MULTILINE="new\nline"` becomes
 
 ```
 {MULTILINE: 'new
 line'}
 ```
-
-- inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
-- whitespace is removed from both ends of the value (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO="  some value  "` becomes `{FOO: 'some value'}`)
 
 ## FAQ
 
