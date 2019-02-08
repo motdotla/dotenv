@@ -11,7 +11,7 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
-t.plan(9)
+t.plan(8)
 
 t.beforeEach(done => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
@@ -59,15 +59,6 @@ t.test('reads path with encoding, parsing output to process.env', ct => {
   const res = dotenv.config()
 
   ct.same(res.parsed, mockParseResponse)
-  ct.equal(readFileSyncStub.callCount, 1)
-})
-
-t.test('makes load a synonym of config', ct => {
-  ct.plan(2)
-
-  const env = dotenv.load()
-
-  ct.same(env.parsed, mockParseResponse)
   ct.equal(readFileSyncStub.callCount, 1)
 })
 

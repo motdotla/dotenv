@@ -77,8 +77,6 @@ $ DOTENV_CONFIG_ENCODING=latin1 node -r dotenv/config your_script.js dotenv_conf
 
 ## Config
 
-_Alias: `load`_
-
 `config` will read your .env file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
 and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
