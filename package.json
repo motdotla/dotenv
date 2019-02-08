@@ -26,12 +26,12 @@
   "readmeFilename": "README.md",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "decache": "^4.5.0",
-    "flow-bin": "^0.84.0",
-    "sinon": "^6.3.5",
+    "decache": "^4.5.1",
+    "flow-bin": "^0.92.1",
+    "sinon": "^7.2.3",
     "standard": "^12.0.1",
     "standard-markdown": "^5.0.1",
-    "tap": "^12.0.1"
+    "tap": "^12.5.1"
   },
   "dependencies": {},
   "engines": {
