@@ -268,26 +268,8 @@ See [CHANGELOG.md](CHANGELOG.md)
 
 See [LICENSE](LICENSE)
 
-## Who's using dotenv
+## Who's using dotenv?
 
-Here's just a few of many repositories using dotenv:
+[These npm modules depend on it.](https://www.npmjs.com/browse/depended/dotenv)
 
-* [jaws](https://github.com/jaws-framework/jaws-core-js)
-* [node-lambda](https://github.com/motdotla/node-lambda)
-* [resume-cli](https://www.npmjs.com/package/resume-cli)
-* [phant](https://www.npmjs.com/package/phant)
-* [adafruit-io-node](https://github.com/adafruit/adafruit-io-node)
-* [mockbin](https://www.npmjs.com/package/mockbin)
-* [and many more...](https://www.npmjs.com/browse/depended/dotenv)
-
-## Go well with dotenv
-
-Here's some projects that expand on dotenv. Check them out.
-
-* [require-environment-variables](https://github.com/bjoshuanoah/require-environment-variables)
-* [dotenv-safe](https://github.com/rolodato/dotenv-safe)
-* [envalid](https://github.com/af/envalid)
-* [lookenv](https://github.com/RodrigoEspinosa/lookenv)
-* [run.env](https://www.npmjs.com/package/run.env)
-* [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack)
-* [env-path](https://github.com/benrei/env-path)
+Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmjs.com/search?q=keywords:dotenv).
