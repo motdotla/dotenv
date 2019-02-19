@@ -10,6 +10,9 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
 [![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
 
+# Update
+ - Added a config option `returnProcess: true | false` to return `process.env` or not. Suitable if you are abstracting your config not to use `process.env` everywhere
+
 ## Install
 
 ```bash
