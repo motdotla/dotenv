@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [7.0.0] - 2019-03-12
+
+### Fixed
+
+- Fix removing unbalanced quotes ([#376](https://github.com/motdotla/dotenv/pull/376))
+
+### Removed
+
+- Removed `load` alias for `config` for consistency throughout code and documentation.
+
 ## [6.2.0] - 2018-12-03
 
 ### Added
@@ -104,7 +114,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - support for multiple `.env` files. should always use one `.env` file for the current environment
 
-[Unreleased]: https://github.com/motdotla/dotenv/compare/v6.2.0...HEAD
+[Unreleased]: https://github.com/motdotla/dotenv/compare/v7.0.0...HEAD
+[7.0.0]: https://github.com/motdotla/dotenv/compare/v6.2.0...v7.0.0
 [6.2.0]: https://github.com/motdotla/dotenv/compare/v6.1.0...v6.2.0
 [6.1.0]: https://github.com/motdotla/dotenv/compare/v6.0.0...v6.1.0
 [6.0.0]: https://github.com/motdotla/dotenv/compare/v5.0.0...v6.0.0
