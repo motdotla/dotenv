@@ -38,8 +38,6 @@ DB_USER=root
 DB_PASS=s1mpl3
 ```
 
-That's it.
-
 `process.env` now has the keys and values you defined in your `.env` file.
 
 ```javascript
@@ -77,9 +75,7 @@ $ DOTENV_CONFIG_ENCODING=latin1 node -r dotenv/config your_script.js dotenv_conf
 
 ## Config
 
-_Alias: `load`_
-
-`config` will read your .env file, parse the contents, assign it to
+`config` will read your `.env` file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
 and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
 
@@ -164,16 +160,16 @@ The parsing engine currently supports the following rules:
 - empty lines are skipped
 - lines beginning with `#` are treated as comments
 - empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
+- inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
+- whitespace is removed from both ends of unquoted values (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO=  some value  ` becomes `{FOO: 'some value'}`)
 - single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
-- new lines are expanded if in double quotes (`MULTILINE="new\nline"` becomes
+- single and double quoted values maintain whitespace from both ends (`FOO="  some value  "` becomes `{FOO: '  some value  '}`)
+- double quoted values expand new lines (`MULTILINE="new\nline"` becomes
 
 ```
 {MULTILINE: 'new
 line'}
 ```
-
-- inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
-- whitespace is removed from both ends of the value (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO="  some value  "` becomes `{FOO: 'some value'}`)
 
 ## FAQ
 
@@ -270,26 +266,8 @@ See [CHANGELOG.md](CHANGELOG.md)
 
 See [LICENSE](LICENSE)
 
-## Who's using dotenv
+## Who's using dotenv?
 
-Here's just a few of many repositories using dotenv:
+[These npm modules depend on it.](https://www.npmjs.com/browse/depended/dotenv)
 
-* [jaws](https://github.com/jaws-framework/jaws-core-js)
-* [node-lambda](https://github.com/motdotla/node-lambda)
-* [resume-cli](https://www.npmjs.com/package/resume-cli)
-* [phant](https://www.npmjs.com/package/phant)
-* [adafruit-io-node](https://github.com/adafruit/adafruit-io-node)
-* [mockbin](https://www.npmjs.com/package/mockbin)
-* [and many more...](https://www.npmjs.com/browse/depended/dotenv)
-
-## Go well with dotenv
-
-Here's some projects that expand on dotenv. Check them out.
-
-* [require-environment-variables](https://github.com/bjoshuanoah/require-environment-variables)
-* [dotenv-safe](https://github.com/rolodato/dotenv-safe)
-* [envalid](https://github.com/af/envalid)
-* [lookenv](https://github.com/RodrigoEspinosa/lookenv)
-* [run.env](https://www.npmjs.com/package/run.env)
-* [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack)
-* [env-path](https://github.com/benrei/env-path)
+Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmjs.com/search?q=keywords:dotenv).
