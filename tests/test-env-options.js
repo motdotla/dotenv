@@ -10,6 +10,7 @@ require('../lib/env-options')
 const e = process.env.DOTENV_CONFIG_ENCODING
 const p = process.env.DOTENV_CONFIG_PATH
 const d = process.env.DOTENV_CONFIG_DEBUG
+const o = process.env.DOTENV_CONFIG_OVERWRITE
 
 // get fresh object for each test
 function options () {
@@ -44,7 +45,11 @@ testOption('DOTENV_CONFIG_PATH', '~/.env.test', { path: '~/.env.test' })
 // sets debug option
 testOption('DOTENV_CONFIG_DEBUG', 'true', { debug: 'true' })
 
+// sets debug option
+testOption('DOTENV_CONFIG_OVERWRITE', 'true', { overwrite: 'true' })
+
 // restore existing env
 process.env.DOTENV_CONFIG_ENCODING = e
 process.env.DOTENV_CONFIG_PATH = p
 process.env.DOTENV_CONFIG_DEBUG = d
+process.env.DOTENV_CONFIG_OVERWRITE = o
