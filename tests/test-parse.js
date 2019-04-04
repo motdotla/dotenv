@@ -55,6 +55,10 @@ t.equal(parsed.USERNAME, 'therealnerdybeast@example.tld', 'parses email addresse
 
 t.equal(parsed.SPACED_KEY, 'parsed', 'parses keys and values surrounded by spaces')
 
+t.equal(parsed.TYPE_BOOLEAN, true, 'test type of boolean')
+
+t.equal(parsed.TYPE_NUMBER, 123, 'test type of number')
+
 const payload = dotenv.parse(Buffer.from('BUFFER=true'))
 t.equal(payload.BUFFER, 'true', 'should parse a buffer into an object')
 
