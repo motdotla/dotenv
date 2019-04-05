@@ -27,6 +27,12 @@ As early as possible in your application, require and configure dotenv.
 ```javascript
 require('dotenv').config()
 ```
+or 
+```ts
+import dotenv from 'dotenv'
+dotenv.config()
+```
+For typescript and ES Modules support
 
 Create a `.env` file in the root directory of your project. Add
 environment-specific variables on new lines in the form of `NAME=VALUE`.
