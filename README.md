@@ -264,7 +264,7 @@ See [CHANGELOG.md](CHANGELOG.md)
 
 ## License
 
-See [LICENSE](LICENSE)
+[![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
 
 ## Who's using dotenv?
 
