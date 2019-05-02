@@ -7,16 +7,16 @@ os:
   - windows
 
 node_js:
-  - "6"
   - "8"
   - "10"
   - "11"
+  - "12"
 
 cache: npm
 
 matrix:
   fast_finish: true
   allow_failures:
-  - os: windows
+    - os: windows
 
 after_success: if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then npm run flow; fi
