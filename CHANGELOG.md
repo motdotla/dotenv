@@ -1,8 +1,18 @@
 # Change Log
-All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+# [8.0.0](https://github.com/motdotla/dotenv/compare/v7.0.0...v8.0.0) (2019-05-02)
+
+
+* Drop support for Node v6 (#392) ([2e9636a](https://github.com/motdotla/dotenv/commit/2e9636a)), closes [#392](https://github.com/motdotla/dotenv/issues/392)
+
+
+### BREAKING CHANGES
+
+* dropping Node v6 support because end-of-life
+
+
 
 ## [7.0.0] - 2019-03-12
 

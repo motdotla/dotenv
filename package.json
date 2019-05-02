@@ -1,6 +1,6 @@
 {
   "name": "dotenv",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "pretest": "npm run lint",
     "test": "tap tests/*.js --100",
     "prerelease": "npm test",
-    "release": "standard-version --sign"
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
