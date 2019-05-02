@@ -1,8 +1,14 @@
 # Change Log
-All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+# [8.0.0](https://github.com/motdotla/dotenv/compare/v7.0.0...v8.0.0) (2019-05-02)
+
+- Drop support for Node v6 (#392) ([2e9636a](https://github.com/motdotla/dotenv/commit/2e9636a)), closes [#392](https://github.com/motdotla/dotenv/issues/392)
+
+### BREAKING CHANGES
+
+- dropping Node v6 support because end-of-life
 
 ## [7.0.0] - 2019-03-12
 
@@ -30,7 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- *Breaking:* drop support for Node v4 ([#304](https://github.com/motdotla/dotenv/pull/304))
+- _Breaking:_ drop support for Node v4 ([#304](https://github.com/motdotla/dotenv/pull/304))
 
 ## [5.0.0] - 2018-01-29
 
@@ -42,27 +48,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- *Breaking*: default `path` is now `path.resolve(process.cwd(), '.env')`
-- *Breaking*: does not write over keys already in `process.env` if the key has a falsy value
+- _Breaking_: default `path` is now `path.resolve(process.cwd(), '.env')`
+- _Breaking_: does not write over keys already in `process.env` if the key has a falsy value
 - using `const` and `let` instead of `var`
 
 ### Removed
 
 - Testing against Node v7
 
-
 ## [4.0.0] - 2016-12-23
+
 ### Changed
 
 - Return Object with parsed content or error instead of false ([#165](https://github.com/motdotla/dotenv/pull/165)).
-
 
 ### Removed
 
 - `verbose` option removed in favor of returning result.
 
-
 ## [3.0.0] - 2016-12-20
+
 ### Added
 
 - `verbose` option will log any error messages. Off by default.
@@ -83,7 +88,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `silent` option removed in favor of `verbose`
 
 ## [2.0.0] - 2016-01-20
+
 ### Added
+
 - CHANGELOG to ["make it easier for users and contributors to see precisely what notable changes have been made between each release"](http://keepachangelog.com/). Linked to from README
 - LICENSE to be more explicit about what was defined in `package.json`. Linked to from README
 - Testing nodejs v4 on travis-ci
@@ -91,30 +98,39 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - return parsed object on success rather than boolean true
 
 ### Changed
+
 - README has shorter description not referencing ruby gem since we don't have or want feature parity
 
 ### Removed
+
 - Variable expansion and escaping so environment variables are encouraged to be fully orthogonal
 
 ## [1.2.0] - 2015-06-20
+
 ### Added
+
 - Preload hook to require dotenv without including it in your code
 
 ### Changed
+
 - clarified license to be "BSD-2-Clause" in `package.json`
 
 ### Fixed
+
 - retain spaces in string vars
 
 ## [1.1.0] - 2015-03-31
+
 ### Added
+
 - Silent option to silence `console.log` when `.env` missing
 
 ## [1.0.0] - 2015-03-13
+
 ### Removed
+
 - support for multiple `.env` files. should always use one `.env` file for the current environment
 
-[Unreleased]: https://github.com/motdotla/dotenv/compare/v7.0.0...HEAD
 [7.0.0]: https://github.com/motdotla/dotenv/compare/v6.2.0...v7.0.0
 [6.2.0]: https://github.com/motdotla/dotenv/compare/v6.1.0...v6.2.0
 [6.1.0]: https://github.com/motdotla/dotenv/compare/v6.0.0...v6.1.0
