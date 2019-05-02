@@ -10,9 +10,7 @@
     "pretest": "npm run lint",
     "test": "tap tests/*.js --100",
     "prerelease": "npm test",
-    "release": "standard-version --sign",
-    "xpostrelease": "npm publish",
-    "postpublish": "git push origin --all; git push origin --tags"
+    "release": "standard-version --sign"
   },
   "repository": {
     "type": "git",
