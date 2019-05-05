@@ -9,10 +9,12 @@ const t = require('tap')
 const dotenv = require('../lib/main')
 
 const mockParseResponse = { test: 'foo' }
+const envPath = path.resolve(process.cwd(), '.env')
+const testPath = 'tests/.env'
 let readFileSyncStub
 let parseStub
 
-t.plan(9)
+t.plan(11)
 
 t.beforeEach(done => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
@@ -29,7 +31,6 @@ t.afterEach(done => {
 t.test('takes option for path', ct => {
   ct.plan(1)
 
-  const testPath = 'tests/.env'
   dotenv.config({ path: testPath })
 
   ct.equal(readFileSyncStub.args[0][0], testPath)
@@ -54,14 +55,49 @@ t.test('takes option for debug', ct => {
   logStub.restore()
 })
 
-t.test('takes option for multiConfig', ct => {
+t.test('takes option for multiConfig (NODE_ENV defined)', ct => {
   ct.plan(1)
 
+  const env = process.env.NODE_ENV
+  process.env.NODE_ENV = 'development'
+
   dotenv.config({ multiConfig: true })
+
   ct.equal(
     readFileSyncStub.args[0][0],
-    `${path.resolve(process.cwd(), '.env')}.${process.env.NODE_ENV}`
+    `${envPath}.${process.env.NODE_ENV}`
   )
+
+  process.env.NODE_ENV = env
+})
+
+t.test('takes option for multiConfig (NODE_ENV undefined)', ct => {
+  ct.plan(1)
+
+  const env = process.env.NODE_ENV
+  process.env.NODE_ENV = undefined
+
+  dotenv.config({ multiConfig: true })
+
+  ct.equal(readFileSyncStub.args[0][0], envPath)
+
+  process.env.NODE_ENV = env
+})
+
+t.test('takes option for multiConfig (custom path)', ct => {
+  ct.plan(1)
+
+  const env = process.env.NODE_ENV
+  process.env.NODE_ENV = 'development'
+
+  dotenv.config({ multiConfig: true, path: testPath })
+
+  ct.equal(
+    readFileSyncStub.args[0][0],
+    `${testPath}.${process.env.NODE_ENV}`
+  )
+
+  process.env.NODE_ENV = env
 })
 
 t.test('reads path with encoding, parsing output to process.env', ct => {
