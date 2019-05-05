@@ -9,6 +9,7 @@
     "postlint": "standard-markdown",
     "pretest": "npm run lint",
     "test": "tap tests/*.js --100",
+    "test-html": "tap tests/*.js --100 --coverage-report=html",
     "prerelease": "npm test",
     "release": "standard-version"
   },
