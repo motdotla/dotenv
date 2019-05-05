@@ -1,6 +1,7 @@
 /* @flow */
 
 const fs = require('fs')
+const path = require('path')
 
 const sinon = require('sinon')
 const t = require('tap')
@@ -11,7 +12,7 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
-t.plan(8)
+t.plan(9)
 
 t.beforeEach(done => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
@@ -51,6 +52,16 @@ t.test('takes option for debug', ct => {
 
   ct.ok(logStub.called)
   logStub.restore()
+})
+
+t.test('takes option for multiConfig', ct => {
+  ct.plan(1)
+
+  dotenv.config({ multiConfig: true })
+  ct.equal(
+    readFileSyncStub.args[0][0],
+    `${path.resolve(process.cwd(), '.env')}.${process.env.NODE_ENV}`
+  )
 })
 
 t.test('reads path with encoding, parsing output to process.env', ct => {
