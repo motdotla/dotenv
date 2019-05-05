@@ -105,6 +105,21 @@ You may specify a custom path if your file containing environment variables is l
 require('dotenv').config({ path: '/full/custom/path/to/your/env/vars' })
 ```
 
+#### MultiConfig
+
+Default: `path.resolve(process.cwd(), '.env')`
+
+Instead of loading `.env` or a custom path, load a configuration file with a suffix matching `NODE_ENV`.
+
+For example, if `NODE_ENV=production` then dotenv will look for `.env.production`.
+If `NODE_ENV=development` then dotenv will look for `.env.development`
+
+If using a custom path, this option will search for that path suffixed with `NODE_ENV`.
+
+```js
+require('dotenv').config({ multiConfig: true })
+```
+
 #### Encoding
 
 Default: `utf8`
