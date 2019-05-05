@@ -1,7 +1,9 @@
-# Coverage directory
+# Coverage directories
 .nyc_output
+coverage
 
 # Dependency directory
 node_modules
 
 .DS_Store
+
