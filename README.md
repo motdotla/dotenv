@@ -4,7 +4,7 @@
 
 Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](http://12factor.net/config) methodology.
 
-[![BuildStatus](https://img.shields.io/travis/motdotla/dotenv/master.svg?style=flat-square)](https://travis-ci.org/motdotla/dotenv)
+[![Backers on Open Collective](https://opencollective.com/dotenv/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/dotenv/sponsors/badge.svg)](#sponsors) [![BuildStatus](https://img.shields.io/travis/motdotla/dotenv/master.svg?style=flat-square)](https://travis-ci.org/motdotla/dotenv)
 [![Build status](https://ci.appveyor.com/api/projects/status/github/motdotla/dotenv?svg=true)](https://ci.appveyor.com/project/motdotla/dotenv/branch/master)
 [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
@@ -269,3 +269,33 @@ See [CHANGELOG.md](CHANGELOG.md)
 [These npm modules depend on it.](https://www.npmjs.com/browse/depended/dotenv)
 
 Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmjs.com/search?q=keywords:dotenv).
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/motdotla/dotenv/graphs/contributors"><img src="https://opencollective.com/dotenv/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/dotenv#backer)]
+
+<a href="https://opencollective.com/dotenv#backers" target="_blank"><img src="https://opencollective.com/dotenv/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/dotenv#sponsor)]
+
+<a href="https://opencollective.com/dotenv/sponsor/0/website" target="_blank"><img src="https://opencollective.com/dotenv/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/dotenv/sponsor/1/website" target="_blank"><img src="https://opencollective.com/dotenv/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/dotenv/sponsor/2/website" target="_blank"><img src="https://opencollective.com/dotenv/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/dotenv/sponsor/3/website" target="_blank"><img src="https://opencollective.com/dotenv/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/dotenv/sponsor/4/website" target="_blank"><img src="https://opencollective.com/dotenv/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/dotenv/sponsor/5/website" target="_blank"><img src="https://opencollective.com/dotenv/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/dotenv/sponsor/6/website" target="_blank"><img src="https://opencollective.com/dotenv/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/dotenv/sponsor/7/website" target="_blank"><img src="https://opencollective.com/dotenv/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/dotenv/sponsor/8/website" target="_blank"><img src="https://opencollective.com/dotenv/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/dotenv/sponsor/9/website" target="_blank"><img src="https://opencollective.com/dotenv/sponsor/9/avatar.svg"></a>
+
+
