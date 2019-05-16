@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "DOTENV_CONFIG_PATH=.env.example DOTENV_CONFIG_DEBUG=true babel-node -r ../../config ./src/index.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2"
+  }
+}
