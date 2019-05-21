@@ -23,7 +23,7 @@ function spawn (cmd, options = {}) {
   return stdout
 }
 
-t.plan(3)
+t.plan(9)
 
 // dotenv/config enables preloading
 t.equal(
@@ -65,4 +65,94 @@ t.equal(
     }
   ),
   'basic\n'
+)
+
+// dotenv/config enables preloading with prefix option
+// should return value since keys were matched
+t.equal(
+  spawn([
+    '-r',
+    '../config',
+    '-e',
+    'console.log(process.env.CLIENT_APP_KEY)',
+    'dotenv_config_encoding=utf8',
+    'dotenv_config_path=./tests/.env',
+    'dotenv_config_prefix=CLIENT_APP'
+  ]),
+  '12345key\n'
+)
+// should return undefined since keys were not matched
+t.equal(
+  spawn([
+    '-r',
+    '../config',
+    '-e',
+    'console.log(process.env.BASIC)',
+    'dotenv_config_encoding=utf8',
+    'dotenv_config_path=./tests/.env',
+    'dotenv_config_prefix=CLIENT_APP'
+  ]),
+  'undefined\n'
+)
+
+// dotenv/config supports configuration via environment variables with prefix option
+// should return value since keys were matched
+t.equal(
+  spawn(['-r', '../config', '-e', 'console.log(process.env.CLIENT_APP_KEY)'], {
+    env: {
+      DOTENV_CONFIG_PATH: './tests/.env',
+      DOTENV_CONFIG_PREFIX: 'CLIENT_APP'
+    }
+  }),
+  '12345key\n'
+)
+// should return undefined since keys were not matched
+t.equal(
+  spawn(['-r', '../config', '-e', 'console.log(process.env.BASIC)'], {
+    env: {
+      DOTENV_CONFIG_PATH: './tests/.env',
+      DOTENV_CONFIG_PREFIX: 'CLIENT_APP'
+    }
+  }),
+  'undefined\n'
+)
+
+// dotenv/config takes CLI configuration over environment variables with prefix option
+// should return value since keys were matched
+t.equal(
+  spawn(
+    [
+      '-r',
+      '../config',
+      '-e',
+      'console.log(process.env.CLIENT_APP_KEY)',
+      'dotenv_config_path=./tests/.env',
+      'dotenv_config_prefix=CLIENT_APP'
+    ],
+    {
+      env: {
+        DOTENV_CONFIG_PATH: '/tmp/dne/path/.env.should.break'
+      }
+    }
+  ),
+  '12345key\n'
+)
+// should return undefined since keys were not matched
+t.equal(
+  spawn(
+    [
+      '-r',
+      '../config',
+      '-e',
+      'console.log(process.env.BASIC)',
+      'dotenv_config_path=./tests/.env',
+      'dotenv_config_prefix=CLIENT_APP'
+    ],
+    {
+      env: {
+        DOTENV_CONFIG_PATH: '/tmp/dne/path/.env.should.break'
+      }
+    }
+  ),
+  'undefined\n'
 )
