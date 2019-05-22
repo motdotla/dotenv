@@ -11,7 +11,7 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
-t.plan(8)
+t.plan(9)
 
 t.beforeEach(done => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
@@ -51,6 +51,19 @@ t.test('takes option for debug', ct => {
 
   ct.ok(logStub.called)
   logStub.restore()
+})
+
+t.test('takes option for prefix', ct => {
+  ct.plan(2)
+
+  const mockParseResponse = { CLIENT_APP_KEY: '12345key' }
+  readFileSyncStub = readFileSyncStub.returns('CLIENT_APP_KEY=12345key\ntest=foo')
+  parseStub = parseStub.returns(mockParseResponse)
+
+  const env = dotenv.config({ prefix: 'CLIENT_APP', debug: true })
+
+  ct.equal(env.parsed.CLIENT_APP_KEY, mockParseResponse.CLIENT_APP_KEY)
+  ct.type(env.parsed.test, 'undefined')
 })
 
 t.test('reads path with encoding, parsing output to process.env', ct => {

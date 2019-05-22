@@ -82,7 +82,7 @@ t.test('with prefix', ct => {
   ct.plan(10)
 
   const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }), { prefix: 'CLIENT_APP' })
-  console.log(parsed)
+
   ct.type(parsed, Object, 'should return an object')
 
   ct.notOk(parsed.BASIC, 'basic', 'ignore keys not matched with prefix')
