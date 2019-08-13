@@ -9,7 +9,7 @@ const dotenv = require('../lib/main')
 
 const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
 
-t.plan(24)
+t.plan(28)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -54,6 +54,13 @@ t.equal(parsed.TRIM_SPACE_FROM_UNQUOTED, 'some spaced out string', 'retains spac
 t.equal(parsed.USERNAME, 'therealnerdybeast@example.tld', 'parses email addresses completely')
 
 t.equal(parsed.SPACED_KEY, 'parsed', 'parses keys and values surrounded by spaces')
+
+t.equal(parsed.DESPITE_EXPORT, 'parsed', 'parses despite leading export')
+
+t.equal(parsed.EXPORT, 'exported1', 'parses EXPORT as a variable name if no export prefix')
+t.equal(parsed.export, 'exported2', 'parses export as a variable name if no export prefix')
+
+t.equal(parsed.exported, 'exported3', 'is not confused by variables starting with export')
 
 const payload = dotenv.parse(Buffer.from('BUFFER=true'))
 t.equal(payload.BUFFER, 'true', 'should parse a buffer into an object')
