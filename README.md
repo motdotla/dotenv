@@ -172,6 +172,7 @@ The parsing engine currently supports the following rules:
 {MULTILINE: 'new
 line'}
 ```
+- lines beginning with `export` are parsed normally
 
 ## FAQ
 
