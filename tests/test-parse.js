@@ -63,10 +63,10 @@ const expectedPayload = { SERVER: 'localhost', PASSWORD: 'password', DB: 'tests'
 const RPayload = dotenv.parse(Buffer.from('SERVER=localhost\rPASSWORD=password\rDB=tests\r'))
 t.same(RPayload, expectedPayload, 'can parse (\\r) line endings')
 
-const NPayload = dotenv.parse(Buffer.from('SERVER=localhost\rPASSWORD=password\rDB=tests\r'))
+const NPayload = dotenv.parse(Buffer.from('SERVER=localhost\nPASSWORD=password\nDB=tests\n'))
 t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
-const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\rPASSWORD=password\rDB=tests\r'))
+const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
 
 // test debug path
