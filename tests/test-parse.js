@@ -58,6 +58,9 @@ t.equal(parsed.SPACED_KEY, 'parsed', 'parses keys and values surrounded by space
 const payload = dotenv.parse(Buffer.from('BUFFER=true'))
 t.equal(payload.BUFFER, 'true', 'should parse a buffer into an object')
 
+const macPayload = dotenv.parse(Buffer.from('MAC=true\rEOL=true'))
+t.same(macPayload, { MAC: 'true', EOL: 'true' }, 'can parse mac (\\r) line endings')
+
 // test debug path
 const logStub = sinon.stub(console, 'log')
 dotenv.parse(Buffer.from('what is this'), { debug: true })
