@@ -9,7 +9,7 @@ const dotenv = require('../lib/main')
 
 const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
 
-t.plan(24)
+t.plan(27)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -58,8 +58,16 @@ t.equal(parsed.SPACED_KEY, 'parsed', 'parses keys and values surrounded by space
 const payload = dotenv.parse(Buffer.from('BUFFER=true'))
 t.equal(payload.BUFFER, 'true', 'should parse a buffer into an object')
 
-const macPayload = dotenv.parse(Buffer.from('MAC=true\rEOL=true'))
-t.same(macPayload, { MAC: 'true', EOL: 'true' }, 'can parse mac (\\r) line endings')
+const expectedPayload = { SERVER: 'localhost', PASSWORD: 'password', DB: 'tests' }
+
+const RPayload = dotenv.parse(Buffer.from('SERVER=localhost\rPASSWORD=password\rDB=tests\r'))
+t.same(RPayload, expectedPayload, 'can parse (\\r) line endings')
+
+const NPayload = dotenv.parse(Buffer.from('SERVER=localhost\rPASSWORD=password\rDB=tests\r'))
+t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
+
+const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\rPASSWORD=password\rDB=tests\r'))
+t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
 
 // test debug path
 const logStub = sinon.stub(console, 'log')
