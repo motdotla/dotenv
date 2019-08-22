@@ -14,8 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/motdotla/dotenv.git"
+    "url": "https://github.com/motdotla/dotenv"
   },
+  "bugs": {
+    "url": "https://github.com/motdotla/dotenv/issues"
+  },
+  "author": "Scott Motte <mot@mot.la> (http://mot.la)",
   "keywords": [
     "dotenv",
     "env",
