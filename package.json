@@ -29,12 +29,12 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "decache": "^4.5.1",
-    "flow-bin": "^0.105.2",
-    "sinon": "^7.4.1",
+    "flow-bin": "^0.109.0",
+    "sinon": "^7.5.0",
     "standard": "^13.1.0",
     "standard-markdown": "^5.1.0",
     "standard-version": "^7.0.0",
-    "tap": "^14.6.1"
+    "tap": "^14.7.0"
   },
   "dependencies": {},
   "engines": {
