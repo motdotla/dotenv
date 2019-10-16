@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.2.0](https://github.com/motdotla/dotenv/compare/v8.1.0...v8.2.0) (2019-10-16)
+
 ## [8.1.0](https://github.com/motdotla/dotenv/compare/v7.0.0...v8.1.0) (2019-08-18)
 
 
