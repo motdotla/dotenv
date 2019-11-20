@@ -167,6 +167,8 @@ The parsing engine currently supports the following rules:
 - single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
 - single and double quoted values maintain whitespace from both ends (`FOO="  some value  "` becomes `{FOO: '  some value  '}`)
 - double quoted values expand new lines (`MULTILINE="new\nline"` becomes
+- escaping backslash is striped away except within single quotes and for `\n` or|and `\r` (`USD=\$` becomes `{USD: '$'`}) *as shell behaves
+- escaping backslash is preserved within single quotes (`USD='\$'` becomes `{USD: '\$'`}) *as shell behaves
 
 ```
 {MULTILINE: 'new

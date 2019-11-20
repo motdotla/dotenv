@@ -1,15 +1,12 @@
 /* @flow */
 
 const fs = require('fs')
-
 const sinon = require('sinon')
 const t = require('tap')
 
 const dotenv = require('../lib/main')
 
 const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
-
-t.plan(27)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -55,6 +52,19 @@ t.equal(parsed.USERNAME, 'therealnerdybeast@example.tld', 'parses email addresse
 
 t.equal(parsed.SPACED_KEY, 'parsed', 'parses keys and values surrounded by spaces')
 
+/**
+ * same behaviour as bash
+ * http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_03.html
+ */
+t.equal(parsed.STRIP_BACKSLASH_0, 'Single$Sign', 'strip backslash before $ sign')
+t.equal(parsed.STRIP_BACKSLASH_1, 'Single$Sign', 'strip backslash before $ sign within double quotes')
+t.equal(parsed.STRIP_BACKSLASH_2, 'NoBackslash', 'strip backslash before regular character')
+t.equal(parsed.STRIP_BACKSLASH_3, 'NoBackslashWith\\n', 'strip backslash before regular character but keep \\n')
+t.equal(parsed.STRIP_BACKSLASH_4, 'NoBackslashWith\\r', 'strip backslash before regular character but keep \\r')
+t.equal(parsed.STRIP_BACKSLASH_5, 'NoBackslashWith\\n\\r', 'strip backslash before regular character but keep \\n\\r')
+t.equal(parsed.STRIP_BACKSLASH_6, 'NoBackslash', 'strip backslash before regular character within double quotes')
+t.equal(parsed.RETAIN_BACKSLASH_0, '\\$Sign', 'retains backslash within single quotes')
+
 const payload = dotenv.parse(Buffer.from('BUFFER=true'))
 t.equal(payload.BUFFER, 'true', 'should parse a buffer into an object')
 
@@ -74,3 +84,5 @@ const logStub = sinon.stub(console, 'log')
 dotenv.parse(Buffer.from('what is this'), { debug: true })
 t.ok(logStub.called)
 logStub.restore()
+
+t.end()
