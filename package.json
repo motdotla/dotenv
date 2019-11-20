@@ -10,7 +10,7 @@
     "lint": "standard",
     "postlint": "standard-markdown",
     "pretest": "npm run lint && npm run dtslint",
-    "test": "tap tests/*.js --100",
+    "test": "tap --reporter=spec tests/*.js --100",
     "prerelease": "npm test",
     "release": "standard-version"
   },
@@ -37,7 +37,7 @@
     "standard": "^13.1.0",
     "standard-markdown": "^5.1.0",
     "standard-version": "^7.0.0",
-    "tap": "^14.7.0"
+    "tap": "^14.9.2"
   },
   "dependencies": {},
   "engines": {
