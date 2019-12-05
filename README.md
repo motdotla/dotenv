@@ -62,7 +62,7 @@ $ node -r dotenv/config your_script.js
 The configuration options below are supported as command line arguments in the format `dotenv_config_<option>=value`
 
 ```bash
-$ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/your/env/vars
+$ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
 
 Additionally, you can use environment variables to set configuration options. Command line arguments will precede these.
@@ -102,7 +102,7 @@ Default: `path.resolve(process.cwd(), '.env')`
 You may specify a custom path if your file containing environment variables is located elsewhere.
 
 ```js
-require('dotenv').config({ path: '/full/custom/path/to/your/env/vars' })
+require('dotenv').config({ path: '/custom/path/to/.env' })
 ```
 
 #### Encoding
