@@ -11,10 +11,14 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
-t.plan(8)
+t.plan(11)
 
 t.beforeEach(done => {
-  readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
+  readFileSyncStub = sinon.stub(fs, 'readFileSync')
+  readFileSyncStub.withArgs('tests/.env').returns('test=foo')
+  readFileSyncStub.withArgs('tests/.env.example').returns('test=foo\nbar=baz')
+  readFileSyncStub.withArgs('tests/.env.default').returns('test=foo\nbar=baz')
+  readFileSyncStub.returns('test=foo')
   parseStub = sinon.stub(dotenv, 'parse').returns(mockParseResponse)
   done()
 })
@@ -53,6 +57,20 @@ t.test('takes option for debug', ct => {
   logStub.restore()
 })
 
+t.test('takes option for extended', ct => {
+  ct.plan(3)
+
+  const testPath = 'test/.env'
+  const examplePath = 'tests/.env.example'
+  const defaultPath = 'tests/.env.default'
+  dotenv.config({ extended: 'true', path: testPath, examplePath, defaultPath })
+
+  const calls = readFileSyncStub.getCalls()
+  ct.equal(calls[0].args[0], testPath)
+  ct.equal(calls[1].args[0], examplePath)
+  ct.equal(calls[2].args[0], defaultPath)
+})
+
 t.test('reads path with encoding, parsing output to process.env', ct => {
   ct.plan(2)
 
@@ -60,6 +78,27 @@ t.test('reads path with encoding, parsing output to process.env', ct => {
 
   ct.same(res.parsed, mockParseResponse)
   ct.equal(readFileSyncStub.callCount, 1)
+})
+
+t.test('with extended, throws if a variable is not provided', ct => {
+  ct.plan(1)
+
+  const examplePath = 'tests/.env.example'
+
+  const res = dotenv.config({ extended: 'true', examplePath })
+
+  ct.same(res.error, new Error('Missing variables!'))
+})
+
+t.test('with extended, uses default if variable is not provided', ct => {
+  ct.plan(1)
+
+  const examplePath = 'tests/.env.example'
+  const defaultPath = 'tests/.env.default'
+
+  const res = dotenv.config({ extended: 'true', examplePath, defaultPath })
+
+  ct.same(res.parsed, { test: 'foo', bar: 'baz' })
 })
 
 t.test('does not write over keys already in process.env', ct => {
