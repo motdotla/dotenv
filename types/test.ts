@@ -1,8 +1,8 @@
-import * as DotEnv from "dotenv";
+import * as dotenv from "dotenv";
 
-const { config, parse }: DotEnv.dotenv = {
-  config: DotEnv.config,
-  parse: DotEnv.parse
+const { config, parse }: dotenv.DotEnv = {
+  config: dotenv.config,
+  parse: dotenv.parse
 };
 
 const env = config();

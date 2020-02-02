@@ -57,7 +57,7 @@ export interface DotenvConfigOutput {
 export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
 
 /** dotenv library interface */
-export interface dotenv {
+export interface DotEnv {
   config: typeof config;
   parse: typeof parse;
 }
