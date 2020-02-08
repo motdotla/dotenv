@@ -1,4 +1,9 @@
-import { config, parse } from "dotenv";
+import * as dotenv from "dotenv";
+
+const { config, parse }: dotenv.DotEnv = {
+  config: dotenv.config,
+  parse: dotenv.parse
+};
 
 const env = config();
 const dbUrl: string | null =
