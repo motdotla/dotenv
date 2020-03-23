@@ -37,7 +37,7 @@
     "standard": "^13.1.0",
     "standard-markdown": "^5.1.0",
     "standard-version": "^7.0.0",
-    "tap": "^14.7.0"
+    "tap": "14.9.2"
   },
   "dependencies": {},
   "engines": {
