@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/motdotla/dotenv.git"
+    "url": "https://github.com/motdotla/dotenv"
   },
   "keywords": [
     "dotenv",
@@ -30,18 +30,19 @@
   "readmeFilename": "README.md",
   "license": "BSD-2-Clause",
   "devDependencies": {
+    "@types/node": "^10.17.18",
     "decache": "^4.5.1",
-    "dtslint": "^0.9.8",
-    "flow-bin": "^0.109.0",
-    "sinon": "^7.5.0",
-    "standard": "^13.1.0",
-    "standard-markdown": "^5.1.0",
-    "standard-version": "^7.0.0",
-    "tap": "^14.7.0"
+    "dtslint": "^3.4.1",
+    "flow-bin": "^0.121.0",
+    "sinon": "^9.0.1",
+    "standard": "^14.3.3",
+    "standard-markdown": "^6.0.0",
+    "standard-version": "^7.1.0",
+    "tap": "^14.10.7"
   },
   "dependencies": {},
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "standard": {
     "ignore": [
