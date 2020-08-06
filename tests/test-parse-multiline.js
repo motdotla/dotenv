@@ -9,7 +9,7 @@ const dotenv = require('../lib/main')
 
 const parsed = dotenv.parse(fs.readFileSync('tests/.env-multiline', { encoding: 'utf8' }), { multiline: 'line-breaks' })
 
-t.plan(25)
+t.plan(26)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -50,6 +50,8 @@ t.equal(parsed.SPACED_KEY, 'parsed', 'parses keys and values surrounded by space
 t.equal(parsed.MULTI_DOUBLE_QUOTED, 'THIS\nIS\nA\nMULTILINE\nSTRING', 'parses multi-line strings when using double quotes')
 
 t.equal(parsed.MULTI_SINGLE_QUOTED, 'THIS\nIS\nA\nMULTILINE\nSTRING', 'parses multi-line strings when using single quotes')
+
+t.equal(parsed.MULTI_UNENDED, 'THIS\nLINE HAS\nNO END QUOTE', 'parses multi-line strings when using single quotes')
 
 const payload = dotenv.parse(Buffer.from('BUFFER=true'))
 t.equal(payload.BUFFER, 'true', 'should parse a buffer into an object')
