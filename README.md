@@ -125,6 +125,29 @@ You may turn on logging to help debug why certain keys or values are not being s
 require('dotenv').config({ debug: process.env.DEBUG })
 ```
 
+#### Multiline
+
+Default: `default`
+
+You may specify the value `line-breaks` to switch the parser into a mode in which line breaks 
+inside quoted values are allowed.
+
+```js
+require('dotenv').config({ multiline: 'line-breaks' })
+```
+
+This allows specifying multiline values in this format:
+
+```
+PRIVATE_KEY="-----BEGIN PRIVATE KEY-----
+MIGT...
+7ure...
+-----END PRIVATE KEY-----"
+```
+
+Ensure that the value begins with a single or double quote character, and it ends with the same character.
+
+
 ## Parse
 
 The engine which parses the contents of your file containing environment
@@ -166,12 +189,23 @@ The parsing engine currently supports the following rules:
 - whitespace is removed from both ends of unquoted values (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO=  some value  ` becomes `{FOO: 'some value'}`)
 - single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
 - single and double quoted values maintain whitespace from both ends (`FOO="  some value  "` becomes `{FOO: '  some value  '}`)
-- double quoted values expand new lines (`MULTILINE="new\nline"` becomes
+- double quoted values expand new lines. Example: `MULTILINE="new\nline"` becomes
 
-```
-{MULTILINE: 'new
-line'}
-```
+  ```
+  {MULTILINE: 'new
+  line'}
+  ```
+- multi-line values with line breaks are supported for quoted values if using the `{ multiline: "line-break" }` option.
+  In this mode you do not need to use `\n` to separate lines. Example:
+
+  ```
+  PRIVATE_KEY="-----BEGIN PRIVATE KEY-----
+  MIGT...
+  7ure...
+  -----END PRIVATE KEY-----"
+  ```
+
+  Note that when using this option, all values that start with quotes must end in quotes.
 
 ## FAQ
 

@@ -5,6 +5,8 @@ const path = require('path')
 
 const t = require('tap')
 
+const configPath = path.resolve(__dirname, '../config.js')
+
 function spawn (cmd, options = {}) {
   const { stdout } = cp.spawnSync(
     process.argv[0], // node binary
@@ -29,7 +31,7 @@ t.plan(3)
 t.equal(
   spawn([
     '-r',
-    '../config',
+    configPath,
     '-e',
     'console.log(process.env.BASIC)',
     'dotenv_config_encoding=utf8',
@@ -40,7 +42,7 @@ t.equal(
 
 // dotenv/config supports configuration via environment variables
 t.equal(
-  spawn(['-r', '../config', '-e', 'console.log(process.env.BASIC)'], {
+  spawn(['-r', configPath, '-e', 'console.log(process.env.BASIC)'], {
     env: {
       DOTENV_CONFIG_PATH: './tests/.env'
     }
@@ -53,7 +55,7 @@ t.equal(
   spawn(
     [
       '-r',
-      '../config',
+      configPath,
       '-e',
       'console.log(process.env.BASIC)',
       'dotenv_config_path=./tests/.env'
