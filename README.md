@@ -125,6 +125,16 @@ You may turn on logging to help debug why certain keys or values are not being s
 require('dotenv').config({ debug: process.env.DEBUG })
 ```
 
+#### Overwrite
+
+Default: `false`
+
+You may turn on to overwrite any existing environment variables.
+
+```js
+require('dotenv').config({ overwrite: process.env.OVERWRITE })
+```
+
 ## Parse
 
 The engine which parses the contents of your file containing environment

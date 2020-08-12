@@ -11,7 +11,7 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
-t.plan(8)
+t.plan(9)
 
 t.beforeEach(done => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
@@ -51,6 +51,17 @@ t.test('takes option for debug', ct => {
 
   ct.ok(logStub.called)
   logStub.restore()
+})
+
+t.test('takes option for overwrite', ct => {
+  ct.plan(1)
+
+  const existing = 'bar'
+  process.env.test = existing
+  const testOverwrite = true
+  dotenv.config({ overwrite: testOverwrite })
+
+  ct.equal(process.env.test, 'foo')
 })
 
 t.test('reads path with encoding, parsing output to process.env', ct => {
