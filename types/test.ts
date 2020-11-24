@@ -22,3 +22,13 @@ const parsedFromBuffer = parse(new Buffer("JUSTICE=league\n"), {
   debug: true
 });
 const justice: string = parsedFromBuffer["JUSTICE"];
+
+interface CustomConfig {
+  DC: string;
+  MARVEL: string;
+}
+
+const universes = parse<CustomConfig>(`
+DC=bad
+MARVEL=good
+`);
