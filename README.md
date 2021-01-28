@@ -105,6 +105,16 @@ You may specify a custom path if your file containing environment variables is l
 require('dotenv').config({ path: '/custom/path/to/.env' })
 ```
 
+### Override
+
+Default: `false`
+
+You may specify whether you want to override existing `process.env` values.
+
+```js
+require('dotenv').config({ override: true })
+```
+
 #### Encoding
 
 Default: `utf8`
