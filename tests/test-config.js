@@ -11,7 +11,7 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
-t.plan(8)
+t.plan(9)
 
 t.beforeEach(done => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
@@ -51,6 +51,17 @@ t.test('takes option for debug', ct => {
 
   ct.ok(logStub.called)
   logStub.restore()
+})
+
+t.test('takes option for scoped', ct => {
+  ct.plan(2)
+
+  process.env.test && delete process.env.test
+
+  const scopedVars = dotenv.config({ scoped: true })
+
+  ct.equal(process.env.test, undefined, 'test should be undefined')
+  ct.equal(scopedVars.parsed.test, 'foo', 'test should be set to "foo"')
 })
 
 t.test('reads path with encoding, parsing output to process.env', ct => {
