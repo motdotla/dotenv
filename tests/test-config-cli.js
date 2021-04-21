@@ -29,7 +29,7 @@ t.plan(3)
 t.equal(
   spawn([
     '-r',
-    '../config',
+    './config',
     '-e',
     'console.log(process.env.BASIC)',
     'dotenv_config_encoding=utf8',
@@ -40,7 +40,7 @@ t.equal(
 
 // dotenv/config supports configuration via environment variables
 t.equal(
-  spawn(['-r', '../config', '-e', 'console.log(process.env.BASIC)'], {
+  spawn(['-r', './config', '-e', 'console.log(process.env.BASIC)'], {
     env: {
       DOTENV_CONFIG_PATH: './tests/.env'
     }
@@ -53,7 +53,7 @@ t.equal(
   spawn(
     [
       '-r',
-      '../config',
+      './config',
       '-e',
       'console.log(process.env.BASIC)',
       'dotenv_config_path=./tests/.env'
