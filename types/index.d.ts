@@ -47,7 +47,7 @@ export interface DotenvConfigOutput {
 }
 
 /**
- * Loads `.env` file contents into {@link https://nodejs.org/api/process.html#process_process_env | `process.env`}.
+ * Loads `.env` file contents into {@link https://nodejs.org/api/process.html#process_process_env `process.env`}.
  * Example: 'KEY=value' becomes { parsed: { KEY: 'value' } }
  *
  * @param options - controls behavior
