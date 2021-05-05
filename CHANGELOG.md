@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.0.0](https://github.com/motdotla/dotenv/compare/v8.0.0...v9.0.0) (2021-05-05)
+
+### Added
+
+- define package.json in exports
+- allow for `import "dotenv/config"`
+
+### Changed
+
+- updated dev dependencies via npm audit
+- TypeScript types
+- point to exact types file to work with VS Code
+- _Breaking:_ drop support for Node v8
+
 ## [8.6.0](https://github.com/motdotla/dotenv/compare/v8.5.1...v8.6.0) (2021-05-05)
 
 ### Added
