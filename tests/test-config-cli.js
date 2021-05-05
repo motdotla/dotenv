@@ -30,7 +30,7 @@ t.equal(
   spawn(
     [
       '-r',
-      path.resolve(__dirname, '../config'),
+      './config',
       '-e',
       'console.log(process.env.BASIC)',
       'dotenv_config_encoding=utf8',
@@ -45,7 +45,7 @@ t.equal(
   spawn(
     [
       '-r',
-      path.resolve(__dirname, '../config'),
+      './config',
       '-e',
       'console.log(process.env.BASIC)'
     ],
@@ -63,7 +63,7 @@ t.equal(
   spawn(
     [
       '-r',
-      path.resolve(__dirname, '../config'),
+      './config',
       '-e',
       'console.log(process.env.BASIC)',
       'dotenv_config_path=./tests/.env'
