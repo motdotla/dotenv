@@ -1,3 +1,5 @@
+[Announcement: From the makers that brought you .env, introducing .env.me. Sync your .env files across machines. Join the early access list.](https://me.dotenv.org/)
+
 # dotenv
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.png" alt="dotenv" align="right" />
