@@ -1,13 +1,13 @@
 {
   "name": "dotenv",
-  "version": "8.2.0",
+  "version": "8.4.0",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "exports": {
     ".": "./lib/main.js",
     "./config": "./config.js"
   },
-  "types": "types",
+  "types": "types/index.d.ts",
   "scripts": {
     "flow": "flow",
     "dtslint": "dtslint types",
@@ -45,7 +45,7 @@
   },
   "dependencies": {},
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "standard": {
     "ignore": [
