@@ -3,6 +3,10 @@
   "version": "8.4.0",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
+  "exports": {
+    ".": "./lib/main.js",
+    "./config": "./config.js"
+  },
   "types": "types/index.d.ts",
   "scripts": {
     "flow": "flow",
