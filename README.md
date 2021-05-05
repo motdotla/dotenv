@@ -1,4 +1,4 @@
-[Announcement: From the makers that brought you .env, introducing .env.me. Sync your .env files across machines. Join the early access list.](https://me.dotenv.org/)
+**Announcement 📣** - From the makers that brought you .env, introducing [.env.me](http://npmjs.org/package/dotenv-me). Sync your .env files across machines. [Join the early access list.](https://me.dotenv.org/)
 
 # dotenv
 
