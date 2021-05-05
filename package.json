@@ -1,6 +1,6 @@
 {
   "name": "dotenv",
-  "version": "8.2.0",
+  "version": "8.3.0",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "types": "types",
@@ -41,7 +41,7 @@
   },
   "dependencies": {},
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "standard": {
     "ignore": [
