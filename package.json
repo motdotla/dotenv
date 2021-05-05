@@ -41,7 +41,7 @@
   },
   "dependencies": {},
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "standard": {
     "ignore": [
