@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Changed
 
-- _Breaking:_ drop support for Node v6 ([#302](https://github.com/motdotla/dotenv/issues/392))
+- _Breaking:_ drop support for Node v6 ([#392](https://github.com/motdotla/dotenv/issues/392))
 
 # [8.0.0](https://github.com/motdotla/dotenv/compare/v7.0.0...v8.0.0) (2019-05-02)
 
