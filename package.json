@@ -14,7 +14,6 @@
     "dtslint": "dtslint types",
     "lint": "standard",
     "postlint": "standard-markdown",
-    "pretest": "npm run lint && npm run dtslint",
     "test": "tap tests/*.js --100",
     "prerelease": "npm test",
     "release": "standard-version"
