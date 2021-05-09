@@ -1,5 +1,5 @@
 <p align="center">
-<strong>Announcement 📣</strong><br/>From the makers that brought you .env, introducing <a href="http://npmjs.org/package/@dotenv/cli">@dotenv/cli</a>.<br/>Sync your .env files across your machines and between your team members.<br/><a href="https://me.dotenv.org">Join the early access list. 🕶</a>
+<strong>Announcement 📣</strong><br/>From the makers that brought you .env, introducing <a href="http://npmjs.org/package/@dotenv/cli">@dotenv/cli</a>.<br/>Sync your .env files across your machines and between your team members.<br/><a href="https://cli.dotenv.org">Join the early access list. 🕶</a>
 </p>
 
 # dotenv
