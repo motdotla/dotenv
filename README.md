@@ -1,4 +1,6 @@
-**Announcement 📣** - From the makers that brought you .env, introducing [.env.me](http://npmjs.org/package/dotenv-me). Sync your .env files across machines. [Join the early access list.](https://me.dotenv.org/)
+<p align="center">
+<strong>Announcement 📣</strong><br/>From the makers that brought you .env, introducing <a href="http://npmjs.org/package/@dotenv/cli">@dotenv/cli</a>.<br/>Sync your .env files across your machines and between your team members.<br/><a href="https://me.dotenv.org">Join the early access list. 🕶</a>
+</p>
 
 # dotenv
 
