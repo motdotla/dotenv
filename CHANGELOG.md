@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.0.2](https://github.com/motdotla/dotenv/compare/v9.0.1...v9.0.2) (2021-05-10)
+
+### Changed
+
+- Support windows newlines with debug mode
+
 ## [9.0.1](https://github.com/motdotla/dotenv/compare/v9.0.0...v9.0.1) (2021-05-08)
 
 ### Changed

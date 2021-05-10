@@ -1,6 +1,6 @@
 {
   "name": "dotenv",
-  "version": "9.0.1",
+  "version": "9.0.2",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "exports": {
