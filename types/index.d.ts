@@ -19,10 +19,10 @@ export interface DotenvParseOutput {
  * @param options - additional options
  * @returns an object with keys and values based on `src`
  */
-export function parse(
+export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
   src: string | Buffer,
   options?: DotenvParseOptions
-): DotenvParseOutput;
+): T;
 
 export interface DotenvConfigOptions {
   /**
