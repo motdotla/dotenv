@@ -6,6 +6,7 @@
   "exports": {
     ".": "./lib/main.js",
     "./config": "./config.js",
+    "./config.js": "./config.js",
     "./package.json": "./package.json"
   },
   "types": "types/index.d.ts",
