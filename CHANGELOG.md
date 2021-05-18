@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 - Updates to README
 
-## [9.0.0](https://github.com/motdotla/dotenv/compare/v8.0.0...v9.0.0) (2021-05-05)
+## [9.0.0](https://github.com/motdotla/dotenv/compare/v8.6.0...v9.0.0) (2021-05-05)
 
 ### Added
 
