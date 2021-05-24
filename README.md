@@ -15,6 +15,7 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 [![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
 [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Rate on Openbase](https://badges.openbase.com/js/rating/dotenv.svg)](https://openbase.com/js/dotenv)
 
 ## Install
 
