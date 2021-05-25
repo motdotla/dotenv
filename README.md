@@ -17,6 +17,8 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Rate on Openbase](https://badges.openbase.com/js/rating/dotenv.svg)](https://openbase.com/js/dotenv)
 
+[Join the community on slack](https://join.slack.com/t/dotenv-org/shared_invite/zt-qsgpi6lu-qMsyASflKWQpa0Q651ceeg)
+
 ## Install
 
 ```bash
