@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  Also, we'd love to hear from you. [Join the community on slack](https://join.slack.com/t/dotenv-org/shared_invite/zt-qsgpi6lu-qMsyASflKWQpa0Q651ceeg), hang out with other cool devs, and talk technology or dotenv.
+  Also, we'd love to hear from you. <a href="https://join.slack.com/t/dotenv-org/shared_invite/zt-qsgpi6lu-qMsyASflKWQpa0Q651ceeg">Join the community on slack</a>, hang out with other cool devs, and talk tech.
 </p>
 
 # dotenv
