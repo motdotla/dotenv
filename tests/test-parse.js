@@ -1,6 +1,6 @@
 /* @flow */
 
-const fs = require('fs')
+const fs = require('fs-extra')
 
 const sinon = require('sinon')
 const t = require('tap')

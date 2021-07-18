@@ -206,7 +206,7 @@ We will never modify any environment variables that have already been set. In pa
 If you want to override `process.env` you can do something like this:
 
 ```javascript
-const fs = require('fs')
+const fs = require('fs-extra')
 const dotenv = require('dotenv')
 const envConfig = dotenv.parse(fs.readFileSync('.env.override'))
 for (const k in envConfig) {

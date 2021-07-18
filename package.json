@@ -45,7 +45,9 @@
     "standard-version": "^7.0.0",
     "tap": "^14.7.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "fs-extra": "^10.0.0"
+  },
   "engines": {
     "node": ">=10"
   },
