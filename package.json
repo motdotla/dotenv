@@ -1,9 +1,15 @@
 {
   "name": "dotenv",
-  "version": "8.2.0",
+  "version": "10.0.0",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
-  "types": "types",
+  "exports": {
+    ".": "./lib/main.js",
+    "./config": "./config.js",
+    "./config.js": "./config.js",
+    "./package.json": "./package.json"
+  },
+  "types": "types/index.d.ts",
   "scripts": {
     "flow": "flow",
     "dtslint": "dtslint types",
@@ -41,7 +47,7 @@
   },
   "dependencies": {},
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "standard": {
     "ignore": [

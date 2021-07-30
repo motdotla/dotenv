@@ -1,6 +1,8 @@
 /* @flow */
 
 const fs = require('fs')
+const os = require('os')
+const path = require('path')
 
 const sinon = require('sinon')
 const t = require('tap')
@@ -32,6 +34,18 @@ t.test('takes option for path', ct => {
   dotenv.config({ path: testPath })
 
   ct.equal(readFileSyncStub.args[0][0], testPath)
+})
+
+t.test('takes option for path along with home directory char ~', ct => {
+  ct.plan(2)
+  const mockedHomedir = '/Users/dummy'
+  const homedirStub = sinon.stub(os, 'homedir').returns(mockedHomedir)
+  const testPath = '~/.env'
+  dotenv.config({ path: testPath })
+
+  ct.equal(readFileSyncStub.args[0][0], path.join(mockedHomedir, '.env'))
+  ct.ok(homedirStub.called)
+  homedirStub.restore()
 })
 
 t.test('takes option for encoding', ct => {

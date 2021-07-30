@@ -29,10 +29,10 @@ export interface DotenvParseOutput {
  * @param options - additional options
  * @returns an object with keys and values based on `src`
  */
-export function parse(
+export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
   src: string | Buffer,
   options?: DotenvParseOptions
-): DotenvParseOutput;
+): T;
 
 export interface DotenvConfigOptions {
   /**
@@ -67,7 +67,7 @@ export interface DotenvConfigOutput {
 }
 
 /**
- * Loads `.env` file contents into {@link https://nodejs.org/api/process.html#process_process_env | `process.env`}.
+ * Loads `.env` file contents into {@link https://nodejs.org/api/process.html#process_process_env `process.env`}.
  * Example: 'KEY=value' becomes { parsed: { KEY: 'value' } }
  *
  * @param options - controls behavior
@@ -75,12 +75,5 @@ export interface DotenvConfigOutput {
  *
  */
 export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
-
-/** dotenv library interface */
-export interface DotEnv {
-  config: typeof config;
-  parse: typeof parse;
-}
-
 /** @deprecated since v7.0.0 Use config instead. */
 export const load: typeof config;

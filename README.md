@@ -1,3 +1,11 @@
+<p align="center">
+<strong>Announcement 📣</strong><br/>From the makers that brought you Dotenv, introducing <a href="https://sync.dotenv.org">Dotenv Sync</a>.<br/>Sync your .env files between machines, environments, and team members.<br/><a href="https://sync.dotenv.org">Join the early access list. 🕶</a>
+</p>
+
+<p align="center">
+  Also, we'd love to hear from you. <a href="https://join.slack.com/t/dotenv-org/shared_invite/zt-qsgpi6lu-qMsyASflKWQpa0Q651ceeg">Join the community on slack</a>, hang out with other cool devs, and talk tech.
+</p>
+
 # dotenv
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.png" alt="dotenv" align="right" />
@@ -11,6 +19,7 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 [![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
 [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Rate on Openbase](https://badges.openbase.com/js/rating/dotenv.svg)](https://openbase.com/js/dotenv)
 
 ## Install
 
