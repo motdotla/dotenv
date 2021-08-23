@@ -36,16 +36,15 @@
   "readmeFilename": "README.md",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "decache": "^4.5.1",
-    "dtslint": "^0.9.8",
-    "flow-bin": "^0.109.0",
-    "sinon": "^7.5.0",
-    "standard": "^13.1.0",
-    "standard-markdown": "^5.1.0",
-    "standard-version": "^7.0.0",
-    "tap": "^14.7.0"
+    "decache": "^4.6.0",
+    "dtslint": "^4.1.5",
+    "flow-bin": "^0.158.0",
+    "sinon": "^11.1.2",
+    "standard": "^16.0.3",
+    "standard-markdown": "^6.0.0",
+    "standard-version": "^9.3.1",
+    "tap": "^15.0.9"
   },
-  "dependencies": {},
   "engines": {
     "node": ">=10"
   },
