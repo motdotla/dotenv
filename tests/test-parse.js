@@ -9,7 +9,7 @@ const dotenv = require('../lib/main')
 
 const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
 
-t.plan(28)
+t.plan(29)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -69,14 +69,26 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
 
+// test default values
+const expectedDefPayload = { SERVER: 'localhost', PASSWORD: 'password', DB: 'tests', PORT: 3000, A_VAR: 'testing' }
+const DefPayload = dotenv.parse(Buffer.from('SERVER=localhost\nPASSWORD=password\nDB=tests\n'), {
+  defaults: {
+    PORT: 3000,
+    A_VAR: 'testing',
+    SERVER: '127.0.0.1'
+  }
+})
+
+t.same(DefPayload, expectedDefPayload, 'can parse with default values')
+
 // test debug path
 let logStub = sinon.stub(console, 'log')
 dotenv.parse(Buffer.from('what is this'), { debug: true })
-t.ok(logStub.calledOnce)
+t.ok(logStub.calledTwice)
 logStub.restore()
 
 // test that debug in windows (\r\n lines) logs just once per line
 logStub = sinon.stub(console, 'log')
 dotenv.parse(Buffer.from('HEY=there\r\n'), { debug: true })
-t.ok(logStub.calledOnce)
+t.ok(logStub.calledTwice)
 logStub.restore()

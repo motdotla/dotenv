@@ -124,6 +124,18 @@ You may specify the encoding of your file containing environment variables.
 require('dotenv').config({ encoding: 'latin1' })
 ```
 
+#### Defaults
+
+Default: `{}`
+
+You may specify default environment variables to inject when not found in your `.env` file.
+If a variable key is found in both your `.env` file and your default values, the value
+in your `.env` file will override the default value.
+
+```js
+require('dotenv').config({ defaults: { PORT: 3000 } })
+```
+
 #### Debug
 
 Default: `false`
