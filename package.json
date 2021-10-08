@@ -7,7 +7,7 @@
     ".": {
       "require": "./lib/main.js",
       "types": "./types/index.d.ts"
-    }
+    },
     "./config": "./config.js",
     "./config.js": "./config.js",
     "./package.json": "./package.json"
