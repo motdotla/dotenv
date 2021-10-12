@@ -6,6 +6,7 @@
   "exports": {
     ".": {
       "require": "./lib/main.js",
+      "default": "./lib/main.js",
       "types": "./types/index.d.ts"
     },
     "./config": "./config.js",
