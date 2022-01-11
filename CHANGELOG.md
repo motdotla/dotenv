@@ -4,9 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v10.0.0...master)
 
+## [11.0.0](https://github.com/motdotla/dotenv/compare/v10.0.0...v11.0.0) (2022-01-11)
+
 ### Changed
 
 - _Breaking:_ drop support for Node v10 ([#558](https://github.com/motdotla/dotenv/pull/558))
+- Patch debug option ([#550](https://github.com/motdotla/dotenv/pull/550))
 
 ## [10.0.0](https://github.com/motdotla/dotenv/compare/v9.0.2...v10.0.0) (2021-05-20)
 
