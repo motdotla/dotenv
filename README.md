@@ -1,9 +1,5 @@
 <p align="center">
-<strong>Announcement 📣</strong><br/>From the makers that brought you Dotenv, introducing <a href="https://sync.dotenv.org">Dotenv Sync</a>.<br/>Sync your .env files between machines, environments, and team members.<br/><a href="https://sync.dotenv.org">Join the early access list. 🕶</a>
-</p>
-
-<p align="center">
-  Also, we'd love to hear from you. <a href="https://join.slack.com/t/dotenv-org/shared_invite/zt-qsgpi6lu-qMsyASflKWQpa0Q651ceeg">Join the community on slack</a>, hang out with other cool devs, and talk tech.
+<strong>Announcement 📣</strong><br/>From the makers that brought you Dotenv, introducing <a href="https://sync.dotenv.org">Dotenv Sync</a>.<br/>Sync your .env files between machines, environments, and team members.<br/><a href="https://sync.dotenv.org">Join the early access list.💛</a>
 </p>
 
 # dotenv
