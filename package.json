@@ -8,7 +8,7 @@
     ".": {
       "require": "./lib/main.js",
       "default": "./lib/main.js",
-      "types": "./types/index.d.ts"
+      "types": "./lib/main.d.ts"
     },
     "./config": "./config.js",
     "./config.js": "./config.js",
