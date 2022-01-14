@@ -4,6 +4,7 @@
     "lib": ["es6"],
     "strict": true,
     "noEmit": true,
+    "baseUrl": ".",
     "paths": {
       "dotenv": ["../lib/main.d.ts"]
     }
