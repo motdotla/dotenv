@@ -2,13 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v11.0.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v12.0.0...master)
 
 TBD
 
 ## [12.0.0](https://github.com/motdotla/dotenv/compare/v11.0.0...v12.0.0) (2022-01-15)
 
+### Removed
+
 - _Breaking:_ drop support for Flow static type checker ([#584](https://github.com/motdotla/dotenv/pull/584))
+
+### Changed
+
 - Move types/index.d.ts to lib/main.d.ts ([#585](https://github.com/motdotla/dotenv/pull/585))
 - Typescript cleanup ([#587](https://github.com/motdotla/dotenv/pull/587))
 - Explicit typescript inclusion in package.json ([#566](https://github.com/motdotla/dotenv/pull/566))
