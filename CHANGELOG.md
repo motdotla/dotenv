@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v11.0.0...master)
 
+- Cleanup ([#587](https://github.com/motdotla/dotenv/pull/587))
 - Move types/index.d.ts to lib/main.d.ts ([#585](https://github.com/motdotla/dotenv/pull/585))
 - Remove flow ([#584](https://github.com/motdotla/dotenv/pull/584))
 
