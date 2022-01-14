@@ -1,5 +1,3 @@
-/* @flow */
-
 (function () {
   require('./lib/main').config(
     Object.assign(
