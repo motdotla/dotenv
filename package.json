@@ -39,16 +39,16 @@
   "readmeFilename": "README.md",
   "license": "BSD-2-Clause",
   "devDependencies": {
+    "@types/node": "^17.0.8",
     "decache": "^4.5.1",
-    "dtslint": "^0.9.8",
+    "dtslint": "^3.4.2",
     "sinon": "^7.5.0",
-    "standard": "^13.1.0",
-    "standard-markdown": "^5.1.0",
-    "standard-version": "^7.0.0",
-    "tap": "^14.7.0",
+    "standard": "^16.0.4",
+    "standard-markdown": "^7.1.0",
+    "standard-version": "^9.3.2",
+    "tap": "^14.11.0",
     "typescript": "^4.5.4"
   },
-  "dependencies": {},
   "engines": {
     "node": ">=12"
   },
