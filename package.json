@@ -5,7 +5,11 @@
   "main": "lib/main.js",
   "types": "lib/main.d.ts",
   "exports": {
-    ".": "./lib/main.js",
+    ".": {
+      "require": "./lib/main.js",
+      "default": "./lib/main.js",
+      "types": "./types/index.d.ts"
+    },
     "./config": "./config.js",
     "./config.js": "./config.js",
     "./package.json": "./package.json"
