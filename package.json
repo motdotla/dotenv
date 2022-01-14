@@ -11,7 +11,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "dts-check": "tsc --project types/tsconfig.json",
+    "dts-check": "tsc --project tests/types/tsconfig.json",
     "lint": "standard",
     "postlint": "standard-markdown",
     "pretest": "npm run lint && npm run dts-check",
