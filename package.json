@@ -3,18 +3,18 @@
   "version": "11.0.0",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
+  "types": "lib/main.d.ts",
   "exports": {
     ".": "./lib/main.js",
     "./config": "./config.js",
     "./config.js": "./config.js",
     "./package.json": "./package.json"
   },
-  "types": "types/index.d.ts",
   "scripts": {
-    "dtslint": "dtslint types",
+    "dts-check": "tsc --project types/tsconfig.json",
     "lint": "standard",
     "postlint": "standard-markdown",
-    "pretest": "npm run lint && npm run dtslint",
+    "pretest": "npm run lint && npm run dts-check",
     "test": "tap tests/*.js --100",
     "prerelease": "npm test",
     "release": "standard-version"
@@ -41,7 +41,8 @@
     "standard": "^13.1.0",
     "standard-markdown": "^5.1.0",
     "standard-version": "^7.0.0",
-    "tap": "^14.7.0"
+    "tap": "^14.7.0",
+    "typescript": "^4.5.4"
   },
   "dependencies": {},
   "engines": {
