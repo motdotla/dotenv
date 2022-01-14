@@ -1,5 +1,3 @@
-/* @flow */
-
 const t = require('tap')
 const decache = require('decache')
 

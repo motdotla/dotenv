@@ -11,7 +11,6 @@
   },
   "types": "types/index.d.ts",
   "scripts": {
-    "flow": "flow",
     "dtslint": "dtslint types",
     "lint": "standard",
     "postlint": "standard-markdown",
@@ -38,7 +37,6 @@
   "devDependencies": {
     "decache": "^4.5.1",
     "dtslint": "^0.9.8",
-    "flow-bin": "^0.109.0",
     "sinon": "^7.5.0",
     "standard": "^13.1.0",
     "standard-markdown": "^5.1.0",
@@ -50,8 +48,6 @@
     "node": ">=12"
   },
   "standard": {
-    "ignore": [
-      "flow-typed/"
-    ]
+    "ignore": []
   }
 }
