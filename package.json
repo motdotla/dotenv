@@ -39,6 +39,7 @@
   "readmeFilename": "README.md",
   "license": "BSD-2-Clause",
   "devDependencies": {
+    "@types/node": "^17.0.8",
     "decache": "^4.5.1",
     "dtslint": "^3.4.2",
     "sinon": "^7.5.0",
