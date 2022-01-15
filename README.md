@@ -91,7 +91,7 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [react](https://github.com/dotenv-org/examples/tree/master/dotenv-react)
 * [react (typescript)](https://github.com/dotenv-org/examples/tree/master/dotenv-react-typescript)
 
-## Available Functions
+## Documentation
 
 Dotenv exposes two functions:
 
