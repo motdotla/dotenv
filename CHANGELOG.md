@@ -2,9 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v12.0.1...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v12.0.3...master)
 
 TBD
+
+## [12.0.3](https://github.com/motdotla/dotenv/compare/v12.0.2...v12.0.3) (2022-01-15)
+
+### Changed
+
+* Simplified jsdoc for consistency across editors
 
 ## [12.0.2](https://github.com/motdotla/dotenv/compare/v12.0.1...v12.0.2) (2022-01-15)
 

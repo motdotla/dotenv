@@ -13,7 +13,9 @@ export interface DotenvParseOutput {
 }
 
 /**
- * Parses a string or buffer in the .env file format into an object. {@link https://github.com/motdotla/dotenv#documentation documentation}
+ * Parses a string or buffer in the .env file format into an object.
+ *
+ * See https://docs.dotenv.org
  *
  * @param src - contents to be parsed. example: `'DB_HOST=localhost'`
  * @param options - additional options. example: `{ debug: true }`
@@ -47,8 +49,9 @@ export interface DotenvConfigOutput {
 }
 
 /**
- * Loads `.env` file contents into {@link https://nodejs.org/api/process.html#process_process_env process.env}. {@link https://github.com/motdotla/dotenv#documentation documentation}
- * Example: 'KEY=value' becomes { parsed: { KEY: 'value' } }
+ * Loads `.env` file contents into process.env.
+ *
+ * See https://docs.dotenv.org
  *
  * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true }`
  * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
