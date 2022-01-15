@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 TBD
 
+## [12.0.2](https://github.com/motdotla/dotenv/compare/v12.0.1...v12.0.2) (2022-01-15)
+
+### Changed
+
+* Improve embedded jsdoc type documentation
+
 ## [12.0.1](https://github.com/motdotla/dotenv/compare/v12.0.0...v12.0.1) (2022-01-15)
 
 ### Changed
