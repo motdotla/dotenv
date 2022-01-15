@@ -66,6 +66,19 @@ db.connect({
 })
 ```
 
+## Examples
+
+See [examples](https://github.com/dotenv-org/examples) of using dotenv with various frameworks, languages, and configurations.
+
+* [nodejs](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs)
+* [nodejs (debug on)](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs-debug)
+* [esm](https://github.com/dotenv-org/examples/tree/master/dotenv-esm)
+* [esm (preload)](https://github.com/dotenv-org/examples/tree/master/dotenv-esm-preload)
+* [typescript](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript)
+* [webpack](https://github.com/dotenv-org/examples/tree/master/dotenv-webpack)
+* [react](https://github.com/dotenv-org/examples/tree/master/dotenv-react)
+* [react (typescript)](https://github.com/dotenv-org/examples/tree/master/dotenv-react-typescript)
+
 ## Available Methods
 
 Dotenv exposes two methods:
