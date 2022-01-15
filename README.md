@@ -21,34 +21,37 @@ Or installing with yarn? `yarn add dotenv`
 
 Usage is easy! 
 
-1. Create a `.env` file in the root directory of your project. Add environment-specific variables on new lines in the form of `NAME=VALUE`.
-
-For example:
+### 1. Create a `.env` file in the **root directory** of your project.
 
 ```dosini
 # .env file
+#
+# Add environment-specific variables on new lines in the form of NAME=VALUE
+# 
 DB_HOST=localhost
 DB_USER=root
 DB_PASS=s1mpl3
 ```
 
-2. As early as possible in your application, import and configure dotenv.
+### 2. As early as possible in your application, import and configure dotenv.
 
 ```javascript
+// index.js
 var dotenv = require('dotenv')
 dotenv.config()
 
 console.log(process.env) // remove this after you've confirmed it working
 ```
 
-Using Typescript or ESM?
+.. or using typescript or esm?
 
 ```javascript
+// index.mjs
 import dotenv from 'dotenv'
 dotenv.config()
 ```
 
-3. That's it! 🎉  
+### 3. That's it! 🎉  
 
 `process.env` now has the keys and values you defined in your `.env` file.
 
@@ -79,14 +82,14 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [react](https://github.com/dotenv-org/examples/tree/master/dotenv-react)
 * [react (typescript)](https://github.com/dotenv-org/examples/tree/master/dotenv-react-typescript)
 
-## Available Methods
+## Available Functions
 
-Dotenv exposes two methods:
+Dotenv exposes two functions:
 
-* config
-* parse
+* `dotenv.config`
+* `dotenv.parse`
 
-### Config
+### `dotenv.config`
 
 `config` will read your `.env` file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
@@ -136,7 +139,7 @@ You may turn on logging to help debug why certain keys or values are not being s
 require('dotenv').config({ debug: process.env.DEBUG })
 ```
 
-### Parse
+### `dotenv.parse`
 
 The engine which parses the contents of your file containing environment
 variables is available to use. It accepts a String or Buffer and will return
