@@ -8,46 +8,56 @@
 
 Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](http://12factor.net/config) methodology.
 
-[![BuildStatus](https://img.shields.io/travis/motdotla/dotenv/master.svg?style=flat-square)](https://travis-ci.org/motdotla/dotenv)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/motdotla/dotenv?svg=true)](https://ci.appveyor.com/project/motdotla/dotenv/branch/master)
-[![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
-[![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
-[![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
-[![Rate on Openbase](https://badges.openbase.com/js/rating/dotenv.svg)](https://openbase.com/js/dotenv)
-
 ## Install
 
 ```bash
-# with npm
-npm install dotenv
-
-# or with Yarn
-yarn add dotenv
+# install locally (recommended)
+npm install dotenv --save
 ```
+
+Or installing with yarn? `yarn add dotenv`
 
 ## Usage
 
-As early as possible in your application, require and configure dotenv.
+Usage is easy! 
 
-```javascript
-require('dotenv').config()
-```
+1. Create a `.env` file in the root directory of your project. Add environment-specific variables on new lines in the form of `NAME=VALUE`.
 
-Create a `.env` file in the root directory of your project. Add
-environment-specific variables on new lines in the form of `NAME=VALUE`.
 For example:
 
 ```dosini
+# .env file
 DB_HOST=localhost
 DB_USER=root
 DB_PASS=s1mpl3
 ```
 
+2. As early as possible in your application, import and configure dotenv.
+
+```javascript
+var dotenv = require('dotenv')
+dotenv.config()
+
+console.log(process.env) // remove this after you've confirmed it working
+```
+
+Using Typescript or ESM?
+
+```javascript
+import dotenv from 'dotenv'
+dotenv.config()
+```
+
+3. That's it! 🎉  
+
 `process.env` now has the keys and values you defined in your `.env` file.
 
 ```javascript
+var dotenv = require('dotenv')
+dotenv.config()
+
+...
+
 const db = require('db')
 db.connect({
   host: process.env.DB_HOST,
@@ -55,6 +65,107 @@ db.connect({
   password: process.env.DB_PASS
 })
 ```
+
+## Examples
+
+See [examples](https://github.com/dotenv-org/examples) of using dotenv with various frameworks, languages, and configurations.
+
+* [nodejs](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs)
+* [nodejs (debug on)](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs-debug)
+* [esm](https://github.com/dotenv-org/examples/tree/master/dotenv-esm)
+* [esm (preload)](https://github.com/dotenv-org/examples/tree/master/dotenv-esm-preload)
+* [typescript](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript)
+* [webpack](https://github.com/dotenv-org/examples/tree/master/dotenv-webpack)
+* [react](https://github.com/dotenv-org/examples/tree/master/dotenv-react)
+* [react (typescript)](https://github.com/dotenv-org/examples/tree/master/dotenv-react-typescript)
+
+## Available Methods
+
+Dotenv exposes two methods:
+
+* config
+* parse
+
+### Config
+
+`config` will read your `.env` file, parse the contents, assign it to
+[`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
+and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
+
+```js
+const result = dotenv.config()
+
+if (result.error) {
+  throw result.error
+}
+
+console.log(result.parsed)
+```
+
+You can additionally, pass options to `config`.
+
+#### Options
+
+##### Path
+
+Default: `path.resolve(process.cwd(), '.env')`
+
+You may specify a custom path if your file containing environment variables is located elsewhere.
+
+```js
+require('dotenv').config({ path: '/custom/path/to/.env' })
+```
+
+##### Encoding
+
+Default: `utf8`
+
+You may specify the encoding of your file containing environment variables.
+
+```js
+require('dotenv').config({ encoding: 'latin1' })
+```
+
+##### Debug
+
+Default: `false`
+
+You may turn on logging to help debug why certain keys or values are not being set as you expect.
+
+```js
+require('dotenv').config({ debug: process.env.DEBUG })
+```
+
+### Parse
+
+The engine which parses the contents of your file containing environment
+variables is available to use. It accepts a String or Buffer and will return
+an Object with the parsed keys and values.
+
+```js
+const dotenv = require('dotenv')
+const buf = Buffer.from('BASIC=basic')
+const config = dotenv.parse(buf) // will return an object
+console.log(typeof config, config) // object { BASIC : 'basic' }
+```
+
+#### Options
+
+##### Debug
+
+Default: `false`
+
+You may turn on logging to help debug why certain keys or values are not being set as you expect.
+
+```js
+const dotenv = require('dotenv')
+const buf = Buffer.from('hello world')
+const opt = { debug: true }
+const config = dotenv.parse(buf, opt)
+// expect a debug message because the buffer is not in KEY=VAL form
+```
+
+## Other Usage
 
 ### Preload
 
@@ -80,86 +191,24 @@ $ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
 $ DOTENV_CONFIG_ENCODING=latin1 node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
 
-## Config
+## FAQ
 
-`config` will read your `.env` file, parse the contents, assign it to
-[`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
-and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
+### Should I commit my `.env` file?
 
-```js
-const result = dotenv.config()
+No. We **strongly** recommend against committing your `.env` file to version
+control. It should only include environment-specific values such as database
+passwords or API keys. Your production database should have a different
+password than your development database.
 
-if (result.error) {
-  throw result.error
-}
+### Should I have multiple `.env` files?
 
-console.log(result.parsed)
-```
+No. We **strongly** recommend against having a "main" `.env` file and an "environment" `.env` file like `.env.test`. Your config should vary between deploys, and you should not be sharing values between environments.
 
-You can additionally, pass options to `config`.
+> In a twelve-factor app, env vars are granular controls, each fully orthogonal to other env vars. They are never grouped together as “environments”, but instead are independently managed for each deploy. This is a model that scales up smoothly as the app naturally expands into more deploys over its lifetime.
+>
+> – [The Twelve-Factor App](http://12factor.net/config)
 
-### Options
-
-#### Path
-
-Default: `path.resolve(process.cwd(), '.env')`
-
-You may specify a custom path if your file containing environment variables is located elsewhere.
-
-```js
-require('dotenv').config({ path: '/custom/path/to/.env' })
-```
-
-#### Encoding
-
-Default: `utf8`
-
-You may specify the encoding of your file containing environment variables.
-
-```js
-require('dotenv').config({ encoding: 'latin1' })
-```
-
-#### Debug
-
-Default: `false`
-
-You may turn on logging to help debug why certain keys or values are not being set as you expect.
-
-```js
-require('dotenv').config({ debug: process.env.DEBUG })
-```
-
-## Parse
-
-The engine which parses the contents of your file containing environment
-variables is available to use. It accepts a String or Buffer and will return
-an Object with the parsed keys and values.
-
-```js
-const dotenv = require('dotenv')
-const buf = Buffer.from('BASIC=basic')
-const config = dotenv.parse(buf) // will return an object
-console.log(typeof config, config) // object { BASIC : 'basic' }
-```
-
-### Options
-
-#### Debug
-
-Default: `false`
-
-You may turn on logging to help debug why certain keys or values are not being set as you expect.
-
-```js
-const dotenv = require('dotenv')
-const buf = Buffer.from('hello world')
-const opt = { debug: true }
-const config = dotenv.parse(buf, opt)
-// expect a debug message because the buffer is not in KEY=VAL form
-```
-
-### Rules
+### What rules does the parsing engine follow?
 
 The parsing engine currently supports the following rules:
 
@@ -177,23 +226,6 @@ The parsing engine currently supports the following rules:
 {MULTILINE: 'new
 line'}
 ```
-
-## FAQ
-
-### Should I commit my `.env` file?
-
-No. We **strongly** recommend against committing your `.env` file to version
-control. It should only include environment-specific values such as database
-passwords or API keys. Your production database should have a different
-password than your development database.
-
-### Should I have multiple `.env` files?
-
-No. We **strongly** recommend against having a "main" `.env` file and an "environment" `.env` file like `.env.test`. Your config should vary between deploys, and you should not be sharing values between environments.
-
-> In a twelve-factor app, env vars are granular controls, each fully orthogonal to other env vars. They are never grouped together as “environments”, but instead are independently managed for each deploy. This is a model that scales up smoothly as the app naturally expands into more deploys over its lifetime.
->
-> – [The Twelve-Factor App](http://12factor.net/config)
 
 ### What happens to environment variables that were already set?
 
@@ -265,9 +297,20 @@ errorReporter.client.report(new Error('faq example'))
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## Change Log
+## CHANGELOG
 
 See [CHANGELOG.md](CHANGELOG.md)
+
+## Badges
+
+[![BuildStatus](https://img.shields.io/travis/motdotla/dotenv/master.svg?style=flat-square)](https://travis-ci.org/motdotla/dotenv)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/motdotla/dotenv?svg=true)](https://ci.appveyor.com/project/motdotla/dotenv/branch/master)
+[![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
+[![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
+[![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Rate on Openbase](https://badges.openbase.com/js/rating/dotenv.svg)](https://openbase.com/js/dotenv)
 
 ## Who's using dotenv?
 
