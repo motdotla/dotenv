@@ -37,7 +37,7 @@ DB_PASS=s1mpl3
 
 ```javascript
 // index.js
-var dotenv = require('dotenv')
+const dotenv = require('dotenv')
 dotenv.config()
 
 console.log(process.env) // remove this after you've confirmed it working

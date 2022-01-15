@@ -17,7 +17,7 @@
   "scripts": {
     "dts-check": "tsc --project tests/types/tsconfig.json",
     "lint": "standard",
-    "postlint": "standard-markdown",
+    "lint-readme": "standard-markdown",
     "pretest": "npm run lint && npm run dts-check",
     "test": "tap tests/*.js --100",
     "prerelease": "npm test",
@@ -51,8 +51,5 @@
   },
   "engines": {
     "node": ">=12"
-  },
-  "standard": {
-    "ignore": []
   }
 }
