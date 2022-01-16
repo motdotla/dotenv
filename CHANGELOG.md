@@ -2,9 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v12.0.3...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v12.0.4...master)
 
 TBD
+
+## [12.0.4](https://github.com/motdotla/dotenv/compare/v12.0.3...v12.0.4) (2022-01-16)
+
+### Changed
+
+* README updates
+* Minor order adjustment to package json format
 
 ## [12.0.3](https://github.com/motdotla/dotenv/compare/v12.0.2...v12.0.3) (2022-01-15)
 
