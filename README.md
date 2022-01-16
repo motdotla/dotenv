@@ -321,7 +321,7 @@ import errorReporter from './errorReporter.mjs'
 errorReporter.report(new Error('documented example'))
 ```
 
-Does that make sense? It's a bit unintuitive, but it is how importing of ES6 modules work.
+Does that make sense? It's a bit unintuitive, but it is how importing of ES6 modules work. Here is a [working example of this pitfall](https://github.com/dotenv-org/examples/tree/master/dotenv-es6-import-pitfall).
 
 There are also 2 alternatives to this approach:
 
