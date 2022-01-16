@@ -2,9 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v13.0.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v13.0.1...master)
 
 TBD
+
+## [13.0.1](https://github.com/motdotla/dotenv/compare/v13.0.0...v13.0.1) (2022-01-16)
+
+### Changed
+
+* Hide comments and newlines from debug output
 
 ## [13.0.0](https://github.com/motdotla/dotenv/compare/v12.0.4...v13.0.0) (2022-01-16)
 
