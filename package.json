@@ -1,14 +1,14 @@
 {
   "name": "dotenv",
-  "version": "12.0.3",
+  "version": "12.0.4",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "types": "lib/main.d.ts",
   "exports": {
     ".": {
       "require": "./lib/main.js",
-      "default": "./lib/main.js",
-      "types": "./lib/main.d.ts"
+      "types": "./lib/main.d.ts",
+      "default": "./lib/main.js"
     },
     "./config": "./config.js",
     "./config.js": "./config.js",
