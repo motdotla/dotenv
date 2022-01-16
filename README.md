@@ -88,6 +88,7 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [esm (preload)](https://github.com/dotenv-org/examples/tree/master/dotenv-esm-preload)
 * [typescript](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript)
 * [typescript parse](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript-parse)
+* [typescript config](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript-config)
 * [webpack](https://github.com/dotenv-org/examples/tree/master/dotenv-webpack)
 * [webpack (plugin)](https://github.com/dotenv-org/examples/tree/master/dotenv-webpack2)
 * [react](https://github.com/dotenv-org/examples/tree/master/dotenv-react)
