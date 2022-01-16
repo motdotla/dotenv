@@ -52,13 +52,11 @@ dotenv.config()
 console.log(process.env) // remove this after you've confirmed it working
 ```
 
-.. or using Typescript or ESM (ES6)?
+.. or using ES6?
 
 ```javascript
-// index.mjs (or if using index.js make sure to add "type": "module" to your package.json)
-import dotenv from 'dotenv'
-dotenv.config()
-
+// index.mjs (ESM)
+import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import express from 'express'
 ```
 
@@ -276,37 +274,59 @@ Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
 ### How do I use dotenv with `import`?
 
-ES2015 and beyond offers modules that allow you to `export` any top-level `function`, `class`, `var`, `let`, or `const`.
+Simply..
+
+```javascript
+// index.mjs (ESM)
+import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import express from 'express'
+```
+
+A little background..
 
 > When you run a module containing an `import` declaration, the modules it imports are loaded first, then each module body is executed in a depth-first traversal of the dependency graph, avoiding cycles by skipping anything already executed.
 >
 > – [ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)
 
-You must run `dotenv.config()` before referencing any environment variables. Here's an example of problematic code:
-
-`errorReporter.js`:
+What does this mean in plain language? It means you would think the following would work but it won't.
 
 ```js
+// errorReporter.mjs
 import { Client } from 'best-error-reporting-service'
 
-export const client = new Client(process.env.BEST_API_KEY)
+export default new Client(process.env.API_KEY)
+
+// index.mjs
+import dotenv from 'dotenv'
+dotenv.config()
+
+import errorReporter from './errorReporter.mjs'
+errorReporter.report(new Error('documented example'))
 ```
 
-`index.js`:
+`process.env.API_KEY` will be blank.
+
+Instead the above code should be written as..
 
 ```js
-import dotenv from 'dotenv'
-import errorReporter from './errorReporter'
+// errorReporter.mjs
+import { Client } from 'best-error-reporting-service'
 
-dotenv.config()
-errorReporter.client.report(new Error('faq example'))
+export default new Client(process.env.API_KEY)
+
+// index.mjs
+import 'dotenv/config'
+
+import errorReporter from './errorReporter.mjs'
+errorReporter.report(new Error('documented example'))
 ```
 
-`client` will not be configured correctly because it was constructed before `dotenv.config()` was executed. There are (at least) 3 ways to make this work.
+Does that make sense? It's a bit unintuitive, but it is how importing of ES6 modules work.
+
+There are also 2 alternatives to this approach:
 
 1. Preload dotenv: `node --require dotenv/config index.js` (_Note: you do not need to `import` dotenv with this approach_)
-2. Import `dotenv/config` instead of `dotenv` (_Note: you do not need to call `dotenv.config()` and must pass options via the command line or environment variables with this approach_)
-3. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
+2. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
 
 ## Contributing Guide
 
