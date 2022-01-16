@@ -52,12 +52,14 @@ dotenv.config()
 console.log(process.env) // remove this after you've confirmed it working
 ```
 
-.. or using typescript or esm?
+.. or using Typescript or ESM (ES6)?
 
 ```javascript
-// index.mjs
+// index.mjs (or if using index.js make sure to add "type": "module" to your package.json)
 import dotenv from 'dotenv'
 dotenv.config()
+
+import express from 'express'
 ```
 
 ### 3. That's it! 🎉  
@@ -89,10 +91,12 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [typescript](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript)
 * [typescript parse](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript-parse)
 * [webpack](https://github.com/dotenv-org/examples/tree/master/dotenv-webpack)
+* [webpack (plugin)](https://github.com/dotenv-org/examples/tree/master/dotenv-webpack2)
 * [react](https://github.com/dotenv-org/examples/tree/master/dotenv-react)
 * [react (typescript)](https://github.com/dotenv-org/examples/tree/master/dotenv-react-typescript)
+* [express](https://github.com/dotenv-org/examples/tree/master/dotenv-express)
 
-## Documentation
+# #Documentation
 
 Dotenv exposes two functions:
 
@@ -257,9 +261,7 @@ for (const k in envConfig) {
 
 ### Can I customize/write plugins for dotenv?
 
-For `dotenv@2.x.x`: Yes. `dotenv.config()` now returns an object representing
-the parsed `.env` file. This gives you everything you need to continue
-setting values on `process.env`. For example:
+Yes! `dotenv.config()` returns an object representing the parsed `.env` file. This gives you everything you need to continue setting values on `process.env`. For example:
 
 ```js
 const dotenv = require('dotenv')
