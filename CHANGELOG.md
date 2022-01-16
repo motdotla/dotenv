@@ -2,9 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v12.0.4...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v13.0.0...master)
 
 TBD
+
+## [13.0.0](https://github.com/motdotla/dotenv/compare/v12.0.4...v13.0.0) (2022-01-16)
+
+### Added
+
+* Add type file for `config.js` ([#539](https://github.com/motdotla/dotenv/pull/539))
 
 ## [12.0.4](https://github.com/motdotla/dotenv/compare/v12.0.3...v12.0.4) (2022-01-16)
 
