@@ -1,14 +1,134 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v13.0.0...master)
+
+TBD
+
+## [13.0.0](https://github.com/motdotla/dotenv/compare/v12.0.4...v13.0.0) (2022-01-16)
+
+### Added
+
+* Add type file for `config.js` ([#539](https://github.com/motdotla/dotenv/pull/539))
+
+## [12.0.4](https://github.com/motdotla/dotenv/compare/v12.0.3...v12.0.4) (2022-01-16)
+
+### Changed
+
+* README updates
+* Minor order adjustment to package json format
+
+## [12.0.3](https://github.com/motdotla/dotenv/compare/v12.0.2...v12.0.3) (2022-01-15)
+
+### Changed
+
+* Simplified jsdoc for consistency across editors
+
+## [12.0.2](https://github.com/motdotla/dotenv/compare/v12.0.1...v12.0.2) (2022-01-15)
+
+### Changed
+
+* Improve embedded jsdoc type documentation
+
+## [12.0.1](https://github.com/motdotla/dotenv/compare/v12.0.0...v12.0.1) (2022-01-15)
+
+### Changed
+
+* README updates and clarifications
+
+## [12.0.0](https://github.com/motdotla/dotenv/compare/v11.0.0...v12.0.0) (2022-01-15)
+
+### Removed
+
+- _Breaking:_ drop support for Flow static type checker ([#584](https://github.com/motdotla/dotenv/pull/584))
+
+### Changed
+
+- Move types/index.d.ts to lib/main.d.ts ([#585](https://github.com/motdotla/dotenv/pull/585))
+- Typescript cleanup ([#587](https://github.com/motdotla/dotenv/pull/587))
+- Explicit typescript inclusion in package.json ([#566](https://github.com/motdotla/dotenv/pull/566))
+
+## [11.0.0](https://github.com/motdotla/dotenv/compare/v10.0.0...v11.0.0) (2022-01-11)
+
+### Changed
+
+- _Breaking:_ drop support for Node v10 ([#558](https://github.com/motdotla/dotenv/pull/558))
+- Patch debug option ([#550](https://github.com/motdotla/dotenv/pull/550))
+
+## [10.0.0](https://github.com/motdotla/dotenv/compare/v9.0.2...v10.0.0) (2021-05-20)
+
+### Added
+
+- Add generic support to parse function
+- Allow for import "dotenv/config.js"
+- Add support to resolve home directory in path via ~
+
+## [9.0.2](https://github.com/motdotla/dotenv/compare/v9.0.1...v9.0.2) (2021-05-10)
+
+### Changed
+
+- Support windows newlines with debug mode
+
+## [9.0.1](https://github.com/motdotla/dotenv/compare/v9.0.0...v9.0.1) (2021-05-08)
+
+### Changed
+
+- Updates to README
+
+## [9.0.0](https://github.com/motdotla/dotenv/compare/v8.6.0...v9.0.0) (2021-05-05)
+
+### Changed
+
+- _Breaking:_ drop support for Node v8
+
+## [8.6.0](https://github.com/motdotla/dotenv/compare/v8.5.1...v8.6.0) (2021-05-05)
+
+### Added
+
+- define package.json in exports
+
+## [8.5.1](https://github.com/motdotla/dotenv/compare/v8.5.0...v8.5.1) (2021-05-05)
+
+### Changed
+
+- updated dev dependencies via npm audit
+
+## [8.5.0](https://github.com/motdotla/dotenv/compare/v8.4.0...v8.5.0) (2021-05-05)
+
+### Added
+
+- allow for `import "dotenv/config"`
+
+## [8.4.0](https://github.com/motdotla/dotenv/compare/v8.3.0...v8.4.0) (2021-05-05)
+
+### Changed
+
+- point to exact types file to work with VS Code
+
+## [8.3.0](https://github.com/motdotla/dotenv/compare/v8.2.0...v8.3.0) (2021-05-05)
+
+### Changed
+
+- _Breaking:_ drop support for Node v8 (mistake to be released as minor bump. later bumped to 9.0.0. see above.)
+
+## [8.2.0](https://github.com/motdotla/dotenv/compare/v8.1.0...v8.2.0) (2019-10-16)
+
+### Added
+
+- TypeScript types
+
+## [8.1.0](https://github.com/motdotla/dotenv/compare/v8.0.0...v8.1.0) (2019-08-18)
+
+### Changed
+
+- _Breaking:_ drop support for Node v6 ([#392](https://github.com/motdotla/dotenv/issues/392))
+
 # [8.0.0](https://github.com/motdotla/dotenv/compare/v7.0.0...v8.0.0) (2019-05-02)
 
-- Drop support for Node v6 (#392) ([2e9636a](https://github.com/motdotla/dotenv/commit/2e9636a)), closes [#392](https://github.com/motdotla/dotenv/issues/392)
+### Changed
 
-### BREAKING CHANGES
-
-- dropping Node v6 support because end-of-life
+- _Breaking:_ drop support for Node v6 ([#302](https://github.com/motdotla/dotenv/issues/392))
 
 ## [7.0.0] - 2019-03-12
 

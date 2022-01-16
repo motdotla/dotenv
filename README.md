@@ -1,3 +1,7 @@
+<p align="center">
+<strong>Announcement 📣</strong><br/>From the makers that brought you Dotenv, introducing <a href="https://sync.dotenv.org">Dotenv Sync</a>.<br/>Sync your .env files between machines, environments, and team members.<br/><a href="https://sync.dotenv.org">Join the early access list.💛</a>
+</p>
+
 # dotenv
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.png" alt="dotenv" align="right" />
@@ -11,38 +15,61 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 [![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
 [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Rate on Openbase](https://badges.openbase.com/js/rating/dotenv.svg)](https://openbase.com/js/dotenv)
 
 ## Install
 
 ```bash
-# with npm
-npm install dotenv
-
-# or with Yarn
-yarn add dotenv
+# install locally (recommended)
+npm install dotenv --save
 ```
+
+Or installing with yarn? `yarn add dotenv`
 
 ## Usage
 
-As early as possible in your application, require and configure dotenv.
+Usage is easy! 
 
-```javascript
-require('dotenv').config()
-```
-
-Create a `.env` file in the root directory of your project. Add
-environment-specific variables on new lines in the form of `NAME=VALUE`.
-For example:
+### 1. Create a `.env` file in the **root directory** of your project.
 
 ```dosini
+# .env file
+#
+# Add environment-specific variables on new lines in the form of NAME=VALUE
+# 
 DB_HOST=localhost
 DB_USER=root
 DB_PASS=s1mpl3
 ```
 
+### 2. As early as possible in your application, import and configure dotenv.
+
+```javascript
+// index.js
+const dotenv = require('dotenv')
+dotenv.config()
+
+console.log(process.env) // remove this after you've confirmed it working
+```
+
+.. or using ES6?
+
+```javascript
+// index.mjs (ESM)
+import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import express from 'express'
+```
+
+### 3. That's it! 🎉  
+
 `process.env` now has the keys and values you defined in your `.env` file.
 
 ```javascript
+var dotenv = require('dotenv')
+dotenv.config()
+
+...
+
 const db = require('db')
 db.connect({
   host: process.env.DB_HOST,
@@ -51,31 +78,31 @@ db.connect({
 })
 ```
 
-### Preload
+## Examples
 
-You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#cli_r_require_module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code. This is the preferred approach when using `import` instead of `require`.
+See [examples](https://github.com/dotenv-org/examples) of using dotenv with various frameworks, languages, and configurations.
 
-```bash
-$ node -r dotenv/config your_script.js
-```
+* [nodejs](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs)
+* [nodejs (debug on)](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs-debug)
+* [esm](https://github.com/dotenv-org/examples/tree/master/dotenv-esm)
+* [esm (preload)](https://github.com/dotenv-org/examples/tree/master/dotenv-esm-preload)
+* [typescript](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript)
+* [typescript parse](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript-parse)
+* [typescript config](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript-config)
+* [webpack](https://github.com/dotenv-org/examples/tree/master/dotenv-webpack)
+* [webpack (plugin)](https://github.com/dotenv-org/examples/tree/master/dotenv-webpack2)
+* [react](https://github.com/dotenv-org/examples/tree/master/dotenv-react)
+* [react (typescript)](https://github.com/dotenv-org/examples/tree/master/dotenv-react-typescript)
+* [express](https://github.com/dotenv-org/examples/tree/master/dotenv-express)
 
-The configuration options below are supported as command line arguments in the format `dotenv_config_<option>=value`
+## Documentation
 
-```bash
-$ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/your/env/vars
-```
+Dotenv exposes two functions:
 
-Additionally, you can use environment variables to set configuration options. Command line arguments will precede these.
+* `dotenv.config`
+* `dotenv.parse`
 
-```bash
-$ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
-```
-
-```bash
-$ DOTENV_CONFIG_ENCODING=latin1 node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
-```
-
-## Config
+### `dotenv.config`
 
 `config` will read your `.env` file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
@@ -93,19 +120,19 @@ console.log(result.parsed)
 
 You can additionally, pass options to `config`.
 
-### Options
+#### Options
 
-#### Path
+##### Path
 
 Default: `path.resolve(process.cwd(), '.env')`
 
 You may specify a custom path if your file containing environment variables is located elsewhere.
 
 ```js
-require('dotenv').config({ path: '/full/custom/path/to/your/env/vars' })
+require('dotenv').config({ path: '/custom/path/to/.env' })
 ```
 
-#### Encoding
+##### Encoding
 
 Default: `utf8`
 
@@ -115,7 +142,7 @@ You may specify the encoding of your file containing environment variables.
 require('dotenv').config({ encoding: 'latin1' })
 ```
 
-#### Debug
+##### Debug
 
 Default: `false`
 
@@ -125,7 +152,7 @@ You may turn on logging to help debug why certain keys or values are not being s
 require('dotenv').config({ debug: process.env.DEBUG })
 ```
 
-## Parse
+### `dotenv.parse`
 
 The engine which parses the contents of your file containing environment
 variables is available to use. It accepts a String or Buffer and will return
@@ -138,9 +165,9 @@ const config = dotenv.parse(buf) // will return an object
 console.log(typeof config, config) // object { BASIC : 'basic' }
 ```
 
-### Options
+#### Options
 
-#### Debug
+##### Debug
 
 Default: `false`
 
@@ -154,23 +181,30 @@ const config = dotenv.parse(buf, opt)
 // expect a debug message because the buffer is not in KEY=VAL form
 ```
 
-### Rules
+## Other Usage
 
-The parsing engine currently supports the following rules:
+### Preload
 
-- `BASIC=basic` becomes `{BASIC: 'basic'}`
-- empty lines are skipped
-- lines beginning with `#` are treated as comments
-- empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
-- inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
-- whitespace is removed from both ends of unquoted values (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO=  some value  ` becomes `{FOO: 'some value'}`)
-- single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
-- single and double quoted values maintain whitespace from both ends (`FOO="  some value  "` becomes `{FOO: '  some value  '}`)
-- double quoted values expand new lines (`MULTILINE="new\nline"` becomes
+You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#cli_r_require_module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code. This is the preferred approach when using `import` instead of `require`.
 
+```bash
+$ node -r dotenv/config your_script.js
 ```
-{MULTILINE: 'new
-line'}
+
+The configuration options below are supported as command line arguments in the format `dotenv_config_<option>=value`
+
+```bash
+$ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
+```
+
+Additionally, you can use environment variables to set configuration options. Command line arguments will precede these.
+
+```bash
+$ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
+```
+
+```bash
+$ DOTENV_CONFIG_ENCODING=latin1 node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
 
 ## FAQ
@@ -190,6 +224,25 @@ No. We **strongly** recommend against having a "main" `.env` file and an "enviro
 >
 > – [The Twelve-Factor App](http://12factor.net/config)
 
+### What rules does the parsing engine follow?
+
+The parsing engine currently supports the following rules:
+
+- `BASIC=basic` becomes `{BASIC: 'basic'}`
+- empty lines are skipped
+- lines beginning with `#` are treated as comments
+- empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
+- inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
+- whitespace is removed from both ends of unquoted values (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO=  some value  ` becomes `{FOO: 'some value'}`)
+- single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
+- single and double quoted values maintain whitespace from both ends (`FOO="  some value  "` becomes `{FOO: '  some value  '}`)
+- double quoted values expand new lines (`MULTILINE="new\nline"` becomes
+
+```
+{MULTILINE: 'new
+line'}
+```
+
 ### What happens to environment variables that were already set?
 
 We will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped. This behavior allows you to override all `.env` configurations with a machine-specific environment, although it is not recommended.
@@ -200,16 +253,14 @@ If you want to override `process.env` you can do something like this:
 const fs = require('fs')
 const dotenv = require('dotenv')
 const envConfig = dotenv.parse(fs.readFileSync('.env.override'))
-for (let k in envConfig) {
+for (const k in envConfig) {
   process.env[k] = envConfig[k]
 }
 ```
 
 ### Can I customize/write plugins for dotenv?
 
-For `dotenv@2.x.x`: Yes. `dotenv.config()` now returns an object representing
-the parsed `.env` file. This gives you everything you need to continue
-setting values on `process.env`. For example:
+Yes! `dotenv.config()` returns an object representing the parsed `.env` file. This gives you everything you need to continue setting values on `process.env`. For example:
 
 ```js
 const dotenv = require('dotenv')
@@ -224,43 +275,65 @@ Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
 ### How do I use dotenv with `import`?
 
-ES2015 and beyond offers modules that allow you to `export` any top-level `function`, `class`, `var`, `let`, or `const`.
+Simply..
+
+```javascript
+// index.mjs (ESM)
+import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import express from 'express'
+```
+
+A little background..
 
 > When you run a module containing an `import` declaration, the modules it imports are loaded first, then each module body is executed in a depth-first traversal of the dependency graph, avoiding cycles by skipping anything already executed.
 >
 > – [ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)
 
-You must run `dotenv.config()` before referencing any environment variables. Here's an example of problematic code:
-
-`errorReporter.js`:
+What does this mean in plain language? It means you would think the following would work but it won't.
 
 ```js
+// errorReporter.mjs
 import { Client } from 'best-error-reporting-service'
 
-export const client = new Client(process.env.BEST_API_KEY)
+export default new Client(process.env.API_KEY)
+
+// index.mjs
+import dotenv from 'dotenv'
+dotenv.config()
+
+import errorReporter from './errorReporter.mjs'
+errorReporter.report(new Error('documented example'))
 ```
 
-`index.js`:
+`process.env.API_KEY` will be blank.
+
+Instead the above code should be written as..
 
 ```js
-import dotenv from 'dotenv'
-import errorReporter from './errorReporter'
+// errorReporter.mjs
+import { Client } from 'best-error-reporting-service'
 
-dotenv.config()
-errorReporter.client.report(new Error('faq example'))
+export default new Client(process.env.API_KEY)
+
+// index.mjs
+import 'dotenv/config'
+
+import errorReporter from './errorReporter.mjs'
+errorReporter.report(new Error('documented example'))
 ```
 
-`client` will not be configured correctly because it was constructed before `dotenv.config()` was executed. There are (at least) 3 ways to make this work.
+Does that make sense? It's a bit unintuitive, but it is how importing of ES6 modules work. Here is a [working example of this pitfall](https://github.com/dotenv-org/examples/tree/master/dotenv-es6-import-pitfall).
+
+There are also 2 alternatives to this approach:
 
 1. Preload dotenv: `node --require dotenv/config index.js` (_Note: you do not need to `import` dotenv with this approach_)
-2. Import `dotenv/config` instead of `dotenv` (_Note: you do not need to call `dotenv.config()` and must pass options via the command line or environment variables with this approach_)
-3. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
+2. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
 
 ## Contributing Guide
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## Change Log
+## CHANGELOG
 
 See [CHANGELOG.md](CHANGELOG.md)
 

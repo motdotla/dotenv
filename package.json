@@ -1,13 +1,24 @@
 {
   "name": "dotenv",
-  "version": "8.0.0",
+  "version": "13.0.0",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
+  "types": "lib/main.d.ts",
+  "exports": {
+    ".": {
+      "require": "./lib/main.js",
+      "types": "./lib/main.d.ts",
+      "default": "./lib/main.js"
+    },
+    "./config": "./config.js",
+    "./config.js": "./config.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "flow": "flow",
+    "dts-check": "tsc --project tests/types/tsconfig.json",
     "lint": "standard",
-    "postlint": "standard-markdown",
-    "pretest": "npm run lint",
+    "lint-readme": "standard-markdown",
+    "pretest": "npm run lint && npm run dts-check",
     "test": "tap tests/*.js --100",
     "prerelease": "npm test",
     "release": "standard-version"
@@ -28,21 +39,17 @@
   "readmeFilename": "README.md",
   "license": "BSD-2-Clause",
   "devDependencies": {
+    "@types/node": "^17.0.8",
     "decache": "^4.5.1",
-    "flow-bin": "^0.98.0",
-    "sinon": "^7.3.2",
-    "standard": "^12.0.1",
-    "standard-markdown": "^5.0.1",
-    "standard-version": "^5.0.2",
-    "tap": "^13.1.2"
+    "dtslint": "^3.4.2",
+    "sinon": "^7.5.0",
+    "standard": "^16.0.4",
+    "standard-markdown": "^7.1.0",
+    "standard-version": "^9.3.2",
+    "tap": "^14.11.0",
+    "typescript": "^4.5.4"
   },
-  "dependencies": {},
   "engines": {
-    "node": ">=8"
-  },
-  "standard": {
-    "ignore": [
-      "flow-typed/"
-    ]
+    "node": ">=12"
   }
 }
