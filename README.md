@@ -289,10 +289,6 @@ const myEnv = dotenv.config()
 variableExpansion(myEnv)
 ```
 
-### What about variable expansion?
-
-Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
-
 ### How do I use dotenv with `import`?
 
 Simply..
@@ -348,6 +344,14 @@ There are also 2 alternatives to this approach:
 
 1. Preload dotenv: `node --require dotenv/config index.js` (_Note: you do not need to `import` dotenv with this approach_)
 2. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
+
+### What about variable expansion?
+
+Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
+
+### What about securely keeping .env files in sync across machines and team members?
+
+Try [dotenv cli](https://github.com/dotenv-org/cli)
 
 ## Contributing Guide
 
