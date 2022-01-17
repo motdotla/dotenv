@@ -2,10 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v13.0.1...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.0.0...master)
 
-- Remove flow ([#584](https://github.com/motdotla/dotenv/pull/584))
-- Support inline comments
+## [14.0.0](https://github.com/motdotla/dotenv/compare/v13.0.1...v14.0.0) (2022-01-16)
+
+### Added
+
+- Support inline comments for the parser 🎉 ([#568](https://github.com/motdotla/dotenv/pull/568))
 
 ## [13.0.1](https://github.com/motdotla/dotenv/compare/v13.0.0...v13.0.1) (2022-01-16)
 
