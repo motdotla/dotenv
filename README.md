@@ -274,6 +274,10 @@ If instead, you want to override `process.env` use the `override` option.
 require('dotenv').config({ override: true })
 ```
 
+### How come my environment variables are not showing up for React?
+
+React has dotenv built in but with a quirk. Preface your environment variables with `REACT_APP_`. See [this stack overflow](https://stackoverflow.com/questions/42182577/is-it-possible-to-use-dotenv-in-a-react-project) for more details.
+
 ### Can I customize/write plugins for dotenv?
 
 Yes! `dotenv.config()` returns an object representing the parsed `.env` file. This gives you everything you need to continue setting values on `process.env`. For example:
