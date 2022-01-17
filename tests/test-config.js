@@ -13,16 +13,14 @@ let parseStub
 
 t.plan(13)
 
-t.beforeEach(done => {
+t.beforeEach(() => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
   parseStub = sinon.stub(dotenv, 'parse').returns(mockParseResponse)
-  done()
 })
 
-t.afterEach(done => {
+t.afterEach(() => {
   readFileSyncStub.restore()
   parseStub.restore()
-  done()
 })
 
 t.test('takes option for path', ct => {
