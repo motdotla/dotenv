@@ -3,9 +3,16 @@
 
 export interface DotenvParseOptions {
   /**
-   * You may turn on logging to help debug why certain keys or values are not being set as you expect.
+   * Turn on logging to help debug why certain keys or values are not being set as you expect.
+   * Defaults to false.
    */
   debug?: boolean;
+
+  /**
+   * Override environment variables that have already been set on your machine with values from your .env file.
+   * Defaults to false.
+   */
+  override?: boolean;
 }
 
 export interface DotenvParseOutput {
@@ -18,7 +25,7 @@ export interface DotenvParseOutput {
  * See https://docs.dotenv.org
  *
  * @param src - contents to be parsed. example: `'DB_HOST=localhost'`
- * @param options - additional options. example: `{ debug: true }`
+ * @param options - additional options. example: `{ debug: true, override: false }`
  * @returns an object with keys and values based on `src`. example: `{ DB_HOST : 'localhost' }`
  */
 export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
@@ -28,19 +35,26 @@ export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
 
 export interface DotenvConfigOptions {
   /**
-   * You may specify a custom path if your file containing environment variables is located elsewhere.
+   * Specify a custom path if your file containing environment variables is located elsewhere.
    */
   path?: string;
 
   /**
-   * You may specify the encoding of your file containing environment variables.
+   * Specify the encoding of your file containing environment variables.
    */
   encoding?: string;
 
   /**
-   * You may turn on logging to help debug why certain keys or values are not being set as you expect.
+   * Turn on logging to help debug why certain keys or values are not being set as you expect.
+   * Defaults to false.
    */
   debug?: boolean;
+
+  /**
+   * Override environment variables that have already been set on your machine with values from your .env file.
+   * Defaults to false.
+   */
+  override?: boolean;
 }
 
 export interface DotenvConfigOutput {
@@ -53,7 +67,7 @@ export interface DotenvConfigOutput {
  *
  * See https://docs.dotenv.org
  *
- * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true }`
+ * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false }`
  * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
  *
  */
