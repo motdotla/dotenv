@@ -46,8 +46,7 @@ DB_PASS=s1mpl3
 
 ```javascript
 // index.js
-const dotenv = require('dotenv')
-dotenv.config()
+require('dotenv').config()
 
 console.log(process.env) // remove this after you've confirmed it working
 ```
@@ -65,8 +64,7 @@ import express from 'express'
 `process.env` now has the keys and values you defined in your `.env` file.
 
 ```javascript
-var dotenv = require('dotenv')
-dotenv.config()
+require('dotenv').config()
 
 ...
 
@@ -208,6 +206,18 @@ $ DOTENV_CONFIG_ENCODING=latin1 node -r dotenv/config your_script.js dotenv_conf
 ```
 
 ## FAQ
+
+### Why is the `.env` file not loading my environment variables successfully?
+
+Most likely your `.env` file is not in the correct place. [See this stack overflow](https://stackoverflow.com/questions/42335016/dotenv-file-is-not-loading-environment-variables).
+
+Turn on debug mode and try again..
+
+```js
+require('dotenv').config({ debug: true })
+```
+
+You will receive a helpful error outputted to your console.
 
 ### Should I commit my `.env` file?
 

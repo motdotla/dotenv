@@ -11,7 +11,7 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
-t.plan(9)
+t.plan(10)
 
 t.beforeEach(done => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
@@ -118,4 +118,18 @@ t.test('returns any errors thrown from reading file or parsing', ct => {
   const env = dotenv.config()
 
   ct.type(env.error, Error)
+})
+
+t.test('logs any errors thrown from reading file or parsing when in debug mode', ct => {
+  ct.plan(2)
+
+  const logStub = sinon.stub(console, 'log')
+
+  readFileSyncStub.throws()
+  const env = dotenv.config({ debug: true })
+
+  ct.ok(logStub.called)
+  ct.type(env.error, Error)
+
+  logStub.restore()
 })

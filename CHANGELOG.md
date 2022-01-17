@@ -4,11 +4,17 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.0.0...master)
 
+## [14.0.1](https://github.com/motdotla/dotenv/compare/v14.0.0...v14.0.1) (2022-01-16)
+
+### Added
+
+- Log error on failure to load `.env` file ([#594](https://github.com/motdotla/dotenv/pull/594))
+
 ## [14.0.0](https://github.com/motdotla/dotenv/compare/v13.0.1...v14.0.0) (2022-01-16)
 
 ### Added
 
-- Support inline comments for the parser 🎉 ([#568](https://github.com/motdotla/dotenv/pull/568))
+- _Breaking:_ Support inline comments for the parser 🎉 ([#568](https://github.com/motdotla/dotenv/pull/568))
 
 ## [13.0.1](https://github.com/motdotla/dotenv/compare/v13.0.0...v13.0.1) (2022-01-16)
 
@@ -20,7 +26,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Added
 
-* Add type file for `config.js` ([#539](https://github.com/motdotla/dotenv/pull/539))
+* _Breaking:_ Add type file for `config.js` ([#539](https://github.com/motdotla/dotenv/pull/539))
 
 ## [12.0.4](https://github.com/motdotla/dotenv/compare/v12.0.3...v12.0.4) (2022-01-16)
 
