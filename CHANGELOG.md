@@ -10,7 +10,7 @@ TBD
 
 ### Changed
 
-* Hide comments and newlines from debug output
+* Hide comments and newlines from debug output ([#404](https://github.com/motdotla/dotenv/pull/404))
 
 ## [13.0.0](https://github.com/motdotla/dotenv/compare/v12.0.4...v13.0.0) (2022-01-16)
 
