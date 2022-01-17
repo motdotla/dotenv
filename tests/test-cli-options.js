@@ -2,7 +2,7 @@ const t = require('tap')
 
 const options = require('../lib/cli-options')
 
-t.plan(5)
+t.plan(6)
 
 // matches encoding option
 t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_encoding=utf8']), {
@@ -17,6 +17,11 @@ t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_path=/cus
 // matches debug option
 t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_debug=true']), {
   debug: 'true'
+})
+
+// matches override option
+t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_override=true']), {
+  override: 'true'
 })
 
 // ignores empty values

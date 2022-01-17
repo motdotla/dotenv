@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file. See [standa
 
 (place unreleased comments here)
 
+## [14.2.0](https://github.com/motdotla/dotenv/compare/v14.1.1...v14.2.0) (2022-01-17)
+
+### Added
+
+- Add `dotenv_config_override` cli option
+- Add `DOTENV_CONFIG_OVERRIDE` command line env option
+
 ## [14.1.1](https://github.com/motdotla/dotenv/compare/v14.1.0...v14.1.1) (2022-01-17)
 
 ### Added

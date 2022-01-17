@@ -1,6 +1,6 @@
 {
   "name": "dotenv",
-  "version": "14.1.1",
+  "version": "14.2.0",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
   "types": "lib/main.d.ts",
