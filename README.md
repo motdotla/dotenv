@@ -203,7 +203,7 @@ $ node -r dotenv/config your_script.js
 The configuration options below are supported as command line arguments in the format `dotenv_config_<option>=value`
 
 ```bash
-$ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
+$ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env dotenv_config_debug=true
 ```
 
 Additionally, you can use environment variables to set configuration options. Command line arguments will precede these.
@@ -213,7 +213,7 @@ $ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
 ```
 
 ```bash
-$ DOTENV_CONFIG_ENCODING=latin1 node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
+$ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
 
 ## FAQ
