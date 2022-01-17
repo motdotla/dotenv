@@ -3,16 +3,13 @@
 
 export interface DotenvParseOptions {
   /**
+   * Default: `false`
+   *
    * Turn on logging to help debug why certain keys or values are not being set as you expect.
-   * Defaults to false.
+   *
+   * example: `dotenv.parse('KEY=value', { debug: true })`
    */
   debug?: boolean;
-
-  /**
-   * Override environment variables that have already been set on your machine with values from your .env file.
-   * Defaults to false.
-   */
-  override?: boolean;
 }
 
 export interface DotenvParseOutput {
@@ -25,7 +22,7 @@ export interface DotenvParseOutput {
  * See https://docs.dotenv.org
  *
  * @param src - contents to be parsed. example: `'DB_HOST=localhost'`
- * @param options - additional options. example: `{ debug: true, override: false }`
+ * @param options - additional options. example: `{ debug: true }`
  * @returns an object with keys and values based on `src`. example: `{ DB_HOST : 'localhost' }`
  */
 export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
@@ -35,24 +32,38 @@ export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
 
 export interface DotenvConfigOptions {
   /**
+   * Default: `path.resolve(process.cwd(), '.env')`
+   *
    * Specify a custom path if your file containing environment variables is located elsewhere.
+   *
+   * example: `require('dotenv').config({ path: '/custom/path/to/.env' })`
    */
   path?: string;
 
   /**
+   * Default: `utf8`
+   *
    * Specify the encoding of your file containing environment variables.
+   *
+   * example: `require('dotenv').config({ encoding: 'latin1' })`
    */
   encoding?: string;
 
   /**
+   * Default: `false`
+   *
    * Turn on logging to help debug why certain keys or values are not being set as you expect.
-   * Defaults to false.
+   *
+   * example: `require('dotenv').config({ debug: process.env.DEBUG })`
    */
   debug?: boolean;
 
   /**
-   * Override environment variables that have already been set on your machine with values from your .env file.
-   * Defaults to false.
+   * Default: `false`
+   *
+   * Override any environment variables that have already been set on your machine with values from your .env file.
+   *
+   * example: `require('dotenv').config({ override: true })`
    */
   override?: boolean;
 }

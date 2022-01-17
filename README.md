@@ -97,10 +97,10 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 
 Dotenv exposes two functions:
 
-* `dotenv.config`
-* `dotenv.parse`
+* `config`
+* `parse`
 
-### `dotenv.config`
+### Config
 
 `config` will read your `.env` file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
@@ -124,7 +124,7 @@ You can additionally, pass options to `config`.
 
 Default: `path.resolve(process.cwd(), '.env')`
 
-You may specify a custom path if your file containing environment variables is located elsewhere.
+Specify a custom path if your file containing environment variables is located elsewhere.
 
 ```js
 require('dotenv').config({ path: '/custom/path/to/.env' })
@@ -134,7 +134,7 @@ require('dotenv').config({ path: '/custom/path/to/.env' })
 
 Default: `utf8`
 
-You may specify the encoding of your file containing environment variables.
+Specify the encoding of your file containing environment variables.
 
 ```js
 require('dotenv').config({ encoding: 'latin1' })
@@ -144,13 +144,23 @@ require('dotenv').config({ encoding: 'latin1' })
 
 Default: `false`
 
-You may turn on logging to help debug why certain keys or values are not being set as you expect.
+Turn on logging to help debug why certain keys or values are not being set as you expect.
 
 ```js
 require('dotenv').config({ debug: process.env.DEBUG })
 ```
 
-### `dotenv.parse`
+##### Override
+
+Default: `false`
+
+Override any environment variables that have already been set on your machine with values from your .env file.
+
+```js
+require('dotenv').config({ override: true })
+```
+
+### Parse
 
 The engine which parses the contents of your file containing environment
 variables is available to use. It accepts a String or Buffer and will return
@@ -169,7 +179,7 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 
 Default: `false`
 
-You may turn on logging to help debug why certain keys or values are not being set as you expect.
+Turn on logging to help debug why certain keys or values are not being set as you expect.
 
 ```js
 const dotenv = require('dotenv')
