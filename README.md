@@ -82,6 +82,7 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 
 * [nodejs](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs)
 * [nodejs (debug on)](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs-debug)
+* [nodejs (override on)](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs-override)
 * [esm](https://github.com/dotenv-org/examples/tree/master/dotenv-esm)
 * [esm (preload)](https://github.com/dotenv-org/examples/tree/master/dotenv-esm-preload)
 * [typescript](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript)
@@ -265,17 +266,12 @@ line'}
 
 ### What happens to environment variables that were already set?
 
-We will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped. This behavior allows you to override all `.env` configurations with a machine-specific environment, although it is not recommended.
+By default, we will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped.
 
-If you want to override `process.env` you can do something like this:
+If instead, you want to override `process.env` use the `override` option.
 
 ```javascript
-const fs = require('fs')
-const dotenv = require('dotenv')
-const envConfig = dotenv.parse(fs.readFileSync('.env.override'))
-for (const k in envConfig) {
-  process.env[k] = envConfig[k]
-}
+require('dotenv').config({ override: true })
 ```
 
 ### Can I customize/write plugins for dotenv?
