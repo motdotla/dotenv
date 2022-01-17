@@ -349,7 +349,7 @@ There are also 2 alternatives to this approach:
 
 Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
-### What about securely keeping .env files in sync across machines and team members?
+### What about syncing .env files?
 
 Try [dotenv cli](https://github.com/dotenv-org/cli)
 
