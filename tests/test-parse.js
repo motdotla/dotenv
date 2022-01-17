@@ -7,7 +7,7 @@ const dotenv = require('../lib/main')
 
 const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
 
-t.plan(29)
+t.plan(34)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -25,6 +25,10 @@ t.equal(parsed.DOUBLE_QUOTES, 'double_quotes', 'escapes double quoted values')
 
 t.equal(parsed.DOUBLE_QUOTES_SPACED, '    double quotes    ', 'respects surrounding spaces in double quotes')
 
+t.equal(parsed.DOUBLE_QUOTES_INSIDE_SINGLE, 'double "quotes" work inside single quotes', 'respects double quotes inside single quotes')
+
+t.equal(parsed.SINGLE_QUOTES_INSIDE_DOUBLE, "single 'quotes' work inside double quotes", 'respects single quotes inside double quotes')
+
 t.equal(parsed.EXPAND_NEWLINES, 'expand\nnew\nlines', 'expands newlines but only if double quoted')
 
 t.equal(parsed.DONT_EXPAND_UNQUOTED, 'dontexpand\\nnewlines', 'expands newlines but only if double quoted')
@@ -32,6 +36,12 @@ t.equal(parsed.DONT_EXPAND_UNQUOTED, 'dontexpand\\nnewlines', 'expands newlines 
 t.equal(parsed.DONT_EXPAND_SQUOTED, 'dontexpand\\nnewlines', 'expands newlines but only if double quoted')
 
 t.notOk(parsed.COMMENTS, 'ignores commented lines')
+
+t.equal(parsed.INLINE_COMMENTS, 'inline comments', 'ignores inline comments')
+
+t.equal(parsed.INLINE_COMMENTS_SINGLE_QUOTES, 'inline comments outside of #singlequotes', 'ignores inline comments, but respects # character inside of single quotes')
+
+t.equal(parsed.INLINE_COMMENTS_DOUBLE_QUOTES, 'inline comments outside of #doublequotes', 'ignores inline comments, but respects # character inside of double quotes')
 
 t.equal(parsed.EQUAL_SIGNS, 'equals==', 'respects equals signs in values')
 

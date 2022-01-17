@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v13.0.1...master)
 
-TBD
+- Remove flow ([#584](https://github.com/motdotla/dotenv/pull/584))
+- Support inline comments
 
 ## [13.0.1](https://github.com/motdotla/dotenv/compare/v13.0.0...v13.0.1) (2022-01-16)
 
