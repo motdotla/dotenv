@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.0.0...master)
 
+- Support `override` option 🎉 ([#595](https://github.com/motdotla/dotenv/pull/595))
+
 ## [14.0.1](https://github.com/motdotla/dotenv/compare/v14.0.0...v14.0.1) (2022-01-16)
 
 ### Added

@@ -3,7 +3,11 @@
 
 export interface DotenvParseOptions {
   /**
-   * You may turn on logging to help debug why certain keys or values are not being set as you expect.
+   * Default: `false`
+   *
+   * Turn on logging to help debug why certain keys or values are not being set as you expect.
+   *
+   * example: `dotenv.parse('KEY=value', { debug: true })`
    */
   debug?: boolean;
 }
@@ -28,19 +32,40 @@ export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
 
 export interface DotenvConfigOptions {
   /**
-   * You may specify a custom path if your file containing environment variables is located elsewhere.
+   * Default: `path.resolve(process.cwd(), '.env')`
+   *
+   * Specify a custom path if your file containing environment variables is located elsewhere.
+   *
+   * example: `require('dotenv').config({ path: '/custom/path/to/.env' })`
    */
   path?: string;
 
   /**
-   * You may specify the encoding of your file containing environment variables.
+   * Default: `utf8`
+   *
+   * Specify the encoding of your file containing environment variables.
+   *
+   * example: `require('dotenv').config({ encoding: 'latin1' })`
    */
   encoding?: string;
 
   /**
-   * You may turn on logging to help debug why certain keys or values are not being set as you expect.
+   * Default: `false`
+   *
+   * Turn on logging to help debug why certain keys or values are not being set as you expect.
+   *
+   * example: `require('dotenv').config({ debug: process.env.DEBUG })`
    */
   debug?: boolean;
+
+  /**
+   * Default: `false`
+   *
+   * Override any environment variables that have already been set on your machine with values from your .env file.
+   *
+   * example: `require('dotenv').config({ override: true })`
+   */
+  override?: boolean;
 }
 
 export interface DotenvConfigOutput {
@@ -53,7 +78,7 @@ export interface DotenvConfigOutput {
  *
  * See https://docs.dotenv.org
  *
- * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true }`
+ * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false }`
  * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
  *
  */
