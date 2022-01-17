@@ -7,7 +7,7 @@ const dotenv = require('../lib/main')
 
 const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
 
-t.plan(33)
+t.plan(34)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -83,8 +83,14 @@ dotenv.parse(Buffer.from('what is this'), { debug: true })
 t.ok(logStub.calledOnce)
 logStub.restore()
 
-// test that debug in windows (\r\n lines) logs just once per line
+// test that debug in windows (\r\n lines) logs never
 logStub = sinon.stub(console, 'log')
 dotenv.parse(Buffer.from('HEY=there\r\n'), { debug: true })
-t.ok(logStub.calledOnce)
+t.equal(logStub.called, false)
+logStub.restore()
+
+// test that debug in windows (\r\n lines) logs when a repeated key
+logStub = sinon.stub(console, 'log')
+dotenv.parse(Buffer.from('what is this\r\n'), { debug: true })
+t.equal(logStub.called, true)
 logStub.restore()

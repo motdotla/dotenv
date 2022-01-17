@@ -2,6 +2,7 @@
 examples/
 flow-typed/
 tests/
+types/
 .editorconfig
 .flowconfig
 .npmignore

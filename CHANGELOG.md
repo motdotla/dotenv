@@ -2,10 +2,59 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v11.0.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v13.0.1...master)
 
 - Remove flow ([#584](https://github.com/motdotla/dotenv/pull/584))
 - Support inline comments
+
+## [13.0.1](https://github.com/motdotla/dotenv/compare/v13.0.0...v13.0.1) (2022-01-16)
+
+### Changed
+
+* Hide comments and newlines from debug output ([#404](https://github.com/motdotla/dotenv/pull/404))
+
+## [13.0.0](https://github.com/motdotla/dotenv/compare/v12.0.4...v13.0.0) (2022-01-16)
+
+### Added
+
+* Add type file for `config.js` ([#539](https://github.com/motdotla/dotenv/pull/539))
+
+## [12.0.4](https://github.com/motdotla/dotenv/compare/v12.0.3...v12.0.4) (2022-01-16)
+
+### Changed
+
+* README updates
+* Minor order adjustment to package json format
+
+## [12.0.3](https://github.com/motdotla/dotenv/compare/v12.0.2...v12.0.3) (2022-01-15)
+
+### Changed
+
+* Simplified jsdoc for consistency across editors
+
+## [12.0.2](https://github.com/motdotla/dotenv/compare/v12.0.1...v12.0.2) (2022-01-15)
+
+### Changed
+
+* Improve embedded jsdoc type documentation
+
+## [12.0.1](https://github.com/motdotla/dotenv/compare/v12.0.0...v12.0.1) (2022-01-15)
+
+### Changed
+
+* README updates and clarifications
+
+## [12.0.0](https://github.com/motdotla/dotenv/compare/v11.0.0...v12.0.0) (2022-01-15)
+
+### Removed
+
+- _Breaking:_ drop support for Flow static type checker ([#584](https://github.com/motdotla/dotenv/pull/584))
+
+### Changed
+
+- Move types/index.d.ts to lib/main.d.ts ([#585](https://github.com/motdotla/dotenv/pull/585))
+- Typescript cleanup ([#587](https://github.com/motdotla/dotenv/pull/587))
+- Explicit typescript inclusion in package.json ([#566](https://github.com/motdotla/dotenv/pull/566))
 
 ## [11.0.0](https://github.com/motdotla/dotenv/compare/v10.0.0...v11.0.0) (2022-01-11)
 

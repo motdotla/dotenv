@@ -15,9 +15,11 @@ export interface DotenvParseOutput {
 /**
  * Parses a string or buffer in the .env file format into an object.
  *
- * @param src - contents to be parsed
- * @param options - additional options
- * @returns an object with keys and values based on `src`
+ * See https://docs.dotenv.org
+ *
+ * @param src - contents to be parsed. example: `'DB_HOST=localhost'`
+ * @param options - additional options. example: `{ debug: true }`
+ * @returns an object with keys and values based on `src`. example: `{ DB_HOST : 'localhost' }`
  */
 export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
   src: string | Buffer,
@@ -47,13 +49,12 @@ export interface DotenvConfigOutput {
 }
 
 /**
- * Loads `.env` file contents into {@link https://nodejs.org/api/process.html#process_process_env `process.env`}.
- * Example: 'KEY=value' becomes { parsed: { KEY: 'value' } }
+ * Loads `.env` file contents into process.env.
  *
- * @param options - controls behavior
- * @returns an object with a `parsed` key if successful or `error` key if an error occurred
+ * See https://docs.dotenv.org
+ *
+ * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true }`
+ * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
  *
  */
 export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
-/** @deprecated since v7.0.0 Use config instead. */
-export const load: typeof config;

@@ -2,14 +2,16 @@
   "compilerOptions": {
     "module": "commonjs",
     "lib": ["es6"],
+    "strict": true,
+    "noEmit": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
-    "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "dotenv": ["."]
+      "dotenv": ["../../lib/main.d.ts"]
     }
-  }
+  },
+  "include": ["./test.ts", "../../main.d.ts"]
 }
