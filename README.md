@@ -151,6 +151,7 @@ Turn on logging to help debug why certain keys or values are not being set as yo
 require('dotenv').config({ debug: process.env.DEBUG })
 ```
 
+<<<<<<< HEAD
 ##### Override
 
 Default: `false`
@@ -162,6 +163,32 @@ require('dotenv').config({ override: true })
 ```
 
 ### Parse
+=======
+#### Multiline
+
+Default: `default`
+
+You may specify the value `line-breaks` to switch the parser into a mode in which line breaks 
+inside quoted values are allowed.
+
+```js
+require('dotenv').config({ multiline: 'line-breaks' })
+```
+
+This allows specifying multiline values in this format:
+
+```
+PRIVATE_KEY="-----BEGIN PRIVATE KEY-----
+MIGT...
+7ure...
+-----END PRIVATE KEY-----"
+```
+
+Ensure that the value begins with a single or double quote character, and it ends with the same character.
+
+
+## Parse
+>>>>>>> 9b1d338e76daa73fa4fb8ed27b94082d80310eba
 
 The engine which parses the contents of your file containing environment
 variables is available to use. It accepts a String or Buffer and will return
@@ -194,6 +221,7 @@ const config = dotenv.parse(buf, opt)
 
 ### Preload
 
+<<<<<<< HEAD
 You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#cli_r_require_module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code. This is the preferred approach when using `import` instead of `require`.
 
 ```bash
@@ -215,6 +243,33 @@ $ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
 ```bash
 $ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
+=======
+- `BASIC=basic` becomes `{BASIC: 'basic'}`
+- empty lines are skipped
+- lines beginning with `#` are treated as comments
+- empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
+- inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
+- whitespace is removed from both ends of unquoted values (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO=  some value  ` becomes `{FOO: 'some value'}`)
+- single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
+- single and double quoted values maintain whitespace from both ends (`FOO="  some value  "` becomes `{FOO: '  some value  '}`)
+- double quoted values expand new lines. Example: `MULTILINE="new\nline"` becomes
+
+  ```
+  {MULTILINE: 'new
+  line'}
+  ```
+- multi-line values with line breaks are supported for quoted values if using the `{ multiline: "line-break" }` option.
+  In this mode you do not need to use `\n` to separate lines. Example:
+
+  ```
+  PRIVATE_KEY="-----BEGIN PRIVATE KEY-----
+  MIGT...
+  7ure...
+  -----END PRIVATE KEY-----"
+  ```
+
+  Note that when using this option, all values that start with quotes must end in quotes.
+>>>>>>> 9b1d338e76daa73fa4fb8ed27b94082d80310eba
 
 ## FAQ
 

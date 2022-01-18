@@ -24,6 +24,11 @@ t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_override=
   override: 'true'
 })
 
+// matches multiline option
+t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_multiline=true']), {
+  multiline: 'true'
+})
+
 // ignores empty values
 t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_path=']), {})
 

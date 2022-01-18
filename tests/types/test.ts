@@ -7,8 +7,18 @@ const dbUrl: string | null =
 config({
   path: ".env-example",
   encoding: "utf8",
-  debug: true
+  debug: true,
 });
+
+config({
+  multiline: true
+});
+
+config({
+  multiline: false
+});
+
+parse("test", { multiline: true});
 
 const parsed = parse("NODE_ENV=production\nDB_HOST=a.b.c");
 const dbHost: string = parsed["DB_HOST"];
