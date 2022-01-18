@@ -11,7 +11,7 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
-t.plan(13)
+t.plan(14)
 
 t.beforeEach(() => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')

@@ -26,7 +26,7 @@ function testOption (envVar, tmpVal, expect) {
   delete process.env[envVar]
 }
 
-t.plan(5)
+t.plan(6)
 
 // returns empty object when no options set in process.env
 delete process.env.DOTENV_CONFIG_ENCODING

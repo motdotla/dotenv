@@ -2,7 +2,7 @@ const t = require('tap')
 
 const options = require('../lib/cli-options')
 
-t.plan(6)
+t.plan(7)
 
 // matches encoding option
 t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_encoding=utf8']), {
