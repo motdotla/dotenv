@@ -161,6 +161,27 @@ Override any environment variables that have already been set on your machine wi
 require('dotenv').config({ override: true })
 ```
 
+##### Multiline
+
+Default: `false`
+
+Turn on multiline line break parsing.
+
+```js
+require('dotenv').config({ multiline: true })
+```
+
+This allows specifying multiline values in this format:
+
+```
+PRIVATE_KEY="-----BEGIN PRIVATE KEY-----
+MIGT...
+7ure...
+-----END PRIVATE KEY-----"
+```
+
+Ensure that the value begins with a single or double quote character, and it ends with the same character.
+
 ### Parse
 
 The engine which parses the contents of your file containing environment
@@ -188,6 +209,25 @@ const buf = Buffer.from('hello world')
 const opt = { debug: true }
 const config = dotenv.parse(buf, opt)
 // expect a debug message because the buffer is not in KEY=VAL form
+```
+
+##### Multiline
+
+Default: `false`
+
+Turn on multiline line break parsing.
+
+```js
+require('dotenv').config({ multiline: true })
+```
+
+This allows specifying multiline values in this format:
+
+```
+PRIVATE_KEY="-----BEGIN PRIVATE KEY-----
+MIGT...
+7ure...
+-----END PRIVATE KEY-----"
 ```
 
 ## Other Usage
