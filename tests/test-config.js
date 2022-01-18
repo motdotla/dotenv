@@ -63,6 +63,13 @@ t.test('takes option for debug', ct => {
   logStub.restore()
 })
 
+t.test('takes option for multiline', ct => {
+  ct.plan(1)
+  const testMultiline = true
+  dotenv.config({ multiline: testMultiline })
+  ct.equal(parseStub.args[0][1].multiline, testMultiline)
+})
+
 t.test('reads path with encoding, parsing output to process.env', ct => {
   ct.plan(2)
 

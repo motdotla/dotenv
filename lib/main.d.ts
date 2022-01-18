@@ -10,6 +10,21 @@ export interface DotenvParseOptions {
    * example: `dotenv.parse('KEY=value', { debug: true })`
    */
   debug?: boolean;
+
+  /**
+   * Default: `false`
+   *
+   * Turn on multiline line break parsing.
+   *
+   * example:
+   *
+   * MY_VAR="this
+   * is
+   * a
+   * multiline
+   * string"
+   */
+  multiline?: boolean;
 }
 
 export interface DotenvParseOutput {
@@ -66,6 +81,21 @@ export interface DotenvConfigOptions {
    * example: `require('dotenv').config({ override: true })`
    */
   override?: boolean;
+
+  /**
+   * Default: `false`
+   *
+   * Turn on multiline line break parsing.
+   *
+   * example:
+   *
+   * MY_VAR="this
+   * is
+   * a
+   * multiline
+   * string"
+   */
+  multiline?: boolean;
 }
 
 export interface DotenvConfigOutput {
@@ -78,7 +108,7 @@ export interface DotenvConfigOutput {
  *
  * See https://docs.dotenv.org
  *
- * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false }`
+ * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false, multiline: false }`
  * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
  *
  */
