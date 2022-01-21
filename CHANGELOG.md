@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [14.3.0](https://github.com/motdotla/dotenv/compare/v14.2.0...v14.3.0)
 
-- Add `multiline` support
+- Add `multiline` option 🎉 ([#486](https://github.com/motdotla/dotenv/pull/486))
 
 ## [14.2.0](https://github.com/motdotla/dotenv/compare/v14.1.1...v14.2.0) (2022-01-17)
 
