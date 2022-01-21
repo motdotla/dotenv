@@ -2,9 +2,9 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.1.1...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.2.0...master)
 
-(place unreleased comments here)
+- Add `multiline` support
 
 ## [14.2.0](https://github.com/motdotla/dotenv/compare/v14.1.1...v14.2.0) (2022-01-17)
 
