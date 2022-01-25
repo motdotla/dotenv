@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.3.0...master)
 
+- Interpret `#` as start of comment only if preceded by whitespace
+
 ## [14.3.0](https://github.com/motdotla/dotenv/compare/v14.2.0...v14.3.0)
 
 - Add `multiline` option 🎉 ([#486](https://github.com/motdotla/dotenv/pull/486))
