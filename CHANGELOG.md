@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.3.1...master)
 
+- Interpret `#` as start of comment only if preceded by whitespace
+
 ## [14.3.1](https://github.com/motdotla/dotenv/compare/v14.3.0...v14.3.1) (2022-01-25)
 
 ### Changed

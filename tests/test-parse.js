@@ -7,7 +7,7 @@ const dotenv = require('../lib/main')
 
 const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
 
-t.plan(34)
+t.plan(35)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -42,6 +42,8 @@ t.equal(parsed.INLINE_COMMENTS, 'inline comments', 'ignores inline comments')
 t.equal(parsed.INLINE_COMMENTS_SINGLE_QUOTES, 'inline comments outside of #singlequotes', 'ignores inline comments, but respects # character inside of single quotes')
 
 t.equal(parsed.INLINE_COMMENTS_DOUBLE_QUOTES, 'inline comments outside of #doublequotes', 'ignores inline comments, but respects # character inside of double quotes')
+
+t.equal(parsed.INLINE_COMMENTS_SPACE, 'inline comments must start with#space', 'respects # character in values when it is not preceded by a space character')
 
 t.equal(parsed.EQUAL_SIGNS, 'equals==', 'respects equals signs in values')
 

@@ -293,6 +293,7 @@ The parsing engine currently supports the following rules:
 - `BASIC=basic` becomes `{BASIC: 'basic'}`
 - empty lines are skipped
 - lines beginning with `#` are treated as comments
+- whitespace followed by `#` marks the beginning of an inline comment (unless when the value is wrapped in quotes)
 - empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
 - inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
 - whitespace is removed from both ends of unquoted values (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO=  some value  ` becomes `{FOO: 'some value'}`)
