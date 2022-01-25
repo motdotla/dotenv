@@ -2,9 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.3.1...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.3.2...master)
 
-- Interpret `#` as start of comment only if preceded by whitespace
+## [14.3.2](https://github.com/motdotla/dotenv/compare/v14.3.1...v14.3.2) (2022-01-25)
+
+### Changed
+
+- Preserve backwards compatibility on values containing `#` 🐞 ([#603](https://github.com/motdotla/dotenv/pull/603))
 
 ## [14.3.1](https://github.com/motdotla/dotenv/compare/v14.3.0...v14.3.1) (2022-01-25)
 
