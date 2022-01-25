@@ -2,11 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.3.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.3.1...master)
 
 - Interpret `#` as start of comment only if preceded by whitespace
 
-## [14.3.0](https://github.com/motdotla/dotenv/compare/v14.2.0...v14.3.0)
+## [14.3.1](https://github.com/motdotla/dotenv/compare/v14.3.0...v14.3.1) (2022-01-25)
+
+### Changed
+
+- Preserve backwards compatibility on exports by re-introducing the prior in-place exports 🐞 ([#606](https://github.com/motdotla/dotenv/pull/606))
+
+## [14.3.0](https://github.com/motdotla/dotenv/compare/v14.2.0...v14.3.0) (2022-01-24)
+
+### Added
 
 - Add `multiline` option 🎉 ([#486](https://github.com/motdotla/dotenv/pull/486))
 
