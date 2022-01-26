@@ -1,5 +1,4 @@
 const fs = require('fs')
-
 const t = require('tap')
 
 const dotenv = require('../lib/main2')
