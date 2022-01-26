@@ -1,9 +1,13 @@
 const fs = require('fs')
+
+const sinon = require('sinon')
 const t = require('tap')
 
-const dotenv = require('../lib/main2')
+const dotenv = require('../lib/main')
 
-const parsed = dotenv.parse(fs.readFileSync('tests/.env2', { encoding: 'utf8' }))
+const parsed = dotenv.parse(fs.readFileSync('tests/.env', { encoding: 'utf8' }))
+
+t.plan(35)
 
 t.type(parsed, Object, 'should return an object')
 
@@ -39,15 +43,19 @@ t.equal(parsed.INLINE_COMMENTS_SINGLE_QUOTES, 'inline comments outside of #singl
 
 t.equal(parsed.INLINE_COMMENTS_DOUBLE_QUOTES, 'inline comments outside of #doublequotes', 'ignores inline comments, but respects # character inside of double quotes')
 
-t.equal(parsed.INLINE_COMMENTS_SPACE, 'inline comments dont have to start with a', 'respects # character in values when it is not preceded by a space character')
+t.equal(parsed.INLINE_COMMENTS_SPACE, 'inline comments must start with#space', 'respects # character in values when it is not preceded by a space character')
 
 t.equal(parsed.EQUAL_SIGNS, 'equals==', 'respects equals signs in values')
 
 t.equal(parsed.RETAIN_INNER_QUOTES, '{"foo": "bar"}', 'retains inner quotes')
 
-t.equal(parsed.EQUAL_SIGNS, 'equals==', 'respects equals signs in values')
+t.equal(parsed.RETAIN_LEADING_DQUOTE, '"retained', 'retains leading double quote')
 
-t.equal(parsed.RETAIN_INNER_QUOTES, '{"foo": "bar"}', 'retains inner quotes')
+t.equal(parsed.RETAIN_LEADING_SQUOTE, "'retained", 'retains leading single quote')
+
+t.equal(parsed.RETAIN_TRAILING_DQUOTE, 'retained"', 'reatins trailing double quote')
+
+t.equal(parsed.RETAIN_TRAILING_SQUOTE, "retained'", 'retains trailing single quote')
 
 t.equal(parsed.RETAIN_INNER_QUOTES_AS_STRING, '{"foo": "bar"}', 'retains inner quotes')
 
@@ -70,3 +78,21 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+// test debug path
+let logStub = sinon.stub(console, 'log')
+dotenv.parse(Buffer.from('what is this'), { debug: true })
+t.ok(logStub.calledOnce)
+logStub.restore()
+
+// test that debug in windows (\r\n lines) logs never
+logStub = sinon.stub(console, 'log')
+dotenv.parse(Buffer.from('HEY=there\r\n'), { debug: true })
+t.equal(logStub.called, false)
+logStub.restore()
+
+// test that debug in windows (\r\n lines) logs when a repeated key
+logStub = sinon.stub(console, 'log')
+dotenv.parse(Buffer.from('what is this\r\n'), { debug: true })
+t.equal(logStub.called, true)
+logStub.restore()

@@ -10,20 +10,10 @@ config({
   debug: true,
 });
 
-config({
-  multiline: true
-});
-
-config({
-  multiline: false
-});
-
-parse("test", { multiline: true});
+parse("test");
 
 const parsed = parse("NODE_ENV=production\nDB_HOST=a.b.c");
 const dbHost: string = parsed["DB_HOST"];
 
-const parsedFromBuffer = parse(new Buffer("JUSTICE=league\n"), {
-  debug: true
-});
+const parsedFromBuffer = parse(new Buffer("JUSTICE=league\n"));
 const justice: string = parsedFromBuffer["JUSTICE"];

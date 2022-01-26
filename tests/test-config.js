@@ -11,8 +11,6 @@ const mockParseResponse = { test: 'foo' }
 let readFileSyncStub
 let parseStub
 
-t.plan(14)
-
 t.beforeEach(() => {
   readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
   parseStub = sinon.stub(dotenv, 'parse').returns(mockParseResponse)
@@ -61,13 +59,6 @@ t.test('takes option for debug', ct => {
 
   ct.ok(logStub.called)
   logStub.restore()
-})
-
-t.test('takes option for multiline', ct => {
-  ct.plan(1)
-  const testMultiline = true
-  dotenv.config({ multiline: testMultiline })
-  ct.equal(parseStub.args[0][1].multiline, testMultiline)
 })
 
 t.test('reads path with encoding, parsing output to process.env', ct => {

@@ -1,13 +1,9 @@
 const fs = require('fs')
-
-const sinon = require('sinon')
 const t = require('tap')
 
 const dotenv = require('../lib/main')
 
-const parsed = dotenv.parse(fs.readFileSync('tests/.env-multiline', { encoding: 'utf8' }), { multiline: 'true' })
-
-t.plan(26)
+const parsed = dotenv.parse(fs.readFileSync('tests/.env-multiline', { encoding: 'utf8' }))
 
 t.type(parsed, Object, 'should return an object')
 
@@ -49,8 +45,6 @@ t.equal(parsed.MULTI_DOUBLE_QUOTED, 'THIS\nIS\nA\nMULTILINE\nSTRING', 'parses mu
 
 t.equal(parsed.MULTI_SINGLE_QUOTED, 'THIS\nIS\nA\nMULTILINE\nSTRING', 'parses multi-line strings when using single quotes')
 
-t.equal(parsed.MULTI_UNENDED, 'THIS\nLINE HAS\nNO END QUOTE', 'parses multi-line strings when using single quotes')
-
 const payload = dotenv.parse(Buffer.from('BUFFER=true'))
 t.equal(payload.BUFFER, 'true', 'should parse a buffer into an object')
 
@@ -64,9 +58,3 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
-
-// test debug path
-const logStub = sinon.stub(console, 'log')
-dotenv.parse(Buffer.from('what is this'), { debug: true })
-t.ok(logStub.called)
-logStub.restore()
