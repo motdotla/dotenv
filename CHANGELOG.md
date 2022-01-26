@@ -2,7 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v14.3.2...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v15.0.0...master)
+
+## [15.0.0](https://github.com/motdotla/dotenv/compare/v14.3.2...v15.0.0) (2022-01-26)
+
+`v15.0.0` is a major new release with some important breaking changes.
+
+### Added
+
+- _Breaking:_ Multiline parsing support (just works. no need for the flag.)
+
+### Changed
+
+- _Breaking:_ `#` marks the beginning of a comment (UNLESS the value is wrapped in quotes. Please update your `.env` files to wrap in quotes any values containing `#`. For example: `SECRET_HASH="something-with-a-#-hash"`).
+
+..Understandably, (as some teams have noted) this is tedious to do across the entire team. To make it less tedious, we recommend using [dotenv cli](https://github.com/dotenv-org/cli) going forward. It's an optional plugin that will keep your `.env` files in sync between machines, environments, or team members.
+
+### Removed
+
+- _Breaking:_ Remove multiline option (just works out of the box now. no need for the flag.)
+
+### Changed
+
+- Preserve backwards compatibility on values containing `#` 🐞 ([#603](https://github.com/motdotla/dotenv/pull/603))
 
 ## [14.3.2](https://github.com/motdotla/dotenv/compare/v14.3.1...v14.3.2) (2022-01-25)
 
