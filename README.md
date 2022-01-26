@@ -31,8 +31,8 @@ Or installing with yarn? `yarn add dotenv`
 Create a `.env` file in the root of your project:
 
 ```dosini
-S3_BUCKET=YOURS3BUCKET
-SECRET_KEY=YOURSECRETKEYGOESHERE
+S3_BUCKET="YOURS3BUCKET"
+SECRET_KEY="YOURSECRETKEYGOESHERE"
 ```
 
 As early as possible in your application, import and configure dotenv:
