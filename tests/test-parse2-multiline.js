@@ -3,7 +3,7 @@ const t = require('tap')
 
 const dotenv = require('../lib/main2')
 
-const parsed = dotenv.parse(fs.readFileSync('tests/.env-multiline2', { encoding: 'utf8' }), { multiline: 'true' })
+const parsed = dotenv.parse(fs.readFileSync('tests/.env-multiline2', { encoding: 'utf8' }))
 
 t.type(parsed, Object, 'should return an object')
 
