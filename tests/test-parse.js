@@ -35,11 +35,11 @@ t.notOk(parsed.COMMENTS, 'ignores commented lines')
 
 t.equal(parsed.INLINE_COMMENTS, 'inline comments', 'ignores inline comments')
 
-t.equal(parsed.INLINE_COMMENTS_SINGLE_QUOTES, 'inline comments outside of #singlequotes', 'ignores inline comments, but respects # character inside of single quotes')
+t.equal(parsed.INLINE_COMMENTS_SINGLE_QUOTES, 'inline comments outside of #singlequotes', 'ignores inline comments and respects # character inside of single quotes')
 
-t.equal(parsed.INLINE_COMMENTS_DOUBLE_QUOTES, 'inline comments outside of #doublequotes', 'ignores inline comments, but respects # character inside of double quotes')
+t.equal(parsed.INLINE_COMMENTS_DOUBLE_QUOTES, 'inline comments outside of #doublequotes', 'ignores inline comments and respects # character inside of double quotes')
 
-t.equal(parsed.INLINE_COMMENTS_SPACE, 'inline comments dont have to start with a', 'respects # character in values when it is not preceded by a space character')
+t.equal(parsed.INLINE_COMMENTS_SPACE, 'inline comments start with a', 'treats # character as start of comment')
 
 t.equal(parsed.EQUAL_SIGNS, 'equals==', 'respects equals signs in values')
 
