@@ -22,10 +22,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 - _Breaking:_ Remove multiline option (just works out of the box now. no need for the flag.)
 
-### Changed
-
-- Preserve backwards compatibility on values containing `#` 🐞 ([#603](https://github.com/motdotla/dotenv/pull/603))
-
 ## [14.3.2](https://github.com/motdotla/dotenv/compare/v14.3.1...v14.3.2) (2022-01-25)
 
 ### Changed
