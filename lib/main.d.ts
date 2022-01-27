@@ -1,32 +1,6 @@
 // TypeScript Version: 3.0
 /// <reference types="node" />
 
-export interface DotenvParseOptions {
-  /**
-   * Default: `false`
-   *
-   * Turn on logging to help debug why certain keys or values are not being set as you expect.
-   *
-   * example: `dotenv.parse('KEY=value', { debug: true })`
-   */
-  debug?: boolean;
-
-  /**
-   * Default: `false`
-   *
-   * Turn on multiline line break parsing.
-   *
-   * example:
-   *
-   * MY_VAR="this
-   * is
-   * a
-   * multiline
-   * string"
-   */
-  multiline?: boolean;
-}
-
 export interface DotenvParseOutput {
   [name: string]: string;
 }
@@ -41,8 +15,7 @@ export interface DotenvParseOutput {
  * @returns an object with keys and values based on `src`. example: `{ DB_HOST : 'localhost' }`
  */
 export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
-  src: string | Buffer,
-  options?: DotenvParseOptions
+  src: string | Buffer
 ): T;
 
 export interface DotenvConfigOptions {
