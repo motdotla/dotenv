@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v15.0.0...master)
 
-## [15.0.0](https://github.com/motdotla/dotenv/compare/v14.3.2...v15.0.0) (2022-01-28)
+## [15.0.0](https://github.com/motdotla/dotenv/compare/v14.3.2...v15.0.0) (2022-01-31)
 
 `v15.0.0` is a major new release with some important breaking changes.
 
