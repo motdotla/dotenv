@@ -299,6 +299,8 @@ The parsing engine currently supports the following rules:
 line'}
 ```
 
+- backticks are supported (`BACKTICK_KEY=`This has 'single' and "double" quotes inside of it.``)
+
 ### What happens to environment variables that were already set?
 
 By default, we will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped.
