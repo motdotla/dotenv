@@ -139,7 +139,6 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [nodejs](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs)
 * [nodejs (debug on)](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs-debug)
 * [nodejs (override on)](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs-override)
-* [nodejs (multiline on)](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs-multiline)
 * [esm](https://github.com/dotenv-org/examples/tree/master/dotenv-esm)
 * [esm (preload)](https://github.com/dotenv-org/examples/tree/master/dotenv-esm-preload)
 * [typescript](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript)
