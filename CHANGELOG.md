@@ -8,7 +8,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Added
 
-- _Breaking:_ Backtick support 🎉 (template literals). If you had values containing the backtick character, please quote those values with either single or double quotes.
+- _Breaking:_ Backtick support 🎉 ([#615](https://github.com/motdotla/dotenv/pull/615))
+
+If you had values containing the backtick character, please quote those values with either single or double quotes.
 
 ## [15.0.1](https://github.com/motdotla/dotenv/compare/v15.0.0...v15.0.1) (2022-02-02)
 
