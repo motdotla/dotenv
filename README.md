@@ -299,7 +299,7 @@ The parsing engine currently supports the following rules:
 line'}
 ```
 
-- backticks are supported (`BACKTICK_KEY=`This has 'single' and "double" quotes inside of it.``)
+- backticks are supported (`` BACKTICK_KEY=`This has 'single' and "double" quotes inside of it.` ``)
 
 ### What happens to environment variables that were already set?
 
