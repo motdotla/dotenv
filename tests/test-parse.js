@@ -13,6 +13,10 @@ t.equal(parsed.AFTER_LINE, 'after_line', 'reads after a skipped line')
 
 t.equal(parsed.EMPTY, '', 'defaults empty values to empty string')
 
+t.equal(parsed.EMPTY_SINGLE_QUOTES, '', 'defaults empty values to empty string')
+
+t.equal(parsed.EMPTY_DOUBLE_QUOTES, '', 'defaults empty values to empty string')
+
 t.equal(parsed.SINGLE_QUOTES, 'single_quotes', 'escapes single quoted values')
 
 t.equal(parsed.SINGLE_QUOTES_SPACED, '    single quotes    ', 'respects surrounding spaces in single quotes')
