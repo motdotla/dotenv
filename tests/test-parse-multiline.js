@@ -45,6 +45,8 @@ t.equal(parsed.MULTI_DOUBLE_QUOTED, 'THIS\nIS\nA\nMULTILINE\nSTRING', 'parses mu
 
 t.equal(parsed.MULTI_SINGLE_QUOTED, 'THIS\nIS\nA\nMULTILINE\nSTRING', 'parses multi-line strings when using single quotes')
 
+t.equal(parsed.MULTI_BACKTICKED, 'THIS\nIS\nA\n"MULTILINE\'S"\nSTRING', 'parses multi-line strings when using single quotes')
+
 const payload = dotenv.parse(Buffer.from('BUFFER=true'))
 t.equal(payload.BUFFER, 'true', 'should parse a buffer into an object')
 
