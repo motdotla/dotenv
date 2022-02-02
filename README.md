@@ -248,8 +248,6 @@ const config = dotenv.parse(buf, opt)
 // expect a debug message because the buffer is not in KEY=VAL form
 ```
 
-## Other Usage
-
 ## FAQ
 
 ### Why is the `.env` file not loading my environment variables successfully?
