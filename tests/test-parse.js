@@ -65,6 +65,8 @@ t.equal(parsed.INLINE_COMMENTS_BACKTICKS, 'inline comments outside of #backticks
 
 t.equal(parsed.INLINE_COMMENTS_SPACE, 'inline comments start with a', 'treats # character as start of comment')
 
+t.equal(parsed.INLINE_COMMENTS_TOKEN, '6U+c\'UDH"l`ZFDD5%/|\'t{Ojt.5hzu+#wUBH#:9w*l_I2z{^m/7h-U&!qcLlXW_')
+
 t.equal(parsed.EQUAL_SIGNS, 'equals==', 'respects equals signs in values')
 
 t.equal(parsed.RETAIN_INNER_QUOTES, '{"foo": "bar"}', 'retains inner quotes')
