@@ -60,3 +60,18 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+const base64EncodedPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n').toString('base64'))
+t.same(base64EncodedPayload, expectedPayload, 'can parse base64 encoded payload into object')
+
+const payloadBase64 = dotenv.parse(Buffer.from('BASE64=true').toString('base64'))
+t.equal(payloadBase64.BASE64, 'true', 'should parse a base64 string into an object')
+
+const RPayloadBase64 = dotenv.parse(Buffer.from('SERVER=localhost\rPASSWORD=password\rDB=tests\r').toString('base64'))
+t.same(RPayloadBase64, expectedPayload, 'can parse (\\r) line endings in base64')
+
+const NPayloadBase64 = dotenv.parse(Buffer.from('SERVER=localhost\nPASSWORD=password\nDB=tests\n').toString('base64'))
+t.same(NPayloadBase64, expectedPayload, 'can parse (\\n) line endings in base64')
+
+const RNPayloadBase64 = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n').toString('base64'))
+t.same(RNPayloadBase64, expectedPayload, 'can parse (\\r\\n) line endings in base64')
