@@ -102,7 +102,7 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 
 ### Preload
 
-You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#cli_r_require_module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
+You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#-r---require-module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
 
 ```bash
 $ node -r dotenv/config your_script.js
