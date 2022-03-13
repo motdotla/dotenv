@@ -74,7 +74,7 @@ Kh9NV...
 Alternatively, you can double quote strings and use the `\n` character:
 
 ```dosini
-PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\Kh9NV...\n-----END DSA PRIVATE KEY-----\n"
+PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nKh9NV...\n-----END DSA PRIVATE KEY-----\n"
 ```
 
 ### Comments
