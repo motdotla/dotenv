@@ -7,6 +7,7 @@
   "exports": {
     ".": {
       "require": "./lib/main.js",
+      "import": "./lib/main.mjs",
       "types": "./lib/main.d.ts",
       "default": "./lib/main.js"
     },
