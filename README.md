@@ -387,7 +387,11 @@ Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
 ### What about syncing .env files?
 
-Try [dotenv-vault](https://github.com/dotenv-org/dotenv-vault)
+Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault)
+
+### What about securing .env files?
+
+Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault)
 
 ## Contributing Guide
 
