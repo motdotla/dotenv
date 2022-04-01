@@ -1,4 +1,4 @@
-Works with [dotenv-vault](https://github.com/dotenv-org/dotenv-vault) (better security for your environment variables). Learn more at [dotenv.org](https://dotenv.org).
+Works with [dotenv-vault](https://github.com/dotenv-org/dotenv-vault). Learn more at [dotenv.org](https://dotenv.org).
 
 # dotenv
 
