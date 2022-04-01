@@ -130,7 +130,7 @@ You need to add the value of another variable in one of your variables? Use [dot
 
 ### Syncing
 
-You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenv cli](https://github.com/dotenv-org/cli).
+You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
 
 ## Examples
 
@@ -389,7 +389,7 @@ Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
 ### What about syncing .env files?
 
-Try [dotenv cli](https://github.com/dotenv-org/cli)
+Try [dotenv-vault](https://github.com/dotenv-org/dotenv-vault)
 
 ## Contributing Guide
 
