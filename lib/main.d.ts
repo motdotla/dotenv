@@ -1,9 +1,7 @@
 // TypeScript Version: 3.0
 /// <reference types="node" />
 
-export interface DotenvParseOutput {
-  [name: string]: string;
-}
+export type DotenvParseOutput = NodeJS.Dict<string>
 
 /**
  * Parses a string or buffer in the .env file format into an object.

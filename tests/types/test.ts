@@ -2,7 +2,7 @@ import { config, parse } from "dotenv";
 
 const env = config();
 const dbUrl: string | null =
-  env.error || !env.parsed ? null : env.parsed["BASIC"];
+  env.error || !env.parsed ? null : env.parsed["BASIC"] ?? "";
 
 config({
   path: ".env-example",
@@ -13,7 +13,9 @@ config({
 parse("test");
 
 const parsed = parse("NODE_ENV=production\nDB_HOST=a.b.c");
-const dbHost: string = parsed["DB_HOST"];
+const dbHost: string = parsed["DB_HOST"] ?? "";
+const dbHostUndef: undefined = parsed["DB_HOST"] as undefined;
 
 const parsedFromBuffer = parse(new Buffer("JUSTICE=league\n"));
-const justice: string = parsedFromBuffer["JUSTICE"];
+const justice: string = parsedFromBuffer["JUSTICE"] ?? "";
+const justiceUndef: undefined = parsedFromBuffer["JUSTICE"] as undefined;
