@@ -98,6 +98,15 @@ const config = dotenv.parse(buf) // will return an object
 console.log(typeof config, config) // object { BASIC : 'basic' }
 ```
 
+You can load the `.env` file without updating `process.env` using the `load` function:
+
+```javascript
+const dotenv = require('dotenv')
+const buf = Buffer.from('BASIC=basic')
+const config = dotenv.load() // will return an object
+console.log(typeof config, config) // object { BASIC : 'basic' }
+```
+
 ### Preload
 
 You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#-r---require-module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.

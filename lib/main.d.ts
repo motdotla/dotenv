@@ -2,7 +2,7 @@
 /// <reference types="node" />
 
 export interface DotenvParseOutput {
-  [name: string]: string;
+  [name: string]: string | undefined;
 }
 
 /**
@@ -18,7 +18,7 @@ export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
   src: string | Buffer
 ): T;
 
-export interface DotenvConfigOptions {
+export interface DotenvLoadOptions {
   /**
    * Default: `path.resolve(process.cwd(), '.env')`
    *
@@ -36,6 +36,18 @@ export interface DotenvConfigOptions {
    * example: `require('dotenv').config({ encoding: 'latin1' })`
    */
   encoding?: string;
+}
+
+/**
+ * Load `.env` file contents and return key/value pairs as an object.
+ *
+ * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1' }`
+ * @returns an object with the keys and values loaded from the `.env` file
+ */
+export function load(options?: DotenvLoadOptions): DotenvParseOutput;
+
+
+export interface DotenvConfigOptions extends DotenvLoadOptions {
 
   /**
    * Default: `false`
@@ -71,3 +83,4 @@ export interface DotenvConfigOutput {
  *
  */
 export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
+
