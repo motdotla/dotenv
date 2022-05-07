@@ -1,4 +1,4 @@
-Works with [dotenv-vault](https://github.com/dotenv-org/dotenv-vault). Learn more at [dotenv.org/vault](https://dotenv.org/vault).
+Works with [dotenv-vault](https://github.com/dotenv-org/dotenv-vault). Learn more at [dotenv.org/vault](https://dotenv.org/vault?r=1).
 
 # dotenv
 
