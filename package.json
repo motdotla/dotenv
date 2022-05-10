@@ -47,6 +47,7 @@
     "standard-markdown": "^7.1.0",
     "standard-version": "^9.3.2",
     "tap": "^15.1.6",
+    "tar": "^6.1.11",
     "typescript": "^4.5.4"
   },
   "engines": {
