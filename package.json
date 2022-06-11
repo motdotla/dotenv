@@ -12,6 +12,8 @@
     },
     "./config": "./config.js",
     "./config.js": "./config.js",
+    "./lib/env-options": "./lib/env-options.js",
+    "./lib/cli-options": "./lib/cli-options.js",
     "./package.json": "./package.json"
   },
   "scripts": {
