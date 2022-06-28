@@ -43,7 +43,8 @@ console.log(process.env) // remove this after you've confirmed it working
 .. or using ES6?
 
 ```javascript
-import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config()
 import express from 'express'
 ```
 
@@ -331,7 +332,8 @@ Simply..
 
 ```javascript
 // index.mjs (ESM)
-import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config()
 import express from 'express'
 ```
 
@@ -368,7 +370,8 @@ import { Client } from 'best-error-reporting-service'
 export default new Client(process.env.API_KEY)
 
 // index.mjs
-import 'dotenv/config'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 import errorReporter from './errorReporter.mjs'
 errorReporter.report(new Error('documented example'))
