@@ -1,7 +1,6 @@
 .nyc_output/
 examples/
 flow-typed/
-media/
 tests/
 types/
 .editorconfig
@@ -10,3 +9,5 @@ types/
 .travis.yml
 appveyor.yml
 CONTRIBUTING.md
+dotenv.png
+dotenv.svg
