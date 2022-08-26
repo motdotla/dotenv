@@ -2,7 +2,7 @@
 
 # dotenv
 
-<img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.png" alt="dotenv" align="right" />
+<img src="https://raw.githubusercontent.com/motdotla/dotenv/master/media/dotenv.svg" alt="dotenv" align="right" />
 
 Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](http://12factor.net/config) methodology.
 
