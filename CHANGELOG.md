@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.0.1...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.0.2...master)
+
+## [16.0.2](https://github.com/motdotla/dotenv/compare/v16.0.1...v16.0.2) (2022-08-29)
+
+### Added
+
+- Export `env-options.js` and `cli-options.js` in package.json for use with downstream [dotenv-expand](https://github.com/motdotla/dotenv-expand) module
 
 ## [16.0.1](https://github.com/motdotla/dotenv/compare/v16.0.0...v16.0.1) (2022-05-10)
 
