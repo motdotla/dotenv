@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.0.2...master)
 
-## [16.0.2](https://github.com/motdotla/dotenv/compare/v16.0.1...v16.0.2) (2022-08-29)
+## [16.0.2](https://github.com/motdotla/dotenv/compare/v16.0.1...v16.0.2) (2022-08-30)
 
 ### Added
 
