@@ -388,11 +388,7 @@ There are two alternatives to this approach:
 
 Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
-### What about syncing .env files?
-
-Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault)
-
-### What about securing .env files?
+### What about syncing and securing .env files?
 
 Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault)
 
