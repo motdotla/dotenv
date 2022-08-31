@@ -1,3 +1,30 @@
+<div align="center">
+
+<p>
+  <sup>
+    <a href="https://github.com/sponsors/motdotla">dotenv is internet infrastructure - supported by the developer community</a>
+  </sup>
+</p>
+<sup>Special thanks to:</sup>
+<br>
+<br>
+<a href="https://www.warp.dev/?utm_source=github&utm_medium=referral&utm_campaign=dotenv_p_20220831">
+  <div>
+    <img src="https://res.cloudinary.com/dotenv-org/image/upload/v1661980709/warp_hi8oqj.png" width="230" alt="Warp">
+  </div>
+  <b>Warp is a blazingly fast, Rust-based terminal reimagined to work like a modern app.</b>
+  <div>
+    <sup>Get more done in the CLI with real text editing, block-based output, and AI command search.</sup>
+  </div>
+</a>
+<hr>
+<br>
+<br>
+<br>
+<br>
+
+</div>
+
 [![dotenv-vault](https://badge.dotenv.org/works-with.svg?r=1)](https://www.dotenv.org/r/github.com/dotenv-org/dotenv-vault?r=1) 
 
 # dotenv
