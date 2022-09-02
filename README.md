@@ -64,7 +64,7 @@ As early as possible in your application, import and configure dotenv:
 
 ```javascript
 require('dotenv').config()
-console.log(process.env) // remove this after you've confirmed it working
+console.log(process.env) // remove this after you've confirmed it is working
 ```
 
 .. or using ES6?
@@ -94,13 +94,13 @@ PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
 ...
 Kh9NV...
 ...
------END DSA PRIVATE KEY-----"
+-----END RSA PRIVATE KEY-----"
 ```
 
 Alternatively, you can double quote strings and use the `\n` character:
 
 ```dosini
-PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nKh9NV...\n-----END DSA PRIVATE KEY-----\n"
+PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nKh9NV...\n-----END RSA PRIVATE KEY-----\n"
 ```
 
 ### Comments
