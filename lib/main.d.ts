@@ -35,7 +35,7 @@ export interface DotenvConfigOptions {
    *
    * example: `require('dotenv').config({ encoding: 'latin1' })`
    */
-  encoding?: string;
+  encoding?: BufferEncoding;
 
   /**
    * Default: `false`
