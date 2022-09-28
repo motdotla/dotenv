@@ -2,7 +2,7 @@
 
 <p>
   <sup>
-    <a href="https://github.com/sponsors/motdotla">Dotenv is internet infrastructure - supported by the developer community.</a>
+    <a href="https://github.com/sponsors/motdotla">Dotenv is supported by the community.</a>
   </sup>
 </p>
 <sup>Special thanks to:</sup>
@@ -15,6 +15,16 @@
   <b>Warp is a blazingly fast, Rust-based terminal reimagined to work like a modern app.</b>
   <div>
     <sup>Get more done in the CLI with real text editing, block-based output, and AI command search.</sup>
+  </div>
+</a>
+<br>
+<a href="https://retool.com/?utm_source=sponsor&utm_campaign=dotenv">
+  <div>
+    <img src="https://res.cloudinary.com/dotenv-org/image/upload/c_scale,w_230/v1664338780/retool_znqf5s.png" width="230" alt="Retool">
+  </div>
+  <b>Retool helps developers build custom internal software, like CRUD apps and admin panels, really fast.</b>
+  <div>
+    <sup>Build UIs visually with flexible components, connect to any data source, and write business logic in JavaScript.</sup>
   </div>
 </a>
 <hr>
