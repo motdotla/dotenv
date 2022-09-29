@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.0.2...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.0.3...master)
+
+## [16.0.3](https://github.com/motdotla/dotenv/compare/v16.0.2...v16.0.3) (2022-09-29)
+
+### Changed
+
+- Added library version to debug logs ([#682](https://github.com/motdotla/dotenv/pull/682))
 
 ## [16.0.2](https://github.com/motdotla/dotenv/compare/v16.0.1...v16.0.2) (2022-08-30)
 
