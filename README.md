@@ -20,7 +20,7 @@
 <br>
 <a href="https://retool.com/?utm_source=sponsor&utm_campaign=dotenv">
   <div>
-    <img src="https://res.cloudinary.com/dotenv-org/image/upload/c_scale,w_230/v1664338780/retool_znqf5s.png" width="230" alt="Retool">
+    <img src="https://res.cloudinary.com/dotenv-org/image/upload/c_scale,w_300/v1664466968/logo-full-black_vidfqf.png" width="270" alt="Retool">
   </div>
   <b>Retool helps developers build custom internal software, like CRUD apps and admin panels, really fast.</b>
   <div>
