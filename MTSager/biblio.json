@@ -1,0 +1,146 @@
+{
+	"AOM": {
+		"href": "https://wicg.github.io/aom/spec/",
+		"title": "Accessibility Object Model"
+	},
+	"BACKGROUND-FETCH": {
+		"href": "https://wicg.github.io/background-fetch/",
+		"title": "Background Fetch"
+	},
+	"BUDGET-API": {
+		"href": "https://wicg.github.io/budget-api/",
+		"title": "Web Budget API"
+	},
+	"CLIENT-HINTS-INFRASTRUCTURE": {
+		"href": "https://wicg.github.io/client-hints-infrastructure/",
+		"title": "Client Hints Infrastructure"
+	},
+	"COMPRESSION": {
+		"href": "https://wicg.github.io/compression/",
+		"title": "Compression Streams"
+	},
+	"COOKIE-STORE": {
+		"href": "https://wicg.github.io/cookie-store/",
+		"title": "Cookie Store API"
+	},
+	"CORS-RFC1918": {
+		"href": "https://wicg.github.io/cors-rfc1918/",
+		"title": "CORS and RFC1918"
+	},
+	"CSS-PARSER-API": {
+		"href": "https://wicg.github.io/css-parser-api/",
+		"title": "CSS Parser API"
+	},
+	"ELEMENT-TIMING": {
+		"href": "https://wicg.github.io/element-timing/",
+		"title": "Element Timing API"
+	},
+	"ENTRIES-API": {
+		"href": "https://wicg.github.io/entries-api/",
+		"title": "File and Directory Entries API"
+	},
+	"FILE-SYSTEM-ACCESS": {
+		"href": "https://wicg.github.io/file-system-access/",
+		"title": "File System Access"
+	},
+	"FRAME-TIMING": {
+		"href": "https://wicg.github.io/frame-timing/",
+		"title": "Frame Timing"
+	},
+	"IDLE-DETECTION": {
+		"href": "https://wicg.github.io/idle-detection/",
+		"title": "Idle Detection API"
+	},
+	"INPUT-DEVICE-CAPABILITIES": {
+		"href": "https://wicg.github.io/input-device-capabilities/",
+		"title": "Input Device Capabilities"
+	},
+	"JS-SELF-PROFILING": {
+		"href": "https://wicg.github.io/js-self-profiling/",
+		"title": "JS Self-Profiling API"
+	},
+	"KEYBOARD-LOCK": {
+		"href": "https://wicg.github.io/keyboard-lock/",
+		"title": "Keyboard Lock"
+	},
+	"KEYBOARD-MAP": {
+		"href": "https://wicg.github.io/keyboard-map/",
+		"title": "Keyboard Map"
+	},
+	"LAYOUT-INSTABILITY": {
+		"href": "https://wicg.github.io/layout-instability/",
+		"title": "Layout Instability"
+	},
+	"MANIFEST-INCUBATIONS": {
+		"href": "https://wicg.github.io/manifest-incubations/",
+		"title": "Manifest Incubations"
+	},
+	"MULTICAPTURE": {
+		"href": "https://wicg.github.io/multicapture/",
+		"title": "Multicapture"
+	},
+	"NETINFO": {
+		"href": "https://wicg.github.io/netinfo/",
+		"title": "Network Information API"
+	},
+	"PAGE-LIFECYCLE": {
+		"href": "https://wicg.github.io/page-lifecycle/",
+		"title": "Page Lifecycle"
+	},
+	"PERMISSIONS-REQUEST": {
+		"href": "https://wicg.github.io/permissions-request/",
+		"title": "Requesting Permissions"
+	},
+	"PERMISSIONS-REVOKE": {
+		"href": "https://wicg.github.io/permissions-revoke/",
+		"title": "Relinquishing Permissions"
+	},
+	"PREFER-CURRENT-TAB": {
+		"href": "https://wicg.github.io/prefer-current-tab/",
+		"title": "preferCurrentTab"
+	},
+	"PRIORITY-HINTS": {
+		"href": "https://wicg.github.io/priority-hints/",
+		"title": "Priority Hints"
+	},
+	"SCHEDULING-APIS": {
+		"href": "https://wicg.github.io/scheduling-apis/",
+		"title": "Prioritized Task Scheduling"
+	},
+	"SHAPE-DETECTION-API": {
+		"href": "https://wicg.github.io/shape-detection-api/",
+		"title": "Accelerated Shape Detection in Images"
+	},
+	"SMS-ONE-TIME-CODES": {
+		"href": "https://wicg.github.io/sms-one-time-codes/",
+		"title": "Origin-bound one-time codes delivered via SMS"
+	},
+	"SPEECH-API": {
+		"href": "https://wicg.github.io/speech-api/",
+		"title": "Web Speech API"
+	},
+	"TEXT-DETECTION-API": {
+		"href": "https://wicg.github.io/shape-detection-api/text.html",
+		"title": "Accelerated Text Detection in Images"
+	},
+	"VISUAL-VIEWPORT": {
+		"href": "https://wicg.github.io/visual-viewport/",
+		"title": "Visual Viewport API"
+	},
+	"WEB-BACKGROUND-SYNC": {
+		"href": "https://wicg.github.io/background-sync/spec/",
+		"title": "Web Background Synchronization"
+	},
+	"PERIODIC-BACKGROUND-SYNC": {
+		"href": "https://wicg.github.io/periodic-background-sync/",
+		"title": "Web Periodic Background Synchronization"
+	},
+	"WEBUSB": {
+		"href": "https://wicg.github.io/webusb/",
+		"title": "WebUSB API"
+	},
+	"WINDOW-CONTROLS-OVERLAY": {
+		"href": "https://wicg.github.io/window-controls-overlay/",
+		"title": "Window Controls Overlay"
+	}
+}

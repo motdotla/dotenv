@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="25">
+
+    <shortcut
+        android:icon="@drawable/shortcut_scan_qr"
+        android:shortcutId="scan_qr"
+        android:shortcutShortLabel="@string/button_scan">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="de.schildbach.wallet.ui.SendCoinsQrActivity"
+            android:targetPackage="de.schildbach.wallet" />
+    </shortcut>
+    <shortcut
+        android:icon="@drawable/shortcut_send_coins"
+        android:shortcutId="send_coins"
+        android:shortcutShortLabel="@string/button_send_coins">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="de.schildbach.wallet.ui.send.SendCoinsActivity"
+            android:targetPackage="de.schildbach.wallet" />
+    </shortcut>
+    <shortcut
+        android:icon="@drawable/shortcut_request_coins"
+        android:shortcutId="request_coins"
+        android:shortcutShortLabel="@string/button_request_coins">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="de.schildbach.wallet.ui.RequestCoinsActivity"
+            android:targetPackage="de.schildbach.wallet" />
+    </shortcut>
+</shortcuts>

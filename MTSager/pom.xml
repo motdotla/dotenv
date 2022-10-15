@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>wallet</artifactId>
+	<packaging>apk</packaging>
+	<version>3.61-v3</version>
+	<name>Bitcoin Wallet</name>
+
+	<parent>
+		<groupId>de.schildbach.wallet</groupId>
+		<artifactId>base</artifactId>
+		<version>1</version>
+	</parent>
+
+	<licenses>
+		<license>
+			<name>GNU General Public License</name>
+			<url>http://www.gnu.org/licenses/gpl.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<dependencies>
+
+		<!-- android.*, java.*, javax.* -->
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>4.0.1.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- android.annotation.* -->
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>annotations</artifactId>
+			<!-- version should match android artifact, but not available on maven central -->
+			<version>4.1.1.4</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- android.support.v4.* -->
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>support-v4</artifactId>
+			<version>r7</version>
+		</dependency>
+
+		<!-- com.actionbarsherlock.* -->
+		<dependency>
+			<groupId>com.actionbarsherlock</groupId>
+			<artifactId>library</artifactId>
+			<version>4.1.0</version>
+			<type>apklib</type>
+		</dependency>
+
+		<!-- com.google.bitcoin.* -->
+		<dependency>
+			<groupId>com.google</groupId>
+			<artifactId>bitcoinj</artifactId>
+			<version>0.11.3</version>
+		</dependency>
+
+		<!-- de.schildbach.wallet.integration.android.* -->
+		<dependency>
+			<groupId>de.schildbach.wallet</groupId>
+			<artifactId>integration-android</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<!-- com.google.protobuf.* -->
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+
+		<!-- com.google.common.* -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>16.0.1</version>
+		</dependency>
+
+		<!-- com.google.zxing.* -->
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<!-- org.slf4j.* -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.6</version>
+		</dependency>
+
+		<!-- ch.qos.logback.classic.* -->
+		<dependency>
+			<groupId>com.github.tony19</groupId>
+			<artifactId>logback-android-classic</artifactId>
+			<version>1.1.1-1</version>
+		</dependency>
+
+		<!-- ch.qos.logback.core.* -->
+		<dependency>
+			<groupId>com.github.tony19</groupId>
+			<artifactId>logback-android-core</artifactId>
+			<version>1.1.1-1</version>
+		</dependency>
+
+		<!-- javax.annotation.* -->
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+		<!-- org.junit.* -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.1</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+		                                <groupId>com.simpligility.maven.plugins</groupId>
+						<artifactId>android-maven-plugin</artifactId>
+						<configuration>
+							<release>true</release>
+							<proguard>
+								<skip>false</skip>
+							</proguard>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>net.sf.proguard</groupId>
+								<artifactId>proguard-base</artifactId>
+								<version>5.1</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<!-- to build, run: mvn clean install -->
+	<!-- then to install on an android device, run: mvn android:deploy -->
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
+		<testResources>
+			<testResource>
+				<directory>test</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.simpligility.maven.plugins</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<configuration>
+					<androidManifestFile>AndroidManifest.xml</androidManifestFile>
+					<resourceDirectory>res</resourceDirectory>
+					<assetsDirectory>assets</assetsDirectory>
+					<excludeJarResources>
+						<excludeJarResource>.*\.jar$</excludeJarResource>
+					</excludeJarResources>
+					<sdk>
+						<platform>14</platform>
+					</sdk>
+					<sign>
+						<debug>both</debug>
+					</sign>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+					<additionalProjectnatures>
+						<projectnature>com.android.ide.eclipse.adt.AndroidNature</projectnature>
+					</additionalProjectnatures>
+					<additionalBuildcommands>
+						<buildcommand>com.android.ide.eclipse.adt.ResourceManagerBuilder</buildcommand>
+						<buildcommand>com.android.ide.eclipse.adt.PreCompilerBuilder</buildcommand>
+						<buildcommand>com.android.ide.eclipse.adt.ApkBuilder</buildcommand>
+					</additionalBuildcommands>
+					<classpathContainers>
+						<classpathContainer>com.android.ide.eclipse.adt.ANDROID_FRAMEWORK</classpathContainer>
+						<!-- This is a workaround: we do not want JRE_CONTAINER, however if we remove it, it will be automatically added, and 
+							placed first. So we add it in the second position, so that the project is recognized as an Android project. -->
+						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+					</classpathContainers>
+					<excludes>
+						<exclude>android:android</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- to generate reports, run: mvn clean install site -->
+	<!-- then browse to: target/site/index.html -->
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>2.5.2</version>
+				<configuration>
+					<onlyAnalyze>de.schildbach.wallet.-</onlyAnalyze>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
+</project>

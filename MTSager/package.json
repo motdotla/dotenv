@@ -1,0 +1,35 @@
+{
+    "name": "@okta/samples-aspnet-webforms-e2e-tests",
+    "version": "0.1.0",
+    "description": "E2E tests for aspnet webforms Sample Applications for Okta",
+    "scripts": {
+      "test": "npm run test:e2e",
+      "build-okta-hosted-login-server": "cd ../okta-hosted-login && @powershell -Command ./build.ps1",
+      "okta-hosted-login-server": "cd ../okta-hosted-login/dist/okta-aspnet-webforms-example && @powershell -Command \"iisexpress /path:$pwd\"",
+      "build-self-hosted-login-server": "cd ../self-hosted-login && @powershell -Command ./build.ps1",
+      "custom-login-server": "cd ../self-hosted-login/dist/okta-aspnet-webforms-example && @powershell -Command \"iisexpress /path:$pwd\"",
+      "test:okta-hosted-login": "protractor okta-oidc-tck/e2e-tests/okta-hosted-login/conf.js",
+      "test:custom-login": "protractor okta-oidc-tck/e2e-tests/custom-login/conf.js",
+      "test:e2e": "npm run test:okta-hosted-login && npm run test:custom-login",
+      "build": "npm run build-okta-hosted-login-server && npm run build-self-hosted-login-server",
+      "pretest": "npm run build && webdriver-manager update --gecko false && node scripts/update-webconfig.js"
+    },
+    "license": "Apache-2.0",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/okta/samples-aspnet-webforms.git"
+    },
+    "bugs": "https://github.com/okta/samples-aspnet-webforms/issues",
+    "homepage": "https://github.com/okta/samples-aspnet-webforms",
+    "devDependencies": {
+      "dotenv": "^5.0.1",
+      "find-process": "^1.1.0",
+      "forever-monitor": "^1.7.1",
+      "jasmine-reporters": "^2.2.0",
+      "platform": "^1.3.5",
+      "protractor": "^5.1.0",
+      "wait-on": "^2.0.2"
+    },
+    "bin": {},
+    "private": true
+}

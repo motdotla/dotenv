@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- foreground -->
+    <color name="fg_network_significant">#ffffcc99</color>
+    <color name="fg_network_less_significant">#ccffcc99</color>
+</resources>

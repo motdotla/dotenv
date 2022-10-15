@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- foreground -->
+    <color name="fg_network_significant_darkdefault">#ff894b00</color>
+    <color name="fg_network_less_significant_darkdefault">#cc894b00</color>
+</resources>

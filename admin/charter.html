@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      Web Incubator Community Group
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="//www.w3.org/StyleSheets/TR/base">
+    <style>
+    body {
+      max-width: 60em;
+      margin: auto;;
+    }
+    *:target {
+      background-color: yellow;
+    }
+    li {
+      margin-bottom:9pt;
+    }
+    </style>
+    <script>
+      window.onload = () =>{
+        fillLastModified();
+      }
+      function fillLastModified(){
+        const lastmod = document.getElementById("lastmod");
+        lastmod.innerText = document.lastModified;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>
+      Web Incubator Community Group Charter
+    </h1>
+    <dl>
+      <dt>
+        This Charter:
+      </dt>
+      <dd>
+        <a href=
+        "https://wicg.github.io/admin/charter.html">https://wicg.github.io/admin/charter.html</a>
+      </dd>
+      <dt>
+        Start Date:
+      </dt>
+      <dd>
+        2 July 2015
+      </dd>
+      <dt>
+        Last Modified:
+      </dt>
+      <dd>
+        <span id="lastmod"></span> (<a href=
+        "https://github.com/WICG/admin/commits/gh-pages/charter.html">Commit
+        History</a>)
+      </dd>
+    </dl>
+    <p>
+      This document is based on the <a href=
+      "http://github.adrianba.net/webstandards/incubator-cg-charter">original
+      proposal</a>. Please raise <a href=
+      "https://github.com/wicg/admin/issues">issues</a> with feedback.
+    </p>
+    <h2 id="goals">
+      Goals
+    </h2>
+    <p>
+      The Web Incubator Community Group (WICG) provides a lightweight venue for
+      proposing and discussing new web platform features. Each proposal will be
+      discussed in its own repository within the group's Github account.
+      Membership of the group is open to everybody but all participants will
+      have signed the <a href=
+      "https://www.w3.org/community/about/agreements/cla/">W3C Community
+      Contributor License Agreement</a>.
+    </p>
+    <p>
+      As proposals gain support and become more stable and mature they will be
+      considered for migration to a W3C Working Group where they can be put on
+      the Recommendation track with appropriate status and Intellectual
+      Property (IP) considerations.
+    </p>
+    <p>
+      Individuals, after consultation with the <a href="#chairs">Chairs</a>,
+      may prepare an "<a href=
+      "https://github.com/WICG/admin/blob/gh-pages/intent-to-migrate.md">intent
+      to migrate</a>" assessment, outlining use cases, as well as
+      implementation considerations, security, privacy, accessibility, and
+      internationalization impacts. Those requests are evaluated within the
+      Community Group as well as the targeted W3C Working Group, if any. The
+      role of the CG and WG <a href="#chairs">Chairs</a> and W3C team is to
+      facilitate the migration and ensure proper continuity in the community
+      who proposed the idea.
+    </p>
+    <h2 id="background">
+      Background
+    </h2>
+    <p>
+      W3C Community Groups provide a convenient structure within which to
+      discuss early standards proposals with a concrete contribution license.
+      While they are relatively simple to create, there is still enough
+      friction in the system that causes some people to start work outside W3C
+      with no formal IP considerations.
+    </p>
+    <p>
+      The goal of the WICG is to balance these two considerations. It should be
+      as low friction as possible to make new proposals where participants make
+      their contributions with known IP commitments.
+    </p>
+    <p>
+      Over time, the WICG will grow into a large community of people that have
+      signed up for their contributions to be made according to the <a href=
+      "https://www.w3.org/community/about/agreements/cla/">W3C CG CLA</a>, much
+      like an open source project grows a list of contributors making pull
+      requests under the project license. The agreement only has to be accepted
+      once and then contributions to any proposal in the CG are covered.
+    </p>
+    <p>
+      Different organisations will have different internal policies for
+      managing engagement in the WICG. Some will run internal processes before
+      allowing their representatives to engage and make contributions to a
+      particular proposal. Others allow contributions to any proposal according
+      to standing policies. It is up to each organisation to determine how to
+      manage this.
+    </p>
+    <p>
+      This approach provides the following benefits:
+    </p>
+    <ul>
+      <li>Avoids web standards proposals scattered in random personal GitHub
+      repos that have unknown IP status.
+      </li>
+      <li>Avoids spending months in charter discussions before commencing work
+      in a WG or even the overhead of finding the right people to begin a new
+      Community Group.
+      </li>
+      <li>Encourages new people (especially web developers) to make proposals
+      without having to first understand how to navigate the role and scope of
+      different W3C Working Groups.
+      </li>
+    </ul>
+    <h2 id="scope">
+      Scope of Work
+    </h2>
+    <p>
+      The Community Group will accept and discuss any proposal for a web
+      platform feature that would be implemented in a browser or similar user
+      agent. Any suggestions, pull requests, issues, or comments made about a
+      proposal fall under the CLA. Editors of feature proposals must ensure
+      that no contributions are adopted from anyone who is not a member of the
+      Community Group.
+    </p>
+    <h2 id="nonscope">
+      Out of Scope
+    </h2>
+    <p>
+      Features or ideas that don't have applicability in a browser (or similar
+      user agent) should be proposed to another Community Group.
+    </p>
+    <h2 id="proposals">
+      Current Proposals
+    </h2>
+    <p>
+      The group publishes an <a href=
+      "https://github.com/WICG/admin/blob/gh-pages/README.md#current-proposals">
+      index of the proposals</a> worked on in GitHub. Any <a href=
+      "https://www.safaribooksonline.com/library/view/building-polyfills/9781449370725/ch07.html">
+      speculative polyfills</a> (sometimes called "prollyfills") or test suites
+      will be developed in Open Source using the <a href=
+      "http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">
+      W3C Software and Document License</a>.
+    </p>
+    <p>
+      New projects or status changes are communicated to the group through the
+      public announcement mailing list (this list will not be used for
+      discussing proposals).
+    </p>
+    <p>
+      Proposal editors should publish regular status updates to the
+      announcement mailing list (again encouraging discussion in the GitHub
+      repo). This allows group participants to monitor progress without having
+      to directly watch every repo.
+    </p>
+    <h2 id="liaisons">
+      Dependencies or Liaisons
+    </h2>
+    <p>
+      It is anticipated that the group will collaborate with appropriate W3C
+      Working Groups and WHATWG Workstreams in order to transition spec
+      proposals to the Recommendation or Living Standard track. The following
+      groups are the most likely to adopt proposals from this group:
+    </p>
+    <ul>
+      <li>
+        <a href=
+        "https://github.com/whatwg/sg/blob/master/Workstreams.md#html">HTML</a>
+        and <a href=
+        "https://github.com/whatwg/sg/blob/master/Workstreams.md#dom">DOM</a>
+        Workstream
+      </li>
+      <li>
+        <a href="https://github.com/w3c/webappswg/">Web Applications Working
+        Group</a>
+      </li>
+      <li>
+        <a href="http://www.w3.org/Style/CSS/">CSS Working Group</a>
+      </li>
+      <li>
+        <a href="http://www.w3.org/2009/dap/">Device APIs Working Group</a>
+      </li>
+    </ul>
+    <h2 id="process">
+      Community and Business Group Process and Patent Policy
+    </h2>
+    <p>
+      The group operates under the <a href=
+      "https://www.w3.org/community/about/agreements/">Community and Business
+      Group Process</a>. Terms of in this charter that conflict with those of
+      the Community and Business Group Process are void.
+    </p>
+    <p>
+      As with other Community Groups, W3C seeks organizational licensing
+      commitments under the <a href=
+      'http://www.w3.org/community/about/agreements/cla/'>W3C Community
+      Contributor License Agreement (CLA)</a> (Proposals in this Community
+      Group charter are applicable "Specification" in the CLA). When people
+      request to participate without representing their organization’s legal
+      interests, W3C will in general approve those requests for this group with
+      the following understanding: W3C will seek and expect an organizational
+      commitment under the CLA starting with the individual’s first request to
+      make a contribution to a group deliverable. The section on <a href=
+      "#contrib">Contribution Mechanics</a> describes how W3C expects to
+      monitor these contribution requests.
+    </p>
+    <h2 id="contrib">
+      Contribution Mechanics
+    </h2>
+    <p>
+      Community Group participants agree to make contributions in the GitHub
+      repo for the project that they are interested in. This may be in the form
+      of a pull request (preferred), by raising an issue, or by adding a
+      comment to an existing issue.
+    </p>
+    <p>
+      The Community Group mailing list must not be used for discussing details
+      of specific projects.
+    </p>
+    <p>
+      Specifications created for proposals in the Community Group must use the
+      <a href=
+      "http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">
+      W3C Software and Document License</a>.
+    </p>
+    <p>
+      All Github repositories attached to the Community Group must contain a
+      copy of the <a href=
+      "https://github.com/w3c/licenses/blob/master/CG-CONTRIBUTING.md">CONTRIBUTING</a>
+      and <a href=
+      "https://github.com/w3c/licenses/blob/master/CG-LICENSE.md">LICENSE</a>
+      files.
+    </p>
+    <p>
+      Note: this CG will not use a <em>contrib</em> mailing list for
+      contributions since all contributions will be tracked via Github
+      mechanisms (e.g. pull requests).
+    </p>
+    <h2 id="chair_selection">
+      Chair Selection
+    </h2>
+    <p>
+      The <dfn id="chairs">Chairs</dfn> are <a href=
+      "mailto:cwilso@google.com">Chris Wilson</a>, <a href=
+      "mailto:yoavweiss@google.com">Yoav Weiss</a>, <a href=
+      "mailto:Travis.Leithead@microsoft.com">Travis Leithead</a>, and <a href=
+	  "mailto:lwatson@tetralogical.com">Léonie Watson</a>.
+    </p>
+    <p>
+      Participants in this group choose their <a>Chair(s)</a> and can replace
+      their <a>Chair(s)</a>at any time using whatever means they prefer.
+      However, if 5 participants —no two from the same organization— call for
+      an election, the group must use the following process to replace any
+      current <a>Chair(s)</a> with a new Chair, consulting the Community
+      Development Lead on election operations (e.g., voting infrastructure and
+      using RFC 2777).
+    </p>
+    <ol>
+      <li>Participants announce their candidacies. Participants have 14 days to
+      announce their candidacies, but this period ends as soon as all
+      participants have announced their intentions. If there is only one
+      candidate, that person becomes the Chair. If there are two or more
+      candidates, there is a vote. Otherwise, nothing changes.
+      </li>
+      <li>Participants vote. Participants have 21 days to vote for a single
+      candidate, but this period ends as soon as all participants have voted.
+      The individual who receives the most votes —no two from the same
+      organization— is elected chair. In case of a tie, RFC2777 is used to
+      break the tie. An elected Chair may appoint co-Chairs.
+      </li>
+    </ol>
+    <p>
+      Participants dissatisfied with the outcome of an election may ask the
+      Community Development Lead to intervene. The Community Development Lead,
+      after evaluating the election, may take any action including no action.
+    </p>
+    <h2 id="charter-change">
+      Amendments to the Charter
+    </h2>
+    <p>
+      This Charter can be amended by the <a href="#chairs">Chairs</a> with
+      consultation of the Community Group, if the change is agreed to by W3C's
+      Community Development Lead (Community Development Lead is described in
+      the CG Process).
+    </p>
+    <h2 id="decision">
+      Decision Process
+    </h2>
+    <p>
+      This group will seek to make decisions when there is consensus. The
+      editors of a spec will determine and record consensus decisions through
+      the spec's GitHub repo issue list with assistance from the CG <a href=
+      "#chairs">Chairs</a>. Members of the group may reopen issues with new
+      technical information.
+    </p>
+    <p>
+      It is the <a href="#chairs">Chairs</a>' responsibility to ensure that the
+      decision process is fair, respects the consensus of the CG, and does not
+      unreasonably favour or discriminate against any group participant or
+      their employer. With that said, the group favours forward motion and
+      dissent will not be allowed to block work on a spec.
+    </p>
+    <p>
+      If substantial disagreement remains (e.g. the group is divided), the
+      Committers will continue with their preference. The issue should be
+      recorded as decided without consensus. Individuals who disagree with the
+      Committer's choice are strongly encouraged to take ownership of their
+      objection by taking ownership of an alternative fork. This is explicitly
+      allowed (and preferred to blocking progress) with a goal of letting
+      implementation experience inform which spec is ultimately chosen by the
+      group to move ahead with.
+    </p>
+    <p>
+      Initially, only the Editor's are the only Committers. It is expected that
+      participants can earn Committer status in a GitHub repo through a history
+      of valuable contributions as is common in open source projects.
+    </p>
+    <h2 id="transparency">
+      Transparency
+    </h2>
+    <p>
+      The group will conduct all of its technical work on its GitHub
+      repositories (and not in mailing list discussions). This is to ensure
+      contributions can be tracked and to ensure that engagement will scale to
+      a large number of proposals.
+    </p>
+    <p>
+      Any decisions reached at any meeting are tentative and should be recorded
+      in the repo issues list. Any group participant may object to a decision
+      reached at an online or in-person meeting within 7 days of publication of
+      the decision provided that they include clear technical reasons for their
+      objection. The <a href="#chairs">Chairs</a> will facilitate discussion to
+      try to resolve the objection according to the <a href=
+      "#decision">decision process</a>.
+    </p>
+  </body>
+</html>
