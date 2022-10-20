@@ -48,7 +48,7 @@
     "dtslint": "^3.7.0",
     "sinon": "^12.0.1",
     "standard": "^16.0.4",
-    "standard-markdown": "^7.1.0",
+    "standard-markdown": "^7.1.3",
     "standard-version": "^9.3.2",
     "tap": "^15.1.6",
     "tar": "^6.1.11",
