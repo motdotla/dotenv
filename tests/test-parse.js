@@ -83,6 +83,14 @@ t.equal(parsed.USERNAME, 'therealnerdybeast@example.tld', 'parses email addresse
 
 t.equal(parsed.SPACED_KEY, 'parsed', 'parses keys and values surrounded by spaces')
 
+t.equal(parsed['SQUARE_BRACKETS[0]'], 'square brackets work', 'square brackets are allowed in environment keys')
+
+t.equal(parsed['ROUND_BRACKETS(1)'], 'round brackets work', 'round brackets are allowed in environment keys')
+
+t.equal(parsed['ANGLE_BRACKETS<bar>'], 'angle brackets work', 'angle brackets are allowed in environment keys')
+
+t.equal(parsed['CURLY_BRACKETS{foo}'], 'curly brackets work', 'curly brackets are allowed in environment keys')
+
 const payload = dotenv.parse(Buffer.from('BUFFER=true'))
 t.equal(payload.BUFFER, 'true', 'should parse a buffer into an object')
 
