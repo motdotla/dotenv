@@ -330,6 +330,7 @@ The parsing engine currently supports the following rules:
 
 - `BASIC=basic` becomes `{BASIC: 'basic'}`
 - empty lines are skipped
+- variable names must consist of alphanumeric characters and `_.-{}[]()<>`
 - lines beginning with `#` are treated as comments
 - `#` marks the beginning of a comment (unless when the value is wrapped in quotes)
 - empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
