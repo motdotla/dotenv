@@ -381,7 +381,11 @@ Simply..
 
 ```javascript
 // index.mjs (ESM)
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+// don`t work with import
+//import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+// just work 
+import 'dotenv/config';
+
 dotenv.config()
 import express from 'express'
 ```
@@ -419,7 +423,8 @@ import { Client } from 'best-error-reporting-service'
 export default new Client(process.env.API_KEY)
 
 // index.mjs
-import * as dotenv from 'dotenv'
+//import * as dotenv from 'dotenv'
+import 'dotenv/config'; // but without setring config
 dotenv.config()
 
 import errorReporter from './errorReporter.mjs'
