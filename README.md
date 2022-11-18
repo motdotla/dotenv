@@ -419,11 +419,11 @@ import { Client } from 'best-error-reporting-service'
 export default new Client(process.env.API_KEY)
 
 // env.mjs
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'
 dotenv.config()
 
 // index.mjs
-import './env.mjs';
+import './env.mjs'
 
 import errorReporter from './errorReporter.mjs'
 errorReporter.report(new Error('documented example'))
