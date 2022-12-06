@@ -71,3 +71,14 @@ export interface DotenvConfigOutput {
  *
  */
 export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
+
+/**
+ * Loads `.env` file contents into process.env. then get the env vaiable
+ *
+ * See https://docs.dotenv.org
+ *
+ * @param key  example: `env("DB_TOKEN")`
+ * @returns a value for the input key or undefined if not exist 
+ *
+ */
+export function env(key: string): string;
