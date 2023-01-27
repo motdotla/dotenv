@@ -198,6 +198,7 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [react (typescript)](https://github.com/dotenv-org/examples/tree/master/dotenv-react-typescript)
 * [express](https://github.com/dotenv-org/examples/tree/master/dotenv-express)
 * [nestjs](https://github.com/dotenv-org/examples/tree/master/dotenv-nestjs)
+* [fastify](https://github.com/dotenv-org/examples/tree/master/dotenv-fastify)
 
 ## Documentation
 
