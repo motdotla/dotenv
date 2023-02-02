@@ -49,9 +49,9 @@ t.equal(parsed.DOUBLE_AND_SINGLE_QUOTES_INSIDE_BACKTICKS, "double \"quotes\" and
 
 t.equal(parsed.EXPAND_NEWLINES, 'expand\nnew\nlines', 'expands newlines but only if double quoted')
 
-t.equal(parsed.DONT_EXPAND_UNQUOTED, 'dontexpand\\nnewlines', 'expands newlines but only if double quoted')
+t.equal(parsed.DONT_EXPAND_UNQUOTED, 'dontexpandnnewlines', 'expands newlines but only if double quoted')
 
-t.equal(parsed.DONT_EXPAND_SQUOTED, 'dontexpand\\nnewlines', 'expands newlines but only if double quoted')
+t.equal(parsed.DONT_EXPAND_SQUOTED, 'dontexpandnnewlines', 'expands newlines but only if double quoted')
 
 t.notOk(parsed.COMMENTS, 'ignores commented lines')
 
