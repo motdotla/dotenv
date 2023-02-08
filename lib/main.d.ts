@@ -80,7 +80,7 @@ export interface DotenvConfigOptions {
    *
    * example: `require('dotenv').safe({ allowEmptyValues: true })`
    */
-  path?: string;
+  allowEmptyValues?: boolean;
 }
 
 export interface DotenvConfigOutput {

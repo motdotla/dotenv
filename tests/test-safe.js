@@ -1,5 +1,4 @@
 const fs = require('fs')
-const path = require('path')
 
 const sinon = require('sinon')
 const t = require('tap')
@@ -20,130 +19,21 @@ t.afterEach(() => {
   parseStub.restore()
 })
 
-t.test('takes option for path', ct => {
+t.test('takes option for example', ct => {
   ct.plan(1)
 
-  const testPath = 'tests/.env'
-  dotenv.safe()
+  const testPath = 'tests/.env.example'
+  dotenv.safe({ example: testPath })
 
   ct.equal(readFileSyncStub.args[0][0], testPath)
 })
 
-t.test('takes option for debug', ct => {
+t.test('takes option for allowEmptyValues', ct => {
   ct.plan(1)
 
   const logStub = sinon.stub(console, 'log')
-  dotenv.config({ debug: 'true' })
+  dotenv.config({ allowEmptyValues: true })
 
   ct.ok(logStub.called)
-  logStub.restore()
-})
-
-t.test('reads path with encoding, parsing output to process.env', ct => {
-  ct.plan(2)
-
-  const res = dotenv.config()
-
-  ct.same(res.parsed, mockParseResponse)
-  ct.equal(readFileSyncStub.callCount, 1)
-})
-
-t.test('does not write over keys already in process.env', ct => {
-  ct.plan(2)
-
-  const existing = 'bar'
-  process.env.test = existing
-  // 'foo' returned as value in `beforeEach`. should keep this 'bar'
-  const env = dotenv.config()
-
-  ct.equal(env.parsed && env.parsed.test, mockParseResponse.test)
-  ct.equal(process.env.test, existing)
-})
-
-t.test('does write over keys already in process.env if override turned on', ct => {
-  ct.plan(2)
-
-  const existing = 'bar'
-  process.env.test = existing
-  // 'foo' returned as value in `beforeEach`. should keep this 'bar'
-  const env = dotenv.config({ override: true })
-
-  ct.equal(env.parsed && env.parsed.test, mockParseResponse.test)
-  ct.equal(process.env.test, 'foo')
-})
-
-t.test(
-  'does not write over keys already in process.env if the key has a falsy value',
-  ct => {
-    ct.plan(2)
-
-    const existing = ''
-    process.env.test = existing
-    // 'foo' returned as value in `beforeEach`. should keep this ''
-    const env = dotenv.config()
-
-    ct.equal(env.parsed && env.parsed.test, mockParseResponse.test)
-    // NB: process.env.test becomes undefined on Windows
-    ct.notOk(process.env.test)
-  }
-)
-
-t.test(
-  'does write over keys already in process.env if the key has a falsy value but override is set to true',
-  ct => {
-    ct.plan(2)
-
-    const existing = ''
-    process.env.test = existing
-    // 'foo' returned as value in `beforeEach`. should keep this ''
-    const env = dotenv.config({ override: true })
-
-    ct.equal(env.parsed && env.parsed.test, mockParseResponse.test)
-    // NB: process.env.test becomes undefined on Windows
-    ct.ok(process.env.test)
-  }
-)
-
-t.test('returns parsed object', ct => {
-  ct.plan(2)
-
-  const env = dotenv.config()
-
-  ct.notOk(env.error)
-  ct.same(env.parsed, mockParseResponse)
-})
-
-t.test('returns any errors thrown from reading file or parsing', ct => {
-  ct.plan(1)
-
-  readFileSyncStub.throws()
-  const env = dotenv.config()
-
-  ct.type(env.error, Error)
-})
-
-t.test('logs any errors thrown from reading file or parsing when in debug mode', ct => {
-  ct.plan(2)
-
-  const logStub = sinon.stub(console, 'log')
-
-  readFileSyncStub.throws()
-  const env = dotenv.config({ debug: true })
-
-  ct.ok(logStub.called)
-  ct.type(env.error, Error)
-
-  logStub.restore()
-})
-
-t.test('logs any errors parsing when in debug and override mode', ct => {
-  ct.plan(1)
-
-  const logStub = sinon.stub(console, 'log')
-
-  dotenv.config({ debug: true, override: true })
-
-  ct.ok(logStub.called)
-
   logStub.restore()
 })
