@@ -54,6 +54,33 @@ export interface DotenvConfigOptions {
    * example: `require('dotenv').config({ override: true })`
    */
   override?: boolean;
+
+  /**
+   * Default: `.env.example`
+   *
+   * Specify a file containing example environment variables.
+   *
+   * example: `require('dotenv').safe({ example: '/custom/path/to/.env.example' })`
+   */
+  example?: string;
+   
+  /**
+   * Default: `.env.example`
+   *
+   * Specify a file containing example environment variables. Alias to `example`.
+   *
+   * example: `require('dotenv').safe({ example: '/custom/path/to/.env.sample' })`
+   */
+  sample?: string;
+
+  /**
+   * Default: `false`
+   *
+   * Allow empty values to be passed as environment variables.
+   *
+   * example: `require('dotenv').safe({ allowEmptyValues: true })`
+   */
+  path?: string;
 }
 
 export interface DotenvConfigOutput {
@@ -71,3 +98,14 @@ export interface DotenvConfigOutput {
  *
  */
 export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
+
+/**
+ * Loads `.env` file contents into process.env and validate the environment variables to the example file provided.
+ *
+ * See https://docs.dotenv.org - TODO - update docs
+ *
+ * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false, example: './custom/path/.env.example', allowEmptyValues: true }`
+ * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
+ *
+ */
+export function safe(options?: DotenvConfigOptions): DotenvConfigOutput;
