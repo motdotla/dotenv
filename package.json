@@ -29,6 +29,11 @@
     "prerelease": "npm test",
     "release": "standard-version"
   },
+  "tap": {
+    "nyc-arg": [
+      "--exclude=lib/missing-vars-error.js"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/motdotla/dotenv.git"

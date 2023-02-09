@@ -34,7 +34,7 @@ t.test('returns any errors thrown from missing env', ct => {
   ct.plan(1)
 
   const examplePath = 'tests/.env.example'
-  dotenv.safe({ example: examplePath })
+  const env = dotenv.safe({ example: examplePath })
 
-  ct.throws(function () { throw new MissingEnvVarsError() }, {})
+  ct.throws(function () { throw new MissingEnvVarsError(false, 'tests/.env', examplePath, ['nonExistentKey'], env.error) }, MissingEnvVarsError)
 })
