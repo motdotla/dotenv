@@ -21,10 +21,19 @@ t.afterEach(() => {
   parseStub.restore()
 })
 
-t.test('takes option for path', ct => {
+t.test('takes string for path option', ct => {
   ct.plan(1)
 
   const testPath = 'tests/.env'
+  dotenv.config({ path: testPath })
+
+  ct.equal(readFileSyncStub.args[0][0], testPath)
+})
+
+t.test('takes URL for path option', ct => {
+  ct.plan(1)
+
+  const testPath = new URL('file://home/user/project/.env')
   dotenv.config({ path: testPath })
 
   ct.equal(readFileSyncStub.args[0][0], testPath)
