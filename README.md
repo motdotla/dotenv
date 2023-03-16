@@ -103,7 +103,6 @@ You can load the `.env` file without updating `process.env` using the `load` fun
 ```javascript
 const dotenv = require('dotenv')
 const config = dotenv.load() // will return an object
-console.log(typeof config, config) // object { BASIC : 'basic' }
 ```
 
 ### Preload
