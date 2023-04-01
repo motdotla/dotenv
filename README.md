@@ -53,16 +53,16 @@
 
 Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](http://12factor.net/config) methodology.
 
-[![BuildStatus](https://img.shields.io/travis/motdotla/dotenv/master.svg?style=flat-square)](https://travis-ci.org/motdotla/dotenv)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/motdotla/dotenv?svg=true)](https://ci.appveyor.com/project/motdotla/dotenv/branch/master)
 [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
 [![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
 [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
-[![Featured on Openbase](https://badges.openbase.com/js/featured/dotenv.svg?token=eE0hWPkhC2JGSD4G9hwg5C54EBxjJAyvurGfQsYoKiQ=)](https://openbase.com/js/dotenv?utm_source=embedded&utm_medium=badge&utm_campaign=featured-badge&utm_term=js/dotenv)
-[![Limited Edition Tee Original](https://img.shields.io/badge/Limited%20Edition%20Tee%20%F0%9F%91%95-Original-yellow?labelColor=black&style=plastic)](https://dotenv.gumroad.com/l/original)
-[![Limited Edition Tee Redacted](https://img.shields.io/badge/Limited%20Edition%20Tee%20%F0%9F%91%95-Redacted-gray?labelColor=black&style=plastic)](https://dotenv.gumroad.com/l/redacted)
+
+* [Install & Usage (development)](#install)
+* [Deploying (production)](#deploying)
+* [Docs](#documentation)
+* [FAQ](#faq)
+* [Changelog](./CHANGELOG.md)
 
 ## Install
 
@@ -455,3 +455,7 @@ See [CHANGELOG.md](CHANGELOG.md)
 [These npm modules depend on it.](https://www.npmjs.com/browse/depended/dotenv)
 
 Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmjs.com/search?q=keywords:dotenv).
+
+[![Limited Edition Tee Original](https://img.shields.io/badge/Limited%20Edition%20Tee%20%F0%9F%91%95-Original-yellow?labelColor=black&style=plastic)](https://dotenv.gumroad.com/l/original)
+[![Limited Edition Tee Redacted](https://img.shields.io/badge/Limited%20Edition%20Tee%20%F0%9F%91%95-Redacted-gray?labelColor=black&style=plastic)](https://dotenv.gumroad.com/l/redacted)
+
