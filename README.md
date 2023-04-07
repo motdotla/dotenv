@@ -39,10 +39,6 @@
 </a>
 <hr>
 <br>
-<br>
-<br>
-<br>
-
 </div>
 
 [![dotenv-vault](https://badge.dotenv.org/works-with.svg?r=1)](https://www.dotenv.org/r/github.com/dotenv-org/dotenv-vault?r=1) 
@@ -58,13 +54,13 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 [![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
 [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
 
-* [🌱 Install](#install)
-* [🏗️ Usage (.env)](#usage)
-* [🚀 Deploying (.env.vault) 🆕](#deploying)
-* [🌴 Examples](#examples)
-* [Docs](#documentation)
-* [FAQ](#faq)
-* [Changelog](./CHANGELOG.md)
+* [🌱 Install](#-install)
+* [🏗️ Usage (.env)](#-usage)
+* [🚀 Deploying (.env.vault) 🆕](#-deploying)
+* [🌴 Examples](#-examples)
+* [🦮 Docs](#-documentation)
+* [❓ FAQ](#-faq)
+* [⏱️ Changelog](./CHANGELOG.md)
 
 ## 🌱 Install
 
@@ -263,7 +259,7 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [nestjs](https://github.com/dotenv-org/examples/tree/master/dotenv-nestjs)
 * [fastify](https://github.com/dotenv-org/examples/tree/master/dotenv-fastify)
 
-## Documentation
+## 🦮 Documentation
 
 Dotenv exposes two functions:
 
@@ -359,7 +355,7 @@ const config = dotenv.parse(buf, opt)
 // expect a debug message because the buffer is not in KEY=VAL form
 ```
 
-## FAQ
+## ❓ FAQ
 
 ### Why is the `.env` file not loading my environment variables successfully?
 
