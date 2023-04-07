@@ -55,7 +55,7 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
 
 * [🌱 Install](#-install)
-* [🏗️ Usage (.env)](#-usage)
+* [🏗️ Usage (.env)](#%EF%B8%8F-usage)
 * [🚀 Deploying (.env.vault) 🆕](#-deploying)
 * [🌴 Examples](#-examples)
 * [🦮 Docs](#-documentation)
