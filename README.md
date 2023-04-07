@@ -184,6 +184,8 @@ You need to keep `.env` files in sync between machines, environments, or team me
 
 ## Deploying
 
+**Note: Unreleased. Releasing as dotenv@1.19.0.**
+
 Up until recently (year 2023), we did not have an opinion on deploying your secrets to production. Dotenv had been focused on solving development secrets only. However, with the increasing number of secrets breaches like the [CircleCI breach](https://techcrunch.com/2023/01/05/circleci-breach/) we have formed an opinion.
 
 Don't scatter your secrets across these platforms. Use a `.env.vault` file.
@@ -229,7 +231,6 @@ The build command also created a `.env.keys` file for you. This is where your `D
 DOTENV_KEY_DEVELOPMENT="dotenv://:key_fc5c0d276e032a1e5ff295f59d7b63db75b0ae1a5a82ad411f4887c23dc78bd1@dotenv.local/vault/.env.vault?environment=development"
 DOTENV_KEY_CI="dotenv://:key_c6bc0b1269b53ee852b269c4ea6d82d82619081f2faddb1e05894fbe90c1ef46@dotenv.local/vault/.env.vault?environment=ci"
 DOTENV_KEY_STAGING="dotenv://:key_09ec9bfe7a4512b71b3b1ab12aa2f843f47b8c9dc7d0d954e206f37ca125da69@dotenv.local/vault/.env.vault?environment=staging"
-DOTENV_KEY_PRODUCTION="dotenv://:key_bfa00115ecacb678ba44376526b2f0b3131aa0060f18de357a63eda08af6a7fe@dotenv.local/vault/.env.vault?environment=production"
 ```
 
 Go to your web server or cloud platform and set the environment variable `DOTENV_KEY` with the production value. For example, in heroku I'd run the following command.
