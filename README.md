@@ -184,7 +184,7 @@ You need to keep `.env` files in sync between machines, environments, or team me
 
 Up until recently (year 2023), we did not have an opinion on deploying your secrets to production. Dotenv had been focused on solving development secrets only. However, with the increasing number of secrets breaches like the [CircleCI breach](https://techcrunch.com/2023/01/05/circleci-breach/) we have formed an opinion.
 
-Don't scatter your secrets across these platforms. Use a `.env.vault` file.
+Don't scatter your secrets across multiple platforms and tools. Use a `.env.vault` file.
 
 The `.env.vault` file encrypts your secrets and decrypts them just-in-time on boot of your application. It uses a `DOTENV_KEY` environment variable that you set on your cloud platform or server. If there is a secrets breach, an attacker only gains access to your decryption key, not your secrets. They would additionally have to gain access to your codebase, find your .env.vault file, and decrypt it to get your secrets. This is much harder and more time consuming for an attacker.
 
