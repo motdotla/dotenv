@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.0.3...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.1.0...master)
+
+## [16.1.0](https://github.com/motdotla/dotenv/compare/v16.0.3...v16.1.0) (2023-04-01)
+
+### Added
+
+- Add `.env.vault` support. 🎉 ([#730](https://github.com/motdotla/dotenv/pull/730))
+
+ℹ️ `.env.vault` extends the `.env` file format standard with a localized encrypted vault file. Package it securely with your production code deploys. It's cloud agnostic so that you can deploy your secrets anywhere – without [risky third-party integrations](https://techcrunch.com/2023/01/05/circleci-breach/).
 
 ## [16.0.3](https://github.com/motdotla/dotenv/compare/v16.0.2...v16.0.3) (2022-09-29)
 
