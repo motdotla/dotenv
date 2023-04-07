@@ -184,7 +184,7 @@ You need to keep `.env` files in sync between machines, environments, or team me
 
 ## Deploying
 
-**Note: Unreleased. Releasing as dotenv@1.19.0.**
+**Note: Unreleased. Releasing as dotenv@16.1.0.**
 
 Up until recently (year 2023), we did not have an opinion on deploying your secrets to production. Dotenv had been focused on solving development secrets only. However, with the increasing number of secrets breaches like the [CircleCI breach](https://techcrunch.com/2023/01/05/circleci-breach/) we have formed an opinion.
 
@@ -239,7 +239,7 @@ Go to your web server or cloud platform and set the environment variable `DOTENV
 heroku config:set DOTENV_KEY=dotenv://:key_bfa00115ecacb678ba44376526b2f0b3131aa0060f18de357a63eda08af6a7fe@dotenv.local/vault/.env.vault?environment=production
 ```
 
-Then deploy your code. On boot, the `dotenv` library (>= 1.19.0) will see that a `DOTENV_KEY` is set and use its value to decrypt the production contents of the `.env.vault` file and inject them into your process.
+Then deploy your code. On boot, the `dotenv` library (>= 16.1.0) will see that a `DOTENV_KEY` is set and use its value to decrypt the production contents of the `.env.vault` file and inject them into your process.
 
 No more scattered secrets across multiple platforms and tools.
 
