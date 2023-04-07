@@ -58,15 +58,15 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 [![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
 [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
 
-* [Install](#install)
-* [Usage (.env)](#usage)
-* [Deploying (.env.vault)](#deploying)
-* [Examples](#examples)
+* [🌱 Install](#install)
+* [🏗️ Usage (.env)](#usage)
+* [🚀 Deploying (.env.vault) 🆕](#deploying)
+* [🌴 Examples](#examples)
 * [Docs](#documentation)
 * [FAQ](#faq)
 * [Changelog](./CHANGELOG.md)
 
-## Install
+## 🌱 Install
 
 ```bash
 # install locally (recommended)
@@ -75,7 +75,7 @@ npm install dotenv --save
 
 Or installing with yarn? `yarn add dotenv`
 
-## Usage
+## 🏗️ Usage
 
 Create a `.env` file in the root of your project:
 
@@ -182,9 +182,9 @@ You need to add the value of another variable in one of your variables? Use [dot
 
 You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
 
-## Deploying
+## 🚀 Deploying
 
-**Note: Unreleased. Releasing as dotenv@16.1.0.**
+**Note: Unreleased. Coming soon! Releasing as dotenv@16.1.0.**
 
 Up until recently (year 2023), we did not have an opinion on deploying your secrets to production. Dotenv had been focused on solving development secrets only. However, with the increasing number of secrets breaches like the [CircleCI breach](https://techcrunch.com/2023/01/05/circleci-breach/) we have formed an opinion.
 
@@ -243,7 +243,7 @@ Then deploy your code. On boot, the `dotenv` library (>= 16.1.0) will see that a
 
 No more scattered secrets across multiple platforms and tools.
 
-## Examples
+## 🌴 Examples
 
 See [examples](https://github.com/dotenv-org/examples) of using dotenv with various frameworks, languages, and configurations.
 
