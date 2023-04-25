@@ -180,7 +180,7 @@ You need to keep `.env` files in sync between machines, environments, or team me
 
 ## 🚀 Deploying
 
-**Note: Unreleased. Coming April 17, 2023! Releasing as dotenv@16.1.0.**
+**Note: Unreleased. Coming May, 2023! Releasing as dotenv@16.1.0.**
 
 Up until recently (year 2023), we did not have an opinion on deploying your secrets to production. Dotenv had been focused on solving development secrets only. However, with the increasing number of secrets breaches like the [CircleCI breach](https://techcrunch.com/2023/01/05/circleci-breach/) we have formed an opinion.
 
