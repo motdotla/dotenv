@@ -88,11 +88,10 @@ require('dotenv').config()
 console.log(process.env) // remove this after you've confirmed it is working
 ```
 
-.. or using ES6?
+.. [or using ES6?](#how-do-i-use-dotenv-with-import)
 
 ```javascript
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
+import 'dotenv/config'
 import express from 'express'
 ```
 
@@ -453,8 +452,7 @@ Simply..
 
 ```javascript
 // index.mjs (ESM)
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
+import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import express from 'express'
 ```
 
@@ -466,14 +464,16 @@ A little background..
 
 What does this mean in plain language? It means you would think the following would work but it won't.
 
+`errorReporter.mjs`:
 ```js
-// errorReporter.mjs
 import { Client } from 'best-error-reporting-service'
 
 export default new Client(process.env.API_KEY)
-
-// index.mjs
-import dotenv from 'dotenv'
+```
+`index.mjs`:
+```js
+// Note: this is INCORRECT and will not work
+import * as dotenv from 'dotenv'
 dotenv.config()
 
 import errorReporter from './errorReporter.mjs'
@@ -482,17 +482,10 @@ errorReporter.report(new Error('documented example'))
 
 `process.env.API_KEY` will be blank.
 
-Instead the above code should be written as..
+Instead, `index.mjs` should be written as..
 
 ```js
-// errorReporter.mjs
-import { Client } from 'best-error-reporting-service'
-
-export default new Client(process.env.API_KEY)
-
-// index.mjs
-import * as dotenv from 'dotenv'
-dotenv.config()
+import 'dotenv/config'
 
 import errorReporter from './errorReporter.mjs'
 errorReporter.report(new Error('documented example'))
