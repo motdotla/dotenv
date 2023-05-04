@@ -57,8 +57,9 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 * [🌱 Install](#-install)
 * [🏗️ Usage (.env)](#%EF%B8%8F-usage)
 * [🚀 Deploying (.env.vault) 🆕](#-deploying)
-* [🌴 Examples](#-examples)
-* [🦮 Docs](#-documentation)
+* [🌴 Multiple Environments](#-manage-multiple-environments)
+* [📚 Examples](#-examples)
+* [📖 Docs](#-documentation)
 * [❓ FAQ](#-faq)
 * [⏱️ Changelog](./CHANGELOG.md)
 
@@ -178,68 +179,79 @@ You need to add the value of another variable in one of your variables? Use [dot
 
 You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
 
-## 🚀 Deploying
+## 🚀 Deploying (.env.vault)
 
-**Note: Unreleased. Coming May, 2023! Releasing as dotenv@16.1.0.**
+**Note: Unreleased. Coming May, 2023! Releasing as dotenv@16.1.0. Currently available as [dotenv@16.1.0-rc1](https://www.npmjs.com/package/dotenv/v/16.1.0-rc1)**
 
-Up until recently (year 2023), we did not have an opinion on deploying your secrets to production. Dotenv had been focused on solving development secrets only. However, with the increasing number of secrets breaches like the [CircleCI breach](https://techcrunch.com/2023/01/05/circleci-breach/) we have formed an opinion.
+Encrypt your environment variables by doing:
 
-Don't scatter your secrets across multiple platforms and tools. Use a `.env.vault` file.
+```shell
+npx dotenv-vault local build
+```
 
-The `.env.vault` file encrypts your secrets and decrypts them just-in-time on boot of your application. It uses a `DOTENV_KEY` environment variable that you set on your cloud platform or server. If there is a secrets breach, an attacker only gains access to your decryption key, not your secrets. They would additionally have to gain access to your codebase, find your .env.vault file, and decrypt it to get your secrets. This is much harder and more time consuming for an attacker.
+This will create an encrypted `.env.vault` file along with a `.env.keys` file containing the encryption keys. Set the `DOTENV_KEY` environment variable by copying and pasting the key value from the `.env.keys` file onto your server or cloud provider. For example in heroku:
 
-It works in 3 easy steps.
+```shell
+heroku config:set DOTENV_KEY=<key string from .env.keys>
+```
 
-### 1. Create .env.ENVIRONMENT files
+Commit your .env.vault file safely to code and deploy. Your .env.vault fill be decrypted on boot, its environment variables injected, and your app work as expected.
 
-In addition to your `.env` (development) file, create a `.env.ci`, `.env.staging`, and `.env.production` file.
+## 🌴 Manage Multiple Environments
 
-(Have a custom environment? Just append it's name. For example, `.env.prod`.)
+You have two options for managing multiple environments - locally managed or vault managed - both use <a href="https://github.com/dotenv-org/dotenv-vault">dotenv-vault</a>.
 
-Put your respective secrets in each of those files, just like you always have with your `.env` files. These files should NOT be committed to code.
+Locally managed never makes a remote API call. It is completely managed on your machine. Vault managed adds conveniences like backing up your .env file, secure sharing across your team, access permissions, and version history. Choose what works best for you.
 
-### 2. Generate .env.vault file
+#### 💻 Locally Managed
 
-Run the build command to generate your `.env.vault` file.
+Create a `.env.production` file in the root of your project and put your production values there.
+
+```
+# .env.production
+S3_BUCKET="PRODUCTION_S3BUCKET"
+SECRET_KEY="PRODUCTION_SECRETKEYGOESHERE"
+```
+
+Rebuild your `.env.vault` file.
 
 ```
 $ npx dotenv-vault local build
 ```
 
-This command will read the contents of each of your `.env.*` files, encrypt them, and inject the encrypted versions into your `.env.vault` file. For example:
+Check your `.env.keys` file. There is a production `DOTENV_KEY` that coincides with the additional `DOTENV_VAULT_PRODUCTION` cipher in your `.env.vault` file.
+
+Set the production `DOTENV_KEY` on your server, recommit your `.env.vault` file to code, and deploy. That's it!
+
+#### 🔐 Vault Managed
+
+Sync your .env file. Run the push command and follow the instructions. [learn more](/docs/sync/quickstart)
 
 ```
-# .env.vault (generated with npx dotenv-vault local build)
-DOTENV_VAULT_DEVELOPMENT="X/GOMD7h/Fygjyq3+K2zbdyTBUBVA+mLivaSebqDMnLAencDGu9YvJji"
-DOTENV_VAULT_CI="SNnKvHTezcd0B8L+81lhcig+6GfkRxnlrgS1GG/2tJZ7KghOEJnM"
-DOTENV_VAULT_PRODUCTION="FudgivxdMrCKOKUeN+QieuCAoGiC2MstXL8JU6Pp4ILYu9wEwfqe4ne3e2jcVys="
-DOTENV_VAULT_STAGING="CZXrvrTusPLJlgm62uEppwCKZt6zEr4TGwlP8Z0McJd7I8KBF522JnhT9/8="
+$ npx dotenv-vault push
 ```
 
-Commit your `.env.vault` file safely to code. It SHOULD be committed to code.
-
-### 3. Set DOTENV_KEY
-
-The build command also created a `.env.keys` file for you. This is where your `DOTENV_KEY` decryption keys live per environment.
+Manage multiple environments with the included UI. [learn more](/docs/tutorials/environments)
 
 ```
-# DOTENV_KEYs (generated with npx dotenv-vault local build)
-DOTENV_KEY_DEVELOPMENT="dotenv://:key_fc5c0d276e032a1e5ff295f59d7b63db75b0ae1a5a82ad411f4887c23dc78bd1@dotenv.local/vault/.env.vault?environment=development"
-DOTENV_KEY_CI="dotenv://:key_c6bc0b1269b53ee852b269c4ea6d82d82619081f2faddb1e05894fbe90c1ef46@dotenv.local/vault/.env.vault?environment=ci"
-DOTENV_KEY_STAGING="dotenv://:key_09ec9bfe7a4512b71b3b1ab12aa2f843f47b8c9dc7d0d954e206f37ca125da69@dotenv.local/vault/.env.vault?environment=staging"
+$ npx dotenv-vault open
 ```
 
-Go to your web server or cloud platform and set the environment variable `DOTENV_KEY` with the production value. For example, in heroku I'd run the following command.
+Build your `.env.vault` file with multiple environments.
 
 ```
-heroku config:set DOTENV_KEY=dotenv://:key_bfa00115ecacb678ba44376526b2f0b3131aa0060f18de357a63eda08af6a7fe@dotenv.local/vault/.env.vault?environment=production
+$ npx dotenv-vault build
 ```
 
-Then deploy your code. On boot, the `dotenv` library (>= 16.1.0) will see that a `DOTENV_KEY` is set and use its value to decrypt the production contents of the `.env.vault` file and inject them into your process.
+Access your `DOTENV_KEY`.
 
-No more scattered secrets across multiple platforms and tools.
+```
+$ npx dotenv-vault keys
+```
 
-## 🌴 Examples
+Set the production `DOTENV_KEY` on your server, recommit your `.env.vault` file to code, and deploy. That's it!
+
+## 📚 Examples
 
 See [examples](https://github.com/dotenv-org/examples) of using dotenv with various frameworks, languages, and configurations.
 
@@ -259,7 +271,7 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [nestjs](https://github.com/dotenv-org/examples/tree/master/dotenv-nestjs)
 * [fastify](https://github.com/dotenv-org/examples/tree/master/dotenv-fastify)
 
-## 🦮 Documentation
+## 📖 Documentation
 
 Dotenv exposes two functions:
 
