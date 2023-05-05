@@ -6,8 +6,8 @@
   "types": "lib/main.d.ts",
   "exports": {
     ".": {
-      "require": "./lib/main.js",
       "types": "./lib/main.d.ts",
+      "require": "./lib/main.js",
       "default": "./lib/main.js"
     },
     "./config": "./config.js",
