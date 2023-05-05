@@ -64,9 +64,8 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 
 <a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
 <div align="right">
-<img src="https://img.youtube.com/vi/YtkZR0NFd1g/hqdefault.jpg" alt="how to use dotenv" align="right" width="330" />
-<br/>
-<img src="https://simpleicons.org/icons/youtube.svg" alt="youtube/@dotenvorg" align="right" width="24" />
+<img src="https://img.youtube.com/vi/YtkZR0NFd1g/hqdefault.jpg" alt="how to use dotenv video tutorial" align="right" width="330" />
+<img src="https://simpleicons.vercel.app/youtube/ff0000" alt="youtube/@dotenvorg" align="right" width="24" />
 </div>
 </a>
 
