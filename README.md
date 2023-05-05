@@ -178,9 +178,9 @@ You need to add the value of another variable in one of your variables? Use [dot
 
 You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
 
-## 🚀 Deploying (.env.vault)
+## 🚀 Deploying
 
-**Note: Unreleased. Coming May, 2023! Releasing as dotenv@16.1.0. Currently available as [dotenv@16.1.0-rc1](https://www.npmjs.com/package/dotenv/v/16.1.0-rc1)**
+**Note: Currently released as RC Candidate [dotenv@16.1.0-rc1](https://www.npmjs.com/package/dotenv/v/16.1.0-rc1)**
 
 Encrypt your environment variables by doing:
 
@@ -519,7 +519,3 @@ See [CHANGELOG.md](CHANGELOG.md)
 [These npm modules depend on it.](https://www.npmjs.com/browse/depended/dotenv)
 
 Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmjs.com/search?q=keywords:dotenv).
-
-[![Limited Edition Tee Original](https://img.shields.io/badge/Limited%20Edition%20Tee%20%F0%9F%91%95-Original-yellow?labelColor=black&style=plastic)](https://dotenv.gumroad.com/l/original)
-[![Limited Edition Tee Redacted](https://img.shields.io/badge/Limited%20Edition%20Tee%20%F0%9F%91%95-Redacted-gray?labelColor=black&style=plastic)](https://dotenv.gumroad.com/l/redacted)
-
