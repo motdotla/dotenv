@@ -41,8 +41,6 @@
 <br>
 </div>
 
-[![dotenv-vault](https://badge.dotenv.org/works-with.svg?r=1)](https://www.dotenv.org/r/github.com/dotenv-org/dotenv-vault?r=1) 
-
 # dotenv
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.svg" alt="dotenv" align="right" width="200" />
@@ -53,11 +51,12 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
 [![Coverage Status](https://img.shields.io/coveralls/motdotla/dotenv/master.svg?style=flat-square)](https://coveralls.io/github/motdotla/dotenv?branch=coverall-intergration)
 [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
+[![dotenv-vault](https://badge.dotenv.org/works-with.svg?r=1)](https://www.dotenv.org/r/github.com/dotenv-org/dotenv-vault?r=1) 
 
 * [🌱 Install](#-install)
 * [🏗️ Usage (.env)](#%EF%B8%8F-usage)
 * [🚀 Deploying (.env.vault) 🆕](#-deploying)
-* [🌴 Multiple Environments](#-manage-multiple-environments)
+* [🌴 Multiple Environments 🆕](#-manage-multiple-environments)
 * [📚 Examples](#-examples)
 * [📖 Docs](#-documentation)
 * [❓ FAQ](#-faq)
