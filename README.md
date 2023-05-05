@@ -184,6 +184,13 @@ You need to keep `.env` files in sync between machines, environments, or team me
 
 ## 🚀 Deploying
 
+<a href="https://www.youtube.com/watch?v=Ad7Wl8iC3Rs">
+<div align="right">
+<img src="https://img.youtube.com/vi/Ad7Wl8iC3Rs/hqdefault.jpg" alt="how to deploy with a .env.vault file video tutorial" align="right" width="330" />
+<img src="https://simpleicons.vercel.app/youtube/ff0000" alt="youtube/@dotenvorg" align="right" width="24" />
+</div>
+</a>
+
 **Note: Currently released as RC Candidate [dotenv@16.1.0-rc1](https://www.npmjs.com/package/dotenv/v/16.1.0-rc1)**
 
 Encrypt your environment variables by doing:
