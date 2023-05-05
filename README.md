@@ -519,6 +519,10 @@ Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmj
 
 ## Videos
 
+<a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
+<img src="https://img.youtube.com/vi/YtkZR0NFd1g/hqdefault.jpg" alt="how to use dotenv" align="right" width="300" />
+</a>
+
 https://user-images.githubusercontent.com/3848/236523426-60f59e3b-364b-4435-91dc-b3d5c13160f1.mp4
 
 <video src='https://user-images.githubusercontent.com/3848/236523426-60f59e3b-364b-4435-91dc-b3d5c13160f1.mp4' width='180' />
