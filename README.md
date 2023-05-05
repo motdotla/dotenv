@@ -71,6 +71,10 @@ Or installing with yarn? `yarn add dotenv`
 
 ## 🏗️ Usage
 
+<a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
+<img src="https://img.youtube.com/vi/YtkZR0NFd1g/hqdefault.jpg" alt="how to use dotenv" align="right" width="330" />
+</a>
+
 Create a `.env` file in the root of your project:
 
 ```dosini
@@ -516,13 +520,3 @@ See [CHANGELOG.md](CHANGELOG.md)
 [These npm modules depend on it.](https://www.npmjs.com/browse/depended/dotenv)
 
 Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmjs.com/search?q=keywords:dotenv).
-
-## Videos
-
-<a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
-<img src="https://img.youtube.com/vi/YtkZR0NFd1g/hqdefault.jpg" alt="how to use dotenv" align="right" width="300" />
-</a>
-
-https://user-images.githubusercontent.com/3848/236523426-60f59e3b-364b-4435-91dc-b3d5c13160f1.mp4
-
-<video src='https://user-images.githubusercontent.com/3848/236523426-60f59e3b-364b-4435-91dc-b3d5c13160f1.mp4' width='180' />
