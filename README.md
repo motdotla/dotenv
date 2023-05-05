@@ -63,11 +63,11 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 ## 🌱 Install
 
 <a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
+<div align="right">
 <img src="https://img.youtube.com/vi/YtkZR0NFd1g/hqdefault.jpg" alt="how to use dotenv" align="right" width="330" />
-</a>
-
-<a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
-how-to-use-dotenv.mp4 <img src="https://simpleicons.org/icons/youtube.svg" alt="youtube/@dotenvorg" align="right" width="24" />
+<br/>
+<img src="https://simpleicons.org/icons/youtube.svg" alt="youtube/@dotenvorg" align="right" width="24" />
+</div>
 </a>
 
 ```bash
