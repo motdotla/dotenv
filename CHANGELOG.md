@@ -5,7 +5,8 @@ All notable changes to this project will be documented in this file. See [standa
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.1.0...master)
 
 - Spanish language README [#698](https://github.com/motdotla/dotenv/pull/698)
-- Support .env.vault decryption
+- Remove cannot resolve 'fs' error on tools like Replit [#693](https://github.com/motdotla/dotenv/pull/693)
+- Support .env.vault decryption [#730](https://github.com/motdotla/dotenv/pull/730)
 
 ## [16.1.0](https://github.com/motdotla/dotenv/compare/v16.0.3...v16.1.0) (2023-04-01)
 
