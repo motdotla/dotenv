@@ -26,7 +26,7 @@ export interface DotenvConfigOptions {
    *
    * example: `require('dotenv').config({ path: '/custom/path/to/.env' })`
    */
-  path?: string;
+  path?: string | URL;
 
   /**
    * Default: `utf8`
