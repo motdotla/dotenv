@@ -96,7 +96,6 @@ console.log(process.env) // remove this after you've confirmed it is working
 
 ```javascript
 import 'dotenv/config'
-import express from 'express'
 ```
 
 That's it. `process.env` now has the keys and values you defined in your `.env` file:
