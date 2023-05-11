@@ -61,6 +61,34 @@ export interface DotenvConfigOutput {
   parsed?: DotenvParseOutput;
 }
 
+export interface DotenvApplyOptions {
+  /**
+   * Default: `false`
+   *
+   * Turn on logging to help debug why certain keys or values are not being set as you expect.
+   *
+   * example: `require('dotenv').config({ debug: process.env.DEBUG })`
+   */
+  debug?: boolean;
+
+  /**
+   * Default: `false`
+   *
+   * Override any environment variables that have already been set on your machine with values from your .env file.
+   *
+   * example: `require('dotenv').config({ override: true })`
+   */
+  override?: boolean;
+}
+
+export interface DotenvApplyOutput {
+  error?: Error;
+}
+
+export interface DotenvApplyInput {
+  [name: string]: string;
+}
+
 /**
  * Loads `.env` file contents into process.env.
  *
@@ -71,3 +99,16 @@ export interface DotenvConfigOutput {
  *
  */
 export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
+
+/**
+ * Loads `source` json contents into `target` like process.env.
+ *
+ * See https://docs.dotenv.org
+ *
+ * @param target - the target JSON object
+ * @param source - the source JSON object
+ * @param options - additional options. example: `{ debug: true, override: false }`
+ * @returns {void}
+ *
+ */
+export function apply(target: DotenvApplyInput, source: DotenvApplyInput, options?: DotenvConfigOptions): DotenvApplyOutput;
