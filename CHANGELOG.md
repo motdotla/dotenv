@@ -6,9 +6,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Added
 
-- Spanish language README [#698](https://github.com/motdotla/dotenv/pull/698)
-- Remove cannot resolve 'fs' error on tools like Replit [#693](https://github.com/motdotla/dotenv/pull/693)
+- Add `apply` method [#733](https://github.com/motdotla/dotenv/pull/733)
+- Remove "cannot resolve 'fs'" error on tools like Replit [#693](https://github.com/motdotla/dotenv/pull/693)
 - Accept URL as path option [#720](https://github.com/motdotla/dotenv/pull/720)
+- Spanish language README [#698](https://github.com/motdotla/dotenv/pull/698)
 - Add `.env.vault` support. 🎉 ([#730](https://github.com/motdotla/dotenv/pull/730))
 
 ℹ️ `.env.vault` extends the `.env` file format standard with a localized encrypted vault file. Package it securely with your production code deploys. It's cloud agnostic so that you can deploy your secrets anywhere – without [risky third-party integrations](https://techcrunch.com/2023/01/05/circleci-breach/).
