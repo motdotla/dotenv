@@ -61,7 +61,7 @@ export interface DotenvConfigOutput {
   parsed?: DotenvParseOutput;
 }
 
-export interface DotenvApplyOptions {
+export interface DotenvPopulateOptions {
   /**
    * Default: `false`
    *
@@ -81,11 +81,11 @@ export interface DotenvApplyOptions {
   override?: boolean;
 }
 
-export interface DotenvApplyOutput {
+export interface DotenvPopulateOutput {
   error?: Error;
 }
 
-export interface DotenvApplyInput {
+export interface DotenvPopulateInput {
   [name: string]: string;
 }
 
@@ -111,4 +111,4 @@ export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
  * @returns {void}
  *
  */
-export function apply(target: DotenvApplyInput, source: DotenvApplyInput, options?: DotenvConfigOptions): DotenvApplyOutput;
+export function populate(target: DotenvPopulateInput, source: DotenvPopulateInput, options?: DotenvConfigOptions): DotenvPopulateOutput;
