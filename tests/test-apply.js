@@ -92,19 +92,9 @@ t.test('logs applying when debug mode and override turned on', ct => {
 t.test('returns any errors thrown on passing not json type', ct => {
   ct.plan(1)
 
-  const env = dotenv.apply('', process.env)
-
-  ct.type(env.error, Error)
-})
-
-t.test('logs any errors thrown on passing not json type and debug is also on', ct => {
-  ct.plan(1)
-
-  const logStub = sinon.stub(console, 'log')
-
-  dotenv.apply('', process.env, { debug: true })
-
-  ct.ok(logStub.called)
-
-  logStub.restore()
+  try {
+    dotenv.apply('', process.env)
+  } catch (e) {
+    ct.equal(e.message, 'INVALID_SOURCE_OBJECT:: Please check the source object being passed to apply')
+  }
 })
