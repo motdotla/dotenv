@@ -282,10 +282,11 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 
 ## 📖 Documentation
 
-Dotenv exposes two functions:
+Dotenv exposes three functions:
 
 * `config`
 * `parse`
+* `populate`
 
 ### Config
 
@@ -375,6 +376,47 @@ const opt = { debug: true }
 const config = dotenv.parse(buf, opt)
 // expect a debug message because the buffer is not in KEY=VAL form
 ```
+
+### Populate
+
+The engine which populates the contents of your .env file to `process.env` is available for use. It accepts a target, a source, and options. This is useful for power users who want to supply their own objects.
+
+For example, customizing the source:
+
+```js
+const dotenv = require('dotenv')
+const parsed = { HELLO: 'world' }
+
+dotenv.populate(process.env, parsed)
+
+console.log(process.env.HELLO) // world
+```
+
+For example, customizing the source AND target:
+
+```js
+const dotenv = require('dotenv')
+const parsed = { HELLO: 'universe' }
+const target = { HELLO: 'world' } // empty object
+
+dotenv.populate(target, parsed, { override: true, debug: true })
+
+console.log(target) // { HELLO: 'universe' }
+```
+
+#### Options
+
+##### Debug
+
+Default: `false`
+
+Turn on logging to help debug why certain keys or values are not being populated as you expect.
+
+##### Override
+
+Default: `false`
+
+Override any environment variables that have already been set.
 
 ## ❓ FAQ
 
