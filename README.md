@@ -190,18 +190,20 @@ You need to keep `.env` files in sync between machines, environments, or team me
 </div>
 </a>
 
-**Note: Currently released as RC Candidate [dotenv@16.1.0-rc1](https://www.npmjs.com/package/dotenv/v/16.1.0-rc1)**
+**Note: Currently released as RC Candidate [dotenv@16.1.0-rc2](https://www.npmjs.com/package/dotenv/v/16.1.0-rc2)**
 
-Encrypt your environment variables by doing:
+Install [dotenv-vault](https://www.dotenv.org/install/).
+
+Encrypt your environment variables.
 
 ```shell
-npx dotenv-vault local build
+$ npx dotenv-vault local build
 ```
 
 This will create an encrypted `.env.vault` file along with a `.env.keys` file containing the encryption keys. Set the `DOTENV_KEY` environment variable by copying and pasting the key value from the `.env.keys` file onto your server or cloud provider. For example in heroku:
 
 ```shell
-heroku config:set DOTENV_KEY=<key string from .env.keys>
+$ heroku config:set DOTENV_KEY=<key string from .env.keys>
 ```
 
 Commit your .env.vault file safely to code and deploy. Your .env.vault fill be decrypted on boot, its environment variables injected, and your app work as expected.
