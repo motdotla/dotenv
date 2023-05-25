@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file. See [standa
 - Add `populate` convenience method [#733](https://github.com/motdotla/dotenv/pull/733)
 - Remove "cannot resolve 'fs'" error on tools like Replit [#693](https://github.com/motdotla/dotenv/pull/693)
 - Accept URL as path option [#720](https://github.com/motdotla/dotenv/pull/720)
+- Add dotenv to `npm fund` command
 - Spanish language README [#698](https://github.com/motdotla/dotenv/pull/698)
 - Add `.env.vault` support. 🎉 ([#730](https://github.com/motdotla/dotenv/pull/730))
 
