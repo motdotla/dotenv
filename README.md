@@ -180,6 +180,10 @@ You need to add the value of another variable in one of your variables? Use [dot
 
 You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
 
+### Deploying
+
+You need to deploy your secrets in a cloud-agnostic manner? Use a `.env.vault` file.
+
 ## 🚀 Deploying
 
 <a href="https://www.youtube.com/watch?v=Ad7Wl8iC3Rs">
@@ -191,21 +195,47 @@ You need to keep `.env` files in sync between machines, environments, or team me
 
 **Note: Currently released as RC Candidate [dotenv@16.1.0-rc2](https://www.npmjs.com/package/dotenv/v/16.1.0-rc2)**
 
-Install [dotenv-vault](https://www.dotenv.org/install/).
-
-Encrypt your environment variables.
+Install dotenv-vault.
 
 ```shell
-$ npx dotenv-vault local build
+$ brew install dotenv-vault 
+```
+(see [dotenv.org/install](https://www.dotenv.org/install) for other install options)
+
+Build your encrypted `.env.vault` file from your local .env file.
+
+```shell
+$ dotenv-vault local build
 ```
 
-This will create an encrypted `.env.vault` file along with a `.env.keys` file containing the encryption keys. Set the `DOTENV_KEY` environment variable by copying and pasting the key value from the `.env.keys` file onto your server or cloud provider. For example in heroku:
+This creates two files:
+
+* `.env.vault` - containing an encrypted version of your .env file
+* `.env.keys` - containing the decryption key
+
+Boot your application using the encrypted `.env.vault` file instead of your `.env` file.
+
+```
+$ DOTENV_KEY=<key string from .env.keys> npm start
+```
+
+If it worked, you'll see the message:
+
+```shell
+[dotenv@16.1.0][INFO] Loading env from encrypted .env.vault
+```
+
+(This [blog post](https://dotenv.org) goes into a full Hello World example.)
+
+Great, now set the `DOTENV_KEY` on your server. For example in heroku:
 
 ```shell
 $ heroku config:set DOTENV_KEY=<key string from .env.keys>
 ```
 
-Commit your .env.vault file safely to code and deploy. Your .env.vault fill be decrypted on boot, its environment variables injected, and your app work as expected.
+Commit your `.env.vault` file safely to code and deploy.
+
+Your `.env.vault` fill be decrypted on boot, its environment variables injected, and your app work as expected. Congratulations, your secrets are now much safer than scattered across multiple servers and cloud providers!
 
 ## 🌴 Manage Multiple Environments
 
