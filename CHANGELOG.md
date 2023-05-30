@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.1.0...master)
 
+## [16.1.1](https://github.com/motdotla/dotenv/compare/v16.1.0...v16.1.1) (2023-05-30)
+
+### Changed
+
+- Added `{crypto: false}` to `packageJson.browser`
+
 ## [16.1.0](https://github.com/motdotla/dotenv/compare/v16.0.3...v16.1.0) (2023-05-30)
 
 ### Added

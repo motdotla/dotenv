@@ -58,7 +58,8 @@
   "browser": {
     "fs": false,
     "path": false,
-    "os": false
+    "os": false,
+    "crypto": false
   },
   "engines": {
     "node": ">=12"
