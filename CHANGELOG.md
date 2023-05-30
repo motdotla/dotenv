@@ -4,16 +4,21 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.1.0...master)
 
+## [16.1.0](https://github.com/motdotla/dotenv/compare/v16.0.3...v16.1.0) (2023-05-30)
+
 ### Added
 
 - Add `populate` convenience method [#733](https://github.com/motdotla/dotenv/pull/733)
-- Remove "cannot resolve 'fs'" error on tools like Replit [#693](https://github.com/motdotla/dotenv/pull/693)
 - Accept URL as path option [#720](https://github.com/motdotla/dotenv/pull/720)
 - Add dotenv to `npm fund` command
 - Spanish language README [#698](https://github.com/motdotla/dotenv/pull/698)
 - Add `.env.vault` support. 🎉 ([#730](https://github.com/motdotla/dotenv/pull/730))
 
-ℹ️ `.env.vault` extends the `.env` file format standard with a localized encrypted vault file. Package it securely with your production code deploys. It's cloud agnostic so that you can deploy your secrets anywhere – without [risky third-party integrations](https://techcrunch.com/2023/01/05/circleci-breach/).
+ℹ️ `.env.vault` extends the `.env` file format standard with a localized encrypted vault file. Package it securely with your production code deploys. It's cloud agnostic so that you can deploy your secrets anywhere – without [risky third-party integrations](https://techcrunch.com/2023/01/05/circleci-breach/). [read more](https://github.com/motdotla/dotenv#-deploying)
+
+### Changed
+
+- Fixed "cannot resolve 'fs'" error on tools like Replit [#693](https://github.com/motdotla/dotenv/pull/693)
 
 ## [16.0.3](https://github.com/motdotla/dotenv/compare/v16.0.2...v16.0.3) (2022-09-29)
 
