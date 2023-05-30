@@ -533,6 +533,10 @@ Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
 Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault)
 
+### What is a `.env.vault` file?
+
+A `.env.vault` file is an encrypted version of your development (and ci, staging, production, etc) environment variables. It is paired with a `DOTENV_KEY` to deploy your secrets more securely than scattering them across multiple platforms and tools. Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault) to manage and generate them.
+
 ## Contributing Guide
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
