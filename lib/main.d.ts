@@ -90,7 +90,7 @@ export interface DotenvPopulateInput {
 }
 
 /**
- * Loads `.env` file contents into process.env.
+ * Loads `.env` file contents into process.env by default. If `DOTENV_KEY` is present, it smartly attempts to load encrypted `.env.vault` file contents into process.env.
  *
  * See https://docs.dotenv.org
  *
@@ -99,6 +99,17 @@ export interface DotenvPopulateInput {
  *
  */
 export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
+
+/**
+ * Loads `.env` file contents into process.env.
+ *
+ * See https://docs.dotenv.org
+ *
+ * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false }`
+ * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
+ *
+ */
+export function configDotenv(options?: DotenvConfigOptions): DotenvConfigOutput;
 
 /**
  * Loads `source` json contents into `target` like process.env.
