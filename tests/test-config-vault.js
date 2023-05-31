@@ -83,7 +83,7 @@ t.test('throws not found if .env.vault is empty', ct => {
 t.test('throws missing data when somehow parsed badly', ct => {
   ct.plan(1)
 
-  const configDotenvStub = sinon.stub(dotenv, '_configDotenv').returns({ parsed: undefined })
+  const configDotenvStub = sinon.stub(dotenv, 'configDotenv').returns({ parsed: undefined })
 
   try {
     dotenv.config({ path: testPath })
