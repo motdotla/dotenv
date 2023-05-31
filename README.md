@@ -525,6 +525,44 @@ There are two alternatives to this approach:
 1. Preload dotenv: `node --require dotenv/config index.js` (_Note: you do not need to `import` dotenv with this approach_)
 2. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
 
+### Why am I getting the error `Module not found: Error: Can't resolve 'crypto|os|path'`?
+
+You are using dotenv on the front-end and have not included a polyfill. Webpack < 5 used to include these for you. Do the following:
+
+```bash
+npm install node-polyfill-webpack-plugin
+```
+
+Configure your `webpack.config.js` to something like the following.
+
+```js
+require('dotenv').config()
+
+const path = require('path');
+const webpack = require('webpack')
+
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
+
+module.exports = {
+  mode: 'development',
+  entry: './src/index.ts',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  plugins: [
+    new NodePolyfillPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        HELLO: JSON.stringify(process.env.HELLO)
+      }
+    }),
+  ]
+};
+```
+
+Alternatively, just use [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack) which does this and more behind the scenes for you.
+
 ### What about variable expansion?
 
 Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)

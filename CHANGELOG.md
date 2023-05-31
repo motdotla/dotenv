@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.1.0...master)
 
+## [16.1.3](https://github.com/motdotla/dotenv/compare/v16.1.2...v16.1.3) (2023-05-31)
+
+### Removed
+
+- Removed `browser` keys for `path`, `os`, and `crypto` in package.json. These were set to false incorrectly as of 16.1. Instead, if using dotenv on the front-end make sure to include polyfills for `path`, `os`, and `crypto`. [node-polyfill-webpack-plugin](https://github.com/Richienb/node-polyfill-webpack-plugin) provides these.
+
 ## [16.1.2](https://github.com/motdotla/dotenv/compare/v16.1.1...v16.1.2) (2023-05-31)
 
 ### Changed
