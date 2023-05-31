@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Changed
 
-- Exposed private function `_configDotenv` as `configDotenv`.
+- Exposed private function `_configDotenv` as `configDotenv`. [#744](https://github.com/motdotla/dotenv/pull/744)
 
 ## [16.1.1](https://github.com/motdotla/dotenv/compare/v16.1.0...v16.1.1) (2023-05-30)
 
