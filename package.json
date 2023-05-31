@@ -55,12 +55,6 @@
     "tar": "^6.1.11",
     "typescript": "^4.8.4"
   },
-  "browser": {
-    "fs": false,
-    "path": false,
-    "os": false,
-    "crypto": false
-  },
   "engines": {
     "node": ">=12"
   }
