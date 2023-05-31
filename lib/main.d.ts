@@ -105,10 +105,22 @@ export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
  *
  * See https://docs.dotenv.org
  *
- * @param target - the target JSON object
- * @param source - the source JSON object
+ * @param processEnv - the target JSON object. in most cases use process.env but you can also pass your own JSON object
+ * @param parsed - the source JSON object
  * @param options - additional options. example: `{ debug: true, override: false }`
  * @returns {void}
  *
  */
-export function populate(target: DotenvPopulateInput, source: DotenvPopulateInput, options?: DotenvConfigOptions): DotenvPopulateOutput;
+export function populate(processEnv: DotenvPopulateInput, parsed: DotenvPopulateInput, options?: DotenvConfigOptions): DotenvPopulateOutput;
+
+/**
+ * Decrypt ciphertext
+ *
+ * See https://docs.dotenv.org
+ *
+ * @param encrypted - the encrypted ciphertext string
+ * @param keyStr - the decryption key string
+ * @returns {string}
+ *
+ */
+export function decrypt(encrypted: string, keyStr: string): string;
