@@ -57,5 +57,8 @@
   },
   "engines": {
     "node": ">=12"
+  },
+  "browser": {
+    "fs": false
   }
 }

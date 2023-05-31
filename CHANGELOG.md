@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Removed
 
-- Removed `browser` key in package.json. These were set to false incorrectly as of 16.1. Instead, if using dotenv on the front-end make sure to include polyfills for `path`, `os`, `fs`, and `crypto`. [Browserify](https://browserify.org/) provides these.
+- Removed `browser` key in package.json. These were set to false incorrectly as of 16.1. Instead, if using dotenv on the front-end make sure to include polyfills for `path`, `os`, and `crypto`. [node-polyfill-webpack-plugin](https://github.com/Richienb/node-polyfill-webpack-plugin) provides these.
 
 ## [16.1.2](https://github.com/motdotla/dotenv/compare/v16.1.1...v16.1.2) (2023-05-31)
 
