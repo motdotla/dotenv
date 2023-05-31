@@ -525,6 +525,20 @@ There are two alternatives to this approach:
 1. Preload dotenv: `node --require dotenv/config index.js` (_Note: you do not need to `import` dotenv with this approach_)
 2. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
 
+### Why am I getting the error `Module not found: Error: Can't resolve 'crypto|fs|os|path'`?
+
+You are using dotenv on the front-end. Webpack < 5 used to include polyfills for core Node.js modules like `crypto`, `fs`, `os`, and `path`. So today, you need to install and configure a polyfill for it.
+
+```bash
+npm install crypto-browserify
+```
+
+And then configure it in your webpack config.
+
+```json
+resolve.fallback: { "crypto": require.resolve("crypto-browserify") }
+```
+
 ### What about variable expansion?
 
 Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
