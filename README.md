@@ -527,7 +527,7 @@ There are two alternatives to this approach:
 
 ### Why am I getting the error `Module not found: Error: Can't resolve 'crypto|fs|os|path'`?
 
-You are using dotenv on the front-end. Webpack < 5 used to include polyfills for core Node.js modules like `crypto`, `fs`, `os`, and `path`. So today, you need to install and configure a polyfill for it.
+You are using dotenv on the front-end. Webpack < 5 used to include polyfills for core Node.js modules like `crypto`, `fs`, `os`, and `path`. It doesn't any longer, so these days you need to install and configure a polyfill for it.
 
 ```bash
 npm install crypto-browserify
@@ -535,7 +535,7 @@ npm install crypto-browserify
 
 And then configure it in your webpack config.
 
-```json
+```js
 resolve.fallback: { "crypto": require.resolve("crypto-browserify") }
 ```
 
