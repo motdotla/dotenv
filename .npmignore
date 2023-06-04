@@ -1,3 +1,4 @@
+.github/
 .nyc_output/
 examples/
 flow-typed/
