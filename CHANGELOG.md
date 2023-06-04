@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.1.0...master)
 
+## [16.1.4](https://github.com/motdotla/dotenv/compare/v16.1.3...v16.1.4) (2023-06-04)
+
+### Added
+
+- Added `.github/` to `.npmignore` [#747](https://github.com/motdotla/dotenv/pull/747)
+
 ## [16.1.3](https://github.com/motdotla/dotenv/compare/v16.1.2...v16.1.3) (2023-05-31)
 
 ### Removed
