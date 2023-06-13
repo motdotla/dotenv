@@ -1,5 +1,6 @@
 // TypeScript Version: 3.0
 /// <reference types="node" />
+import type { URL } from 'node:url';
 
 export interface DotenvParseOutput {
   [name: string]: string;
