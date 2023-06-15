@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.1.0...master)
 
+### Added
+
+- Add import type URL to types file [#751](https://github.com/motdotla/dotenv/pull/751)
+
 ## [16.1.4](https://github.com/motdotla/dotenv/compare/v16.1.3...v16.1.4) (2023-06-04)
 
 ### Added
