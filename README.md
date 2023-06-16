@@ -339,6 +339,16 @@ console.log(myObject) // values from .env or .env.vault live here now.
 console.log(process.env) // this was not changed or written to
 ```
 
+##### DOTENV_KEY
+
+Default: `process.env.DOTENV_KEY`
+
+Pass the `DOTENV_KEY` directly to config options. Defaults to looking for `process.env.DOTENV_KEY` environment variable. Note this only applies to decrypting `.env.vault` files. If passed as null or undefined, or not passed at all, dotenv falls back to its traditional job of parsing a `.env` file.
+
+```js
+require('dotenv').config({ DOTENV_KEY: 'dotenv://:key_1234…@dotenv.org/vault/.env.vault?environment=production' })
+```
+
 ### Parse
 
 The engine which parses the contents of your file containing environment

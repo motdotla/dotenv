@@ -194,6 +194,20 @@ t.test('does write over keys already in process.env if override turned on', ct =
   ct.equal(process.env.ALPHA, 'zeta')
 })
 
+t.test('when DOTENV_KEY is passed as an option it successfully decrypts and injects', ct => {
+  envStub.restore()
+  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('')
+
+  ct.plan(2)
+
+  const result = dotenv.config({ path: testPath, DOTENV_KEY: dotenvKey })
+
+  ct.equal(result.parsed.ALPHA, 'zeta')
+  ct.equal(process.env.ALPHA, 'zeta')
+
+  ct.end()
+})
+
 t.test('can write to a different object rather than process.env', ct => {
   ct.plan(3)
 
