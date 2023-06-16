@@ -333,7 +333,8 @@ Specify an object to write your secrets to. Defaults to `process.env` environmen
 const myObject = {}
 require('dotenv').config({ processEnv: myObject })
 
-// myObject will receive the values from your .env file rather than process.env
+console.log(myObject) // values from .env or .env.vault live here now.
+console.log(process.env) // this was not changed or written to
 ```
 
 ### Parse
@@ -351,7 +352,7 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 
 #### Options
 
-##### Debug
+##### debug
 
 Default: `false`
 
@@ -392,7 +393,7 @@ dotenv.populate(target, parsed, { override: true, debug: true })
 console.log(target) // { HELLO: 'universe' }
 ```
 
-#### Options
+#### options
 
 ##### Debug
 
@@ -400,7 +401,7 @@ Default: `false`
 
 Turn on logging to help debug why certain keys or values are not being populated as you expect.
 
-##### Override
+##### override
 
 Default: `false`
 
