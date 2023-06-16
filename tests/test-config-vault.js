@@ -170,6 +170,20 @@ t.test('when DOTENV_KEY is empty string falls back to .env file', ct => {
   ct.end()
 })
 
+t.test('when DOTENV_KEY is passed as an option it successfully decrypts and injects', ct => {
+  envStub.restore()
+  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('')
+
+  ct.plan(1)
+
+  const result = dotenv.config({ path: testPath, DOTENV_KEY: dotenvKey })
+
+  ct.equal(result.parsed.ALPHA, 'zeta')
+  ct.equal(process.env.ALPHA, 'bar')
+
+  ct.end()
+})
+
 t.test('does not write over keys already in process.env by default', ct => {
   ct.plan(2)
 
