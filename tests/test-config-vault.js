@@ -194,6 +194,21 @@ t.test('does write over keys already in process.env if override turned on', ct =
   ct.equal(process.env.ALPHA, 'zeta')
 })
 
+t.test('can write to a different object rather than process.env', ct => {
+  ct.plan(3)
+
+  process.env.ALPHA = 'other' // reset process.env
+
+  logStub = sinon.stub(console, 'log')
+
+  const myObject = {}
+
+  const result = dotenv.config({ path: testPath, processEnv: myObject })
+  ct.equal(result.parsed.ALPHA, 'zeta')
+  ct.equal(process.env.ALPHA, 'other')
+  ct.equal(myObject.ALPHA, 'zeta')
+})
+
 t.test('logs when debug and override are turned on', ct => {
   ct.plan(1)
 

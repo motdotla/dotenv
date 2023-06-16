@@ -135,6 +135,20 @@ t.test(
   }
 )
 
+t.test('can write to a different object rather than process.env', ct => {
+  ct.plan(3)
+
+  process.env.test = 'other' // reset process.env
+
+  const myObject = {}
+  const env = dotenv.config({ processEnv: myObject })
+
+  ct.equal(env.parsed && env.parsed.test, mockParseResponse.test)
+  console.log('logging', process.env.test)
+  ct.equal(process.env.test, 'other')
+  ct.equal(myObject.test, mockParseResponse.test)
+})
+
 t.test('returns parsed object', ct => {
   ct.plan(2)
 

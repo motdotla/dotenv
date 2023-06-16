@@ -283,7 +283,7 @@ You can additionally, pass options to `config`.
 
 #### Options
 
-##### Path
+##### path
 
 Default: `path.resolve(process.cwd(), '.env')`
 
@@ -293,7 +293,7 @@ Specify a custom path if your file containing environment variables is located e
 require('dotenv').config({ path: '/custom/path/to/.env' })
 ```
 
-##### Encoding
+##### encoding
 
 Default: `utf8`
 
@@ -303,7 +303,7 @@ Specify the encoding of your file containing environment variables.
 require('dotenv').config({ encoding: 'latin1' })
 ```
 
-##### Debug
+##### debug
 
 Default: `false`
 
@@ -313,7 +313,7 @@ Turn on logging to help debug why certain keys or values are not being set as yo
 require('dotenv').config({ debug: process.env.DEBUG })
 ```
 
-##### Override
+##### override
 
 Default: `false`
 
@@ -321,6 +321,20 @@ Override any environment variables that have already been set on your machine wi
 
 ```js
 require('dotenv').config({ override: true })
+```
+
+##### processEnv
+
+Default: `process.env`
+
+Specify an object to write your secrets to. Defaults to `process.env` environment variables.
+
+```js
+const myObject = {}
+require('dotenv').config({ processEnv: myObject })
+
+console.log(myObject) // values from .env or .env.vault live here now.
+console.log(process.env) // this was not changed or written to
 ```
 
 ### Parse
@@ -338,7 +352,7 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 
 #### Options
 
-##### Debug
+##### debug
 
 Default: `false`
 
@@ -379,7 +393,7 @@ dotenv.populate(target, parsed, { override: true, debug: true })
 console.log(target) // { HELLO: 'universe' }
 ```
 
-#### Options
+#### options
 
 ##### Debug
 
@@ -387,11 +401,27 @@ Default: `false`
 
 Turn on logging to help debug why certain keys or values are not being populated as you expect.
 
-##### Override
+##### override
 
 Default: `false`
 
 Override any environment variables that have already been set.
+
+### Decrypt
+
+The engine which decrypts the ciphertext contents of your .env.vault file is available for use. It accepts a ciphertext and a decryption key. It uses AES-256-GCM encryption.
+
+For example, decrypting a simple ciphertext:
+
+```js
+const dotenv = require('dotenv')
+const ciphertext = 's7NYXa809k/bVSPwIAmJhPJmEGTtU0hG58hOZy7I0ix6y5HP8LsHBsZCYC/gw5DDFy5DgOcyd18R'
+const decryptionKey = 'ddcaa26504cd70a6fef9801901c3981538563a1767c297cb8416e8a38c62fe00'
+
+const decrypted = dotenv.decrypt(ciphertext, decryptionKey)
+
+console.log(decrypted) // # development@v6\nALPHA="zeta"
+```
 
 ## ❓ FAQ
 
