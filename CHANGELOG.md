@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.2.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.3.0...master)
+
+## [16.3.0](https://github.com/motdotla/dotenv/compare/v16.2.0...v16.3.0) (2023-06-16)
+
+### Added
+
+- Optionally pass `DOTENV_KEY` to options rather than relying on `process.env.DOTENV_KEY`. Defaults to `process.env.DOTENV_KEY` [#754](https://github.com/motdotla/dotenv/pull/754)
 
 ## [16.2.0](https://github.com/motdotla/dotenv/compare/v16.1.4...v16.2.0) (2023-06-15)
 
