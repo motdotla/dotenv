@@ -258,11 +258,12 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 
 ## 📖 Documentation
 
-Dotenv exposes three functions:
+Dotenv exposes four functions:
 
 * `config`
 * `parse`
 * `populate`
+* `decrypt`
 
 ### Config
 
