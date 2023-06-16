@@ -2,10 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.1.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.2.0...master)
+
+## [16.2.0](https://github.com/motdotla/dotenv/compare/v16.1.4...v16.2.0) (2023-06-15)
 
 ### Added
 
+- Optionally write to your own target object rather than `process.env`. Defaults to `process.env`. [#753](https://github.com/motdotla/dotenv/pull/753)
 - Add import type URL to types file [#751](https://github.com/motdotla/dotenv/pull/751)
 
 ## [16.1.4](https://github.com/motdotla/dotenv/compare/v16.1.3...v16.1.4) (2023-06-04)
