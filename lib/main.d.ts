@@ -55,6 +55,15 @@ export interface DotenvConfigOptions {
    * example: `require('dotenv').config({ override: true })`
    */
   override?: boolean;
+
+  /**
+   * Default: `process.env`
+   *
+   * Override any environment variables that have already been set on your machine with values from your .env file.
+   *
+   * example: `const processEnv = {}; require('dotenv').config({ processEnv: processEnv })`
+   */
+  processEnv?: DotenvPopulateInput;
 }
 
 export interface DotenvConfigOutput {
