@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.3.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.3.1...master)
+
+## [16.3.1](https://github.com/motdotla/dotenv/compare/v16.3.0...v16.3.1) (2023-06-17)
+
+### Added
+
+- Add missing type definitions for `processEnv` and `DOTENV_KEY` options. [#756](https://github.com/motdotla/dotenv/pull/756)
 
 ## [16.3.0](https://github.com/motdotla/dotenv/compare/v16.2.0...v16.3.0) (2023-06-16)
 
