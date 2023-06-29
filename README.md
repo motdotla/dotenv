@@ -215,7 +215,7 @@ That's it! On deploy, your `.env.vault` file will be decrypted and its secrets i
 
 *ℹ️ A note from [Mot](https://github.com/motdotla): Until recently, we did not have an opinion on how and where to store your secrets in production. We now strongly recommend generating a `.env.vault` file. It's the best way to prevent your secrets from being scattered across multiple servers and cloud providers – protecting you from breaches like the [CircleCI breach](https://techcrunch.com/2023/01/05/circleci-breach/). Also it unlocks interoperability WITHOUT native third-party integrations. Third-party integrations are [increasingly risky](https://coderpad.io/blog/development/heroku-github-breach/) to our industry. They may be the 'du jour' of today, but we imagine a better future.*
 
-<a href="https://github.com/dotenv-org/dotenv-vault#dotenv-vault-">Learn more at dotenv-vault: Deploying</a>
+<a href="https://github.com/dotenv-org/dotenv-vault#-deploying">Learn more at dotenv-vault: Deploying</a>
 
 ## 🌴 Manage Multiple Environments
 
