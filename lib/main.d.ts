@@ -154,3 +154,15 @@ export function populate(processEnv: DotenvPopulateInput, parsed: DotenvPopulate
  *
  */
 export function decrypt(encrypted: string, keyStr: string): string;
+
+/**
+ * Get env variable and throw an error if it is undefined
+ *
+ * See https://docs.dotenv.org
+ *
+ * @param key - the env key
+ * @returns {string | boolean}
+ * @throws {Error} - Cannot locate environment $key in your .env file.
+ *
+ */
+export function get(key: string): string | boolean;
