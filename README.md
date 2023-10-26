@@ -52,8 +52,8 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 
 * [🌱 Install](#-install)
 * [🏗️ Usage (.env)](#%EF%B8%8F-usage)
-* [🚀 Deploying (.env.vault) 🆕](#-deploying)
 * [🌴 Multiple Environments 🆕](#-manage-multiple-environments)
+* [🚀 Deploying (.env.vault) 🆕](#-deploying)
 * [📚 Examples](#-examples)
 * [📖 Docs](#-documentation)
 * [❓ FAQ](#-faq)
@@ -180,13 +180,31 @@ You need to add the value of another variable in one of your variables? Use [dot
 
 You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
 
+### Multiple Environments
+
+You need to manage your secrets across different environments and apply them as needed? Use a `.env.vault` file with a `DOTENV_KEY`.
+
 ### Deploying
 
 You need to deploy your secrets in a cloud-agnostic manner? Use a `.env.vault` file.
 
-### Multiple Environments
+## 🌴 Manage Multiple Environments
 
-You need to manage your secrets across different environments and apply them as needed? Use a `.env.vault` file with a `DOTENV_KEY`.
+Edit your production environment variables.
+
+```bash
+$ npx dotenv-vault open production
+```
+
+Regenerate your `.env.vault` file.
+
+```bash
+$ npx dotenv-vault build
+```
+
+*ℹ️  🔐 Vault Managed vs 💻 Locally Managed: The above example, for brevity's sake, used the 🔐 Vault Managed solution to manage your `.env.vault` file. You can instead use the 💻 Locally Managed solution. [Read more here](https://github.com/dotenv-org/dotenv-vault#how-do-i-use--locally-managed-dotenv-vault). Our vision is that other platforms and orchestration tools adopt the `.env.vault` standard as they did the `.env` standard. We don't expect to be the only ones providing tooling to manage and generate `.env.vault` files.*
+
+<a href="https://github.com/dotenv-org/dotenv-vault#-manage-multiple-environments">Learn more at dotenv-vault: Manage Multiple Environments</a>
 
 ## 🚀 Deploying
 
@@ -216,24 +234,6 @@ That's it! On deploy, your `.env.vault` file will be decrypted and its secrets i
 *ℹ️ A note from [Mot](https://github.com/motdotla): Until recently, we did not have an opinion on how and where to store your secrets in production. We now strongly recommend generating a `.env.vault` file. It's the best way to prevent your secrets from being scattered across multiple servers and cloud providers – protecting you from breaches like the [CircleCI breach](https://techcrunch.com/2023/01/05/circleci-breach/). Also it unlocks interoperability WITHOUT native third-party integrations. Third-party integrations are [increasingly risky](https://coderpad.io/blog/development/heroku-github-breach/) to our industry. They may be the 'du jour' of today, but we imagine a better future.*
 
 <a href="https://github.com/dotenv-org/dotenv-vault#-deploying">Learn more at dotenv-vault: Deploying</a>
-
-## 🌴 Manage Multiple Environments
-
-Edit your production environment variables.
-
-```bash
-$ npx dotenv-vault open production
-```
-
-Regenerate your `.env.vault` file.
-
-```bash
-$ npx dotenv-vault build
-```
-
-*ℹ️  🔐 Vault Managed vs 💻 Locally Managed: The above example, for brevity's sake, used the 🔐 Vault Managed solution to manage your `.env.vault` file. You can instead use the 💻 Locally Managed solution. [Read more here](https://github.com/dotenv-org/dotenv-vault#how-do-i-use--locally-managed-dotenv-vault). Our vision is that other platforms and orchestration tools adopt the `.env.vault` standard as they did the `.env` standard. We don't expect to be the only ones providing tooling to manage and generate `.env.vault` files.*
-
-<a href="https://github.com/dotenv-org/dotenv-vault#-manage-multiple-environments">Learn more at dotenv-vault: Manage Multiple Environments</a>
 
 ## 📚 Examples
 
