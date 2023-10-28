@@ -186,7 +186,7 @@ You need to manage your secrets across different environments and apply them as 
 
 ### Deploying
 
-You need to deploy your secrets in a cloud-agnostic manner? Use a `.env.vault` file.
+You need to deploy your secrets in a cloud-agnostic manner? Use a `.env.vault` file. See [deploying `.env.vault` files](https://github.com/motdotla/dotenv/tree/master#-deploying).
 
 ## 🌴 Manage Multiple Environments
 
