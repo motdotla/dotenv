@@ -25,6 +25,15 @@ t.afterEach(() => {
   }
 })
 
+t.test('logs when no path is set', ct => {
+  ct.plan(1)
+
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config()
+  ct.ok(logStub.called)
+})
+
 t.test('logs', ct => {
   ct.plan(1)
 
@@ -43,7 +52,7 @@ t.test('logs when testPath calls to .env.vault directly (interpret what the user
   ct.ok(logStub.called)
 })
 
-t.test('warns if DOTENV_KEY exists but .env.vault does not', ct => {
+t.test('warns if DOTENV_KEY exists but .env.vault does not exist', ct => {
   ct.plan(1)
 
   logStub = sinon.stub(console, 'log')
@@ -56,10 +65,41 @@ t.test('warns if DOTENV_KEY exists but .env.vault does not', ct => {
   ct.end()
 })
 
+t.test('warns if DOTENV_KEY exists but .env.vault does not exist (set as array)', ct => {
+  ct.plan(1)
+
+  logStub = sinon.stub(console, 'log')
+
+  const existsSync = sinon.stub(fs, 'existsSync').returns(false) // make .env.vault not exist
+  dotenv.config({ path: [testPath] })
+  ct.ok(logStub.called)
+  existsSync.restore()
+
+  ct.end()
+})
+
 t.test('returns parsed object', ct => {
   ct.plan(1)
 
   const env = dotenv.config({ path: testPath })
+  ct.same(env.parsed, { ALPHA: 'zeta' })
+
+  ct.end()
+})
+
+t.test('returns parsed object (set path as array)', ct => {
+  ct.plan(1)
+
+  const env = dotenv.config({ path: [testPath] })
+  ct.same(env.parsed, { ALPHA: 'zeta' })
+
+  ct.end()
+})
+
+t.test('returns parsed object (set path as array with .vault extension)', ct => {
+  ct.plan(1)
+
+  const env = dotenv.config({ path: [`${testPath}.vault`] })
   ct.same(env.parsed, { ALPHA: 'zeta' })
 
   ct.end()
