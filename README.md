@@ -180,6 +180,8 @@ You need to deploy your secrets in a cloud-agnostic manner? Use a `.env.vault` f
 
 ## 🌴 Manage Multiple Environments
 
+Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
+
 Edit your production environment variables.
 
 ```bash
@@ -284,6 +286,12 @@ Specify a custom path if your file containing environment variables is located e
 
 ```js
 require('dotenv').config({ path: '/custom/path/to/.env' })
+```
+
+By default, `config` will look for a file called .env in the current working directory. Pass in multiple files as an array, and they will be loaded in order. The first value set for a variable will win.
+
+```js
+require('dotenv').config({ path: ['.env.local', '.env'] })
 ```
 
 ##### encoding
