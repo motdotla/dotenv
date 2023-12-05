@@ -69,10 +69,6 @@ t.equal(parsed.EQUAL_SIGNS, 'equals==', 'respects equals signs in values')
 
 t.equal(parsed.RETAIN_INNER_QUOTES, '{"foo": "bar"}', 'retains inner quotes')
 
-t.equal(parsed.EQUAL_SIGNS, 'equals==', 'respects equals signs in values')
-
-t.equal(parsed.RETAIN_INNER_QUOTES, '{"foo": "bar"}', 'retains inner quotes')
-
 t.equal(parsed.RETAIN_INNER_QUOTES_AS_STRING, '{"foo": "bar"}', 'retains inner quotes')
 
 t.equal(parsed.RETAIN_INNER_QUOTES_AS_BACKTICKS, '{"foo": "bar\'s"}', 'retains inner quotes')
