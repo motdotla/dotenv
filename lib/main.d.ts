@@ -12,7 +12,6 @@ export interface DotenvParseOutput {
  * See https://docs.dotenv.org
  *
  * @param src - contents to be parsed. example: `'DB_HOST=localhost'`
- * @param options - additional options. example: `{ debug: true }`
  * @returns an object with keys and values based on `src`. example: `{ DB_HOST : 'localhost' }`
  */
 export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
@@ -100,10 +99,6 @@ export interface DotenvPopulateOptions {
   override?: boolean;
 }
 
-export interface DotenvPopulateOutput {
-  error?: Error;
-}
-
 export interface DotenvPopulateInput {
   [name: string]: string;
 }
@@ -141,7 +136,7 @@ export function configDotenv(options?: DotenvConfigOptions): DotenvConfigOutput;
  * @returns {void}
  *
  */
-export function populate(processEnv: DotenvPopulateInput, parsed: DotenvPopulateInput, options?: DotenvConfigOptions): DotenvPopulateOutput;
+export function populate(processEnv: DotenvPopulateInput, parsed: DotenvPopulateInput, options?: DotenvConfigOptions): void;
 
 /**
  * Decrypt ciphertext
