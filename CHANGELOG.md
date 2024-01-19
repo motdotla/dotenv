@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Changed
 
 - Fix output typing for `populate` [#792](https://github.com/motdotla/dotenv/pull/792)
+- Use subarray instead of slice [#793](https://github.com/motdotla/dotenv/pull/793)
 
 ## [16.3.1](https://github.com/motdotla/dotenv/compare/v16.3.0...v16.3.1) (2023-06-17)
 
