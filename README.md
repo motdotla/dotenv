@@ -32,7 +32,10 @@
   <div>
     <img src="https://res.cloudinary.com/dotenv-org/image/upload/c_crop,g_center,h_65,w_290,x_0,y_0/v1704258787/AlloyAutomation-logo_dqin8c.svg" width="370" alt="Alloy Automation">
   </div>
-  <b>Alloy Automation is the only integration development platform that scales with you, with both a Unified API and an embedded iPaaS for your engineering team to launch user-facing integrations with. </b>
+  <b>Launch user-facing integrations faster</b>
+  <div>
+    <sup>Easily spin up hundreds of integrations. Sign up free or read our docs first</sup>
+  </div>
 </a>
 <hr>
 </div>
