@@ -66,7 +66,7 @@ t.test('returns parsed object', ct => {
 })
 
 t.test('throws not found if .env.vault is empty', ct => {
-  ct.plan(1)
+  ct.plan(2)
 
   const readFileSync = sinon.stub(fs, 'readFileSync').returns('') // empty file
 
@@ -74,6 +74,7 @@ t.test('throws not found if .env.vault is empty', ct => {
     dotenv.config({ path: testPath })
   } catch (e) {
     ct.equal(e.message, 'NOT_FOUND_DOTENV_ENVIRONMENT: Cannot locate environment DOTENV_VAULT_DEVELOPMENT in your .env.vault file.')
+    ct.equal(e.code, 'NOT_FOUND_DOTENV_ENVIRONMENT')
   }
 
   readFileSync.restore()
@@ -81,7 +82,7 @@ t.test('throws not found if .env.vault is empty', ct => {
 })
 
 t.test('throws missing data when somehow parsed badly', ct => {
-  ct.plan(1)
+  ct.plan(2)
 
   const configDotenvStub = sinon.stub(dotenv, 'configDotenv').returns({ parsed: undefined })
 
@@ -89,6 +90,7 @@ t.test('throws missing data when somehow parsed badly', ct => {
     dotenv.config({ path: testPath })
   } catch (e) {
     ct.equal(e.message, 'MISSING_DATA: Cannot parse tests/.env.vault for an unknown reason')
+    ct.equal(e.code, 'MISSING_DATA')
   }
 
   configDotenvStub.restore()
@@ -99,12 +101,13 @@ t.test('throws error when invalid formed DOTENV_KEY', ct => {
   envStub.restore()
   envStub = sinon.stub(process.env, 'DOTENV_KEY').value('invalid-format-non-uri-format')
 
-  ct.plan(1)
+  ct.plan(2)
 
   try {
     dotenv.config({ path: testPath })
   } catch (e) {
     ct.equal(e.message, 'INVALID_DOTENV_KEY: Wrong format. Must be in valid uri format like dotenv://:key_1234@dotenv.org/vault/.env.vault?environment=development')
+    ct.equal(e.code, 'INVALID_DOTENV_KEY')
   }
 
   ct.end()
@@ -132,12 +135,13 @@ t.test('throws error when DOTENV_KEY missing password', ct => {
   envStub.restore()
   envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://username@dotenv.org/vault/.env.vault?environment=development')
 
-  ct.plan(1)
+  ct.plan(2)
 
   try {
     dotenv.config({ path: testPath })
   } catch (e) {
     ct.equal(e.message, 'INVALID_DOTENV_KEY: Missing key part')
+    ct.equal(e.code, 'INVALID_DOTENV_KEY')
   }
 
   ct.end()
@@ -147,12 +151,13 @@ t.test('throws error when DOTENV_KEY missing environment', ct => {
   envStub.restore()
   envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_ddcaa26504cd70a6fef9801901c3981538563a1767c297cb8416e8a38c62fe00@dotenv.org/vault/.env.vault')
 
-  ct.plan(1)
+  ct.plan(2)
 
   try {
     dotenv.config({ path: testPath })
   } catch (e) {
     ct.equal(e.message, 'INVALID_DOTENV_KEY: Missing environment part')
+    ct.equal(e.code, 'INVALID_DOTENV_KEY')
   }
 
   ct.end()
@@ -247,12 +252,13 @@ t.test('raises an INVALID_DOTENV_KEY if key RangeError', ct => {
   envStub.restore()
   envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_ddcaa26504cd70a@dotenv.org/vault/.env.vault?environment=development')
 
-  ct.plan(1)
+  ct.plan(2)
 
   try {
     dotenv.config({ path: testPath })
   } catch (e) {
     ct.equal(e.message, 'INVALID_DOTENV_KEY: It must be 64 characters long (or more)')
+    ct.equal(e.code, 'INVALID_DOTENV_KEY')
   }
 
   ct.end()
@@ -262,12 +268,13 @@ t.test('raises an DECRYPTION_FAILED if key fails to decrypt payload', ct => {
   envStub.restore()
   envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_2c4d267b8c3865f921311612e69273666cc76c008acb577d3e22bc3046fba386@dotenv.org/vault/.env.vault?environment=development')
 
-  ct.plan(1)
+  ct.plan(2)
 
   try {
     dotenv.config({ path: testPath })
   } catch (e) {
     ct.equal(e.message, 'DECRYPTION_FAILED: Please check your DOTENV_KEY')
+    ct.equal(e.code, 'DECRYPTION_FAILED')
   }
 
   ct.end()
@@ -277,12 +284,13 @@ t.test('raises an DECRYPTION_FAILED if both (comma separated) keys fail to decry
   envStub.restore()
   envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_2c4d267b8c3865f921311612e69273666cc76c008acb577d3e22bc3046fba386@dotenv.org/vault/.env.vault?environment=development,dotenv://:key_c04959b64473e43dd60c56a536ef8481388528b16759736d89515c25eec69247@dotenv.org/vault/.env.vault?environment=development')
 
-  ct.plan(1)
+  ct.plan(2)
 
   try {
     dotenv.config({ path: testPath })
   } catch (e) {
     ct.equal(e.message, 'DECRYPTION_FAILED: Please check your DOTENV_KEY')
+    ct.equal(e.code, 'DECRYPTION_FAILED')
   }
 
   ct.end()
