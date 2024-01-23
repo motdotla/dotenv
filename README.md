@@ -501,7 +501,7 @@ password than your development database.
 
 ### Should I have multiple `.env` files?
 
-No. We **strongly** recommend against having a "main" `.env` file and an "environment" `.env` file like `.env.test`. Your config should vary between deploys, and you should not be sharing values between environments.
+We recommend creating on `.env` file per environment. Use `.env` for local/development, `.env.production` for production and so on. This still follows the twelve factor principles as each is attributed individually to its own environment. Avoid custom set ups that work in inheritance somehow (`.env.production` inherits values form `.env` for example). It is better to duplicate values if necessary across each `.env.environment` file.
 
 > In a twelve-factor app, env vars are granular controls, each fully orthogonal to other env vars. They are never grouped together as “environments”, but instead are independently managed for each deploy. This is a model that scales up smoothly as the app naturally expands into more deploys over its lifetime.
 >
@@ -659,6 +659,28 @@ Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault)
 ### What is a `.env.vault` file?
 
 A `.env.vault` file is an encrypted version of your development (and ci, staging, production, etc) environment variables. It is paired with a `DOTENV_KEY` to deploy your secrets more securely than scattering them across multiple platforms and tools. Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault) to manage and generate them.
+
+### What if I accidentally commit my `.env` file to code?
+
+Remove it, [remove git history](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository) and then install the [git pre-commit hook](https://github.com/dotenvx/dotenvx#pre-commit) to prevent this from ever happening again. 
+
+```
+brew install dotenvx/brew/dotenvx
+dotenvx precommit --install
+```
+
+### How can I prevent committing my `.env` file to a Docker build?
+
+Use the [docker prebuild hook](https://dotenvx.com/docs/features/prebuild).
+
+```bash
+# Dockerfile
+...
+RUN curl -fsS https://dotenvx.sh/ | sh
+...
+RUN dotenvx prebuild
+CMD ["dotenvx", "run", "--", "node", "index.js"]
+```
 
 ## Contributing Guide
 
