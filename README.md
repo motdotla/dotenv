@@ -1,5 +1,5 @@
 <div align="center">
-🎉 announcing <a href="https://github.com/dotenvx/dotenvx">dotenvx</a> – a better dotenv. run anywhere, multi-environment, and encryption.
+🎉 announcing <a href="https://github.com/dotenvx/dotenvx">dotenvx</a>. *run anywhere, multi-environment, encrypted envs*.
 </div>
 
 ---
