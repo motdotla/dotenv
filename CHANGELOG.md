@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.3.1...master)
 
+- Add `error.code` to error messages around `.env.vault` decryption [#795](https://github.com/motdotla/dotenv/pull/795)
+
 ## [16.3.2](https://github.com/motdotla/dotenv/compare/v16.3.1...v16.3.2) (2024-01-18)
 
 ### Added
