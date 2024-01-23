@@ -1,4 +1,10 @@
 <div align="center">
+🎉 announcing <a href="https://github.com/dotenvx/dotenvx">dotenvx</a>. *run anywhere, multi-environment, encrypted envs*.
+</div>
+
+---
+
+<div align="center">
 
 <p>
   <sup>
