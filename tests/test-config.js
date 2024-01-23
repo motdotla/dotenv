@@ -30,6 +30,33 @@ t.test('takes string for path option', ct => {
   ct.equal(readFileSyncStub.args[0][0], testPath)
 })
 
+t.test('takes string for path option', ct => {
+  ct.plan(1)
+
+  const testPath = 'tests/.env'
+  dotenv.config({ path: testPath })
+
+  ct.equal(readFileSyncStub.args[0][0], testPath)
+})
+
+t.test('takes array for path option', ct => {
+  ct.plan(1)
+
+  const testPath = ['tests/.env']
+  dotenv.config({ path: testPath })
+
+  ct.equal(readFileSyncStub.args[0][0], testPath)
+})
+
+t.test('takes two or more files in the array for path option', ct => {
+  ct.plan(1)
+
+  const testPath = ['tests/.env.local', 'tests/.env']
+  dotenv.config({ path: testPath })
+
+  ct.equal(readFileSyncStub.args[0][0], testPath)
+})
+
 t.test('takes URL for path option', ct => {
   ct.plan(1)
 

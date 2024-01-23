@@ -1,6 +1,6 @@
 // TypeScript Version: 3.0
 /// <reference types="node" />
-import type { URL } from 'node:url';
+import type { URL } from 'url';
 
 export interface DotenvParseOutput {
   [name: string]: string;
@@ -23,10 +23,12 @@ export interface DotenvConfigOptions {
    * Default: `path.resolve(process.cwd(), '.env')`
    *
    * Specify a custom path if your file containing environment variables is located elsewhere.
+   * Can also be an array of strings, specifying multiple paths.
    *
    * example: `require('dotenv').config({ path: '/custom/path/to/.env' })`
+   * example: `require('dotenv').config({ path: ['/path/to/first.env', '/path/to/second.env'] })`
    */
-  path?: string | URL;
+  path?: string | string[] | URL;
 
   /**
    * Default: `utf8`
