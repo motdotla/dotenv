@@ -190,7 +190,35 @@ You need to deploy your secrets in a cloud-agnostic manner? Use a `.env.vault` f
 
 ## 🌴 Manage Multiple Environments
 
-Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
+Use [dotenvx](https://github.com/dotenvx/dotenvx) or [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
+
+### dotenvx
+
+Run any environment locally. Create a `.env.ENVIRONMENT` file and use `--env-file` to load it. It's straightforward, yet flexible.
+
+```bash
+$ echo "HELLO=production" > .env.production
+$ echo "console.log('Hello ' + process.env.HELLO)" > index.js
+
+$ dotenvx run --env-file=.env.production -- node index.js
+Hello production
+> ^^
+```
+
+or with multiple .env files
+
+```bash
+$ echo "HELLO=local" > .env.local
+$ echo "HELLO=World" > .env
+$ echo "console.log('Hello ' + process.env.HELLO)" > index.js
+
+$ dotenvx run --env-file=.env.local --env-file=.env -- node index.js
+Hello local
+```
+
+[more environment examples](https://dotenvx.com/docs/quickstart/environments)
+
+### dotenv-vault
 
 Edit your production environment variables.
 
