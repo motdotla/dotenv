@@ -160,8 +160,6 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 >
 > It serves the same purpose (you do not need to require and load dotenv), adds better debugging, and works with ANY language, framework, or platform. – [motdotla](https://github.com/motdotla)
 
-&nbsp;
-
 You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#-r---require-module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
 
 ```bash
