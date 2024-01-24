@@ -41,6 +41,27 @@ t.test('takes two or more files in the array for path option', ct => {
   ct.end()
 })
 
+t.test('sets values from both .env.local and .env. first file key wins.', { skip: true }, ct => {
+  delete process.env.SINGLE_QUOTES
+
+  const testPath = ['tests/.env.local', 'tests/.env']
+  const env = dotenv.config({ path: testPath })
+
+  // in both files - first file wins (.env.local)
+  ct.equal(env.parsed.BASIC, 'local_basic')
+  ct.equal(process.env.BASIC, 'local_basic')
+
+  // in .env.local only
+  ct.equal(env.parsed.LOCAL, 'local')
+  ct.equal(process.env.LOCAL, 'local')
+
+  // in .env only
+  ct.equal(env.parsed.SINGLE_QUOTES, 'single_quotes')
+  ct.equal(process.env.SINGLE_QUOTES, 'single_quotes')
+
+  ct.end()
+})
+
 t.test('takes URL for path option', ct => {
   const envPath = path.resolve(__dirname, '.env')
   const fileUrl = new URL(`file://${envPath}`)
