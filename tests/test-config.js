@@ -1,169 +1,182 @@
 const fs = require('fs')
-// const os = require('os')
-// const path = require('path')
+const os = require('os')
+const path = require('path')
 
 const sinon = require('sinon')
 const t = require('tap')
 
 const dotenv = require('../lib/main')
 
-const mockParseResponse = { test: 'foo' }
+t.beforeEach(() => {
+  delete process.env.BASIC // reset
+})
 
 t.test('takes string for path option', ct => {
-  ct.plan(2)
-
   const testPath = 'tests/.env'
   const env = dotenv.config({ path: testPath })
 
   ct.equal(env.parsed.BASIC, 'basic')
   ct.equal(process.env.BASIC, 'basic')
+
+  ct.end()
 })
 
 t.test('takes array for path option', ct => {
-  ct.plan(2)
-
   const testPath = ['tests/.env']
   const env = dotenv.config({ path: testPath })
 
   ct.equal(env.parsed.BASIC, 'basic')
   ct.equal(process.env.BASIC, 'basic')
+
+  ct.end()
 })
 
 t.test('takes two or more files in the array for path option', ct => {
-  ct.plan(2)
-
   const testPath = ['tests/.env.local', 'tests/.env']
   const env = dotenv.config({ path: testPath })
 
   ct.equal(env.parsed.BASIC, 'local_basic')
   ct.equal(process.env.BASIC, 'local_basic')
+
+  ct.end()
 })
 
 t.test('takes URL for path option', ct => {
-  ct.plan(2)
+  const envPath = path.resolve(__dirname, '.env')
+  const fileUrl = new URL(`file://${envPath}`)
 
-  const testPath = new URL('file://home/user/project/.env')
-  const env = dotenv.config({ path: testPath })
+  const env = dotenv.config({ path: fileUrl })
 
   ct.equal(env.parsed.BASIC, 'basic')
   ct.equal(process.env.BASIC, 'basic')
+
+  ct.end()
 })
 
-// t.test('takes option for path along with home directory char ~', ct => {
-//   ct.plan(2)
-//   const mockedHomedir = '/Users/dummy'
-//   const homedirStub = sinon.stub(os, 'homedir').returns(mockedHomedir)
-//   const testPath = '~/.env'
-//   dotenv.config({ path: testPath })
-//
-//   ct.equal(readFileSyncStub.args[0][0], path.join(mockedHomedir, '.env'))
-//   ct.ok(homedirStub.called)
-//   homedirStub.restore()
-// })
+t.test('takes option for path along with home directory char ~', ct => {
+  const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
+  const mockedHomedir = '/Users/dummy'
+  const homedirStub = sinon.stub(os, 'homedir').returns(mockedHomedir)
+  const testPath = '~/.env'
+  dotenv.config({ path: testPath })
+
+  ct.equal(readFileSyncStub.args[0][0], path.join(mockedHomedir, '.env'))
+  ct.ok(homedirStub.called)
+
+  homedirStub.restore()
+  readFileSyncStub.restore()
+  ct.end()
+})
 
 t.test('takes option for encoding', ct => {
-  ct.plan(1)
+  const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
 
   const testEncoding = 'latin1'
   dotenv.config({ encoding: testEncoding })
-
-  const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
-
   ct.equal(readFileSyncStub.args[0][1].encoding, testEncoding)
+
   readFileSyncStub.restore()
+  ct.end()
 })
 
 t.test('takes option for debug', ct => {
-  ct.plan(1)
-
   const logStub = sinon.stub(console, 'log')
-  dotenv.config({ debug: 'true' })
 
+  dotenv.config({ debug: 'true' })
   ct.ok(logStub.called)
+
   logStub.restore()
+  ct.end()
 })
 
 t.test('reads path with encoding, parsing output to process.env', ct => {
-  ct.plan(2)
+  const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('BASIC=basic')
+  const parseStub = sinon.stub(dotenv, 'parse').returns({ BASIC: 'basic' })
 
-  const env = dotenv.config()
+  const res = dotenv.config()
 
-  ct.same(env.parsed.BASIC, 'basic')
-  ct.same(process.env.BASIC, 'basic')
+  ct.same(res.parsed, { BASIC: 'basic' })
+  ct.equal(readFileSyncStub.callCount, 1)
+
+  readFileSyncStub.restore()
+  parseStub.restore()
+
+  ct.end()
 })
 
 t.test('does not write over keys already in process.env', ct => {
-  ct.plan(2)
-
+  const testPath = 'tests/.env'
   const existing = 'bar'
   process.env.BASIC = existing
-  const env = dotenv.config()
+  const env = dotenv.config({ path: testPath })
 
   ct.equal(env.parsed.BASIC, 'basic')
   ct.equal(process.env.BASIC, existing)
+
+  ct.end()
 })
 
 t.test('does write over keys already in process.env if override turned on', ct => {
-  ct.plan(2)
-
+  const testPath = 'tests/.env'
   const existing = 'bar'
   process.env.BASIC = existing
-  const env = dotenv.config({ override: true })
+  const env = dotenv.config({ path: testPath, override: true })
 
   ct.equal(env.parsed.BASIC, 'basic')
   ct.equal(process.env.BASIC, 'basic')
+
+  ct.end()
 })
 
 t.test('does not write over keys already in process.env if the key has a falsy value', ct => {
-  ct.plan(2)
-
+  const testPath = 'tests/.env'
   const existing = ''
   process.env.BASIC = existing
-  const env = dotenv.config()
-
-  ct.equal(env.parsed.BASIC, 'basic')
-  ct.equal(process.env.BASIC, undefined)
-})
-
-t.test('does write over keys already in process.env if the key has a falsy value but override is set to true', ct => {
-  ct.plan(2)
-
-  const existing = ''
-  process.env.BASIC = existing
-  // 'foo' returned as value in `beforeEach`. should keep this ''
-  const env = dotenv.config({ override: true })
+  const env = dotenv.config({ path: testPath })
 
   ct.equal(env.parsed.BASIC, 'basic')
   ct.equal(process.env.BASIC, '')
-  // ct.ok(process.env.test)
+
+  ct.end()
+})
+
+t.test('does write over keys already in process.env if the key has a falsy value but override is set to true', ct => {
+  const testPath = 'tests/.env'
+  const existing = ''
+  process.env.BASIC = existing
+  const env = dotenv.config({ path: testPath, override: true })
+
+  ct.equal(env.parsed.BASIC, 'basic')
+  ct.equal(process.env.BASIC, 'basic')
+  ct.end()
 })
 
 t.test('can write to a different object rather than process.env', ct => {
-  ct.plan(3)
-
+  const testPath = 'tests/.env'
   process.env.BASIC = 'other' // reset process.env
 
   const myObject = {}
-  const env = dotenv.config({ processEnv: myObject })
+  const env = dotenv.config({ path: testPath, processEnv: myObject })
 
   ct.equal(env.parsed.BASIC, 'basic')
   console.log('logging', process.env.BASIC)
   ct.equal(process.env.BASIC, 'other')
   ct.equal(myObject.BASIC, 'basic')
+
+  ct.end()
 })
 
 t.test('returns parsed object', ct => {
-  ct.plan(2)
-
-  const env = dotenv.config()
+  const testPath = 'tests/.env'
+  const env = dotenv.config({ path: testPath })
 
   ct.notOk(env.error)
-  ct.same(env.parsed, mockParseResponse)
+  ct.equal(env.parsed.BASIC, 'basic')
+
+  ct.end()
 })
 
 t.test('returns any errors thrown from reading file or parsing', ct => {
-  ct.plan(1)
-
   const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
 
   readFileSyncStub.throws()
@@ -172,6 +185,8 @@ t.test('returns any errors thrown from reading file or parsing', ct => {
   ct.type(env.error, Error)
 
   readFileSyncStub.restore()
+
+  ct.end()
 })
 
 t.test('logs any errors thrown from reading file or parsing when in debug mode', ct => {
