@@ -156,6 +156,8 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 
 ### Preload
 
+> Note: Consider using [`dotenvx`](https://github.com/dotenvx/dotenvx) instead of preloading. I am now doing (and recommending) so. It serves the same purpose (you do not need to require and load dotenv) but adds much better debugging. It also works for ANY framework, environment, or platform. – [motdotla](https://github.com/motdotla)
+
 You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#-r---require-module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
 
 ```bash
