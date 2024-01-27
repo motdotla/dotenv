@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.3.1...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.4.1...master)
+
+## [16.4.1](https://github.com/motdotla/dotenv/compare/v16.4.0...v16.4.1) (2024-01-24)
+
+- Patch support for array as `path` option [#797](https://github.com/motdotla/dotenv/pull/797)
+
+## [16.4.0](https://github.com/motdotla/dotenv/compare/v16.3.2...v16.4.0) (2024-01-23)
+
+- Add `error.code` to error messages around `.env.vault` decryption handling [#795](https://github.com/motdotla/dotenv/pull/795)
+- Add ability to find `.env.vault` file when filename(s) passed as an array [#784](https://github.com/motdotla/dotenv/pull/784)
 
 ## [16.3.2](https://github.com/motdotla/dotenv/compare/v16.3.1...v16.3.2) (2024-01-18)
 
