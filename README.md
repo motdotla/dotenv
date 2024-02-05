@@ -336,7 +336,7 @@ Specify a custom path if your file containing environment variables is located e
 require('dotenv').config({ path: '/custom/path/to/.env' })
 ```
 
-By default, `config` will look for a file called .env in the current working directory. Pass in multiple files as an array, and they will be loaded in order. The first value set for a variable will win.
+By default, `config` will look for a file called .env in the current working directory. Pass in multiple files as an array, and first existing file will be used. Any remaining files will be ignored.
 
 ```js
 require('dotenv').config({ path: ['.env.local', '.env'] })
