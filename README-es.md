@@ -1,8 +1,8 @@
 <div align="center">
-🎉 announcing <a href="https://github.com/dotenvx/dotenvx">dotenvx</a>. *run anywhere, multi-environment, encrypted envs*.
+🎉 announcing <a href="https://github.com/dotenvx/dotenvx">dotenvx</a>. <em>run anywhere, multi-environment, encrypted envs</em>.
 </div>
 
----
+&nbsp;
 
 <div align="center">
 
