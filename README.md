@@ -336,7 +336,9 @@ Specify a custom path if your file containing environment variables is located e
 require('dotenv').config({ path: '/custom/path/to/.env' })
 ```
 
-By default, `config` will look for a file called .env in the current working directory. Pass in multiple files as an array, and they will be loaded in order. The first value set for a variable will win.
+By default, `config` will look for a file called .env in the current working directory.
+
+Pass in multiple files as an array, and they will be parsed in order and combined. The first value set for a variable will win. There is no overriding. The combined result will then be applied to `process.env` (or `options.processEnv`, if set). For this final application the `options.override` flag is respected.
 
 ```js
 require('dotenv').config({ path: ['.env.local', '.env'] })
@@ -366,7 +368,7 @@ require('dotenv').config({ debug: process.env.DEBUG })
 
 Default: `false`
 
-Override any environment variables that have already been set on your machine with values from your .env file.
+Override any environment variables that have already been set on your machine with values from your .env file(s). If multiple files have been provided in `option.path` the override does not apply while the files are being combined (see `options.path`). It applies though at the merging of the combined results with `process.env` (or `optiors.processEnv`, if set). 
 
 ```js
 require('dotenv').config({ override: true })
