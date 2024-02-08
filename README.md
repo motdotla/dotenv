@@ -54,7 +54,6 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
 [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
-[![dotenv-vault](https://badge.dotenv.org/works-with.svg?r=1)](https://www.dotenv.org/r/github.com/dotenv-org/dotenv-vault?r=1) 
 
 * [🌱 Install](#-install)
 * [🏗️ Usage (.env)](#%EF%B8%8F-usage)
@@ -291,7 +290,7 @@ Set `DOTENV_KEY` on your server.
 
 ```bash
 # heroku example
-heroku config:set DOTENV_KEY=dotenv://:key_1234…@dotenv.org/vault/.env.vault?environment=production
+heroku config:set DOTENV_KEY=dotenv://:key_1234…@dotenvx.com/vault/.env.vault?environment=production
 ```
 
 That's it! On deploy, your `.env.vault` file will be decrypted and its secrets injected as environment variables – just in time.
@@ -418,7 +417,7 @@ Default: `process.env.DOTENV_KEY`
 Pass the `DOTENV_KEY` directly to config options. Defaults to looking for `process.env.DOTENV_KEY` environment variable. Note this only applies to decrypting `.env.vault` files. If passed as null or undefined, or not passed at all, dotenv falls back to its traditional job of parsing a `.env` file.
 
 ```js
-require('dotenv').config({ DOTENV_KEY: 'dotenv://:key_1234…@dotenv.org/vault/.env.vault?environment=production' })
+require('dotenv').config({ DOTENV_KEY: 'dotenv://:key_1234…@dotenvx.com/vault/.env.vault?environment=production' })
 ```
 
 ### Parse

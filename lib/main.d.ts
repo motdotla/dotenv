@@ -9,7 +9,7 @@ export interface DotenvParseOutput {
 /**
  * Parses a string or buffer in the .env file format into an object.
  *
- * See https://docs.dotenv.org
+ * See https://dotenvx.com/docs
  *
  * @param src - contents to be parsed. example: `'DB_HOST=localhost'`
  * @returns an object with keys and values based on `src`. example: `{ DB_HOST : 'localhost' }`
@@ -71,7 +71,7 @@ export interface DotenvConfigOptions {
    *
    * Pass the DOTENV_KEY directly to config options. Defaults to looking for process.env.DOTENV_KEY environment variable. Note this only applies to decrypting .env.vault files. If passed as null or undefined, or not passed at all, dotenv falls back to its traditional job of parsing a .env file.
    *
-   * example: `require('dotenv').config({ DOTENV_KEY: 'dotenv://:key_1234…@dotenv.org/vault/.env.vault?environment=production' })`
+   * example: `require('dotenv').config({ DOTENV_KEY: 'dotenv://:key_1234…@dotenvx.com/vault/.env.vault?environment=production' })`
    */
   DOTENV_KEY?: string;
 }
@@ -108,7 +108,7 @@ export interface DotenvPopulateInput {
 /**
  * Loads `.env` file contents into process.env by default. If `DOTENV_KEY` is present, it smartly attempts to load encrypted `.env.vault` file contents into process.env.
  *
- * See https://docs.dotenv.org
+ * See https://dotenvx.com/docs
  *
  * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false }`
  * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
@@ -119,7 +119,7 @@ export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
 /**
  * Loads `.env` file contents into process.env.
  *
- * See https://docs.dotenv.org
+ * See https://dotenvx.com/docs
  *
  * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false }`
  * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
@@ -130,7 +130,7 @@ export function configDotenv(options?: DotenvConfigOptions): DotenvConfigOutput;
 /**
  * Loads `source` json contents into `target` like process.env.
  *
- * See https://docs.dotenv.org
+ * See https://dotenvx.com/docs
  *
  * @param processEnv - the target JSON object. in most cases use process.env but you can also pass your own JSON object
  * @param parsed - the source JSON object
@@ -143,7 +143,7 @@ export function populate(processEnv: DotenvPopulateInput, parsed: DotenvPopulate
 /**
  * Decrypt ciphertext
  *
- * See https://docs.dotenv.org
+ * See https://dotenvx.com/docs
  *
  * @param encrypted - the encrypted ciphertext string
  * @param keyStr - the decryption key string
