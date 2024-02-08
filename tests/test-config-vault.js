@@ -7,7 +7,7 @@ const dotenv = require('../lib/main')
 
 const testPath = 'tests/.env'
 
-const dotenvKey = 'dotenv://:key_ddcaa26504cd70a6fef9801901c3981538563a1767c297cb8416e8a38c62fe00@dotenv.org/vault/.env.vault?environment=development'
+const dotenvKey = 'dotenv://:key_ddcaa26504cd70a6fef9801901c3981538563a1767c297cb8416e8a38c62fe00@dotenvx.com/vault/.env.vault?environment=development'
 
 let envStub
 let logStub
@@ -146,7 +146,7 @@ t.test('throws error when invalid formed DOTENV_KEY', ct => {
   try {
     dotenv.config({ path: testPath })
   } catch (e) {
-    ct.equal(e.message, 'INVALID_DOTENV_KEY: Wrong format. Must be in valid uri format like dotenv://:key_1234@dotenv.org/vault/.env.vault?environment=development')
+    ct.equal(e.message, 'INVALID_DOTENV_KEY: Wrong format. Must be in valid uri format like dotenv://:key_1234@dotenvx.com/vault/.env.vault?environment=development')
     ct.equal(e.code, 'INVALID_DOTENV_KEY')
   }
 
@@ -173,7 +173,7 @@ t.test('throws error when invalid formed DOTENV_KEY that otherwise is not caught
 
 t.test('throws error when DOTENV_KEY missing password', ct => {
   envStub.restore()
-  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://username@dotenv.org/vault/.env.vault?environment=development')
+  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://username@dotenvx.com/vault/.env.vault?environment=development')
 
   ct.plan(2)
 
@@ -189,7 +189,7 @@ t.test('throws error when DOTENV_KEY missing password', ct => {
 
 t.test('throws error when DOTENV_KEY missing environment', ct => {
   envStub.restore()
-  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_ddcaa26504cd70a6fef9801901c3981538563a1767c297cb8416e8a38c62fe00@dotenv.org/vault/.env.vault')
+  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_ddcaa26504cd70a6fef9801901c3981538563a1767c297cb8416e8a38c62fe00@dotenvx.com/vault/.env.vault')
 
   ct.plan(2)
 
@@ -290,7 +290,7 @@ t.test('logs when debug is on and override is false', ct => {
 
 t.test('raises an INVALID_DOTENV_KEY if key RangeError', ct => {
   envStub.restore()
-  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_ddcaa26504cd70a@dotenv.org/vault/.env.vault?environment=development')
+  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_ddcaa26504cd70a@dotenvx.com/vault/.env.vault?environment=development')
 
   ct.plan(2)
 
@@ -306,7 +306,7 @@ t.test('raises an INVALID_DOTENV_KEY if key RangeError', ct => {
 
 t.test('raises an DECRYPTION_FAILED if key fails to decrypt payload', ct => {
   envStub.restore()
-  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_2c4d267b8c3865f921311612e69273666cc76c008acb577d3e22bc3046fba386@dotenv.org/vault/.env.vault?environment=development')
+  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_2c4d267b8c3865f921311612e69273666cc76c008acb577d3e22bc3046fba386@dotenvx.com/vault/.env.vault?environment=development')
 
   ct.plan(2)
 
@@ -322,7 +322,7 @@ t.test('raises an DECRYPTION_FAILED if key fails to decrypt payload', ct => {
 
 t.test('raises an DECRYPTION_FAILED if both (comma separated) keys fail to decrypt', ct => {
   envStub.restore()
-  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_2c4d267b8c3865f921311612e69273666cc76c008acb577d3e22bc3046fba386@dotenv.org/vault/.env.vault?environment=development,dotenv://:key_c04959b64473e43dd60c56a536ef8481388528b16759736d89515c25eec69247@dotenv.org/vault/.env.vault?environment=development')
+  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_2c4d267b8c3865f921311612e69273666cc76c008acb577d3e22bc3046fba386@dotenvx.com/vault/.env.vault?environment=development,dotenv://:key_c04959b64473e43dd60c56a536ef8481388528b16759736d89515c25eec69247@dotenvx.com/vault/.env.vault?environment=development')
 
   ct.plan(2)
 

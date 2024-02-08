@@ -48,7 +48,7 @@ testOption('DOTENV_CONFIG_DEBUG', 'true', { debug: 'true' })
 testOption('DOTENV_CONFIG_OVERRIDE', 'true', { override: 'true' })
 
 // sets DOTENV_KEY option
-testOption('DOTENV_CONFIG_DOTENV_KEY', 'dotenv://:key_ddcaa26504cd70a@dotenv.org/vault/.env.vault?environment=development', { DOTENV_KEY: 'dotenv://:key_ddcaa26504cd70a@dotenv.org/vault/.env.vault?environment=development' })
+testOption('DOTENV_CONFIG_DOTENV_KEY', 'dotenv://:key_ddcaa26504cd70a@dotenvx.com/vault/.env.vault?environment=development', { DOTENV_KEY: 'dotenv://:key_ddcaa26504cd70a@dotenvx.com/vault/.env.vault?environment=development' })
 
 // restore existing env
 process.env.DOTENV_CONFIG_ENCODING = e
