@@ -31,7 +31,7 @@
     "type": "git",
     "url": "git://github.com/motdotla/dotenv.git"
   },
-  "funding": "https://github.com/motdotla/dotenv?sponsor=1",
+  "funding": "https://dotenvx.com",
   "keywords": [
     "dotenv",
     "env",
