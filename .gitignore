@@ -1,5 +1,6 @@
 # Coverage directory
 .nyc_output
+coverage
 
 # Dependency directory
 node_modules

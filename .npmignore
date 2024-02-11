@@ -1,5 +1,6 @@
 .github/
 .nyc_output/
+coverage/
 examples/
 flow-typed/
 tests/

@@ -24,6 +24,7 @@
     "lint-readme": "standard-markdown",
     "pretest": "npm run lint && npm run dts-check",
     "test": "tap tests/*.js --100 -Rspec",
+    "test:coverage": "tap --coverage-report=lcov",
     "prerelease": "npm test",
     "release": "standard-version"
   },
