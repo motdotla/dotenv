@@ -96,6 +96,15 @@ t.test('returns parsed object (set path as array)', ct => {
   ct.end()
 })
 
+t.test('returns parsed object (set path as mulit-array)', ct => {
+  ct.plan(1)
+
+  const env = dotenv.config({ path: ['tests/.env.local', 'tests/.env'] })
+  ct.same(env.parsed, { ALPHA: 'zeta' })
+
+  ct.end()
+})
+
 t.test('returns parsed object (set path as array with .vault extension)', ct => {
   ct.plan(1)
 
