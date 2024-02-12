@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.4.2...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.4.3...master)
+
+## [16.4.3](https://github.com/motdotla/dotenv/compare/v16.4.2...v16.4.3) (2024-02-12)
+
+### Changed
+
+- Fixed processing of multiple files in `options.path` [#805](https://github.com/motdotla/dotenv/pull/805)
 
 ## [16.4.2](https://github.com/motdotla/dotenv/compare/v16.4.1...v16.4.2) (2024-02-10)
 
