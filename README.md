@@ -366,8 +366,6 @@ By default, `config` will look for a file called .env in the current working dir
 Pass in multiple files as an array, and they will be parsed in order and combined with `process.env` (or `option.processEnv`, if set). The first value set for a variable will win, unless the `options.override` flag is set, in which case the last value set will win.  If a value already exists in `process.env` and the `options.override` flag is NOT set, no changes will be made to that value. 
 
 ```js  
-
-```js
 require('dotenv').config({ path: ['.env.local', '.env'] })
 ```
 
