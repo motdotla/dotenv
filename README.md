@@ -338,7 +338,9 @@ require('dotenv').config({ path: '/custom/path/to/.env' })
 
 By default, `config` will look for a file called .env in the current working directory.
 
-Pass in multiple files as an array, and they will be parsed in order and combined. The first value set for a variable will win. There is no overriding. The combined result will then be applied to `process.env` (or `options.processEnv`, if set). For this final application the `options.override` flag is respected.
+Pass in multiple files as an array, and they will be parsed in order and combined with `process.env` (or `option.processEnv`, if set). The first value set for a variable will win, unless the `options.override` flag is set, in which case the last value set will win.  If a value already exists in `process.env` and the `options.override` flag is NOT set, no changes will be made to that value. 
+
+```js  
 
 ```js
 require('dotenv').config({ path: ['.env.local', '.env'] })
@@ -368,7 +370,7 @@ require('dotenv').config({ debug: process.env.DEBUG })
 
 Default: `false`
 
-Override any environment variables that have already been set on your machine with values from your .env file(s). If multiple files have been provided in `option.path` the override does not apply while the files are being combined (see `options.path`). It applies though at the merging of the combined results with `process.env` (or `optiors.processEnv`, if set). 
+Override any environment variables that have already been set on your machine with values from your .env file(s). If multiple files have been provided in `option.path` the override will also be used as each file is combined with the next. Without `override` being set, the first value wins. With `override` set the last value wins. 
 
 ```js
 require('dotenv').config({ override: true })
