@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.4.3...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.4.4...master)
+
+## [16.4.4](https://github.com/motdotla/dotenv/compare/v16.4.3...v16.4.4) (2024-02-13)
+
+### Changed
+
+- 🐞 Replaced chaining operator `?.` with old school `&&` (fixing node 12 failures) [#812](https://github.com/motdotla/dotenv/pull/812)
 
 ## [16.4.3](https://github.com/motdotla/dotenv/compare/v16.4.2...v16.4.3) (2024-02-12)
 
