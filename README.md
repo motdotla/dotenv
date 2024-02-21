@@ -83,7 +83,7 @@ Or installing with yarn? `yarn add dotenv`
 </div>
 </a>
 
-Create a `.env` file in the root of your project:
+Create a `.env` file in the working directory of your process:
 
 ```dosini
 S3_BUCKET="YOURS3BUCKET"
