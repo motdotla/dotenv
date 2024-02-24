@@ -83,7 +83,7 @@ Or installing with yarn? `yarn add dotenv`
 </div>
 </a>
 
-Create a `.env` file in the root of your project:
+Create a `.env` file in the root of your project (if using a monorepo structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs):
 
 ```dosini
 S3_BUCKET="YOURS3BUCKET"

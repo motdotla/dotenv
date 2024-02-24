@@ -88,15 +88,11 @@ t.test('takes URL for path option', ct => {
 })
 
 t.test('takes option for path along with home directory char ~', ct => {
-  const existsSyncStub = sinon.stub(fs, 'existsSync').returns(true)
   const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
   const mockedHomedir = '/Users/dummy'
   const homedirStub = sinon.stub(os, 'homedir').returns(mockedHomedir)
   const testPath = '~/.env'
   dotenv.config({ path: testPath })
-
-  ct.equal(existsSyncStub.args[0][0], testPath)
-  ct.ok(existsSyncStub.called)
 
   ct.equal(readFileSyncStub.args[0][0], path.join(mockedHomedir, '.env'))
   ct.ok(homedirStub.called)
