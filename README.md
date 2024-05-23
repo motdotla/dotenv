@@ -90,7 +90,7 @@ console.log(process.env) // remove this after you've confirmed it is working
 .. [or using ES6?](#how-do-i-use-dotenv-with-import)
 
 ```javascript
-import 'dotenv/config'
+import 'dotenv/config.js'
 ```
 
 That's it. `process.env` now has the keys and values you defined in your `.env` file:
@@ -585,7 +585,7 @@ Simply..
 
 ```javascript
 // index.mjs (ESM)
-import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import 'dotenv/config.js' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import express from 'express'
 ```
 
@@ -618,7 +618,7 @@ errorReporter.report(new Error('documented example'))
 Instead, `index.mjs` should be written as..
 
 ```js
-import 'dotenv/config'
+import 'dotenv/config.js'
 
 import errorReporter from './errorReporter.mjs'
 errorReporter.report(new Error('documented example'))
