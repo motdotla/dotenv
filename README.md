@@ -49,7 +49,7 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 * [🌱 Install](#-install)
 * [🏗️ Usage (.env)](#%EF%B8%8F-usage)
 * [🌴 Multiple Environments 🆕](#-manage-multiple-environments)
-* [🚀 Deploying (.env.vault) 🆕](#-deploying)
+* [🚀 Deploying (encryption) 🆕](#-deploying)
 * [📚 Examples](#-examples)
 * [📖 Docs](#-documentation)
 * [❓ FAQ](#-faq)
@@ -176,23 +176,41 @@ $ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config y
 
 You need to add the value of another variable in one of your variables? Use [dotenv-expand](https://github.com/motdotla/dotenv-expand).
 
+### Command Substitution
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to use command substitution.
+
+Add the output of a command to one of your variables in your .env file.
+
+```ini
+# .env
+DATABASE_URL="postgres://$(whoami)@localhost/my_database"
+```
+```js
+// index.js
+console.log('DATABASE_URL', process.env.DATABASE_URL)
+```
+```sh
+$ dotenvx run --debug -- node index.js
+[dotenvx@0.14.1] injecting env (1) from .env
+DATABASE_URL postgres://yourusername@localhost/my_database
+```
+
 ### Syncing
 
-You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
+You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt your `.env` files and safely include them in source control. This still subscribes to the twelve-factor app rules by generating a decryption key separate from code.
 
 ### Multiple Environments
 
-You need to manage your secrets across different environments and apply them as needed? Use a `.env.vault` file with a `DOTENV_KEY`.
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate `.env.ci`, `.env.production` files, and more.
 
 ### Deploying
 
-You need to deploy your secrets in a cloud-agnostic manner? Use a `.env.vault` file. See [deploying `.env.vault` files](https://github.com/motdotla/dotenv/tree/master#-deploying).
+You need to deploy your secrets in a cloud-agnostic manner? Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate a private decryption key that is set on your production server.
 
 ## 🌴 Manage Multiple Environments
 
-Use [dotenvx](https://github.com/dotenvx/dotenvx) or [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
-
-### dotenvx
+Use [dotenvx](https://github.com/dotenvx/dotenvx)
 
 Run any environment locally. Create a `.env.ENVIRONMENT` file and use `--env-file` to load it. It's straightforward, yet flexible.
 
@@ -218,77 +236,22 @@ Hello local
 
 [more environment examples](https://dotenvx.com/docs/quickstart/environments)
 
-### dotenv-vault
-
-Edit your production environment variables.
-
-```bash
-$ npx dotenv-vault open production
-```
-
-Regenerate your `.env.vault` file.
-
-```bash
-$ npx dotenv-vault build
-```
-
-*ℹ️  🔐 Vault Managed vs 💻 Locally Managed: The above example, for brevity's sake, used the 🔐 Vault Managed solution to manage your `.env.vault` file. You can instead use the 💻 Locally Managed solution. [Read more here](https://github.com/dotenv-org/dotenv-vault#how-do-i-use--locally-managed-dotenv-vault). Our vision is that other platforms and orchestration tools adopt the `.env.vault` standard as they did the `.env` standard. We don't expect to be the only ones providing tooling to manage and generate `.env.vault` files.*
-
-<a href="https://github.com/dotenv-org/dotenv-vault#-manage-multiple-environments">Learn more at dotenv-vault: Manage Multiple Environments</a>
-
 ## 🚀 Deploying
 
-Use [dotenvx](https://github.com/dotenvx/dotenvx) or [dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
+Use [dotenvx](https://github.com/dotenvx/dotenvx).
 
-### dotenvx
+Add encryption to your `.env` files with a single command. Pass the `--encrypt` flag.
 
-Encrypt your secrets to a `.env.vault` file and load from it (recommended for production and ci).
-
-```bash
-$ echo "HELLO=World" > .env
-$ echo "HELLO=production" > .env.production
+```
+$ dotenvx set HELLO Production --encrypt -f .env.production
 $ echo "console.log('Hello ' + process.env.HELLO)" > index.js
 
-$ dotenvx encrypt
-[dotenvx][info] encrypted to .env.vault (.env,.env.production)
-[dotenvx][info] keys added to .env.keys (DOTENV_KEY_PRODUCTION,DOTENV_KEY_PRODUCTION)
-
-$ DOTENV_KEY='<dotenv_key_production>' dotenvx run -- node index.js
-[dotenvx][info] loading env (1) from encrypted .env.vault
-Hello production
-^ :-]
+$ DOTENV_PRIVATE_KEY_PRODUCTION="<.env.production private key>" dotenvx run -- node index.js
+[dotenvx] injecting env (2) from .env.production
+Hello Production
 ```
 
 [learn more](https://github.com/dotenvx/dotenvx?tab=readme-ov-file#encryption)
-
-### dotenv-vault
-
-*Note: Requires dotenv >= 16.1.0*
-
-Encrypt your `.env.vault` file.
-
-```bash
-$ npx dotenv-vault build
-```
-
-Fetch your production `DOTENV_KEY`.
-
-```bash
-$ npx dotenv-vault keys production
-```
-
-Set `DOTENV_KEY` on your server.
-
-```bash
-# heroku example
-heroku config:set DOTENV_KEY=dotenv://:key_1234…@dotenvx.com/vault/.env.vault?environment=production
-```
-
-That's it! On deploy, your `.env.vault` file will be decrypted and its secrets injected as environment variables – just in time.
-
-*ℹ️ A note from [Mot](https://github.com/motdotla): Until recently, we did not have an opinion on how and where to store your secrets in production. We now strongly recommend generating a `.env.vault` file. It's the best way to prevent your secrets from being scattered across multiple servers and cloud providers – protecting you from breaches like the [CircleCI breach](https://techcrunch.com/2023/01/05/circleci-breach/). Also it unlocks interoperability WITHOUT native third-party integrations. Third-party integrations are [increasingly risky](https://coderpad.io/blog/development/heroku-github-breach/) to our industry. They may be the 'du jour' of today, but we imagine a better future.*
-
-<a href="https://github.com/dotenv-org/dotenv-vault#-deploying">Learn more at dotenv-vault: Deploying</a>
 
 ## 📚 Examples
 
@@ -298,7 +261,6 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [nodejs (debug on)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs-debug)
 * [nodejs (override on)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs-override)
 * [nodejs (processEnv override)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-custom-target)
-* [nodejs (DOTENV_KEY override)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-vault-custom-target)
 * [esm](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-esm)
 * [esm (preload)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-esm-preload)
 * [typescript](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript)
@@ -399,18 +361,8 @@ Specify an object to write your secrets to. Defaults to `process.env` environmen
 const myObject = {}
 require('dotenv').config({ processEnv: myObject })
 
-console.log(myObject) // values from .env or .env.vault live here now.
+console.log(myObject) // values from .env
 console.log(process.env) // this was not changed or written to
-```
-
-##### DOTENV_KEY
-
-Default: `process.env.DOTENV_KEY`
-
-Pass the `DOTENV_KEY` directly to config options. Defaults to looking for `process.env.DOTENV_KEY` environment variable. Note this only applies to decrypting `.env.vault` files. If passed as null or undefined, or not passed at all, dotenv falls back to its traditional job of parsing a `.env` file.
-
-```js
-require('dotenv').config({ DOTENV_KEY: 'dotenv://:key_1234…@dotenvx.com/vault/.env.vault?environment=production' })
 ```
 
 ### Parse
@@ -482,22 +434,6 @@ Turn on logging to help debug why certain keys or values are not being populated
 Default: `false`
 
 Override any environment variables that have already been set.
-
-### Decrypt
-
-The engine which decrypts the ciphertext contents of your .env.vault file is available for use. It accepts a ciphertext and a decryption key. It uses AES-256-GCM encryption.
-
-For example, decrypting a simple ciphertext:
-
-```js
-const dotenv = require('dotenv')
-const ciphertext = 's7NYXa809k/bVSPwIAmJhPJmEGTtU0hG58hOZy7I0ix6y5HP8LsHBsZCYC/gw5DDFy5DgOcyd18R'
-const decryptionKey = 'ddcaa26504cd70a6fef9801901c3981538563a1767c297cb8416e8a38c62fe00'
-
-const decrypted = dotenv.decrypt(ciphertext, decryptionKey)
-
-console.log(decrypted) // # development@v6\nALPHA="zeta"
-```
 
 ## ❓ FAQ
 
@@ -675,11 +611,7 @@ Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
 ### What about syncing and securing .env files?
 
-Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault)
-
-### What is a `.env.vault` file?
-
-A `.env.vault` file is an encrypted version of your development (and ci, staging, production, etc) environment variables. It is paired with a `DOTENV_KEY` to deploy your secrets more securely than scattering them across multiple platforms and tools. Use [dotenv-vault](https://github.com/dotenv-org/dotenv-vault) to manage and generate them.
+Use [dotenvx](https://github.com/dotenvx/dotenvx)
 
 ### What if I accidentally commit my `.env` file to code?
 
