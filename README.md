@@ -66,12 +66,11 @@ Or installing with yarn? `yarn add dotenv`
 
 ## 🏗️ Usage
 
-<a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
-<div align="right">
-<img src="https://img.youtube.com/vi/YtkZR0NFd1g/hqdefault.jpg" alt="how to use dotenv video tutorial" align="right" width="330" />
-<img src="https://simpleicons.vercel.app/youtube/ff0000" alt="youtube/@dotenvorg" align="right" width="24" />
+<div>
+  <a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
+    <img src="https://github.com/user-attachments/assets/ede4a1d1-6e45-4349-95b0-98b48ad88f5b" alt="how to use dotenv video tutorial" width="640" />
+  </a>
 </div>
-</a>
 
 Create a `.env` file in the root of your project (if using a monorepo structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs):
 
