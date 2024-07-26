@@ -1,5 +1,5 @@
-const cp = require('child_process')
-const path = require('path')
+const cp = require('node:child_process')
+const path = require('node:path')
 
 const t = require('tap')
 

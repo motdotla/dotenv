@@ -1,5 +1,5 @@
-const fs = require('fs')
-const crypto = require('crypto')
+const fs = require('node:fs')
+const crypto = require('node:crypto')
 const sinon = require('sinon')
 const t = require('tap')
 

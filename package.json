@@ -57,7 +57,7 @@
     "typescript": "^4.8.4"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14.18.0 <15 || >=16"
   },
   "browser": {
     "fs": false

@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('node:fs')
 
 const sinon = require('sinon')
 const t = require('tap')
