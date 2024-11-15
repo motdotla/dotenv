@@ -97,6 +97,7 @@ That's it. `process.env` now has the keys and values you defined in your `.env` 
 
 ```javascript
 require('dotenv').config()
+// or import 'dotenv/config' if you're using ES6
 
 ...
 
