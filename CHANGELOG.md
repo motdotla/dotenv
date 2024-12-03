@@ -2,13 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.4.5...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.4.6...master)
+
+## [16.4.6](https://github.com/motdotla/dotenv/compare/v16.4.5...v16.4.6) (2024-12-02)
+
+### Changed
+
+- Clean up stale dev dependencies [#847](https://github.com/motdotla/dotenv/pull/847)
+- Various README updates clarifying usage and alternative solutions using [dotenvx](https://github.com/dotenvx/dotenvx)
 
 ## [16.4.5](https://github.com/motdotla/dotenv/compare/v16.4.4...v16.4.5) (2024-02-19)
 
 ### Changed
 
-- 🐞 fix recent regression when using `path` option. return to historical behavior: do not attempt to auto find `.env` if `path` set. (regression was introduced in `16.4.3`) [#814](https://github.com/motdotla/dotenv/pull/814)
+- 🐞 Fix recent regression when using `path` option. return to historical behavior: do not attempt to auto find `.env` if `path` set. (regression was introduced in `16.4.3`) [#814](https://github.com/motdotla/dotenv/pull/814)
 
 ## [16.4.4](https://github.com/motdotla/dotenv/compare/v16.4.3...v16.4.4) (2024-02-13)
 
