@@ -15,5 +15,5 @@ parse("test");
 const parsed = parse("NODE_ENV=production\nDB_HOST=a.b.c");
 const dbHost: string = parsed["DB_HOST"];
 
-const parsedFromBuffer = parse(new Buffer("JUSTICE=league\n"));
+const parsedFromBuffer = parse(Buffer.from("JUSTICE=league\n"));
 const justice: string = parsedFromBuffer["JUSTICE"];
