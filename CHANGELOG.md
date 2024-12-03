@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.4.6...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.4.7...master)
+
+## [16.4.7](https://github.com/motdotla/dotenv/compare/v16.4.6...v16.4.7 (2024-12-03)
+
+### Changed
+
+- Ignore `.tap` folder when publishing. (oops, sorry about that everyone. - @motdotla) [#848](https://github.com/motdotla/dotenv/pull/848)
 
 ## [16.4.6](https://github.com/motdotla/dotenv/compare/v16.4.5...v16.4.6) (2024-12-02)
 
