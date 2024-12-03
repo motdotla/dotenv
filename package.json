@@ -21,7 +21,6 @@
   "scripts": {
     "dts-check": "tsc --project tests/types/tsconfig.json",
     "lint": "standard",
-    "lint-readme": "standard-markdown",
     "pretest": "npm run lint && npm run dts-check",
     "test": "tap run --allow-empty-coverage --disable-coverage --timeout=60000",
     "test:coverage": "tap run --show-full-coverage --timeout=60000 --coverage-report=lcov",
@@ -46,13 +45,11 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "@types/node": "^18.11.3",
-    "decache": "^4.6.1",
+    "decache": "^4.6.2",
     "sinon": "^14.0.1",
     "standard": "^17.0.0",
-    "standard-markdown": "^7.1.0",
     "standard-version": "^9.5.0",
     "tap": "^19.2.0",
-    "tar": "^6.1.11",
     "typescript": "^4.8.4"
   },
   "engines": {
