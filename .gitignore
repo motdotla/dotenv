@@ -1,9 +1,7 @@
-# Coverage directory
-.nyc_output
-coverage
-
-# Dependency directory
-node_modules
-
 .DS_Store
+.nyc_output
+.tap
+coverage/
+node_modules/
 .idea/
+.vscode
