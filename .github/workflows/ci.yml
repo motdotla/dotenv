@@ -22,7 +22,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm test
-      # - run: npm run test:coverage
+      - run: npm run test:coverage
       # - name: codecov
       #   uses: codecov/codecov-action@v3
       #   env:
