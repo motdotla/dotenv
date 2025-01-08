@@ -356,7 +356,7 @@ require('dotenv').config({ override: true })
 
 Default: `process.env`
 
-Specify an object to write your secrets to. Defaults to `process.env` environment variables.
+Specify an object to write your environment variables to. Defaults to `process.env` environment variables.
 
 ```js
 const myObject = {}
