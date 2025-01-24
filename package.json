@@ -44,7 +44,7 @@
   "readmeFilename": "README.md",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "@types/node": "^18.11.3",
+    "@types/node": "^22.10.10",
     "decache": "^4.6.2",
     "sinon": "^14.0.1",
     "standard": "^17.0.0",
