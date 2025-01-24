@@ -49,7 +49,7 @@
     "sinon": "^19.0.2",
     "standard": "^17.0.0",
     "standard-version": "^9.5.0",
-    "tap": "^19.2.0",
+    "tap": "^21.0.1",
     "typescript": "^4.8.4"
   },
   "engines": {
