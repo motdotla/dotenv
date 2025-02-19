@@ -536,7 +536,13 @@ What does this mean in plain language? It means you would think the following wo
 
 `errorReporter.mjs`:
 ```js
-import { Client } from 'best-error-reporting-service'
+class Client {
+  constructor (apiKey) {
+    console.log('apiKey', apiKey)
+
+    this.apiKey = apiKey
+  }
+}
 
 export default new Client(process.env.API_KEY)
 ```
@@ -546,8 +552,7 @@ export default new Client(process.env.API_KEY)
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-import errorReporter from './errorReporter.mjs'
-errorReporter.report(new Error('documented example'))
+import errorReporter from './errorReporter.mjs' // process.env.API_KEY will be blank!
 ```
 
 `process.env.API_KEY` will be blank.
@@ -558,7 +563,6 @@ Instead, `index.mjs` should be written as..
 import 'dotenv/config'
 
 import errorReporter from './errorReporter.mjs'
-errorReporter.report(new Error('documented example'))
 ```
 
 Does that make sense? It's a bit unintuitive, but it is how importing of ES6 modules work. Here is a [working example of this pitfall](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-es6-import-pitfall).
