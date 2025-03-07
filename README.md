@@ -58,11 +58,16 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 ## 🌱 Install
 
 ```bash
-# install locally (recommended)
 npm install dotenv --save
 ```
 
-Or installing with yarn? `yarn add dotenv`
+You can also use an npm-compatible package manager like yarn or bun:
+
+```bash
+yarn add dotenv
+# or
+bun add dotenv
+```
 
 ## 🏗️ Usage
 
