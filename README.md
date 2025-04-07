@@ -25,9 +25,7 @@
 </a>
 <br>
 
-![](https://res.cloudinary.com/dotenv-org/image/upload/v1744035073/graphite_lgsrl8.gif)
-
-<img src="https://res.cloudinary.com/dotenv-org/image/upload/v1744035073/graphite_lgsrl8.gif" width="270" />
+<img src="https://res.cloudinary.com/dotenv-org/image/upload/v1744035073/graphite_lgsrl8.gif" width="270" alt="Graphite" />
 
 <a href="https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv">
   <div>
