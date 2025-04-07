@@ -24,13 +24,13 @@
   </div>
 </a>
 <br>
-<a href="https://workos.com/?utm_campaign=github_repo&utm_medium=referral&utm_content=dotenv&utm_source=github">
+<a href="https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv">
   <div>
-    <img src="https://res.cloudinary.com/dotenv-org/image/upload/c_scale,w_400/v1665605496/68747470733a2f2f73696e647265736f726875732e636f6d2f6173736574732f7468616e6b732f776f726b6f732d6c6f676f2d77686974652d62672e737667_zdmsbu.svg" width="270" alt="WorkOS">
+    <img src="https://res.cloudinary.com/dotenv-org/image/upload/v1744034330/Ditter_3_piisup.gif" width="270" alt="Graphite">
   </div>
-  <b>Your App, Enterprise Ready.</b>
+  <b>Graphite is the AI developer productivity platform helping teams on GitHub ship higher quality software, faster.</b>
   <div>
-    <sup>Add Single Sign-On, Multi-Factor Auth, and more, in minutes instead of months.</sup>
+    <sup></sup>
   </div>
 </a>
 <hr>
