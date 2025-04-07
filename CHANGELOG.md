@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.4.7...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.5.0...master)
+
+## [16.5.0](https://github.com/motdotla/dotenv/compare/v16.4.7...v16.5.0) (2025-04-07)
+
+### Changed
+
+- Remove `_log` method. Use `_debug` [#862](https://github.com/motdotla/dotenv/pull/862)
 
 ## [16.4.7](https://github.com/motdotla/dotenv/compare/v16.4.6...v16.4.7) (2024-12-03)
 
