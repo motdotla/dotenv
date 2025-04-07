@@ -26,7 +26,7 @@
 <br>
 <a href="https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv">
   <div>
-    <img src="https://github.com/user-attachments/assets/58419607-c87f-4477-ba0a-521f697941e6" width="270" alt="Graphite">
+    <img src="https://res.cloudinary.com/dotenv-org/image/upload/v1744035073/graphite_lgsrl8.gif" alt="Graphite">
   </div>
   <b>Graphite is the AI developer productivity platform helping teams on GitHub ship higher quality software, faster.</b>
   <div>
@@ -658,3 +658,5 @@ See [CHANGELOG.md](CHANGELOG.md)
 [These npm modules depend on it.](https://www.npmjs.com/browse/depended/dotenv)
 
 Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmjs.com/search?q=keywords:dotenv).
+
+![](https://res.cloudinary.com/dotenv-org/image/upload/v1744035073/graphite_lgsrl8.gif)
