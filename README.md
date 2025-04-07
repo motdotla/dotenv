@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[Sponsor dotenv](https://github.com/sponsors/motdotla). Thank you to:
+**Special thanks to [our sponsors](https://github.com/sponsors/motdotla)**
 
 <br>
 <a href="https://www.warp.dev/?utm_source=github&utm_medium=referral&utm_campaign=dotenv_p_20220831">
