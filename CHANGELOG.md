@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [16.5.0](https://github.com/motdotla/dotenv/compare/v16.4.7...v16.5.0) (2025-04-07)
 
+### Added
+
+- 🎉 Added new sponsor [Graphite](https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv) - *the AI developer productivity platform helping teams on GitHub ship higher quality software, faster*. Sponsors like them help finance dotenv development. 🙏
+
 ### Changed
 
 - Remove `_log` method. Use `_debug` [#862](https://github.com/motdotla/dotenv/pull/862)
