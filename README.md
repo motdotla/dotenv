@@ -26,7 +26,7 @@
 <br>
 <a href="https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv">
   <div>
-    <img src="https://res.cloudinary.com/dotenv-org/image/upload/v1744034330/Ditter_3_piisup.gif" width="270" alt="Graphite">
+    <img src="https://github.com/user-attachments/assets/58419607-c87f-4477-ba0a-521f697941e6" width="270" alt="Graphite">
   </div>
   <b>Graphite is the AI developer productivity platform helping teams on GitHub ship higher quality software, faster.</b>
   <div>
