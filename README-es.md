@@ -18,37 +18,19 @@
   <div>
     <img src="https://res.cloudinary.com/dotenv-org/image/upload/v1661980709/warp_hi8oqj.png" width="230" alt="Warp">
   </div>
-  <b>Warp es una rápida e impresionante terminal basada en Rust, reinventado para funcionar como una aplicación moderna.</b>
+  <b>Warp is a blazingly fast, Rust-based terminal reimagined to work like a modern app.</b>
   <div>
-    <sup>Haga más en la CLI con edición de texto real, resultado básado en bloques, y busqueda de comandos de IA.</sup>
+    <sup>Get more done in the CLI with real text editing, block-based output, and AI command search.</sup>
   </div>
 </a>
-<br>
-<a href="https://retool.com/?utm_source=sponsor&utm_campaign=dotenv">
-  <div>
-    <img src="https://res.cloudinary.com/dotenv-org/image/upload/c_scale,w_300/v1664466968/logo-full-black_vidfqf.png" width="270" alt="Retool">
-  </div>
-  <b>Retool ayuda a los desarrolladores a crear software interno personalizado, como aplicaciones CRUD y paneles de administración, realmente rápido.</b>
-  <div>
-    <sup>Construya Interfaces de Usuario de forma visual con componentes flexibles, conéctese a cualquier fuente de datos, y escriba lógica de negocio en JavaScript.</sup>
-  </div>
-</a>
-<br>
-<a href="https://workos.com/?utm_campaign=github_repo&utm_medium=referral&utm_content=dotenv&utm_source=github">
-  <div>
-    <img src="https://res.cloudinary.com/dotenv-org/image/upload/c_scale,w_400/v1665605496/68747470733a2f2f73696e647265736f726875732e636f6d2f6173736574732f7468616e6b732f776f726b6f732d6c6f676f2d77686974652d62672e737667_zdmsbu.svg" width="270" alt="WorkOS">
-  </div>
-  <b>Su Apliación, Lista para la Empresa.</b>
-  <div>
-    <sup>Agrega Inicio de Sesión Único, Autenticación Multi-Factor, y mucho más, en minutos en lugar de meses.</sup>
-  </div>
-</a>
-<hr>
-<br>
-<br>
-<br>
 <br>
 
+<a href="https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv"><img src="https://res.cloudinary.com/dotenv-org/image/upload/v1744035073/graphite_lgsrl8.gif" width="240" alt="Graphite" /></a>
+
+<a href="https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv">
+  <b>Graphite is the AI developer productivity platform helping teams on GitHub ship higher quality software, faster.</b>
+</a>
+<hr>
 </div>
 
 # dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
