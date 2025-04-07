@@ -11,8 +11,10 @@ All notable changes to this project will be documented in this file. See [standa
 - 🎉 Added new sponsor [Graphite](https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv) - *the AI developer productivity platform helping teams on GitHub ship higher quality software, faster*.
 
 > [!TIP]
-> **[Become a sponsor](https://github.com/sponsors/motdotla)**. The dotenvx README is viewed thousands of times DAILY on GitHub and NPM. Sponsoring dotenv is a great way to get in front of developers and give back to the developer community at the same time.
+> **[Become a sponsor](https://github.com/sponsors/motdotla)**
 > 
+> The dotenvx README is viewed thousands of times DAILY on GitHub and NPM.
+> Sponsoring dotenv is a great way to get in front of developers and give back to the developer community at the same time.
 
 ### Changed
 
