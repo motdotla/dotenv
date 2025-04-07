@@ -6,13 +6,8 @@
 
 <div align="center">
 
-<p>
-  <sup>
-    <a href="https://github.com/sponsors/motdotla">Dotenv is supported by the community.</a>
-  </sup>
-</p>
-<sup>Special thanks to:</sup>
-<br>
+[Sponsor dotenv](https://github.com/sponsors/motdotla). Thank you to:
+
 <br>
 <a href="https://www.warp.dev/?utm_source=github&utm_medium=referral&utm_campaign=dotenv_p_20220831">
   <div>
