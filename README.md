@@ -24,6 +24,9 @@
   </div>
 </a>
 <br>
+
+![](https://res.cloudinary.com/dotenv-org/image/upload/v1744035073/graphite_lgsrl8.gif)
+
 <a href="https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv">
   <div>
     <img src="https://res.cloudinary.com/dotenv-org/image/upload/v1744035073/graphite_lgsrl8.gif" alt="Graphite">
@@ -658,5 +661,3 @@ See [CHANGELOG.md](CHANGELOG.md)
 [These npm modules depend on it.](https://www.npmjs.com/browse/depended/dotenv)
 
 Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmjs.com/search?q=keywords:dotenv).
-
-![](https://res.cloudinary.com/dotenv-org/image/upload/v1744035073/graphite_lgsrl8.gif)
