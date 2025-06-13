@@ -67,6 +67,15 @@ export interface DotenvConfigOptions {
   processEnv?: DotenvPopulateInput;
 
   /**
+   * Optional strategy to locate .env files from nearest parent directory upward.
+   *
+   * Default: `undefined`
+   *
+   * example: `require('dotenv').config({ strategy: 'nearest' })`
+   */
+  strategy?: 'nearest';
+
+  /**
    * Default: `undefined`
    *
    * Pass the DOTENV_KEY directly to config options. Defaults to looking for process.env.DOTENV_KEY environment variable. Note this only applies to decrypting .env.vault files. If passed as null or undefined, or not passed at all, dotenv falls back to its traditional job of parsing a .env file.
