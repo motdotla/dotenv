@@ -74,6 +74,51 @@ export interface DotenvConfigOptions {
    * example: `require('dotenv').config({ DOTENV_KEY: 'dotenv://:key_1234…@dotenvx.com/vault/.env.vault?environment=production' })`
    */
   DOTENV_KEY?: string;
+
+  /**
+   * Default: `false`
+   *
+   * Enable performance mode for large .env files (>100KB). Uses optimized parsing algorithms.
+   *
+   * example: `require('dotenv').config({ enablePerformanceMode: true })`
+   */
+  enablePerformanceMode?: boolean;
+
+  /**
+   * Default: `true`
+   *
+   * Use optimized parser for large content automatically. Set to false to force original parser.
+   *
+   * example: `require('dotenv').parse(content, { useOptimizedParser: false })`
+   */
+  useOptimizedParser?: boolean;
+
+  /**
+   * Default: `1024 * 1024` (1MB)
+   *
+   * Maximum line length to prevent memory issues when parsing malformed files.
+   *
+   * example: `require('dotenv').config({ maxLineLength: 512 * 1024 })`
+   */
+  maxLineLength?: number;
+
+  /**
+   * Default: `64 * 1024` (64KB)
+   *
+   * Chunk size for streaming operations on large files.
+   *
+   * example: `require('dotenv').config({ chunkSize: 128 * 1024 })`
+   */
+  chunkSize?: number;
+
+  /**
+   * Default: `false`
+   *
+   * Enable benchmark logging to measure parsing performance.
+   *
+   * example: `require('dotenv').config({ enableBenchmark: true })`
+   */
+  enableBenchmark?: boolean;
 }
 
 export interface DotenvConfigOutput {
