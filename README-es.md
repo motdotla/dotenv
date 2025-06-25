@@ -145,11 +145,6 @@ $ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config t
 
 Necesitaras agregar el valor de otro variable en una de sus variables? Usa [dotenv-expand](https://github.com/motdotla/dotenv-expand).
 
-### Sincronizando
-
-Necesitas mentener sincronizados los archivos `.env` entre maquinas, entornos, o miembros del equipo? Usa 
-[dotenv-vault](https://github.com/dotenv-org/dotenv-vault).
-
 ## Ejemplos
 
 Vea [ejemplos](https://github.com/dotenv-org/examples) sobre el uso de dotenv con varios frameworks, lenguajes y configuraciones.
@@ -400,10 +395,6 @@ Existen dos arternativas a este planteamiento:
 ### ¿Qué pasa con la expansión de variable?
 
 Prueba [dotenv-expand](https://github.com/motdotla/dotenv-expand)
-
-### ¿Qué pasa con la sincronización y la seguridad de los archivos .env?
-
-Vea [dotenv-vault](https://github.com/dotenv-org/dotenv-vault)
 
 ## Guía de contribución
 
