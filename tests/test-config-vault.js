@@ -34,12 +34,21 @@ t.test('logs when no path is set', ct => {
   ct.ok(logStub.called)
 })
 
-t.test('does not log by default', ct => {
+t.test('DOES log by default', ct => {
   ct.plan(1)
 
   logStub = sinon.stub(console, 'log')
 
   dotenv.config({ path: testPath })
+  ct.ok(logStub.called)
+})
+
+t.test('does not log if quiet flag passed', ct => {
+  ct.plan(1)
+
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, quiet: true })
   ct.ok(logStub.notCalled)
 })
 
@@ -58,7 +67,7 @@ t.test('logs when testPath calls to .env.vault directly (interpret what the user
   logStub = sinon.stub(console, 'log')
 
   dotenv.config({ path: `${testPath}.vault` })
-  ct.ok(logStub.notCalled)
+  ct.ok(logStub.called)
 })
 
 t.test('logs when testPath calls to .env.vault directly (interpret what the user meant) and debug true', ct => {
