@@ -42,6 +42,15 @@ export interface DotenvConfigOptions {
   /**
    * Default: `false`
    *
+   * Suppress all output (except errors).
+   *
+   * example: `require('dotenv').config({ quiet: true })`
+   */
+  quiet?: boolean;
+
+  /**
+   * Default: `false`
+   *
    * Turn on logging to help debug why certain keys or values are not being set as you expect.
    *
    * example: `require('dotenv').config({ debug: process.env.DEBUG })`
@@ -110,7 +119,7 @@ export interface DotenvPopulateInput {
  *
  * See https://dotenvx.com/docs
  *
- * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false }`
+ * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', quiet: false, debug: true, override: false }`
  * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
  *
  */
@@ -121,7 +130,7 @@ export function config(options?: DotenvConfigOptions): DotenvConfigOutput;
  *
  * See https://dotenvx.com/docs
  *
- * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', debug: true, override: false }`
+ * @param options - additional options. example: `{ path: './custom/path', encoding: 'latin1', quiet: false, debug: true, override: false }`
  * @returns an object with a `parsed` key if successful or `error` key if an error occurred. example: { parsed: { KEY: 'value' } }
  *
  */
@@ -134,7 +143,7 @@ export function configDotenv(options?: DotenvConfigOptions): DotenvConfigOutput;
  *
  * @param processEnv - the target JSON object. in most cases use process.env but you can also pass your own JSON object
  * @param parsed - the source JSON object
- * @param options - additional options. example: `{ debug: true, override: false }`
+ * @param options - additional options. example: `{ quiet: false, debug: true, override: false }`
  * @returns {void}
  *
  */
