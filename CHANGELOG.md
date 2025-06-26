@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Added
 
-- By default log helpful message `[dotenv@16.6.0] injecting env (1) from .env`
+- Default log helpful message `[dotenv@16.6.0] injecting env (1) from .env` ([#870](https://github.com/motdotla/dotenv/pull/870))
 - Use `{ quiet: true }` to suppress
 - Aligns dotenv more closely with [dotenvx](https://github.com/dotenvx/dotenvx).
 
