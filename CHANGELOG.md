@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Added
 
 - By default log helpful message `[dotenv@16.6.0] injecting env (1) from .env`
-- Use `{ quiet: true }` to surpress
+- Use `{ quiet: true }` to suppress
 - Aligns dotenv more closely with [dotenvx](https://github.com/dotenvx/dotenvx).
 
 ## [16.5.0](https://github.com/motdotla/dotenv/compare/v16.4.7...v16.5.0) (2025-04-07)
