@@ -7,6 +7,7 @@ require('../lib/env-options')
 // preserve existing env
 const e = process.env.DOTENV_CONFIG_ENCODING
 const p = process.env.DOTENV_CONFIG_PATH
+const q = process.env.DOTENV_CONFIG_QUIET
 const d = process.env.DOTENV_CONFIG_DEBUG
 const o = process.env.DOTENV_CONFIG_OVERRIDE
 const dk = process.env.DOTENV_CONFIG_DOTENV_KEY
@@ -29,6 +30,7 @@ function testOption (envVar, tmpVal, expect) {
 // returns empty object when no options set in process.env
 delete process.env.DOTENV_CONFIG_ENCODING
 delete process.env.DOTENV_CONFIG_PATH
+delete process.env.DOTENV_CONFIG_QUIET
 delete process.env.DOTENV_CONFIG_DEBUG
 delete process.env.DOTENV_CONFIG_OVERRIDE
 delete process.env.DOTENV_CONFIG_DOTENV_KEY
@@ -40,6 +42,9 @@ testOption('DOTENV_CONFIG_ENCODING', 'latin1', { encoding: 'latin1' })
 
 // sets path option
 testOption('DOTENV_CONFIG_PATH', '~/.env.test', { path: '~/.env.test' })
+
+// sets quiet option
+testOption('DOTENV_CONFIG_QUIET', 'true', { quiet: 'true' })
 
 // sets debug option
 testOption('DOTENV_CONFIG_DEBUG', 'true', { debug: 'true' })
@@ -53,6 +58,7 @@ testOption('DOTENV_CONFIG_DOTENV_KEY', 'dotenv://:key_ddcaa26504cd70a@dotenvx.co
 // restore existing env
 process.env.DOTENV_CONFIG_ENCODING = e
 process.env.DOTENV_CONFIG_PATH = p
+process.env.DOTENV_CONFIG_QUIET = q
 process.env.DOTENV_CONFIG_DEBUG = d
 process.env.DOTENV_CONFIG_OVERRIDE = o
 process.env.DOTENV_CONFIG_DOTENV_KEY = dk
