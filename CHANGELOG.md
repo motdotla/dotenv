@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.6.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.6.1...master)
+
+## [16.6.1](https://github.com/motdotla/dotenv/compare/v16.6.0...v16.6.1) (2025-06-27)
+
+### Changed
+
+- Default `quiet` to true – hiding the runtime log message ([#874](https://github.com/motdotla/dotenv/pull/874))
+- NOTICE: 17.0.0 will be released with quiet defaulting to false. Use `config({ quiet: true })` to suppress.
+- And check out the new [dotenvx](https://github.com/dotenvx/dotenvx). As coding workflows evolve and agents increasingly handle secrets, encrypted .env files offer a much safer way to deploy both agents and code together with secure secrets.
 
 ## [16.6.0](https://github.com/motdotla/dotenv/compare/v16.5.0...v16.6.0) (2025-06-26)
 

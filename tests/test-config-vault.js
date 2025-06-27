@@ -34,22 +34,40 @@ t.test('logs when no path is set', ct => {
   ct.ok(logStub.called)
 })
 
-t.test('DOES log by default', ct => {
+t.test('does not log by default', ct => {
   ct.plan(1)
 
   logStub = sinon.stub(console, 'log')
 
   dotenv.config({ path: testPath })
-  ct.ok(logStub.called)
+  ct.ok(logStub.notCalled)
 })
 
-t.test('does not log if quiet flag passed', ct => {
+t.test('does not log if quiet flag passed true', ct => {
   ct.plan(1)
 
   logStub = sinon.stub(console, 'log')
 
   dotenv.config({ path: testPath, quiet: true })
   ct.ok(logStub.notCalled)
+})
+
+t.test('does log if quiet flag false', ct => {
+  ct.plan(1)
+
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, quiet: false })
+  ct.ok(logStub.called)
+})
+
+t.test('does log if quiet flag present and undefined/null', ct => {
+  ct.plan(1)
+
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, quiet: undefined })
+  ct.ok(logStub.called)
 })
 
 t.test('logs if debug set', ct => {
@@ -61,13 +79,13 @@ t.test('logs if debug set', ct => {
   ct.ok(logStub.called)
 })
 
-t.test('logs when testPath calls to .env.vault directly (interpret what the user meant)', ct => {
+t.test('does not log when testPath calls to .env.vault directly (interpret what the user meant)', ct => {
   ct.plan(1)
 
   logStub = sinon.stub(console, 'log')
 
   dotenv.config({ path: `${testPath}.vault` })
-  ct.ok(logStub.called)
+  ct.ok(logStub.notCalled)
 })
 
 t.test('logs when testPath calls to .env.vault directly (interpret what the user meant) and debug true', ct => {
@@ -389,4 +407,14 @@ t.test('raises error if some other uncaught decryption error', ct => {
   decipherStub.restore()
 
   ct.end()
+})
+
+t.test('_parseVault when empty args', ct => {
+  ct.plan(1)
+
+  try {
+    dotenv._parseVault()
+  } catch (e) {
+    ct.equal(e.message, 'NOT_FOUND_DOTENV_ENVIRONMENT: Cannot locate environment DOTENV_VAULT_DEVELOPMENT in your .env.vault file.')
+  }
 })

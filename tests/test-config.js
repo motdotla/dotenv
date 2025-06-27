@@ -250,3 +250,56 @@ t.test('logs any errors parsing when in debug and override mode', ct => {
 
   logStub.restore()
 })
+
+t.test('deals with file:// path', ct => {
+  const logStub = sinon.stub(console, 'log')
+
+  const testPath = 'file:///tests/.env'
+  const env = dotenv.config({ path: testPath })
+
+  ct.equal(env.parsed.BASIC, undefined)
+  ct.equal(process.env.BASIC, undefined)
+  ct.equal(env.error.message, "ENOENT: no such file or directory, open 'file:///tests/.env'")
+
+  ct.ok(logStub.notCalled)
+
+  logStub.restore()
+
+  ct.end()
+})
+
+t.test('deals with file:// path and debug true', ct => {
+  const logStub = sinon.stub(console, 'log')
+
+  const testPath = 'file:///tests/.env'
+  const env = dotenv.config({ path: testPath, debug: true })
+
+  ct.equal(env.parsed.BASIC, undefined)
+  ct.equal(process.env.BASIC, undefined)
+  ct.equal(env.error.message, "ENOENT: no such file or directory, open 'file:///tests/.env'")
+
+  ct.ok(logStub.called)
+
+  logStub.restore()
+
+  ct.end()
+})
+
+t.test('path.relative fails somehow', ct => {
+  const logStub = sinon.stub(console, 'log')
+  const pathRelativeStub = sinon.stub(path, 'relative').throws(new Error('fail'))
+
+  const testPath = 'file:///tests/.env'
+  const env = dotenv.config({ path: testPath, debug: true })
+
+  ct.equal(env.parsed.BASIC, undefined)
+  ct.equal(process.env.BASIC, undefined)
+  ct.equal(env.error.message, 'fail')
+
+  ct.ok(logStub.called)
+
+  logStub.restore()
+  pathRelativeStub.restore()
+
+  ct.end()
+})
