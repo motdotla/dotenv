@@ -43,13 +43,22 @@ t.test('does not log by default', ct => {
   ct.ok(logStub.notCalled)
 })
 
-t.test('does not log if quiet flag passed', ct => {
+t.test('does log if quiet flag passed true', ct => {
   ct.plan(1)
 
   logStub = sinon.stub(console, 'log')
 
   dotenv.config({ path: testPath, quiet: true })
   ct.ok(logStub.notCalled)
+})
+
+t.test('does log if quiet flag false', ct => {
+  ct.plan(1)
+
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, quiet: false })
+  ct.ok(logStub.called)
 })
 
 t.test('logs if debug set', ct => {
