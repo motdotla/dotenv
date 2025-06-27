@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v16.6.1...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.0.0...master)
+
+## [17.0.0](https://github.com/motdotla/dotenv/compare/v16.6.1...v17.0.0) (2025-06-27)
+
+### Changed
+
+- Default `quiet` to false - runtime log message shows by default ([#875](https://github.com/motdotla/dotenv/pull/874))
 
 ## [16.6.1](https://github.com/motdotla/dotenv/compare/v16.6.0...v16.6.1) (2025-06-27)
 

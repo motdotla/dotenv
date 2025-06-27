@@ -312,6 +312,29 @@ Pass in multiple files as an array, and they will be parsed in order and combine
 require('dotenv').config({ path: ['.env.local', '.env'] })
 ```
 
+##### quiet
+
+Default: `false`
+
+Suppress runtime logging message.
+
+```js
+// index.js
+require('dotenv').config({ quiet: false }) // change to true to suppress
+console.log(`Hello ${process.env.HELLO}`)
+```
+
+```ini
+# .env
+.env
+```
+
+```sh
+$ node index.js
+[dotenv@17.0.0] injecting env (1) from .env
+Hello World
+```
+
 ##### encoding
 
 Default: `utf8`

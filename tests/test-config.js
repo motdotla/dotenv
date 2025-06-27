@@ -261,7 +261,7 @@ t.test('deals with file:// path', ct => {
   ct.equal(process.env.BASIC, undefined)
   ct.equal(env.error.message, "ENOENT: no such file or directory, open 'file:///tests/.env'")
 
-  ct.ok(logStub.notCalled)
+  ct.ok(logStub.called)
 
   logStub.restore()
 
