@@ -23,7 +23,7 @@
     "lint": "standard",
     "pretest": "npm run lint && npm run dts-check",
     "test": "tap run --allow-empty-coverage --disable-coverage --timeout=60000",
-    "test:coverage": "tap run --show-full-coverage --timeout=60000 --coverage-report=lcov",
+    "test:coverage": "tap run --show-full-coverage --timeout=60000 --coverage-report=text --coverage-report=lcov",
     "prerelease": "npm test",
     "release": "standard-version"
   },
