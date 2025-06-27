@@ -408,3 +408,13 @@ t.test('raises error if some other uncaught decryption error', ct => {
 
   ct.end()
 })
+
+t.test('_parseVault when empty args', ct => {
+  ct.plan(1)
+
+  try {
+    dotenv._parseVault()
+  } catch (e) {
+    ct.equal(e.message, 'NOT_FOUND_DOTENV_ENVIRONMENT: Cannot locate environment DOTENV_VAULT_DEVELOPMENT in your .env.vault file.')
+  }
+})
