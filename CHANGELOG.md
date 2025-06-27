@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Changed
 
-- Default `quiet` to false - runtime log message shows by default ([#875](https://github.com/motdotla/dotenv/pull/874))
+- Default `quiet` to false - informational (file and keys count) runtime log message shows by default ([#875](https://github.com/motdotla/dotenv/pull/874))
 
 ## [16.6.1](https://github.com/motdotla/dotenv/compare/v16.6.0...v16.6.1) (2025-06-27)
 
