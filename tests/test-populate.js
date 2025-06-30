@@ -59,7 +59,7 @@ t.test('does write over keys already in processEnv if override turned on', ct =>
 t.test('logs any errors populating when in debug mode but override turned off', ct => {
   ct.plan(2)
 
-  const logStub = sinon.stub(console, 'log')
+  const logStub = sinon.stub(console, 'debug')
 
   const parsed = { test: false }
   process.env.test = true

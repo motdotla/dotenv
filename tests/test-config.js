@@ -252,7 +252,7 @@ t.test('logs any errors parsing when in debug and override mode', ct => {
 })
 
 t.test('deals with file:// path', ct => {
-  const logStub = sinon.stub(console, 'log')
+  const logStub = sinon.stub(console, 'warn')
 
   const testPath = 'file:///tests/.env'
   const env = dotenv.config({ path: testPath })
@@ -261,7 +261,7 @@ t.test('deals with file:// path', ct => {
   ct.equal(process.env.BASIC, undefined)
   ct.equal(env.error.message, "ENOENT: no such file or directory, open 'file:///tests/.env'")
 
-  ct.ok(logStub.called)
+  ct.ok(logStub.notCalled)
 
   logStub.restore()
 
