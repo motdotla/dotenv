@@ -40,7 +40,7 @@ export interface DotenvConfigOptions {
   encoding?: string;
 
   /**
-   * Default: `false`
+   * Default: `true`
    *
    * Suppress all output (except errors).
    *

@@ -314,7 +314,7 @@ require('dotenv').config({ path: ['.env.local', '.env'] })
 
 ##### quiet
 
-Default: `false`
+Default: `true`
 
 Suppress runtime logging message.
 
