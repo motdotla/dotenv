@@ -6,6 +6,10 @@ export interface DotenvParseOutput {
   [name: string]: string;
 }
 
+export interface DotenvPopulateOutput {
+  [name: string]: string;
+}
+
 /**
  * Parses a string or buffer in the .env file format into an object.
  *
@@ -144,10 +148,14 @@ export function configDotenv(options?: DotenvConfigOptions): DotenvConfigOutput;
  * @param processEnv - the target JSON object. in most cases use process.env but you can also pass your own JSON object
  * @param parsed - the source JSON object
  * @param options - additional options. example: `{ quiet: false, debug: true, override: false }`
- * @returns {void}
+ * @returns an object with the keys and values that were actually set
  *
  */
-export function populate(processEnv: DotenvPopulateInput, parsed: DotenvPopulateInput, options?: DotenvConfigOptions): void;
+export function populate(
+  processEnv: DotenvPopulateInput,
+  parsed: DotenvPopulateInput,
+  options?: DotenvConfigOptions
+): DotenvPopulateOutput;
 
 /**
  * Decrypt ciphertext
