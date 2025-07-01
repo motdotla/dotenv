@@ -4,19 +4,6 @@
 
 &nbsp;
 
-<div align="center">
-
-**Special thanks to [our sponsors](https://github.com/sponsors/motdotla)**
-
-<br>
-<a href="https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv"><img src="https://res.cloudinary.com/dotenv-org/image/upload/v1744035073/graphite_lgsrl8.gif" width="240" alt="Graphite" /></a>
-<br>
-<a href="https://graphite.dev/?utm_source=github&utm_medium=repo&utm_campaign=dotenv">
-  <b>Graphite is the AI developer productivity platform helping teams on GitHub ship higher quality software, faster.</b>
-</a>
-<hr>
-</div>
-
 # dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.svg" alt="dotenv" align="right" width="200" />
