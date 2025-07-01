@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.0.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.0.1...master)
+
+## [17.0.1](https://github.com/motdotla/dotenv/compare/v17.0.0...v17.0.1) (2025-07-01)
+
+### Changed
+
+* Patched injected log to count only populated/set keys to process.env ([#879](https://github.com/motdotla/dotenv/pull/879))
 
 ## [17.0.0](https://github.com/motdotla/dotenv/compare/v16.6.1...v17.0.0) (2025-06-27)
 
