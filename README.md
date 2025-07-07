@@ -152,7 +152,24 @@ $ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config y
 
 ### Variable Expansion
 
-You need to add the value of another variable in one of your variables? Use [dotenv-expand](https://github.com/motdotla/dotenv-expand).
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to use variable expansion.
+
+Reference and expand variables already on your machine for use in your .env file.
+
+```ini
+# .env
+USERNAME="username"
+DATABASE_URL="postgres://${USERNAME}@localhost/my_database"
+```
+```js
+// index.js
+console.log('DATABASE_URL', process.env.DATABASE_URL)
+```
+```sh
+$ dotenvx run --debug -- node index.js
+[dotenvx@0.14.1] injecting env (2) from .env
+DATABASE_URL postgres://username@localhost/my_database
+```
 
 ### Command Substitution
 
@@ -259,7 +276,6 @@ Dotenv exposes four functions:
 * `config`
 * `parse`
 * `populate`
-* `decrypt`
 
 ### Config
 
@@ -616,7 +632,7 @@ Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
 
 ### What about syncing and securing .env files?
 
-Use [dotenvx](https://github.com/dotenvx/dotenvx)
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to unlock syncing encrypted .env files over git.
 
 ### What if I accidentally commit my `.env` file to code?
 
