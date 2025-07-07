@@ -2,7 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.0.1...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.1.0...master)
+
+## [17.1.0](https://github.com/motdotla/dotenv/compare/v17.0.1...v17.1.0) (2025-07-07)
+
+### Added
+
+* Add additional security and configuration tips to the runtime log ([#884](https://github.com/motdotla/dotenv/pull/884))
+* Dim the tips text from the main injection information text
+
+```js
+const TIPS = [
+  '🔐 encrypt with dotenvx: https://dotenvx.com',
+  '🔐 prevent committing .env to code: https://dotenvx.com/precommit',
+  '🔐 prevent building .env in docker: https://dotenvx.com/prebuild',
+  '🛠️  run anywhere with `dotenvx run -- yourcommand`',
+  '⚙️  specify custom .env file path with { path: \'/custom/path/.env\' }',
+  '⚙️  enable debug logging with { debug: true }',
+  '⚙️  override existing env vars with { override: true }',
+  '⚙️  suppress all logs with { quiet: true }',
+  '⚙️  write to custom object with { processEnv: myObject }',
+  '⚙️  load multiple .env files with { path: [\'.env.local\', \'.env\'] }'
+]
+```
 
 ## [17.0.1](https://github.com/motdotla/dotenv/compare/v17.0.0...v17.0.1) (2025-07-01)
 
