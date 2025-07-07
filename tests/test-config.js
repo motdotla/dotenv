@@ -299,7 +299,7 @@ t.test('displays random tips from the tips array', ct => {
   // Should have at least one call that contains a tip
   let foundTip = false
   for (const call of logStub.getCalls()) {
-    if (call.args[0] && call.args[0].includes('[tip]')) {
+    if (call.args[0] && call.args[0].includes('tip:')) {
       foundTip = true
       break
     }
@@ -310,17 +310,20 @@ t.test('displays random tips from the tips array', ct => {
   // Test that the tip contains one of our expected tip messages
   let foundExpectedTip = false
   const expectedTips = [
-    'encrypt with dotenvx: https://dotenvx.com',
-    'specify custom .env file path with { path: \'/custom/path/.env\' }',
-    'enable debug logging with { debug: true }',
-    'override existing env vars with { override: true }',
-    'suppress all logs with { quiet: true }',
-    'write to custom object with { processEnv: myObject }',
-    'load multiple .env files with { path: [\'.env.local\', \'.env\'] }'
+    '🔐 encrypt with dotenvx: https://dotenvx.com',
+    '🔐 prevent committing .env to code: https://dotenvx.com/precommit',
+    '🔐 prevent building .env in docker: https://dotenvx.com/prebuild',
+    '🛠️  run anywhere with `dotenvx run -- yourcommand`',
+    '⚙️  specify custom .env file path with { path: \'/custom/path/.env\' }',
+    '⚙️  enable debug logging with { debug: true }',
+    '⚙️  override existing env vars with { override: true }',
+    '⚙️  suppress all logs with { quiet: true }',
+    '⚙️  write to custom object with { processEnv: myObject }',
+    '⚙️  load multiple .env files with { path: [\'.env.local\', \'.env\'] }'
   ]
 
   for (const call of logStub.getCalls()) {
-    if (call.args[0] && call.args[0].includes('[tip]')) {
+    if (call.args[0] && call.args[0].includes('tip:')) {
       for (const expectedTip of expectedTips) {
         if (call.args[0].includes(expectedTip)) {
           foundExpectedTip = true
