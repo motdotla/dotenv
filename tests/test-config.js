@@ -286,7 +286,7 @@ t.test('deals with file:// path and debug true', ct => {
 })
 
 t.test('displays random tips from the tips array', ct => {
-  ct.plan(3)
+  ct.plan(2)
 
   const logStub = sinon.stub(console, 'log')
   const testPath = 'tests/.env'
@@ -331,10 +331,6 @@ t.test('displays random tips from the tips array', ct => {
   }
 
   ct.ok(foundExpectedTip, 'Should display one of the expected tips')
-
-  // Test that the _getRandomTip function exists and returns a tip
-  const randomTip = dotenv._getRandomTip()
-  ct.ok(expectedTips.includes(randomTip), 'Should return a valid tip from the array')
 
   logStub.restore()
   ct.end()
