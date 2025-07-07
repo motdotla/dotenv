@@ -285,6 +285,61 @@ t.test('deals with file:// path and debug true', ct => {
   ct.end()
 })
 
+t.test('displays random tips from the tips array', ct => {
+  ct.plan(3)
+
+  const logStub = sinon.stub(console, 'log')
+  const testPath = 'tests/.env'
+
+  // Test that tips are displayed (run config multiple times to see variation)
+  dotenv.config({ path: testPath })
+  dotenv.config({ path: testPath })
+  dotenv.config({ path: testPath })
+
+  // Should have at least one call that contains a tip
+  let foundTip = false
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('[tip]')) {
+      foundTip = true
+      break
+    }
+  }
+
+  ct.ok(foundTip, 'Should display a tip')
+
+  // Test that the tip contains one of our expected tip messages
+  let foundExpectedTip = false
+  const expectedTips = [
+    'encrypt with dotenvx: https://dotenvx.com',
+    'specify custom .env file path with { path: \'/custom/path/.env\' }',
+    'enable debug logging with { debug: true }',
+    'override existing env vars with { override: true }',
+    'suppress all logs with { quiet: true }',
+    'write to custom object with { processEnv: myObject }',
+    'load multiple .env files with { path: [\'.env.local\', \'.env\'] }'
+  ]
+
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('[tip]')) {
+      for (const expectedTip of expectedTips) {
+        if (call.args[0].includes(expectedTip)) {
+          foundExpectedTip = true
+          break
+        }
+      }
+    }
+  }
+
+  ct.ok(foundExpectedTip, 'Should display one of the expected tips')
+
+  // Test that the _getRandomTip function exists and returns a tip
+  const randomTip = dotenv._getRandomTip()
+  ct.ok(expectedTips.includes(randomTip), 'Should return a valid tip from the array')
+
+  logStub.restore()
+  ct.end()
+})
+
 t.test('path.relative fails somehow', ct => {
   const logStub = sinon.stub(console, 'log')
   const pathRelativeStub = sinon.stub(path, 'relative').throws(new Error('fail'))
