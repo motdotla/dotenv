@@ -285,8 +285,30 @@ t.test('deals with file:// path and debug true', ct => {
   ct.end()
 })
 
+t.test('path.relative fails somehow', ct => {
+  const logStub = sinon.stub(console, 'log')
+  const pathRelativeStub = sinon.stub(path, 'relative').throws(new Error('fail'))
+
+  const testPath = 'file:///tests/.env'
+  const env = dotenv.config({ path: testPath, debug: true })
+
+  ct.equal(env.parsed.BASIC, undefined)
+  ct.equal(process.env.BASIC, undefined)
+  ct.equal(env.error.message, 'fail')
+
+  ct.ok(logStub.called)
+
+  logStub.restore()
+  pathRelativeStub.restore()
+
+  ct.end()
+})
+
 t.test('displays random tips from the tips array', ct => {
   ct.plan(2)
+
+  const originalTTY = process.stdout.isTTY
+  process.stdout.isTTY = true
 
   const logStub = sinon.stub(console, 'log')
   const testPath = 'tests/.env'
@@ -335,25 +357,69 @@ t.test('displays random tips from the tips array', ct => {
 
   ct.ok(foundExpectedTip, 'Should display one of the expected tips')
 
+  // Restore
+  process.stdout.isTTY = originalTTY
+
   logStub.restore()
   ct.end()
 })
 
-t.test('path.relative fails somehow', ct => {
+t.test('displays random tips from the tips array with fallback for isTTY false', ct => {
+  ct.plan(2)
+
+  const originalTTY = process.stdout.isTTY
+  process.stdout.isTTY = undefined
+
   const logStub = sinon.stub(console, 'log')
-  const pathRelativeStub = sinon.stub(path, 'relative').throws(new Error('fail'))
+  const testPath = 'tests/.env'
 
-  const testPath = 'file:///tests/.env'
-  const env = dotenv.config({ path: testPath, debug: true })
+  // Test that tips are displayed (run config multiple times to see variation)
+  dotenv.config({ path: testPath })
+  dotenv.config({ path: testPath })
+  dotenv.config({ path: testPath })
 
-  ct.equal(env.parsed.BASIC, undefined)
-  ct.equal(process.env.BASIC, undefined)
-  ct.equal(env.error.message, 'fail')
+  // Should have at least one call that contains a tip
+  let foundTip = false
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('tip:')) {
+      foundTip = true
+      break
+    }
+  }
 
-  ct.ok(logStub.called)
+  ct.ok(foundTip, 'Should display a tip')
+
+  // Test that the tip contains one of our expected tip messages
+  let foundExpectedTip = false
+  const expectedTips = [
+    '🔐 encrypt with dotenvx: https://dotenvx.com',
+    '🔐 prevent committing .env to code: https://dotenvx.com/precommit',
+    '🔐 prevent building .env in docker: https://dotenvx.com/prebuild',
+    '🛠️  run anywhere with `dotenvx run -- yourcommand`',
+    '⚙️  specify custom .env file path with { path: \'/custom/path/.env\' }',
+    '⚙️  enable debug logging with { debug: true }',
+    '⚙️  override existing env vars with { override: true }',
+    '⚙️  suppress all logs with { quiet: true }',
+    '⚙️  write to custom object with { processEnv: myObject }',
+    '⚙️  load multiple .env files with { path: [\'.env.local\', \'.env\'] }'
+  ]
+
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('tip:')) {
+      for (const expectedTip of expectedTips) {
+        if (call.args[0].includes(expectedTip)) {
+          foundExpectedTip = true
+          break
+        }
+      }
+    }
+  }
+
+  ct.ok(foundExpectedTip, 'Should display one of the expected tips')
+
+  // Restore
+  process.stdout.isTTY = originalTTY
 
   logStub.restore()
-  pathRelativeStub.restore()
-
   ct.end()
 })
