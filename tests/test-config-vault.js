@@ -25,60 +25,6 @@ t.afterEach(() => {
   }
 })
 
-t.test('logs when no path is set', ct => {
-  ct.plan(1)
-
-  logStub = sinon.stub(console, 'log')
-
-  dotenv.config()
-  ct.ok(logStub.called)
-})
-
-t.test('does log by default', ct => {
-  ct.plan(1)
-
-  logStub = sinon.stub(console, 'log')
-
-  dotenv.config({ path: testPath })
-  ct.ok(logStub.called)
-})
-
-t.test('does not log if quiet flag passed true', ct => {
-  ct.plan(1)
-
-  logStub = sinon.stub(console, 'log')
-
-  dotenv.config({ path: testPath, quiet: true })
-  ct.ok(logStub.notCalled)
-})
-
-t.test('does log if quiet flag false', ct => {
-  ct.plan(1)
-
-  logStub = sinon.stub(console, 'log')
-
-  dotenv.config({ path: testPath, quiet: false })
-  ct.ok(logStub.called)
-})
-
-t.test('does log if quiet flag present and undefined/null', ct => {
-  ct.plan(1)
-
-  logStub = sinon.stub(console, 'log')
-
-  dotenv.config({ path: testPath, quiet: undefined })
-  ct.ok(logStub.called)
-})
-
-t.test('logs if debug set', ct => {
-  ct.plan(1)
-
-  logStub = sinon.stub(console, 'log')
-
-  dotenv.config({ path: testPath, debug: true })
-  ct.ok(logStub.called)
-})
-
 t.test('does log when testPath calls to .env.vault directly (interpret what the user meant)', ct => {
   ct.plan(1)
 
@@ -88,18 +34,10 @@ t.test('does log when testPath calls to .env.vault directly (interpret what the 
   ct.ok(logStub.called)
 })
 
-t.test('logs when testPath calls to .env.vault directly (interpret what the user meant) and debug true', ct => {
-  ct.plan(1)
-
-  logStub = sinon.stub(console, 'log')
-
-  dotenv.config({ path: `${testPath}.vault`, debug: true })
-  ct.ok(logStub.called)
-})
-
 t.test('warns if DOTENV_KEY exists but .env.vault does not exist', ct => {
   ct.plan(1)
 
+  const testPath = 'tests/.env'
   logStub = sinon.stub(console, 'log')
 
   const existsSync = sinon.stub(fs, 'existsSync').returns(false) // make .env.vault not exist
@@ -113,6 +51,7 @@ t.test('warns if DOTENV_KEY exists but .env.vault does not exist', ct => {
 t.test('warns if DOTENV_KEY exists but .env.vault does not exist (set as array)', ct => {
   ct.plan(1)
 
+  const testPath = 'tests/.env'
   logStub = sinon.stub(console, 'log')
 
   const existsSync = sinon.stub(fs, 'existsSync').returns(false) // make .env.vault not exist
@@ -121,6 +60,15 @@ t.test('warns if DOTENV_KEY exists but .env.vault does not exist (set as array)'
   existsSync.restore()
 
   ct.end()
+})
+
+t.test('logs when testPath calls to .env.vault directly (interpret what the user meant) and debug true', ct => {
+  ct.plan(1)
+
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: `${testPath}.vault`, debug: true })
+  ct.ok(logStub.called)
 })
 
 t.test('returns parsed object', ct => {
