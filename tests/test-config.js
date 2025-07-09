@@ -1,14 +1,20 @@
 const fs = require('fs')
 const os = require('os')
 const path = require('path')
-
 const sinon = require('sinon')
 const t = require('tap')
 
 const dotenv = require('../lib/main')
 
+let logStub
+
 t.beforeEach(() => {
+  logStub = null
   delete process.env.BASIC // reset
+})
+
+t.afterEach(() => {
+  if (logStub) logStub.restore()
 })
 
 t.test('takes string for path option', ct => {
@@ -114,12 +120,11 @@ t.test('takes option for encoding', ct => {
 })
 
 t.test('takes option for debug', ct => {
-  const logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'log')
 
   dotenv.config({ debug: 'true' })
   ct.ok(logStub.called)
 
-  logStub.restore()
   ct.end()
 })
 
@@ -226,7 +231,7 @@ t.test('returns any errors thrown from reading file or parsing', ct => {
 t.test('logs any errors thrown from reading file or parsing when in debug mode', ct => {
   ct.plan(2)
 
-  const logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'log')
   const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
 
   readFileSyncStub.throws()
@@ -235,24 +240,21 @@ t.test('logs any errors thrown from reading file or parsing when in debug mode',
   ct.ok(logStub.called)
   ct.type(env.error, Error)
 
-  logStub.restore()
   readFileSyncStub.restore()
 })
 
 t.test('logs any errors parsing when in debug and override mode', ct => {
   ct.plan(1)
 
-  const logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'log')
 
   dotenv.config({ debug: true, override: true })
 
   ct.ok(logStub.called)
-
-  logStub.restore()
 })
 
 t.test('deals with file:// path', ct => {
-  const logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'log')
 
   const testPath = 'file:///tests/.env'
   const env = dotenv.config({ path: testPath })
@@ -263,13 +265,11 @@ t.test('deals with file:// path', ct => {
 
   ct.ok(logStub.called)
 
-  logStub.restore()
-
   ct.end()
 })
 
 t.test('deals with file:// path and debug true', ct => {
-  const logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'log')
 
   const testPath = 'file:///tests/.env'
   const env = dotenv.config({ path: testPath, debug: true })
@@ -280,13 +280,11 @@ t.test('deals with file:// path and debug true', ct => {
 
   ct.ok(logStub.called)
 
-  logStub.restore()
-
   ct.end()
 })
 
 t.test('path.relative fails somehow', ct => {
-  const logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'log')
   const pathRelativeStub = sinon.stub(path, 'relative').throws(new Error('fail'))
 
   const testPath = 'file:///tests/.env'
@@ -298,7 +296,6 @@ t.test('path.relative fails somehow', ct => {
 
   ct.ok(logStub.called)
 
-  logStub.restore()
   pathRelativeStub.restore()
 
   ct.end()
@@ -310,7 +307,7 @@ t.test('displays random tips from the tips array', ct => {
   const originalTTY = process.stdout.isTTY
   process.stdout.isTTY = true
 
-  const logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'log')
   const testPath = 'tests/.env'
 
   // Test that tips are displayed (run config multiple times to see variation)
@@ -359,8 +356,6 @@ t.test('displays random tips from the tips array', ct => {
 
   // Restore
   process.stdout.isTTY = originalTTY
-
-  logStub.restore()
   ct.end()
 })
 
@@ -370,7 +365,7 @@ t.test('displays random tips from the tips array with fallback for isTTY false',
   const originalTTY = process.stdout.isTTY
   process.stdout.isTTY = undefined
 
-  const logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'log')
   const testPath = 'tests/.env'
 
   // Test that tips are displayed (run config multiple times to see variation)
@@ -419,7 +414,88 @@ t.test('displays random tips from the tips array with fallback for isTTY false',
 
   // Restore
   process.stdout.isTTY = originalTTY
-
-  logStub.restore()
   ct.end()
+})
+
+t.test('logs when no path is set', ct => {
+  ct.plan(1)
+
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config()
+  ct.ok(logStub.called)
+})
+
+t.test('does log by default', ct => {
+  ct.plan(1)
+
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+  ct.ok(logStub.called)
+})
+
+t.test('does not log if quiet flag passed true', ct => {
+  ct.plan(1)
+
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, quiet: true })
+  ct.ok(logStub.notCalled)
+})
+
+t.test('does not log if process.env.DOTENV_CONFIG_QUIET is true', ct => {
+  ct.plan(1)
+
+  process.env.DOTENV_CONFIG_QUIET = 'true'
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+  ct.ok(logStub.notCalled)
+  delete process.env.DOTENV_CONFIG_QUIET
+})
+
+t.test('does log if quiet flag false', ct => {
+  ct.plan(1)
+
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, quiet: false })
+  ct.ok(logStub.called)
+})
+
+t.test('does log if process.env.DOTENV_CONFIG_QUIET is false', ct => {
+  ct.plan(1)
+
+  process.env.DOTENV_CONFIG_QUIET = 'false'
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+  ct.ok(logStub.called)
+  delete process.env.DOTENV_CONFIG_QUIET
+})
+
+t.test('does log if quiet flag present and undefined/null', ct => {
+  ct.plan(1)
+
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, quiet: undefined })
+  ct.ok(logStub.called)
+})
+
+t.test('logs if debug set', ct => {
+  ct.plan(1)
+
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, debug: true })
+  ct.ok(logStub.called)
 })
