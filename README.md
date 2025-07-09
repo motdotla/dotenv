@@ -29,7 +29,7 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 npm install dotenv --save
 ```
 
-You can also use an npm-compatible package manager like yarn, bun or pnpm:
+You can also use an npm-compatible package manager like yarn, bun, pnpm, or gitcrate:
 
 ```bash
 yarn add dotenv
@@ -39,6 +39,9 @@ bun add dotenv
 ```
 ```bash
 pnpm add dotenv
+```
+```bash
+gcr install env
 ```
 
 ## 🏗️ Usage
