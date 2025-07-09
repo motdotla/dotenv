@@ -2,7 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.1.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.2.0...master)
+
+## [17.2.0](https://github.com/motdotla/dotenv/compare/v17.1.0...v17.2.0) (2025-07-09)
+
+### Added
+
+* Optionally specify `DOTENV_CONFIG_QUIET=true` in your environment or `.env` file to quiet the runtime log ([#889](https://github.com/motdotla/dotenv/pull/889))
+* Just like dotenv any `DOTENV_CONFIG_` environment variables take precedence over any code set options like `({quiet: false})`
+
+```ini
+# .env
+DOTENV_CONFIG_QUIET=true
+HELLO="World"
+```
+```js
+// index.js
+require('dotenv').config()
+console.log(`Hello ${process.env.HELLO}`)
+```
+```sh
+$ node index.js
+Hello World
+
+or
+
+$ DOTENV_CONFIG_QUIET=true node index.js
+```
 
 ## [17.1.0](https://github.com/motdotla/dotenv/compare/v17.0.1...v17.1.0) (2025-07-07)
 
