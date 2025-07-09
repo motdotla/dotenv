@@ -9,6 +9,7 @@ const dotenv = require('../lib/main')
 let logStub
 
 t.beforeEach(() => {
+  logStub = null
   delete process.env.BASIC // reset
 })
 
