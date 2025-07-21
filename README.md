@@ -70,6 +70,14 @@ console.log(process.env) // remove this after you've confirmed it is working
 import 'dotenv/config'
 ```
 
+ES6 import if you need to set config options:
+
+```javascript
+import dotenv from 'dotenv'
+
+dotenv.config({ path: '/custom/path/to/.env' })
+```
+
 That's it. `process.env` now has the keys and values you defined in your `.env` file:
 
 ```javascript
