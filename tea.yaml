@@ -1,7 +1,0 @@
-# https://tea.xyz/what-is-this-file (dotenv supports projects trying to make open source more sustainable - tea.xyz included)
-# this file only lives in the github repo and is not published to the npm module.
----
-version: 1.0.0
-codeOwners:
-  - '0x248c5A7855A8861e3277341A1285c5D7dE64ba73'
-quorum: 1
