@@ -4,6 +4,19 @@
 
 &nbsp;
 
+<div align="center">
+
+**Special thanks to [our sponsors](https://github.com/sponsors/motdotla)**
+
+<a href="https://tuple.app/dotenv">
+  <div>
+    <img src="https://res.cloudinary.com/dotenv-org/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1756831704/github_repo_sponsorship_gq4hvx.png" width="600" alt="Tuple">
+  </div>
+  <b>Tuple, the premier screen sharing app for developers on macOS and Windows.</b>
+</a>
+<hr>
+</div>
+
 # dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.svg" alt="dotenv" align="right" width="200" />
