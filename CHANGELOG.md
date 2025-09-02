@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Added
 
-- 🙏 A big thank you to new sponsor [Tuple.app](https://tuple.app/dotenv) - *the premier screen sharing app for developers on macOS and Windows.*. Go check them out. It's wonderful and generous of them to give back to open source and sponsor dotenv. Give them some love back.
+- 🙏 A big thank you to new sponsor [Tuple.app](https://tuple.app/dotenv) - *the premier screen sharing app for developers on macOS and Windows.* Go check them out. It's wonderful and generous of them to give back to open source by sponsoring dotenv. Give them some love back.
 
 ## [17.2.1](https://github.com/motdotla/dotenv/compare/v17.2.0...v17.2.1) (2025-07-24)
 
