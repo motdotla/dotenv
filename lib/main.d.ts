@@ -90,8 +90,17 @@ export interface DotenvConfigOptions {
 }
 
 export interface DotenvConfigOutput {
-  error?: Error;
+  error?: DotenvError;
   parsed?: DotenvParseOutput;
+}
+
+type DotenvError = Error & {
+  code: 
+    | 'MISSING_DATA'
+    | 'INVALID_DOTENV_KEY'
+    | 'NOT_FOUND_DOTENV_ENVIRONMENT'
+    | 'DECRYPTION_FAILED'
+    | 'OBJECT_REQUIRED';
 }
 
 export interface DotenvPopulateOptions {
