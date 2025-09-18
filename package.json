@@ -20,10 +20,10 @@
   },
   "scripts": {
     "dts-check": "tsc --project tests/types/tsconfig.json",
-    "lint": "standard",
+    "lint": "npx standard",
     "pretest": "npm run lint && npm run dts-check",
-    "test": "tap run --allow-empty-coverage --disable-coverage --timeout=60000",
-    "test:coverage": "tap run --show-full-coverage --timeout=60000 --coverage-report=text --coverage-report=lcov",
+    "test": "npx tap run --allow-empty-coverage --disable-coverage --timeout=60000",
+    "test:coverage": "npx tap run --show-full-coverage --timeout=60000 --coverage-report=text --coverage-report=lcov",
     "prerelease": "npm test",
     "release": "standard-version"
   },
