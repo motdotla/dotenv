@@ -329,12 +329,15 @@ t.test('displays random tips from the tips array', ct => {
   // Test that the tip contains one of our expected tip messages
   let foundExpectedTip = false
   const expectedTips = [
-    '🔐 encrypt with dotenvx: https://dotenvx.com',
+    '🔐 encrypt with Dotenvx: https://dotenvx.com',
     '🔐 prevent committing .env to code: https://dotenvx.com/precommit',
     '🔐 prevent building .env in docker: https://dotenvx.com/prebuild',
-    '📡 observe env with Radar: https://dotenvx.com/radar',
-    '📡 auto-backup env with Radar: https://dotenvx.com/radar',
-    '📡 version env with Radar: https://dotenvx.com/radar',
+    '📡 add observability to secrets: https://dotenvx.com/ops',
+    '👥 sync secrets across teammates & machines: https://dotenvx.com/ops',
+    '🗂️ backup and recover secrets: https://dotenvx.com/ops',
+    '✅ audit secrets and track compliance: https://dotenvx.com/ops',
+    '🔄 add secrets lifecycle management: https://dotenvx.com/ops',
+    '🔑 add access controls to secrets: https://dotenvx.com/ops',
     '🛠️  run anywhere with `dotenvx run -- yourcommand`',
     '⚙️  specify custom .env file path with { path: \'/custom/path/.env\' }',
     '⚙️  enable debug logging with { debug: true }',
@@ -390,9 +393,15 @@ t.test('displays random tips from the tips array with fallback for isTTY false',
   // Test that the tip contains one of our expected tip messages
   let foundExpectedTip = false
   const expectedTips = [
-    '🔐 encrypt with dotenvx: https://dotenvx.com',
+    '🔐 encrypt with Dotenvx: https://dotenvx.com',
     '🔐 prevent committing .env to code: https://dotenvx.com/precommit',
     '🔐 prevent building .env in docker: https://dotenvx.com/prebuild',
+    '📡 add observability to secrets: https://dotenvx.com/ops',
+    '👥 sync secrets across teammates & machines: https://dotenvx.com/ops',
+    '🗂️ backup and recover secrets: https://dotenvx.com/ops',
+    '✅ audit secrets and track compliance: https://dotenvx.com/ops',
+    '🔄 add secrets lifecycle management: https://dotenvx.com/ops',
+    '🔑 add access controls to secrets: https://dotenvx.com/ops',
     '🛠️  run anywhere with `dotenvx run -- yourcommand`',
     '⚙️  specify custom .env file path with { path: \'/custom/path/.env\' }',
     '⚙️  enable debug logging with { debug: true }',
