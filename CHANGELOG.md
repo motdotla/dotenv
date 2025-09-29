@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.2.2...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.2.3...master)
+
+## [17.2.3](https://github.com/motdotla/dotenv/compare/v17.2.2...v17.2.3) (2025-09-29)
+
+### Changed
+
+* Fixed typescript error definition ([#912](https://github.com/motdotla/dotenv/pull/912))
 
 ## [17.2.2](https://github.com/motdotla/dotenv/compare/v17.2.1...v17.2.2) (2025-09-02)
 
