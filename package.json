@@ -25,7 +25,8 @@
     "test": "tap run tests/**/*.js --allow-empty-coverage --disable-coverage --timeout=60000",
     "test:coverage": "tap run tests/**/*.js --show-full-coverage --timeout=60000 --coverage-report=text --coverage-report=lcov",
     "prerelease": "npm test",
-    "release": "standard-version"
+    "release": "standard-version",
+    "ui": "node dotenv-ui/server.js"
   },
   "repository": {
     "type": "git",
@@ -58,5 +59,9 @@
   },
   "browser": {
     "fs": false
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0"
   }
 }

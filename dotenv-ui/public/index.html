@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>dotenv-ui</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <section id="editor">
+      <h1>dotenv-ui</h1>
+      <div class="section-content">
+        <div class="toolbar">
+          <button id="btn-refresh">Refresh</button>
+          <button id="btn-save">Save .env</button>
+          <button id="btn-add">Add Key</button>
+          <label class="toggle"><input id="hide-values" type="checkbox" checked> Hide values</label>
+        </div>
+
+        <table id="env-table">
+          <thead><tr><th>Key</th><th>Value</th><th>Actions</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="diff">
+      <h2>Diff vs .env.example</h2>
+      <div class="section-content">
+        <button id="btn-diff">Compute diff</button>
+        <div id="diff-result"></div>
+      </div>
+    </section>
+
+    <section id="encrypt">
+      <h2>Encrypt / Decrypt (dotenvx)</h2>
+      <div class="section-content">
+        <p class="muted">Requires <code>dotenvx</code> installed and configured. The server calls commands configured in environment variables if set.</p>
+        <button id="btn-encrypt">Encrypt (.env → .env.enc)</button>
+        <button id="btn-decrypt">Decrypt (.env.enc → .env)</button>
+        <pre id="exec-output"></pre>
+      </div>
+    </section>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

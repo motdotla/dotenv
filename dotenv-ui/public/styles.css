@@ -1,0 +1,238 @@
+body { 
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; 
+  background: #f6f8fa; 
+  color: #111; 
+  margin: 0;
+  padding: 20px;
+}
+.wrap { 
+  max-width: 900px; 
+  margin: 28px auto; 
+  padding: 20px; 
+  background: #fff; 
+  border-radius: 8px; 
+  box-shadow: 0 6px 18px rgba(12,20,30,0.06);
+}
+h1, h2 { 
+  margin-top: 0; 
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+h1:hover, h2:hover {
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 8px;
+  background: white;
+}
+th, td { 
+  border-bottom: 1px solid #eee; 
+  padding: 12px 8px; 
+  text-align: left;
+}
+th {
+  background: #f8f9fa;
+  font-weight: 600;
+}
+input[type=password], input[type=text] { 
+  width: 100%; 
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 14px;
+}
+input[type=password]:focus, input[type=text]:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+.key-input {
+  font-weight: 600;
+  background: #f8f9fa;
+}
+.key-input:focus {
+  background: #fff;
+}
+.toolbar { 
+  display: flex; 
+  gap: 8px; 
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+button { 
+  padding: 8px 16px; 
+  border-radius: 6px; 
+  border: 1px solid #ddd; 
+  background: #fff; 
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+button:hover { 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: #f8f9fa;
+}
+button:active {
+  transform: translateY(1px);
+}
+.btn-delete {
+  color: #d93025;
+  border-color: #d93025;
+}
+.btn-delete:hover {
+  background: #fce8e6;
+}
+.toggle-section {
+  background: none;
+  border: none;
+  font-size: 16px;
+  padding: 4px 8px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: #666;
+}
+.toggle-section:hover {
+  background: #e9ecef;
+  border-radius: 4px;
+}
+.muted { 
+  color: #666; 
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+pre { 
+  background: #1e1e1e; 
+  color: #d4d4d4; 
+  padding: 16px; 
+  border-radius: 6px; 
+  max-height: 240px; 
+  overflow: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 13px;
+}
+label.toggle { 
+  margin-left: auto; 
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.empty-message {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 40px !important;
+}
+
+.diff-section {
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 6px;
+  background: #f8f9fa;
+}
+
+.diff-missing {
+  color: #d93025;
+  font-weight: 500;
+}
+
+.diff-extra {
+  color: #f9ab00;
+  font-weight: 500;
+}
+
+.diff-common {
+  color: #1e8e3e;
+  font-weight: 500;
+}
+
+section {
+  margin: 30px 0;
+  padding: 20px;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  background: #fff;
+}
+
+section h2 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.section-content {
+  transition: all 0.3s ease;
+}
+
+.workflow {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.step {
+  flex: 1;
+  min-width: 250px;
+  padding: 20px;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.step h3 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.step p {
+  margin: 10px 0;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.file-status {
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.file-exists {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.file-missing {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+code {
+  background: #f1f3f4;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+/* Smooth transitions for collapse/expand */
+section {
+  transition: all 0.3s ease;
+}
