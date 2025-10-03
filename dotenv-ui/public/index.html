@@ -23,7 +23,7 @@
                 <tr>
                 <td colspan="3">
                     <button id="btn-add" class="btn btn-primary">Add New</button>
-                    <button id="btn-save" class="btn btn-success">Save All</button>
+                    <button id="btn-save" class="btn btn-success">Save All Changes</button>
                 </td>
                 </tr>
         </table>
@@ -42,8 +42,8 @@
       <h2>Encrypt / Decrypt (dotenvx)</h2>
       <div class="section-content">
         <p class="muted">Requires <code>dotenvx</code> installed and configured. The server calls commands configured in environment variables if set.</p>
-        <button id="btn-encrypt">Encrypt (.env → .env.enc)</button>
-        <button id="btn-decrypt">Decrypt (.env.enc → .env)</button>
+        <button id="btn-encrypt" class="btn btn-secondary">Encrypt (.env → .env.enc)</button>
+        <button id="btn-decrypt" class="btn btn-warning">Decrypt (.env.enc → .env)</button>
         <pre id="exec-output"></pre>
       </div>
     </section>

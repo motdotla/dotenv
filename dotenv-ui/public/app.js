@@ -133,10 +133,8 @@ function renderTable(env) {
     del.textContent = 'Delete'
     del.className = 'btn-delete'
     del.addEventListener('click', () => {
-      if (confirm(`Delete environment variable "${k}"?`)) {
-        delete env[k]
-        renderTable(env)
-      }
+      delete env[k]
+      renderTable(env)
     })
     tdActions.appendChild(del)
 
@@ -525,7 +523,8 @@ function setupEventListeners() {
   })
   
   btnAdd.addEventListener('click', addNewRow)
-    
+  
+  
   btnSave.addEventListener('click', saveAll)
   
   btnDiff?.addEventListener('click', async () => {

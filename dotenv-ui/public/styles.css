@@ -282,6 +282,20 @@ section {
   background-color: #007bff;
   border-color: #007bff;
 }
+/* Warning/Save Indicator Button */
+.btn-warning {
+  background-color: #ffd700 !important;
+  border-color: #ffa500 !important;
+  color: #856404 !important;
+  font-weight: bold;
+}
+
+.btn-warning:hover {
+  background-color: #ffed4a !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 2px 8px rgba(255, 173, 0, 0.3);
+}
+
 
 .btn-primary:hover {
   background-color: #0069d9;
