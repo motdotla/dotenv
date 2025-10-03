@@ -218,6 +218,19 @@ section h2 {
   border: 1px solid #c3e6cb;
 }
 
+.btn-unsaved {
+  background-color: #ffd700 !important;
+  border-color: #ffa500 !important;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { background-color: #ffd700; }
+  50% { background-color: #ffed4a; }
+  100% { background-color: #ffd700; }
+}
+
 .file-missing {
   background: #f8d7da;
   color: #721c24;
@@ -235,4 +248,93 @@ code {
 /* Smooth transitions for collapse/expand */
 section {
   transition: all 0.3s ease;
+}
+
+
+.new-row {
+  background-color: #f0fff0;
+}
+.new-row td {
+  border-bottom: 2px dashed #ccc;
+}
+
+/* Bootstrap-like button styles */
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, 
+              border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  cursor: pointer;
+  margin: 0 2px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+.toolbar {
+  margin-bottom: 1rem;
 }

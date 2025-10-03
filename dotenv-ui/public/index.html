@@ -13,14 +13,19 @@
       <div class="section-content">
         <div class="toolbar">
           <button id="btn-refresh">Refresh</button>
-          <button id="btn-save">Save .env</button>
-          <button id="btn-add">Add Key</button>
           <label class="toggle"><input id="hide-values" type="checkbox" checked> Hide values</label>
         </div>
 
         <table id="env-table">
           <thead><tr><th>Key</th><th>Value</th><th>Actions</th></tr></thead>
           <tbody></tbody>
+            <tfoot>
+                <tr>
+                <td colspan="3">
+                    <button id="btn-add" class="btn btn-primary">Add New</button>
+                    <button id="btn-save" class="btn btn-success">Save All</button>
+                </td>
+                </tr>
         </table>
       </div>
     </section>

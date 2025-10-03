@@ -6,6 +6,8 @@ const qsa = (s) => Array.from(document.querySelectorAll(s))
 // State management
 let currentEnv = {}
 let collapsedSections = JSON.parse(localStorage.getItem('collapsedSections')) || {}
+let newRows = [] // Track newly added rows
+let newRowsData = {} // Store data for unsaved new rows
 
 async function apiCall(endpoint, options = {}) {
   try {
@@ -32,6 +34,8 @@ async function loadEnv() {
   try {
     const data = await apiCall('/api/env')
     currentEnv = data.env || {}
+    newRows = [] // Reset new rows when loading fresh data
+    newRowsData = {} // Reset new rows data
     return currentEnv
   } catch (error) {
     showError('Failed to load .env file')
@@ -49,6 +53,29 @@ async function loadExample() {
   }
 }
 
+function saveNewRowsState() {
+  // Save the current state of new rows before re-rendering
+  const newKeyInputs = qsa('.new-key-input')
+  const newValInputs = qsa('.new-val-input')
+  
+  newKeyInputs.forEach(keyInput => {
+    const rowId = keyInput.dataset.rowId
+    if (rowId) {
+      if (!newRowsData[rowId]) {
+        newRowsData[rowId] = {}
+      }
+      newRowsData[rowId].key = keyInput.value
+    }
+  })
+  
+  newValInputs.forEach(valInput => {
+    const rowId = valInput.dataset.rowId
+    if (rowId && newRowsData[rowId]) {
+      newRowsData[rowId].value = valInput.value
+    }
+  })
+}
+
 function renderTable(env) {
   const tbody = qs('#env-table tbody')
   if (!tbody) {
@@ -60,7 +87,7 @@ function renderTable(env) {
   const hide = qs('#hide-values')?.checked || false
   const keys = Object.keys(env).sort()
   
-  if (keys.length === 0) {
+  if (keys.length === 0 && newRows.length === 0) {
     const tr = document.createElement('tr')
     const td = document.createElement('td')
     td.colSpan = 3
@@ -71,6 +98,7 @@ function renderTable(env) {
     return
   }
   
+  // Render existing keys
   for (const k of keys) {
     const tr = document.createElement('tr')
     
@@ -117,6 +145,79 @@ function renderTable(env) {
     tr.appendChild(tdActions)
     tbody.appendChild(tr)
   }
+  
+  // Render new rows (not yet saved)
+  newRows.forEach((rowId) => {
+    const tr = document.createElement('tr')
+    tr.className = 'new-row'
+    tr.dataset.newRowId = rowId
+    
+    // Key column
+    const tdKey = document.createElement('td')
+    const keyInput = document.createElement('input')
+    keyInput.placeholder = 'Enter key name...'
+    keyInput.className = 'key-input new-key-input'
+    keyInput.type = 'text'
+    keyInput.dataset.rowId = rowId
+    // Restore saved key value if exists
+    if (newRowsData[rowId] && newRowsData[rowId].key !== undefined) {
+      keyInput.value = newRowsData[rowId].key
+    }
+    tdKey.appendChild(keyInput)
+    
+    // Value column
+    const tdVal = document.createElement('td')
+    const valInput = document.createElement('input')
+    valInput.placeholder = 'Enter value...'
+    valInput.className = 'valinput new-val-input'
+    valInput.type = hide ? 'password' : 'text'
+    valInput.dataset.rowId = rowId
+    // Restore saved value if exists
+    if (newRowsData[rowId] && newRowsData[rowId].value !== undefined) {
+      valInput.value = newRowsData[rowId].value
+    }
+    tdVal.appendChild(valInput)
+    
+    // Actions column
+    const tdActions = document.createElement('td')
+    const del = document.createElement('button')
+    del.textContent = 'Remove'
+    del.className = 'btn-delete'
+    del.addEventListener('click', () => {
+      removeNewRow(rowId)
+    })
+    tdActions.appendChild(del)
+    
+    tr.appendChild(tdKey)
+    tr.appendChild(tdVal)
+    tr.appendChild(tdActions)
+    tbody.appendChild(tr)
+  })
+}
+
+function addNewRow() {
+  // Save current state before adding new row
+  saveNewRowsState()
+  
+  const rowId = 'new_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+  newRows.push(rowId)
+  // Initialize empty data for new row
+  newRowsData[rowId] = { key: '', value: '' }
+  renderTable(currentEnv)
+  
+  // Focus on the new key input
+  setTimeout(() => {
+    const newKeyInput = qs(`.new-key-input[data-row-id="${rowId}"]`)
+    if (newKeyInput) {
+      newKeyInput.focus()
+    }
+  }, 10)
+}
+
+function removeNewRow(rowId) {
+  newRows = newRows.filter(id => id !== rowId)
+  delete newRowsData[rowId]
+  renderTable(currentEnv)
 }
 
 function handleKeyEdit(event) {
@@ -164,12 +265,112 @@ function handleKeyEdit(event) {
 }
 
 function showError(message) {
-  alert(`Error: ${message}`)
+  showNotification(message, 'error')
 }
 
 function showSuccess(message) {
-  // You could replace this with a more subtle notification
-  console.log(`Success: ${message}`)
+  showNotification(message, 'success')
+}
+
+function showNotification(message, type = 'info') {
+  // Remove existing notifications
+  const existingNotification = qs('.notification')
+  if (existingNotification) {
+    existingNotification.remove()
+  }
+  
+  // Create notification element
+  const notification = document.createElement('div')
+  notification.className = `notification notification-${type}`
+  notification.innerHTML = `
+    <div class="notification-content">
+      <span class="notification-message">${message}</span>
+      <button class="notification-close">&times;</button>
+    </div>
+  `
+  
+  // Add styles if not already added
+  if (!qs('#notification-styles')) {
+    const styles = document.createElement('style')
+    styles.id = 'notification-styles'
+    styles.textContent = `
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        min-width: 300px;
+        max-width: 500px;
+        animation: slideIn 0.3s ease-out;
+      }
+      .notification-content {
+        padding: 12px 16px;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: flex;
+        justify-content: between;
+        align-items: center;
+      }
+      .notification-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      .notification-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+      .notification-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+      }
+      .notification-message {
+        flex: 1;
+        margin-right: 10px;
+      }
+      .notification-close {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 0;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `
+    document.head.appendChild(styles)
+  }
+  
+  // Add close functionality
+  const closeBtn = notification.querySelector('.notification-close')
+  closeBtn.addEventListener('click', () => {
+    notification.remove()
+  })
+  
+  // Auto-remove after 5 seconds for success, 8 seconds for error
+  const autoRemoveTime = type === 'success' ? 5000 : 8000
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.remove()
+    }
+  }, autoRemoveTime)
+  
+  document.body.appendChild(notification)
 }
 
 function toggleSection(sectionId) {
@@ -238,11 +439,73 @@ async function refresh() {
   }
 }
 
+async function saveAll() {
+  // Save current state before processing
+  saveNewRowsState()
+  
+  const env = {...currentEnv}
+  
+  const newEntries = {}
+  const validationErrors = []
+  
+  // Validate and collect new rows using saved data
+  newRows.forEach(rowId => {
+    const rowData = newRowsData[rowId]
+    if (rowData && rowData.key) {
+      const key = rowData.key.trim()
+      const value = rowData.value || ''
+      
+      if (key) {
+        // Validate key format
+        if (!/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(key)) {
+          validationErrors.push(`"${key}" must start with a letter or underscore and contain only letters, numbers, and underscores`)
+          return
+        }
+        
+        // Check for duplicates
+        if (key in env || key in newEntries) {
+          validationErrors.push(`Key "${key}" already exists`)
+          return
+        }
+        
+        newEntries[key] = value
+      }
+    }
+  })
+  
+  // Show validation errors if any
+  if (validationErrors.length > 0) {
+    showError('Validation errors:\n' + validationErrors.join('\n'))
+    return
+  }
+  
+  // Merge new entries
+  Object.assign(env, newEntries)
+  
+  try {
+    await apiCall('/api/env', {
+      method: 'POST',
+      body: JSON.stringify({ env })
+    })
+    
+    // Clear new rows after successful save
+    newRows = []
+    newRowsData = {}
+    currentEnv = env
+    renderTable(currentEnv)
+    showSuccess('.env saved successfully with ' + Object.keys(newEntries).length + ' new variables')
+    
+  } catch (error) {
+    showError('Failed to save .env file')
+  }
+}
+
 // Event listeners
 function setupEventListeners() {
   const btnRefresh = qs('#btn-refresh')
   const btnSave = qs('#btn-save')
   const btnAdd = qs('#btn-add')
+  const btnAddMultiple = qs('#btn-add-multiple')
   const hideValues = qs('#hide-values')
   const btnDiff = qs('#btn-diff')
   const btnEncrypt = qs('#btn-encrypt')
@@ -256,37 +519,14 @@ function setupEventListeners() {
   btnRefresh.addEventListener('click', refresh)
   
   hideValues?.addEventListener('change', () => {
+    // Save current state before re-rendering
+    saveNewRowsState()
     renderTable(currentEnv)
   })
   
-  btnAdd.addEventListener('click', () => {
-    let i = 1
-    while (currentEnv[`NEW_KEY_${i}`]) i++
-    currentEnv[`NEW_KEY_${i}`] = ''
-    renderTable(currentEnv)
-  })
-  
-  btnSave.addEventListener('click', async () => {
-    const inputs = qsa('.valinput')
-    const env = {}
+  btnAdd.addEventListener('click', addNewRow)
     
-    for (const input of inputs) {
-      const key = input.dataset.key
-      if (key) {
-        env[key] = input.value
-      }
-    }
-    
-    try {
-      await apiCall('/api/env', {
-        method: 'POST',
-        body: JSON.stringify({ env })
-      })
-      showSuccess('.env saved successfully')
-    } catch (error) {
-      showError('Failed to save .env file')
-    }
-  })
+  btnSave.addEventListener('click', saveAll)
   
   btnDiff?.addEventListener('click', async () => {
     try {
