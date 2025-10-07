@@ -124,7 +124,7 @@ export interface DotenvPopulateOptions {
 }
 
 export interface DotenvPopulateInput {
-  [name: string]: string;
+  [name: string]: string | undefined;
 }
 
 /**

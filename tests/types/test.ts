@@ -17,3 +17,8 @@ const dbHost: string = parsed["DB_HOST"];
 
 const parsedFromBuffer = parse(Buffer.from("JUSTICE=league\n"));
 const justice: string = parsedFromBuffer["JUSTICE"];
+
+config({
+  // make sure the type accepts process.env (it didn't in the past)
+  processEnv: process.env,
+});
