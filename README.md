@@ -1,12 +1,8 @@
 <div align="center">
-🎉 announcing <a href="https://github.com/dotenvx/dotenvx">dotenvx</a>. <em>run anywhere, multi-environment, encrypted envs</em>.
+🎉 announcing <a href="https://github.com/vestauth/vestauth">vestauth</a>. <em>auth for agents–from the creator of <a href="https://github.com/motdotla/dotenv">dotenv</a> and <a href="https://github.com/dotenvx/dotenvx">dotenvx</a></em>.
 </div>
 
 &nbsp;
-
-<div align="center">
-
-</div>
 
 # dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
 
