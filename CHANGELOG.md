@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.2.3...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.2.4...master)
+
+## [17.2.4](https://github.com/motdotla/dotenv/compare/v17.2.3...v17.2.4) (2026-02-05)
+
+### Changed
+
+* Make `DotenvPopulateInput` accept `NodeJS.ProcessEnv` type ([#915](https://github.com/motdotla/dotenv/pull/915))
+- Give back to dotenv by checking out my newest project [vestauth](https://github.com/vestauth/vestauth). It is auth for agents. Thank you for using my software.
 
 ## [17.2.3](https://github.com/motdotla/dotenv/compare/v17.2.2...v17.2.3) (2025-09-29)
 
