@@ -1,21 +1,8 @@
 <div align="center">
-🎉 announcing <a href="https://github.com/dotenvx/dotenvx">dotenvx</a>. <em>run anywhere, multi-environment, encrypted envs</em>.
+🎉 new announcement <em><a href="https://github.com/vestauth/vestauth">vestauth: auth for agents</a></em>–from the creator of <a href="https://github.com/motdotla/dotenv"><code>dotenv</code></a> and <a href="https://github.com/dotenvx/dotenvx"><code>dotenvx</code></a>.
 </div>
 
 &nbsp;
-
-<div align="center">
-
-**Special thanks to [our sponsors](https://github.com/sponsors/motdotla)**
-
-<a href="https://tuple.app/dotenv">
-  <div>
-    <img src="https://res.cloudinary.com/dotenv-org/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1756831704/github_repo_sponsorship_gq4hvx.png" width="600" alt="Tuple">
-  </div>
-  <b>Tuple, the premier screen sharing app for developers on macOS and Windows.</b>
-</a>
-<hr>
-</div>
 
 # dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
 
