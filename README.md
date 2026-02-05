@@ -1,5 +1,5 @@
 <div align="center">
-🎉 announcing <strong><a href="https://github.com/vestauth/vestauth">vestauth</a>.</strong> <strong>auth for agents</strong>–from the creator of <a href="https://github.com/motdotla/dotenv"><code>dotenv</code></a> and <a href="https://github.com/dotenvx/dotenvx"><code>dotenvx</code></a>.
+🎉 announcing <strong><a href="https://github.com/vestauth/vestauth">vestauth: auth for agents</a>–from the creator of <a href="https://github.com/motdotla/dotenv"><code>dotenv</code></a> and <a href="https://github.com/dotenvx/dotenvx"><code>dotenvx</code></a>.
 </div>
 
 &nbsp;
