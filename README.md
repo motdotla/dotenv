@@ -335,7 +335,7 @@ console.log(`Hello ${process.env.HELLO}`)
 
 ```ini
 # .env
-.env
+HELLO=World
 ```
 
 ```sh
