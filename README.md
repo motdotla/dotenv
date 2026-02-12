@@ -14,22 +14,6 @@ Install it.
 npm install dotenv --save
 ```
 
-<details><summary>learn more</summary><br>
-
-You can use any npm-compatible package manager like yarn, bun, or pnpm.
-
-```sh
-yarn add dotenv
-bun add dotenv
-pnpm add dotenv
-```
-
-&nbsp;
-
-</details>
-
-&nbsp;
-
 Create a `.env` file in the root of your project:
 
 ```ini
@@ -38,9 +22,32 @@ S3_BUCKET="YOURS3BUCKET"
 SECRET_KEY="YOURSECRETKEYGOESHERE"
 ```
 
-<details><summary>learn more</summary><br>
+And as early as possible in your application, import and configure dotenv:
 
-For monorepos with a structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs.
+```javascript
+require('dotenv').config() // or import 'dotenv/config' if you're using ES6
+console.log(process.env) // remove this after you've confirmed it is working
+```
+
+That's it. `process.env` now has the keys and values you defined in your `.env` file:
+
+```javascript
+require('dotenv').config() 
+...
+s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
+```
+
+<details><summary>more details (expand)</summary><br>
+
+Install with any npm-compatible package manager.
+
+```sh
+yarn add dotenv
+bun add dotenv
+pnpm add dotenv
+```
+
+For monorepos with a structure like `apps/backend/app.js`, put it the `.env` file in the root of the folder where your `app.js` process runs.
 
 ```ini
 # app/backend/.env
@@ -48,44 +55,14 @@ S3_BUCKET="YOURS3BUCKET"
 SECRET_KEY="YOURSECRETKEYGOESHERE"
 ```
 
-&nbsp;
-
-</details>
-
-And as early as possible in your application, import and configure dotenv:
-
-```javascript
-require('dotenv').config()
-console.log(process.env) // remove this after you've confirmed it is working
-```
-
-<details><summary>learn more</summary><br>
-
-If you are [using ES6](#how-do-i-use-dotenv-with-import):
-
-```javascript
-import 'dotenv/config'
-```
-
-or using ES6 import with config options:
+And if you are [using ES6](#how-do-i-use-dotenv-with-import) import with config options:
 
 ```javascript
 import dotenv from 'dotenv'
-
 dotenv.config({ path: '/custom/path/to/.env' })
 ```
 
 </details>
-
-&nbsp;
-
-That's it. `process.env` now has the keys and values you defined in your `.env` file:
-
-```javascript
-require('dotenv').config() // or import 'dotenv/config' if you're using ES6
-...
-s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
-```
 
 &nbsp;
 
