@@ -50,11 +50,9 @@ And if you are [using ES6](#how-do-i-use-dotenv-with-import) import with config 
 ```javascript
 import dotenv from 'dotenv'
 dotenv.config({ path: 'app/backend/.env' })
-```
 
-That's it. Make use of `process.env.S3_BUCKET`.
+...
 
-```javascript
 s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
 ```
 
