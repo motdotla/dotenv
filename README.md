@@ -341,7 +341,7 @@ vestauth agent init
 Your agent `set`s secrets with a simple `curl` endpoint:
 
 ```bash
-vestauth agent curl -X POST https://as2.dotenvx.com/set '{"KEY":"value"}'
+vestauth agent curl -X POST https://as2.dotenvx.com/set -d '{"KEY":"value"}'
 ```
 
 And your agent `get`s secrets with a simple `curl` endpoint:
