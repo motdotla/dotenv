@@ -1,9 +1,3 @@
-<div align="center">
-🎉 new announcement <em><a href="https://github.com/vestauth/vestauth">vestauth: auth for agents</a></em>–from the creator of <a href="https://github.com/motdotla/dotenv"><code>dotenv</code></a> and <a href="https://github.com/dotenvx/dotenvx"><code>dotenvx</code></a>.
-</div>
-
-&nbsp;
-
 # dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv) [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard) [![codecov](https://codecov.io/gh/motdotla/dotenv-expand/graph/badge.svg?token=pawWEyaMfg)](https://codecov.io/gh/motdotla/dotenv-expand)
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.svg" alt="dotenv" align="right" width="200" />
