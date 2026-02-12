@@ -27,13 +27,7 @@ console.log(process.env) // remove this after you've confirmed it is working
 
 That's it. `process.env` now has the keys and values you defined in your `.env` file:
 
-```javascript
-require('dotenv').config() 
-...
-s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
-```
-
-<details><summary>more details (expand)</summary><br>
+<details><summary>learn more</summary><br>
 
 Install with any npm-compatible package manager.
 
@@ -55,7 +49,13 @@ And if you are [using ES6](#how-do-i-use-dotenv-with-import) import with config 
 
 ```javascript
 import dotenv from 'dotenv'
-dotenv.config({ path: '/custom/path/to/.env' })
+dotenv.config({ path: 'app/backend/.env' })
+```
+
+That's it. Make use of `process.env.S3_BUCKET`.
+
+```javascript
+s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
 ```
 
 </details>
