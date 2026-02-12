@@ -6,6 +6,11 @@
 >
 > [2 minute tutorial 📺](https://www.youtube.com/watch?v=YtkZR0NFd1g)
 
+* [usage](#usage)
+* [environments](#multiple-environments)
+* [deploying](#deploying)
+* [agents 🆕](#agents-as2)
+
 &nbsp;
 
 ### Usage
@@ -28,20 +33,56 @@ And as early as possible in your application, import and configure dotenv:
 
 ```javascript
 require('dotenv').config() // or import 'dotenv/config' if you're using ES6
+...
 console.log(process.env) // remove this after you've confirmed it is working
 ```
 
 That's it. `process.env` now has the keys and values you defined in your `.env` file:
 
-<details><summary>learn more</summary><br>
 
-Install with any npm-compatible package manager.
+&nbsp;
+
+## Advanced
+
+<details><summary>ES6</summary><br>
+
+Import with [ES6](#how-do-i-use-dotenv-with-import):
+
+```javascript
+import 'dotenv/config'
+```
+
+ES6 import if you need to set config options:
+
+```javascript
+import dotenv from 'dotenv'
+dotenv.config({ path: '/custom/path/to/.env' })
+```
+
+</details>
+<details><summary>bun</summary><br>
+
+```sh
+bun add dotenv
+```
+
+</details>
+<details><summary>yarn</summary><br>
 
 ```sh
 yarn add dotenv
-bun add dotenv
+```
+
+</details>
+<details><summary>pnpm</summary><br>
+
+```sh
 pnpm add dotenv
 ```
+
+</details>
+
+<details><summary>Monorepos</summary><br>
 
 For monorepos with a structure like `apps/backend/app.js`, put it the `.env` file in the root of the folder where your `app.js` process runs.
 
@@ -51,28 +92,7 @@ S3_BUCKET="YOURS3BUCKET"
 SECRET_KEY="YOURSECRETKEYGOESHERE"
 ```
 
-And if you are [using ES6](#how-do-i-use-dotenv-with-import) import with config options:
-
-```javascript
-import dotenv from 'dotenv'
-dotenv.config({ path: 'app/backend/.env' })
-
-...
-
-s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
-```
-
 </details>
-
-&nbsp;
-
-* [Usage](#usage)
-* [Multiple Environments](#multiple-environments)
-* [Deploying](#deploying)
-* [Agents (AS2) 🆕](#agents-as2)
-
-## Advanced
-
 <details><summary>Multiline Values</summary><br>
 
 If you need multiline variables, for example private keys, those are now supported (`>= v15.0.0`) with line breaks:
@@ -105,8 +125,6 @@ SECRET_HASH="something-with-a-#-hash"
 Comments begin where a `#` exists, so if your value contains a `#` please wrap it in quotes. This is a breaking change from `>= v15.0.0` and on.
 
 </details>
-
-
 <details><summary>Parsing</summary><br>
 
 The engine which parses the contents of your file containing environment variables is available to use. It accepts a String or Buffer and will return an Object with the parsed keys and values.
