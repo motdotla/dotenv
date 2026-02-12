@@ -14,17 +14,13 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
 [![codecov](https://codecov.io/gh/motdotla/dotenv-expand/graph/badge.svg?token=pawWEyaMfg)](https://codecov.io/gh/motdotla/dotenv-expand)
 
-* [🌱 Install](#-install)
-* [🏗️ Usage (.env)](#%EF%B8%8F-usage)
-* [🌴 Multiple Environments 🆕](#-manage-multiple-environments)
-* [🚀 Deploying (encryption) 🆕](#-deploying)
-* [🤖 Agents (AS2) 🆕](#-agents-as2)
-* [📚 Examples](#-examples)
-* [📖 Docs](#-documentation)
-* [❓ FAQ](#-faq)
-* [⏱️ Changelog](./CHANGELOG.md)
+* [Install](#install)
+* [Usage](#usage)
+* [Multiple Environments](#multiple-environments)
+* [Deploying](#deploying)
+* [Agents (AS2) 🆕](#agents-as2)
 
-## 🌱 Install
+## Install
 
 ```bash
 npm install dotenv --save
@@ -34,15 +30,11 @@ You can also use an npm-compatible package manager like yarn, bun or pnpm:
 
 ```bash
 yarn add dotenv
-```
-```bash
 bun add dotenv
-```
-```bash
 pnpm add dotenv
 ```
 
-## 🏗️ Usage
+## Usage
 
 <a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
 <img src="https://img.youtube.com/vi/YtkZR0NFd1g/hqdefault.jpg" alt="how to use dotenv video tutorial" align="right" width="330" />
@@ -210,7 +202,7 @@ Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate `.env.ci`, `.env.p
 
 You need to deploy your secrets in a cloud-agnostic manner? Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate a private decryption key that is set on your production server.
 
-## 🌴 Manage Multiple Environments
+## Multiple Environments
 
 Use [dotenvx](https://github.com/dotenvx/dotenvx)
 
@@ -238,7 +230,7 @@ Hello local
 
 [more environment examples](https://dotenvx.com/docs/quickstart/environments)
 
-## 🚀 Deploying
+## Deploying
 
 Use [dotenvx](https://github.com/dotenvx/dotenvx).
 
@@ -255,7 +247,7 @@ Hello Production
 
 [learn more](https://github.com/dotenvx/dotenvx?tab=readme-ov-file#encryption)
 
-## 🤖 Agents (AS2)
+## Agents (AS2)
 
 <a href="https://dotenvx.com/as2">AS2</a> is agentic secret storage from Dotenvx.
 
