@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.3.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.3.1...master)
+
+## [17.3.1](https://github.com/motdotla/dotenv/compare/v17.3.0...v17.3.1) (2026-02-12)
+
+### Changed
+
+* Fix as2 example command in README and update spanish README
 
 ## [17.3.0](https://github.com/motdotla/dotenv/compare/v17.2.4...v17.3.0) (2026-02-12)
 

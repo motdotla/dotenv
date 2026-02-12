@@ -1,67 +1,96 @@
-<div align="center">
-🎉 new announcement <em><a href="https://github.com/vestauth/vestauth">vestauth: auth for agents</a></em>–from the creator of <a href="https://github.com/motdotla/dotenv"><code>dotenv</code></a> and <a href="https://github.com/dotenvx/dotenvx"><code>dotenvx</code></a>.
-</div>
-
-&nbsp;
-
-# dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
+# dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv) [![downloads](https://img.shields.io/npm/dw/dotenv)](https://www.npmjs.com/package/dotenv)
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.svg" alt="dotenv" align="right" width="200" />
 
-Dotenv es un módulo de dependencia cero que carga las variables de entorno desde un archivo `.env` en [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). El almacenamiento de la configuración del entorno separado del código está basado en la metodología [The Twelve-Factor App](http://12factor.net/config).
+Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](https://12factor.net/config) methodology.
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
-[![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
+[Watch the tutorial](https://www.youtube.com/watch?v=YtkZR0NFd1g)
 
-## Instalación
+&nbsp;
 
-```bash
-# instalación local (recomendado)
+## Usage
+
+Install it.
+
+```sh
 npm install dotenv --save
 ```
 
-O installación con yarn? `yarn add dotenv`
+Create a `.env` file in the root of your project:
 
-## Uso
-
-Cree un archivo `.env` en la raíz de su proyecto:
-
-```dosini
+```ini
+# .env
 S3_BUCKET="YOURS3BUCKET"
 SECRET_KEY="YOURSECRETKEYGOESHERE"
 ```
 
-Tan prónto como sea posible en su aplicación, importe y configure dotenv:
+And as early as possible in your application, import and configure dotenv:
 
 ```javascript
-require('dotenv').config()
-console.log(process.env) // elimine esto después que haya confirmado que esta funcionando
-```
-
-.. o usa ES6?
-
-```javascript
-import * as dotenv from 'dotenv' // vea en https://github.com/motdotla/dotenv#como-uso-dotenv-con-import
-// REVISAR LINK DE REFERENCIA DE IMPORTACIÓN
-dotenv.config()
-import express from 'express'
-```
-
-Eso es todo. `process.env` ahora tiene las claves y los valores que definiste en tu archivo `.env`:
-
-```javascript
-require('dotenv').config()
-
+require('dotenv').config() // or import 'dotenv/config' if you're using ES6
 ...
-
-s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
+console.log(process.env) // remove this after you've confirmed it is working
 ```
 
-### Valores multilínea
+That's it. `process.env` now has the keys and values you defined in your `.env` file:
 
-Si necesita variables de varias líneas, por ejemplo, claves privadas, ahora se admiten en la versión (`>= v15.0.0`) con saltos de línea:
+&nbsp;
 
-```dosini
+## Advanced
+
+<details><summary>ES6</summary><br>
+
+Import with [ES6](#how-do-i-use-dotenv-with-import):
+
+```javascript
+import 'dotenv/config'
+```
+
+ES6 import if you need to set config options:
+
+```javascript
+import dotenv from 'dotenv'
+dotenv.config({ path: '/custom/path/to/.env' })
+```
+
+</details>
+<details><summary>bun</summary><br>
+
+```sh
+bun add dotenv
+```
+
+</details>
+<details><summary>yarn</summary><br>
+
+```sh
+yarn add dotenv
+```
+
+</details>
+<details><summary>pnpm</summary><br>
+
+```sh
+pnpm add dotenv
+```
+
+</details>
+<details><summary>Monorepos</summary><br>
+
+For monorepos with a structure like `apps/backend/app.js`, put it the `.env` file in the root of the folder where your `app.js` process runs.
+
+```ini
+# app/backend/.env
+S3_BUCKET="YOURS3BUCKET"
+SECRET_KEY="YOURSECRETKEYGOESHERE"
+```
+
+</details>
+<details><summary>Multiline Values</summary><br>
+
+If you need multiline variables, for example private keys, those are now supported (`>= v15.0.0`) with line breaks:
+
+```ini
 PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
 ...
 Kh9NV...
@@ -69,93 +98,497 @@ Kh9NV...
 -----END RSA PRIVATE KEY-----"
 ```
 
-Alternativamente, puede usar comillas dobles y usar el carácter `\n`:
+Alternatively, you can double quote strings and use the `\n` character:
 
-```dosini
+```ini
 PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nKh9NV...\n-----END RSA PRIVATE KEY-----\n"
 ```
 
-### Comentarios
+</details>
+<details><summary>Comments</summary><br>
 
-Los comentarios pueden ser agregados en tu archivo o en la misma línea:
+Comments may be added to your file on their own line or inline:
 
-```dosini
+```ini
 # This is a comment
 SECRET_KEY=YOURSECRETKEYGOESHERE # comment
 SECRET_HASH="something-with-a-#-hash"
 ```
 
-Los comentarios comienzan donde existe un `#`, entonces, si su valor contiene un `#`, enciérrelo entre comillas. Este es un cambio importante desde la versión `>= v15.0.0` en adelante.
+Comments begin where a `#` exists, so if your value contains a `#` please wrap it in quotes. This is a breaking change from `>= v15.0.0` and on.
 
-### Análisis
+</details>
+<details><summary>Parsing</summary><br>
 
-El motor que analiza el contenido de su archivo que contiene variables de entorno está disponible para su uso. Este Acepta una Cadena o un Búfer y devolverá un Objeto con las claves y los valores analizados.
+The engine which parses the contents of your file containing environment variables is available to use. It accepts a String or Buffer and will return an Object with the parsed keys and values.
 
 ```javascript
 const dotenv = require('dotenv')
-const buf = Buffer.from('BASICO=basico')
-const config = dotenv.parse(buf) // devolverá un objeto
-console.log(typeof config, config) // objeto { BASICO : 'basico' }
+const buf = Buffer.from('BASIC=basic')
+const config = dotenv.parse(buf) // will return an object
+console.log(typeof config, config) // object { BASIC : 'basic' }
 ```
 
-### Precarga
+</details>
+<details><summary>Preload</summary><br>
 
-Puede usar el `--require` (`-r`) [opción de línea de comando](https://nodejs.org/api/cli.html#-r---require-module) para precargar dotenv. Al hacer esto, no necesita requerir ni cargar dotnev en el código de su aplicación.
+> Note: Consider using [`dotenvx`](https://github.com/dotenvx/dotenvx) instead of preloading. I am now doing (and recommending) so.
+>
+> It serves the same purpose (you do not need to require and load dotenv), adds better debugging, and works with ANY language, framework, or platform. – [motdotla](https://mot.la)
+
+You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#-r---require-module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
 
 ```bash
-$ node -r dotenv/config tu_script.js
+$ node -r dotenv/config your_script.js
 ```
 
-Las opciones de configuración a continuación se admiten como argumentos de línea de comandos en el formato `dotenv_config_<option>=value`
+The configuration options below are supported as command line arguments in the format `dotenv_config_<option>=value`
 
 ```bash
-$ node -r dotenv/config tu_script.js dotenv_config_path=/custom/path/to/.env dotenv_config_debug=true
+$ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env dotenv_config_debug=true
 ```
 
-Además, puede usar variables de entorno para establecer opciones de configuración. Los argumentos de línea de comandos precederán a estos.
+Additionally, you can use environment variables to set configuration options. Command line arguments will precede these.
 
 ```bash
-$ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config tu_script.js
+$ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
 ```
 
 ```bash
-$ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config tu_script.js dotenv_config_path=/custom/path/to/.env
+$ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
 
-### Expansión Variable
+</details>
+<details><summary>Variable Expansion</summary><br>
 
-Necesitaras agregar el valor de otro variable en una de sus variables? Usa [dotenv-expand](https://github.com/motdotla/dotenv-expand).
+Use [dotenvx](https://github.com/dotenvx/dotenvx) for variable expansion.
 
-## Ejemplos
+Reference and expand variables already on your machine for use in your .env file.
 
-Vea [ejemplos](https://github.com/dotenv-org/examples) sobre el uso de dotenv con varios frameworks, lenguajes y configuraciones.
+```ini
+# .env
+USERNAME="username"
+DATABASE_URL="postgres://${USERNAME}@localhost/my_database"
+```
+```js
+// index.js
+console.log('DATABASE_URL', process.env.DATABASE_URL)
+```
+```sh
+$ dotenvx run --debug -- node index.js
+[dotenvx@0.14.1] injecting env (2) from .env
+DATABASE_URL postgres://username@localhost/my_database
+```
 
-* [nodejs](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs)
-* [nodejs (depurar en)](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs-debug)
-* [nodejs (anular en)](https://github.com/dotenv-org/examples/tree/master/dotenv-nodejs-override)
-* [esm](https://github.com/dotenv-org/examples/tree/master/dotenv-esm)
-* [esm (precarga)](https://github.com/dotenv-org/examples/tree/master/dotenv-esm-preload)
-* [typescript](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript)
-* [typescript parse](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript-parse)
-* [typescript config](https://github.com/dotenv-org/examples/tree/master/dotenv-typescript-config)
-* [webpack](https://github.com/dotenv-org/examples/tree/master/dotenv-webpack)
-* [webpack (plugin)](https://github.com/dotenv-org/examples/tree/master/dotenv-webpack2)
-* [react](https://github.com/dotenv-org/examples/tree/master/dotenv-react)
-* [react (typescript)](https://github.com/dotenv-org/examples/tree/master/dotenv-react-typescript)
-* [express](https://github.com/dotenv-org/examples/tree/master/dotenv-express)
-* [nestjs](https://github.com/dotenv-org/examples/tree/master/dotenv-nestjs)
+</details>
+<details><summary>Command Substitution</summary><br>
 
-## Documentación
+Use [dotenvx](https://github.com/dotenvx/dotenvx) for command substitution.
 
-Dotenv expone dos funciones:
+Add the output of a command to one of your variables in your .env file.
 
-* `configuración`
-* `analizar`
+```ini
+# .env
+DATABASE_URL="postgres://$(whoami)@localhost/my_database"
+```
+```js
+// index.js
+console.log('DATABASE_URL', process.env.DATABASE_URL)
+```
+```sh
+$ dotenvx run --debug -- node index.js
+[dotenvx@0.14.1] injecting env (1) from .env
+DATABASE_URL postgres://yourusername@localhost/my_database
+```
 
-### Configuración
+</details>
+<details><summary>Encryption</summary><br>
 
-`Configuración` leerá su archivo `.env`, analizará el contenido, lo asignará a [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
-y devolverá un Objeto con una clave `parsed` que contiene el contenido cargado o una clave `error` si falla.
+Use [dotenvx](https://github.com/dotenvx/dotenvx) for encryption.
+
+Add encryption to your `.env` files with a single command.
+
+```
+$ dotenvx set HELLO Production -f .env.production
+$ echo "console.log('Hello ' + process.env.HELLO)" > index.js
+
+$ DOTENV_PRIVATE_KEY_PRODUCTION="<.env.production private key>" dotenvx run -- node index.js
+[dotenvx] injecting env (2) from .env.production
+Hello Production
+```
+
+[learn more](https://github.com/dotenvx/dotenvx?tab=readme-ov-file#encryption)
+
+</details>
+<details><summary>Multiple Environments</summary><br>
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to manage multiple environments.
+
+Run any environment locally. Create a `.env.ENVIRONMENT` file and use `-f` to load it. It's straightforward, yet flexible.
+
+```bash
+$ echo "HELLO=production" > .env.production
+$ echo "console.log('Hello ' + process.env.HELLO)" > index.js
+
+$ dotenvx run -f=.env.production -- node index.js
+Hello production
+> ^^
+```
+
+or with multiple .env files
+
+```bash
+$ echo "HELLO=local" > .env.local
+$ echo "HELLO=World" > .env
+$ echo "console.log('Hello ' + process.env.HELLO)" > index.js
+
+$ dotenvx run -f=.env.local -f=.env -- node index.js
+Hello local
+```
+
+[more environment examples](https://dotenvx.com/docs/quickstart/environments)
+
+</details>
+<details><summary>Production</summary><br>
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx) for production deploys.
+
+Create a `.env.production` file.
+
+```sh
+$ echo "HELLO=production" > .env.production
+```
+
+Encrypt it.
+
+```sh
+$ dotenvx encrypt -f .env.production
+```
+
+Set `DOTENV_PRIVATE_KEY_PRODUCTION` (found in `.env.keys`) on your server.
+
+```
+$ heroku config:set DOTENV_PRIVATE_KEY_PRODUCTION=value
+```
+
+Commit your `.env.production` file to code and deploy.
+
+```
+$ git add .env.production
+$ git commit -m "encrypted .env.production"
+$ git push heroku main
+```
+
+Dotenvx will decrypt and inject the secrets at runtime using `dotenvx run -- node index.js`.
+
+</details>
+<details><summary>Syncing</summary><br>
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to sync your .env files.
+
+Encrypt them with `dotenvx encrypt -f .env` and safely include them in source control. Your secrets are securely synced with your git.
+
+This still subscribes to the twelve-factor app rules by generating a decryption key separate from code.
+
+</details>
+<details><summary>More Examples</summary><br>
+
+See [examples](https://github.com/dotenv-org/examples) of using dotenv with various frameworks, languages, and configurations.
+
+* [nodejs](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs)
+* [nodejs (debug on)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs-debug)
+* [nodejs (override on)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs-override)
+* [nodejs (processEnv override)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-custom-target)
+* [esm](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-esm)
+* [esm (preload)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-esm-preload)
+* [typescript](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript)
+* [typescript parse](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript-parse)
+* [typescript config](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript-config)
+* [webpack](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-webpack)
+* [webpack (plugin)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-webpack2)
+* [react](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-react)
+* [react (typescript)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-react-typescript)
+* [express](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-express)
+* [nestjs](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nestjs)
+* [fastify](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-fastify)
+
+</details>
+
+&nbsp;
+
+## Agentes
+
+<img src="https://dotenvx.com/assets/img/as2/9.jpg" height="400" alt="dotenvx-as2" align="right"/>
+
+> El software está cambiando, y dotenv debe cambiar con él—por eso construí [agentic secret storage (AS2)](https://dotenvx.com/as2). Los agentes ejecutan código sin humanos en la terminal, por lo que los archivos `.env` en texto plano son el primitivo equivocado.
+>
+> AS2 está diseñado para software autónomo: cifrado por defecto, cero acceso a consola y entrega priorizando la criptografía que mantiene a los operadores fuera del circuito.
+>
+> Está respaldado por [Vestauth](https://github.com/vestauth/vestauth), la capa de autenticación pionera y de confianza para agentes—que otorga a cada agente una identidad criptográfica para firmar solicitudes con claves privadas y verificarlas con claves públicas. Sin secretos compartidos que se filtren.
+>
+> Es lo que uso ahora. - [motdotla](https://mot.la)
+
+### Inicio rápido
+
+Instala vestauth e inicializa tu agente.
+
+```bash
+npm i -g vestauth
+
+vestauth agent init
+```
+
+Tu agente puede `set` secretos con un endpoint `curl` simple:
+
+```bash
+vestauth agent curl -X POST https://as2.dotenvx.com/set -d '{"KEY":"value"}'
+```
+
+Y tu agente puede `get` secretos con un endpoint `curl` simple:
+
+```bash
+vestauth agent curl https://as2.dotenvx.com/get?key=KEY
+```
+
+¡Eso es todo! Este nuevo primitivo habilita el acceso a secretos para agentes sin intervención humana, flujos de OAuth ni claves API. Es el futuro para los agentes.
+
+&nbsp;
+
+## FAQ
+
+<details><summary>Should I commit my `.env` file?</summary><br/>
+
+No.
+
+Unless you encrypt it with [dotenvx](https://github.com/dotenvx/dotenvx). Then we recommend you do.
+
+</details>
+<details><summary>What about variable expansion?</summary><br/>
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx).
+
+</details>
+<details><summary>Should I have multiple `.env` files?</summary><br/>
+
+We recommend creating one `.env` file per environment. Use `.env` for local/development, `.env.production` for production and so on. This still follows the twelve factor principles as each is attributed individually to its own environment. Avoid custom set ups that work in inheritance somehow (`.env.production` inherits values form `.env` for example). It is better to duplicate values if necessary across each `.env.environment` file.
+
+> In a twelve-factor app, env vars are granular controls, each fully orthogonal to other env vars. They are never grouped together as “environments”, but instead are independently managed for each deploy. This is a model that scales up smoothly as the app naturally expands into more deploys over its lifetime.
+>
+> – [The Twelve-Factor App](http://12factor.net/config)
+
+Additionally, we recommend using [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt and manage these.
+
+</details>
+
+<details><summary>How do I use dotenv with `import`?</summary><br/>
+
+Simply..
+
+```javascript
+// index.mjs (ESM)
+import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import express from 'express'
+```
+
+A little background..
+
+> When you run a module containing an `import` declaration, the modules it imports are loaded first, then each module body is executed in a depth-first traversal of the dependency graph, avoiding cycles by skipping anything already executed.
+>
+> – [ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)
+
+What does this mean in plain language? It means you would think the following would work but it won't.
+
+`errorReporter.mjs`:
+```js
+class Client {
+  constructor (apiKey) {
+    console.log('apiKey', apiKey)
+
+    this.apiKey = apiKey
+  }
+}
+
+export default new Client(process.env.API_KEY)
+```
+`index.mjs`:
+```js
+// Note: this is INCORRECT and will not work
+import * as dotenv from 'dotenv'
+dotenv.config()
+
+import errorReporter from './errorReporter.mjs' // process.env.API_KEY will be blank!
+```
+
+`process.env.API_KEY` will be blank.
+
+Instead, `index.mjs` should be written as..
+
+```js
+import 'dotenv/config'
+
+import errorReporter from './errorReporter.mjs'
+```
+
+Does that make sense? It's a bit unintuitive, but it is how importing of ES6 modules work. Here is a [working example of this pitfall](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-es6-import-pitfall).
+
+There are two alternatives to this approach:
+
+1. Preload with dotenvx: `dotenvx run -- node index.js` (_Note: you do not need to `import` dotenv with this approach_)
+2. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
+</details>
+
+<details><summary>Can I customize/write plugins for dotenv?</summary><br/>
+
+Yes! `dotenv.config()` returns an object representing the parsed `.env` file. This gives you everything you need to continue setting values on `process.env`. For example:
+
+```js
+const dotenv = require('dotenv')
+const variableExpansion = require('dotenv-expand')
+const myEnv = dotenv.config()
+variableExpansion(myEnv)
+```
+
+</details>
+<details><summary>What rules does the parsing engine follow?</summary><br/>
+
+The parsing engine currently supports the following rules:
+
+- `BASIC=basic` becomes `{BASIC: 'basic'}`
+- empty lines are skipped
+- lines beginning with `#` are treated as comments
+- `#` marks the beginning of a comment (unless when the value is wrapped in quotes)
+- empty values become empty strings (`EMPTY=` becomes `{EMPTY: ''}`)
+- inner quotes are maintained (think JSON) (`JSON={"foo": "bar"}` becomes `{JSON:"{\"foo\": \"bar\"}"`)
+- whitespace is removed from both ends of unquoted values (see more on [`trim`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO=  some value  ` becomes `{FOO: 'some value'}`)
+- single and double quoted values are escaped (`SINGLE_QUOTE='quoted'` becomes `{SINGLE_QUOTE: "quoted"}`)
+- single and double quoted values maintain whitespace from both ends (`FOO="  some value  "` becomes `{FOO: '  some value  '}`)
+- double quoted values expand new lines (`MULTILINE="new\nline"` becomes
+
+```
+{MULTILINE: 'new
+line'}
+```
+
+- backticks are supported (`` BACKTICK_KEY=`This has 'single' and "double" quotes inside of it.` ``)
+
+</details>
+<details><summary>What about syncing and securing .env files?</summary><br/>
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to unlock syncing encrypted .env files over git.
+
+</details>
+<details><summary>What if I accidentally commit my `.env` file to code?</summary><br/>
+
+Remove it, [remove git history](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository) and then install the [git pre-commit hook](https://github.com/dotenvx/dotenvx#pre-commit) to prevent this from ever happening again. 
+
+```
+npm i -g @dotenvx/dotenvx
+dotenvx precommit --install
+```
+
+</details>
+<details><summary>What happens to environment variables that were already set?</summary><br/>
+
+By default, we will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped.
+
+If instead, you want to override `process.env` use the `override` option.
+
+```javascript
+require('dotenv').config({ override: true })
+```
+
+</details>
+<details><summary>How can I prevent committing my `.env` file to a Docker build?</summary><br/>
+
+Use the [docker prebuild hook](https://dotenvx.com/docs/features/prebuild).
+
+```bash
+# Dockerfile
+...
+RUN curl -fsS https://dotenvx.sh/ | sh
+...
+RUN dotenvx prebuild
+CMD ["dotenvx", "run", "--", "node", "index.js"]
+```
+
+</details>
+<details><summary>How come my environment variables are not showing up for React?</summary><br/>
+
+Your React code is run in Webpack, where the `fs` module or even the `process` global itself are not accessible out-of-the-box. `process.env` can only be injected through Webpack configuration.
+
+If you are using [`react-scripts`](https://www.npmjs.com/package/react-scripts), which is distributed through [`create-react-app`](https://create-react-app.dev/), it has dotenv built in but with a quirk. Preface your environment variables with `REACT_APP_`. See [this stack overflow](https://stackoverflow.com/questions/42182577/is-it-possible-to-use-dotenv-in-a-react-project) for more details.
+
+If you are using other frameworks (e.g. Next.js, Gatsby...), you need to consult their documentation for how to inject environment variables into the client.
+
+</details>
+<details><summary>Why is the `.env` file not loading my environment variables successfully?</summary><br/>
+
+Most likely your `.env` file is not in the correct place. [See this stack overflow](https://stackoverflow.com/questions/42335016/dotenv-file-is-not-loading-environment-variables).
+
+Turn on debug mode and try again..
+
+```js
+require('dotenv').config({ debug: true })
+```
+
+You will receive a helpful error outputted to your console.
+
+</details>
+<details><summary>Why am I getting the error `Module not found: Error: Can't resolve 'crypto|os|path'`?</summary><br/>
+
+You are using dotenv on the front-end and have not included a polyfill. Webpack < 5 used to include these for you. Do the following:
+
+```bash
+npm install node-polyfill-webpack-plugin
+```
+
+Configure your `webpack.config.js` to something like the following.
+
+```js
+require('dotenv').config()
+
+const path = require('path');
+const webpack = require('webpack')
+
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
+
+module.exports = {
+  mode: 'development',
+  entry: './src/index.ts',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  plugins: [
+    new NodePolyfillPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        HELLO: JSON.stringify(process.env.HELLO)
+      }
+    }),
+  ]
+};
+```
+
+Alternatively, just use [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack) which does this and more behind the scenes for you.
+
+</details>
+
+&nbsp;
+
+## Docs
+
+Dotenv exposes four functions:
+
+* `config`
+* `parse`
+* `populate`
+
+### Config
+
+`config` will read your `.env` file, parse the contents, assign it to
+[`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
+and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
 
 ```js
 const result = dotenv.config()
@@ -167,226 +600,175 @@ if (result.error) {
 console.log(result.parsed)
 ```
 
-Adicionalmente, puede pasar opciones a `configuracion`.
+You can additionally, pass options to `config`.
 
-#### Opciones
+#### Options
 
-##### Ruta
+##### path
 
-Por defecto: `path.resolve(process.cwd(), '.env')`
+Default: `path.resolve(process.cwd(), '.env')`
 
-Especifique una ruta personalizada si el archivo que contiene las variables de entorno se encuentra localizado en otro lugar.
+Specify a custom path if your file containing environment variables is located elsewhere.
 
 ```js
-require('dotenv').config({ path: '/personalizado/ruta/a/.env' })
+require('dotenv').config({ path: '/custom/path/to/.env' })
 ```
 
-##### Codificación
+By default, `config` will look for a file called .env in the current working directory.
 
-Por defecto: `utf8`
+Pass in multiple files as an array, and they will be parsed in order and combined with `process.env` (or `option.processEnv`, if set). The first value set for a variable will win, unless the `options.override` flag is set, in which case the last value set will win.  If a value already exists in `process.env` and the `options.override` flag is NOT set, no changes will be made to that value. 
 
-Especifique la codificación del archivo que contiene las variables de entorno.
+```js  
+require('dotenv').config({ path: ['.env.local', '.env'] })
+```
+
+##### quiet
+
+Default: `false`
+
+Suppress runtime logging message.
+
+```js
+// index.js
+require('dotenv').config({ quiet: false }) // change to true to suppress
+console.log(`Hello ${process.env.HELLO}`)
+```
+
+```ini
+# .env
+HELLO=World
+```
+
+```sh
+$ node index.js
+[dotenv@17.0.0] injecting env (1) from .env
+Hello World
+```
+
+##### encoding
+
+Default: `utf8`
+
+Specify the encoding of your file containing environment variables.
 
 ```js
 require('dotenv').config({ encoding: 'latin1' })
 ```
 
-##### Depurar
+##### debug
 
-Por defecto: `false`
+Default: `false`
 
-Active el registro de ayuda para depurar por qué ciertas claves o valores no se inician como lo esperabas.
+Turn on logging to help debug why certain keys or values are not being set as you expect.
 
 ```js
 require('dotenv').config({ debug: process.env.DEBUG })
 ```
 
-##### Anular
+##### override
 
-Por defecto: `false`
+Default: `false`
 
-Anule cualquier variable de entorno que ya se haya configurada en su maquina con los valores de su archivo .env.
+Override any environment variables that have already been set on your machine with values from your .env file(s). If multiple files have been provided in `option.path` the override will also be used as each file is combined with the next. Without `override` being set, the first value wins. With `override` set the last value wins. 
 
 ```js
 require('dotenv').config({ override: true })
 ```
 
-### Analizar
+##### processEnv
 
-El motor que analiza el contenido del archivo que contiene las variables de entorno está disponible para su uso. Acepta una Cadena o un Búfer y retornará un objecto con los valores analizados.
+Default: `process.env`
+
+Specify an object to write your environment variables to. Defaults to `process.env` environment variables.
 
 ```js
-const dotenv = require('dotenv')
-const buf = Buffer.from('BASICO=basico')
-const config = dotenv.parse(buf) // devolverá un objeto
-console.log(typeof config, config) // objeto { BASICO : 'basico' }
+const myObject = {}
+require('dotenv').config({ processEnv: myObject })
+
+console.log(myObject) // values from .env
+console.log(process.env) // this was not changed or written to
 ```
 
-#### Opciones
+### Parse
 
-##### Depurar
-
-Por defecto: `false`
-
-Active el registro de ayuda para depurar por qué ciertas claves o valores no se inician como lo esperabas.
+The engine which parses the contents of your file containing environment
+variables is available to use. It accepts a String or Buffer and will return
+an Object with the parsed keys and values.
 
 ```js
 const dotenv = require('dotenv')
-const buf = Buffer.from('hola mundo')
+const buf = Buffer.from('BASIC=basic')
+const config = dotenv.parse(buf) // will return an object
+console.log(typeof config, config) // object { BASIC : 'basic' }
+```
+
+#### Options
+
+##### debug
+
+Default: `false`
+
+Turn on logging to help debug why certain keys or values are not being set as you expect.
+
+```js
+const dotenv = require('dotenv')
+const buf = Buffer.from('hello world')
 const opt = { debug: true }
 const config = dotenv.parse(buf, opt)
-// espere por un mensaje de depuración porque el búfer no esta listo KEY=VAL
+// expect a debug message because the buffer is not in KEY=VAL form
 ```
 
-## FAQ
+### Populate
 
-### ¿Por qué el archivo `.env` no carga mis variables de entorno correctamente?
+The engine which populates the contents of your .env file to `process.env` is available for use. It accepts a target, a source, and options. This is useful for power users who want to supply their own objects.
 
-Lo más probable es que su archivo `.env` no esté en el lugar correcto. [Vea este stack overflow](https://stackoverflow.com/questions/42335016/dotenv-file-is-not-loading-environment-variables).
-
-Active el modo de depuración y vuelva a intentarlo...
-
-```js
-require('dotenv').config({ debug: true })
-```
-
-Recibirá un error apropiado en su consola.
-
-### ¿Debo confirmar mi archivo `.env`?
-
-No. Recomendamos **enfáticamente** no enviar su archivo `.env` a la versión de control. Solo debe incluir los valores especificos del entorno, como la base de datos, contraseñas o claves API.
-
-### ¿Debería tener multiples archivos `.env`?
-
-No. Recomendamos **enfáticamente** no tener un archivo `.env` "principal" y un archivo `.env` de "entorno" como `.env.test`. Su configuración debe variar entre implementaciones y no debe compartir valores entre entornos.
-
-> En una Aplicación de Doce Factores, las variables de entorno son controles diferenciados, cada uno totalmente independiente a otras variables de entorno. Nunca se agrupan como "entornos", sino que se gestionan de manera independiente para cada despliegue. Este es un modelo que se escala sin problemas a medida que la aplicación se expande de forma natural en más despliegues a lo largo de su vida.
->
-> – [La Apliación de los Doce Factores](https://12factor.net/es/)
-
-### ¿Qué reglas sigue el motor de análisis?
-
-El motor de análisis actualmente admite las siguientes reglas:
-
-- `BASICO=basico` se convierte en `{BASICO: 'basico'}`
-- las líneas vacías se saltan
-- las líneas que comienzan con `#` se tratan como comentarios
-- `#` marca el comienzo de un comentario (a menos que el valor esté entre comillas)
-- valores vacíos se convierten en cadenas vacías (`VACIO=` se convierte en `{VACIO: ''}`)
-- las comillas internas se mantienen (piensa en JSON) (`JSON={"foo": "bar"}` se convierte en `{JSON:"{\"foo\": \"bar\"}"`)
-- los espacios en blanco se eliminan de ambos extremos de los valores no citanos (aprende más en [`trim`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)) (`FOO=  algo ` se convierte en `{FOO: 'algo'}`)
-- los valores entre comillas simples y dobles se escapan (`CITA_SIMPLE='citado'` se convierte en `{CITA_SIMPLE: "citado"}`)
-- los valores entre comillas simples y dobles mantienen los espacios en blanco en ambos extremos  (`FOO="  algo  "` se convierte en `{FOO: '  algo  '}`)
-- los valores entre comillas dobles expanden nuevas líneas (`MULTILINEA="nueva\nlínea"` se convierte en
-
-```
-{MULTILINEA: 'nueva
-línea'}
-```
-
-- se admite la comilla simple invertida (`` SIGNO_ACENTO=`Esto tiene comillas 'simples' y "dobles" en su interior.` ``)
-
-### ¿Qué sucede con las variables de entorno que ya estaban configuradas?
-
-Por defecto, nunca modificaremos ninguna variable de entorno que ya haya sido establecida. En particular, si hay una variable en su archivo `.env` que colisiona con una que ya existe en su entorno, entonces esa variable se omitirá.
-
-Si por el contrario, quieres anular `process.env` utiliza la opción `override`.
-
-```javascript
-require('dotenv').config({ override: true })
-```
-
-### ¿Por qué mis variables de entorno no aparecen para React?
-
-Su código React se ejecuta en Webpack, donde el módulo `fs` o incluso el propio `process` global no son accesibles fuera-de-la-caja. El módulo `process.env` sólo puede ser inyectado a través de la configuración de Webpack.
-
-Si estás usando [`react-scripts`](https://www.npmjs.com/package/react-scripts), el cual se distribuye a través de [`create-react-app`](https://create-react-app.dev/), tiene dotenv incorporado pero con una singularidad. Escriba sus variables de entorno con `REACT_APP_`. Vea [este stack overflow](https://stackoverflow.com/questions/42182577/is-it-possible-to-use-dotenv-in-a-react-project) para más detalles.
-
-Si estás utilizando otros frameworks (por ejemplo, Next.js, Gatsby...), debes consultar su documentación para saber cómo injectar variables de entorno en el cliente.
-
-### ¿Puedo personalizar/escribir plugins para dotenv?
-
-Sí! `dotenv.config()` devuelve un objeto que representa el archivo `.env` analizado. Esto te da todo lo que necesitas para poder establecer valores en `process.env`. Por ejemplo:
+For example, customizing the source:
 
 ```js
 const dotenv = require('dotenv')
-const variableExpansion = require('dotenv-expand')
-const miEnv = dotenv.config()
-variableExpansion(miEnv)
+const parsed = { HELLO: 'world' }
+
+dotenv.populate(process.env, parsed)
+
+console.log(process.env.HELLO) // world
 ```
 
-### Cómo uso dotnev con `import`?
-
-Simplemente..
-
-```javascript
-// index.mjs (ESM)
-import * as dotenv from 'dotenv' // vea https://github.com/motdotla/dotenv#como-uso-dotenv-con-import
-dotenv.config()
-import express from 'express'
-```
-
-Un poco de historia...
-
-> Cuando se ejecuta un módulo que contiene una sentencia `import`, los módulos que importa serán cargados primero, y luego se ejecuta cada bloque del módulo en un recorrido en profundidad del gráfico de dependencias, evitando los ciclos al saltarse todo lo que ya se ha ejecutado.
->
-> – [ES6 en Profundidad: Módulos](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)
-
-¿Qué significa esto en lenguaje sencillo? Significa que se podrías pensar que lo siguiente funcionaría pero no lo hará.
+For example, customizing the source AND target:
 
 ```js
-// notificarError.mjs
-import { Cliente } from 'mejor-servicio-para-notificar-error'
+const dotenv = require('dotenv')
+const parsed = { HELLO: 'universe' }
+const target = { HELLO: 'world' } // empty object
 
-export default new Client(process.env.CLAVE_API)
+dotenv.populate(target, parsed, { override: true, debug: true })
 
-// index.mjs
-import dotenv from 'dotenv'
-dotenv.config()
-
-import notificarError from './notificarError.mjs'
-notificarError.report(new Error('ejemplo documentado'))
+console.log(target) // { HELLO: 'universe' }
 ```
 
-`process.env.CLAVE_API` será vacio.
+#### options
 
-En su lugar, el código anterior debe ser escrito como...
+##### Debug
 
-```js
-// notificarError.mjs
-import { Cliente } from 'mejor-servicio-para-notificar-errores'
+Default: `false`
 
-export default new Client(process.env.CLAVE_API)
+Turn on logging to help debug why certain keys or values are not being populated as you expect.
 
-// index.mjs
-import * as dotenv from 'dotenv'
-dotenv.config()
+##### override
 
-import notificarError from './notificarError.mjs'
-notificarError.report(new Error('ejemplo documentado'))
-```
+Default: `false`
 
-¿Esto tiene algo de sentido? Esto es poco poco intuitivo, pero es como funciona la importación de módulos en ES6. Aquí hay un ejemplo [ejemplo práctico de esta trampa](https://github.com/dotenv-org/examples/tree/master/dotenv-es6-import-pitfall).
+Override any environment variables that have already been set.
 
-Existen dos arternativas a este planteamiento:
+&nbsp;
 
-1. Precarga dotenv: `node --require dotenv/config index.js` (_Nota: no es necesario usar `import` dotenv con este método_)
-2. Cree un archivo separado que ejecutará `config` primero como se describe en [este comentario #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
+## CHANGELOG
 
-### ¿Qué pasa con la expansión de variable?
+See [CHANGELOG.md](CHANGELOG.md)
 
-Prueba [dotenv-expand](https://github.com/motdotla/dotenv-expand)
+&nbsp;
 
-## Guía de contribución
+## Who's using dotenv?
 
-Vea [CONTRIBUTING.md](CONTRIBUTING.md)
+[These npm modules depend on it.](https://www.npmjs.com/browse/depended/dotenv)
 
-## REGISTRO DE CAMBIOS
-
-Vea [CHANGELOG.md](CHANGELOG.md)
-
-## ¿Quiénes utilizan dotenv?
-
-[Estos módulos npm dependen de él.](https://www.npmjs.com/browse/depended/dotenv)
-
-Los proyectos que lo amplían suelen utilizar la [palabra clave "dotenv" en npm](https://www.npmjs.com/search?q=keywords:dotenv).
+Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmjs.com/search?q=keywords:dotenv).
