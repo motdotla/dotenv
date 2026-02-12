@@ -330,24 +330,27 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 
 ### Quickstart
 
-Install <a href="https://github.com/vestauth/vestauth">vestauth</a> and initialize your agent.
+Install vestauth and initialize your agent.
 
 ```bash
 npm i -g vestauth
+
 vestauth agent init
 ```
 
-Your agent can `set` secrets in as2:
+Your agent `set`s secrets with a simple `curl` endpoint:
 
 ```bash
 vestauth agent curl -X POST https://as2.dotenvx.com/set '{"KEY":"value"}'
 ```
 
-And your agent can `get` secrets:
+And your agent `get`s secrets with a simple `curl` endpoint:
 
 ```bash
 vestauth agent curl https://as2.dotenvx.com/get?key=KEY
 ```
+
+That's it! This new primitive unlocks secrets access for agents without human in the loop, oauth flows, or API keys. It's the future for agents.
 
 &nbsp;
 
