@@ -6,7 +6,9 @@
 >
 > [2 minute tutorial 📺](https://www.youtube.com/watch?v=YtkZR0NFd1g)
 
-### Quickstart
+&nbsp;
+
+### Usage
 
 Install it.
 
@@ -69,12 +71,142 @@ s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
 * [Deploying](#deploying)
 * [Agents (AS2) 🆕](#agents-as2)
 
-## Usage
+## Advanced
 
-<a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
-<img src="https://img.youtube.com/vi/YtkZR0NFd1g/hqdefault.jpg" alt="how to use dotenv video tutorial" align="right" width="330" />
-<img src="https://simpleicons.vercel.app/youtube/ff0000" alt="youtube/@dotenvorg" align="right" width="24" />
-</a>
+<details><summary>Multiline Values</summary><br>
+
+If you need multiline variables, for example private keys, those are now supported (`>= v15.0.0`) with line breaks:
+
+```ini
+PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
+...
+Kh9NV...
+...
+-----END RSA PRIVATE KEY-----"
+```
+
+Alternatively, you can double quote strings and use the `\n` character:
+
+```ini
+PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nKh9NV...\n-----END RSA PRIVATE KEY-----\n"
+```
+
+</details>
+<details><summary>Comments</summary><br>
+
+Comments may be added to your file on their own line or inline:
+
+```ini
+# This is a comment
+SECRET_KEY=YOURSECRETKEYGOESHERE # comment
+SECRET_HASH="something-with-a-#-hash"
+```
+
+Comments begin where a `#` exists, so if your value contains a `#` please wrap it in quotes. This is a breaking change from `>= v15.0.0` and on.
+
+</details>
+
+
+<details><summary>Parsing</summary><br>
+
+The engine which parses the contents of your file containing environment variables is available to use. It accepts a String or Buffer and will return an Object with the parsed keys and values.
+
+```javascript
+const dotenv = require('dotenv')
+const buf = Buffer.from('BASIC=basic')
+const config = dotenv.parse(buf) // will return an object
+console.log(typeof config, config) // object { BASIC : 'basic' }
+```
+
+</details>
+<details><summary>Preload</summary><br>
+
+> Note: Consider using [`dotenvx`](https://github.com/dotenvx/dotenvx) instead of preloading. I am now doing (and recommending) so.
+>
+> It serves the same purpose (you do not need to require and load dotenv), adds better debugging, and works with ANY language, framework, or platform. – [motdotla](https://github.com/motdotla)
+
+You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#-r---require-module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
+
+```bash
+$ node -r dotenv/config your_script.js
+```
+
+The configuration options below are supported as command line arguments in the format `dotenv_config_<option>=value`
+
+```bash
+$ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env dotenv_config_debug=true
+```
+
+Additionally, you can use environment variables to set configuration options. Command line arguments will precede these.
+
+```bash
+$ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
+```
+
+```bash
+$ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
+```
+
+</details>
+<details><summary>Variable Expansion</summary><br>
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to use variable expansion.
+
+Reference and expand variables already on your machine for use in your .env file.
+
+```ini
+# .env
+USERNAME="username"
+DATABASE_URL="postgres://${USERNAME}@localhost/my_database"
+```
+```js
+// index.js
+console.log('DATABASE_URL', process.env.DATABASE_URL)
+```
+```sh
+$ dotenvx run --debug -- node index.js
+[dotenvx@0.14.1] injecting env (2) from .env
+DATABASE_URL postgres://username@localhost/my_database
+```
+
+</details>
+<details><summary>Command Substitution</summary><br>
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to use command substitution.
+
+Add the output of a command to one of your variables in your .env file.
+
+```ini
+# .env
+DATABASE_URL="postgres://$(whoami)@localhost/my_database"
+```
+```js
+// index.js
+console.log('DATABASE_URL', process.env.DATABASE_URL)
+```
+```sh
+$ dotenvx run --debug -- node index.js
+[dotenvx@0.14.1] injecting env (1) from .env
+DATABASE_URL postgres://yourusername@localhost/my_database
+```
+
+</details>
+<details><summary>Syncing</summary><br>
+
+You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt your `.env` files and safely include them in source control. This still subscribes to the twelve-factor app rules by generating a decryption key separate from code.
+
+</details>
+<details><summary>Multiple Environments</summary><br>
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate `.env.ci`, `.env.production` files, and more.
+
+</details>
+
+<details><summary>Deploying</summary><br>
+
+You need to deploy your secrets in a cloud-agnostic manner? Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate a private decryption key that is set on your production server.
+
+</details>
 
 Create a `.env` file in the root of your project (if using a monorepo structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs):
 
@@ -114,128 +246,6 @@ require('dotenv').config()
 
 s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
 ```
-
-### Multiline values
-
-If you need multiline variables, for example private keys, those are now supported (`>= v15.0.0`) with line breaks:
-
-```ini
-PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
-...
-Kh9NV...
-...
------END RSA PRIVATE KEY-----"
-```
-
-Alternatively, you can double quote strings and use the `\n` character:
-
-```ini
-PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nKh9NV...\n-----END RSA PRIVATE KEY-----\n"
-```
-
-### Comments
-
-Comments may be added to your file on their own line or inline:
-
-```ini
-# This is a comment
-SECRET_KEY=YOURSECRETKEYGOESHERE # comment
-SECRET_HASH="something-with-a-#-hash"
-```
-
-Comments begin where a `#` exists, so if your value contains a `#` please wrap it in quotes. This is a breaking change from `>= v15.0.0` and on.
-
-### Parsing
-
-The engine which parses the contents of your file containing environment variables is available to use. It accepts a String or Buffer and will return an Object with the parsed keys and values.
-
-```javascript
-const dotenv = require('dotenv')
-const buf = Buffer.from('BASIC=basic')
-const config = dotenv.parse(buf) // will return an object
-console.log(typeof config, config) // object { BASIC : 'basic' }
-```
-
-### Preload
-
-> Note: Consider using [`dotenvx`](https://github.com/dotenvx/dotenvx) instead of preloading. I am now doing (and recommending) so.
->
-> It serves the same purpose (you do not need to require and load dotenv), adds better debugging, and works with ANY language, framework, or platform. – [motdotla](https://github.com/motdotla)
-
-You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#-r---require-module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
-
-```bash
-$ node -r dotenv/config your_script.js
-```
-
-The configuration options below are supported as command line arguments in the format `dotenv_config_<option>=value`
-
-```bash
-$ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env dotenv_config_debug=true
-```
-
-Additionally, you can use environment variables to set configuration options. Command line arguments will precede these.
-
-```bash
-$ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
-```
-
-```bash
-$ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
-```
-
-### Variable Expansion
-
-Use [dotenvx](https://github.com/dotenvx/dotenvx) to use variable expansion.
-
-Reference and expand variables already on your machine for use in your .env file.
-
-```ini
-# .env
-USERNAME="username"
-DATABASE_URL="postgres://${USERNAME}@localhost/my_database"
-```
-```js
-// index.js
-console.log('DATABASE_URL', process.env.DATABASE_URL)
-```
-```sh
-$ dotenvx run --debug -- node index.js
-[dotenvx@0.14.1] injecting env (2) from .env
-DATABASE_URL postgres://username@localhost/my_database
-```
-
-### Command Substitution
-
-Use [dotenvx](https://github.com/dotenvx/dotenvx) to use command substitution.
-
-Add the output of a command to one of your variables in your .env file.
-
-```ini
-# .env
-DATABASE_URL="postgres://$(whoami)@localhost/my_database"
-```
-```js
-// index.js
-console.log('DATABASE_URL', process.env.DATABASE_URL)
-```
-```sh
-$ dotenvx run --debug -- node index.js
-[dotenvx@0.14.1] injecting env (1) from .env
-DATABASE_URL postgres://yourusername@localhost/my_database
-```
-
-### Syncing
-
-You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt your `.env` files and safely include them in source control. This still subscribes to the twelve-factor app rules by generating a decryption key separate from code.
-
-### Multiple Environments
-
-Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate `.env.ci`, `.env.production` files, and more.
-
-### Deploying
-
-You need to deploy your secrets in a cloud-agnostic manner? Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate a private decryption key that is set on your production server.
 
 &nbsp;
 
