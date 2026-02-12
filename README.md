@@ -14,7 +14,9 @@ Install it.
 npm install dotenv --save
 ```
 
-<details><summary>with yarn, bun, or pnpm (expand)</summary><br>
+<details><summary>learn more</summary><br>
+
+You can use any npm-compatible package manager like yarn, bun, or pnpm.
 
 ```sh
 yarn add dotenv
@@ -26,16 +28,25 @@ pnpm add dotenv
 
 </details>
 
+&nbsp;
+
 Create a `.env` file in the root of your project:
 
-```dosini
+```ini
+# .env
 S3_BUCKET="YOURS3BUCKET"
 SECRET_KEY="YOURSECRETKEYGOESHERE"
 ```
 
-<details><summary>for monorepos (expand)</summary><br>
+<details><summary>learn more</summary><br>
 
-If using a monorepo structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs.
+For monorepos with a structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs.
+
+```ini
+# app/backend/.env
+S3_BUCKET="YOURS3BUCKET"
+SECRET_KEY="YOURSECRETKEYGOESHERE"
+```
 
 &nbsp;
 
@@ -48,13 +59,15 @@ require('dotenv').config()
 console.log(process.env) // remove this after you've confirmed it is working
 ```
 
-.. [or using ES6?](#how-do-i-use-dotenv-with-import)
+<details><summary>learn more</summary><br>
+
+If you are [using ES6](#how-do-i-use-dotenv-with-import):
 
 ```javascript
 import 'dotenv/config'
 ```
 
-ES6 import if you need to set config options:
+or using ES6 import with config options:
 
 ```javascript
 import dotenv from 'dotenv'
@@ -62,14 +75,13 @@ import dotenv from 'dotenv'
 dotenv.config({ path: '/custom/path/to/.env' })
 ```
 
+</details>
+
 That's it. `process.env` now has the keys and values you defined in your `.env` file:
 
 ```javascript
-require('dotenv').config()
-// or import 'dotenv/config' if you're using ES6
-
+require('dotenv').config() // or import 'dotenv/config' if you're using ES6
 ...
-
 s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
 ```
 
@@ -89,7 +101,7 @@ s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
 
 Create a `.env` file in the root of your project (if using a monorepo structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs):
 
-```dosini
+```ini
 S3_BUCKET="YOURS3BUCKET"
 SECRET_KEY="YOURSECRETKEYGOESHERE"
 ```
@@ -130,7 +142,7 @@ s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
 
 If you need multiline variables, for example private keys, those are now supported (`>= v15.0.0`) with line breaks:
 
-```dosini
+```ini
 PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
 ...
 Kh9NV...
@@ -140,7 +152,7 @@ Kh9NV...
 
 Alternatively, you can double quote strings and use the `\n` character:
 
-```dosini
+```ini
 PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nKh9NV...\n-----END RSA PRIVATE KEY-----\n"
 ```
 
@@ -148,7 +160,7 @@ PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nKh9NV...\n-----END RSA PRIVATE KEY
 
 Comments may be added to your file on their own line or inline:
 
-```dosini
+```ini
 # This is a comment
 SECRET_KEY=YOURSECRETKEYGOESHERE # comment
 SECRET_HASH="something-with-a-#-hash"
