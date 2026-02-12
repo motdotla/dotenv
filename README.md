@@ -8,8 +8,6 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 
 [Watch the tutorial](https://www.youtube.com/watch?v=YtkZR0NFd1g)
 
-&nbsp;
-
 ## Usage
 
 Install it.
