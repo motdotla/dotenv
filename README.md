@@ -134,7 +134,7 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 
 > Note: Consider using [`dotenvx`](https://github.com/dotenvx/dotenvx) instead of preloading. I am now doing (and recommending) so.
 >
-> It serves the same purpose (you do not need to require and load dotenv), adds better debugging, and works with ANY language, framework, or platform. – [motdotla](https://github.com/motdotla)
+> It serves the same purpose (you do not need to require and load dotenv), adds better debugging, and works with ANY language, framework, or platform. – [motdotla](https://mot.la)
 
 You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#-r---require-module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
 
@@ -318,9 +318,8 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 
 ## Agents
 
-> Software is changing, and dotenv must change with it—that is why we built [dotenvx as2](https://dotenvx.com/as2). Agents run code without humans at terminals, so plaintext `.env` files are the wrong primitive. AS2 is built for autonomous software: encrypted by default, zero console access, and cryptography‑first delivery that keeps operators out of the loop. It is backed by Vestauth, the trusted, pioneering auth layer for agents—giving each agent a cryptographic identity so requests are signed with private keys and verified with public keys. No shared secrets to leak.
-> 
-> If you are writing agentic code here is how to get started:
+> Software is changing, and dotenv must change with it—that is why I built [agentic secret stoarge (AS2)](https://dotenvx.com/as2). Agents run code without humans at terminals, so plaintext `.env` files are the wrong primitive. AS2 is built for autonomous software: encrypted by default, zero console access, and cryptography‑first delivery that keeps operators out of the loop. It is backed by Vestauth, the trusted, pioneering auth layer for agents—giving each agent a cryptographic identity so requests are signed with private keys and verified with public keys. No shared secrets to leak. - [motdotla](https://mot.la)
+>
 
 Install <a href="https://github.com/vestauth/vestauth">vestauth</a> and initialize your agent.
 
