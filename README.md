@@ -235,24 +235,6 @@ You need to keep `.env` files in sync between machines, environments, or team me
 </details>
 <details><summary>Multiple Environments</summary><br>
 
-Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate `.env.ci`, `.env.production` files, and more.
-
-&nbsp;
-
-</details>
-
-<details><summary>Deploying</summary><br>
-
-You need to deploy your secrets in a cloud-agnostic manner? Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate a private decryption key that is set on your production server.
-
-&nbsp;
-
-</details>
-
-&nbsp;
-
-## Multiple Environments
-
 Use [dotenvx](https://github.com/dotenvx/dotenvx)
 
 Run any environment locally. Create a `.env.ENVIRONMENT` file and use `--env-file` to load it. It's straightforward, yet flexible.
@@ -278,6 +260,17 @@ Hello local
 ```
 
 [more environment examples](https://dotenvx.com/docs/quickstart/environments)
+
+&nbsp;
+
+</details>
+<details><summary>Deploying</summary><br>
+
+You need to deploy your secrets in a cloud-agnostic manner? Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate a private decryption key that is set on your production server.
+
+&nbsp;
+
+</details>
 
 &nbsp;
 
