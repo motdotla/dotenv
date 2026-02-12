@@ -533,18 +533,16 @@ Override any environment variables that have already been set.
 
 ## FAQ
 
-<details><summary>What about variable expansion?</summary><br/>
-
-Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
-
-</details>
 <details><summary>Should I commit my `.env` file?</summary><br/>
 
-No. We **strongly** recommend against committing your `.env` file to version
+No.
 
-control. It should only include environment-specific values such as database
-passwords or API keys. Your production database should have a different
-password than your development database.
+Unless you encrypt it with [dotenvx](https://github.com/dotenvx/dotenvx). Then we recommend you do.
+
+</details>
+<details><summary>What about variable expansion?</summary><br/>
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx).
 
 </details>
 <details><summary>How do I use dotenv with `import`?</summary><br/>
@@ -611,6 +609,9 @@ We recommend creating one `.env` file per environment. Use `.env` for local/deve
 > In a twelve-factor app, env vars are granular controls, each fully orthogonal to other env vars. They are never grouped together as “environments”, but instead are independently managed for each deploy. This is a model that scales up smoothly as the app naturally expands into more deploys over its lifetime.
 >
 > – [The Twelve-Factor App](http://12factor.net/config)
+
+Additionally, we recommend using [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt and manage these.
+
 </details>
 <details><summary>Can I customize/write plugins for dotenv?</summary><br/>
 
@@ -622,6 +623,7 @@ const variableExpansion = require('dotenv-expand')
 const myEnv = dotenv.config()
 variableExpansion(myEnv)
 ```
+
 </details>
 <details><summary>What rules does the parsing engine follow?</summary><br/>
 
@@ -656,7 +658,7 @@ Use [dotenvx](https://github.com/dotenvx/dotenvx) to unlock syncing encrypted .e
 Remove it, [remove git history](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository) and then install the [git pre-commit hook](https://github.com/dotenvx/dotenvx#pre-commit) to prevent this from ever happening again. 
 
 ```
-brew install dotenvx/brew/dotenvx
+npm i -g @dotenvx/dotenvx
 dotenvx precommit --install
 ```
 
