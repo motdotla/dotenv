@@ -34,6 +34,8 @@ bun add dotenv
 pnpm add dotenv
 ```
 
+&nbsp;
+
 ## Usage
 
 <a href="https://www.youtube.com/watch?v=YtkZR0NFd1g">
@@ -202,6 +204,8 @@ Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate `.env.ci`, `.env.p
 
 You need to deploy your secrets in a cloud-agnostic manner? Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate a private decryption key that is set on your production server.
 
+&nbsp;
+
 ## Multiple Environments
 
 Use [dotenvx](https://github.com/dotenvx/dotenvx)
@@ -230,6 +234,8 @@ Hello local
 
 [more environment examples](https://dotenvx.com/docs/quickstart/environments)
 
+&nbsp;
+
 ## Deploying
 
 Use [dotenvx](https://github.com/dotenvx/dotenvx).
@@ -246,6 +252,8 @@ Hello Production
 ```
 
 [learn more](https://github.com/dotenvx/dotenvx?tab=readme-ov-file#encryption)
+
+&nbsp;
 
 ## Agents (AS2)
 
@@ -295,7 +303,7 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [nestjs](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nestjs)
 * [fastify](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-fastify)
 
-## 📖 Documentation
+## Documentation
 
 Dotenv exposes four functions:
 
@@ -478,7 +486,9 @@ Default: `false`
 
 Override any environment variables that have already been set.
 
-## ❓ FAQ
+&nbsp;
+
+## FAQ
 
 ### Why is the `.env` file not loading my environment variables successfully?
 
@@ -686,9 +696,13 @@ CMD ["dotenvx", "run", "--", "node", "index.js"]
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
 
+&nbsp;
+
 ## CHANGELOG
 
 See [CHANGELOG.md](CHANGELOG.md)
+
+&nbsp;
 
 ## Who's using dotenv?
 
