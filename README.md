@@ -347,7 +347,7 @@ vestauth agent curl -X POST https://as2.dotenvx.com/set -d '{"KEY":"value"}'
 And your agent `get`s secrets with a simple `curl` endpoint:
 
 ```bash
-vestauth agent curl https://as2.dotenvx.com/get?key=KEY
+vestauth agent curl "https://as2.dotenvx.com/get?key=KEY"
 ```
 
 That's it! This new primitive unlocks secrets access for agents without human-in-the-loop, oauth flows, or API keys. It's the future for agents.
