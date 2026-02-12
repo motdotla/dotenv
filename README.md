@@ -1,33 +1,45 @@
-# dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv) [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE) [![codecov](https://codecov.io/gh/motdotla/dotenv-expand/graph/badge.svg?token=pawWEyaMfg)](https://codecov.io/gh/motdotla/dotenv-expand)
-
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.svg" alt="dotenv" align="right" width="200" />
 
-Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](https://12factor.net/config) methodology.
+# dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv) [![downloads](https://img.shields.io/npm/dw/dotenv)](https://www.npmjs.com/package/dotenv)
+
+> Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](https://12factor.net/config) methodology.
 
 &nbsp;
 
 ### Quickstart
 
-Install and use it in code just like `dotenv`.
+Install it.
 
 ```sh
 npm install dotenv --save
 ```
 
-You can also use an npm-compatible package manager like yarn, bun or pnpm:
+<details><summary>with yarn, bun, or pnpm (expand)</summary><br>
 
-```bash
+```sh
 yarn add dotenv
 bun add dotenv
 pnpm add dotenv
 ```
 
-Create a `.env` file in the root of your project (if using a monorepo structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs):
+&nbsp;
+
+</details>
+
+Create a `.env` file in the root of your project:
 
 ```dosini
 S3_BUCKET="YOURS3BUCKET"
 SECRET_KEY="YOURSECRETKEYGOESHERE"
 ```
+
+<details><summary>for monorepos (expand)</summary><br>
+
+If using a monorepo structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs.
+
+&nbsp;
+
+</details>
 
 As early as possible in your application, import and configure dotenv:
 
