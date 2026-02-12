@@ -2,18 +2,13 @@
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.svg" alt="dotenv" align="right" width="200" />
 
-> Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](https://12factor.net/config) methodology.
->
-> [2 minute tutorial 📺](https://www.youtube.com/watch?v=YtkZR0NFd1g)
+Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](https://12factor.net/config) methodology.
 
-* [usage](#usage)
-* [environments](#multiple-environments)
-* [deploying](#deploying)
-* [agents 🆕](#agents-as2)
+[Watch the tutorial](https://www.youtube.com/watch?v=YtkZR0NFd1g)
 
 &nbsp;
 
-### Usage
+## Usage
 
 Install it.
 
@@ -225,45 +220,6 @@ Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate `.env.ci`, `.env.p
 You need to deploy your secrets in a cloud-agnostic manner? Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate a private decryption key that is set on your production server.
 
 </details>
-
-Create a `.env` file in the root of your project (if using a monorepo structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs):
-
-```ini
-S3_BUCKET="YOURS3BUCKET"
-SECRET_KEY="YOURSECRETKEYGOESHERE"
-```
-
-As early as possible in your application, import and configure dotenv:
-
-```javascript
-require('dotenv').config()
-console.log(process.env) // remove this after you've confirmed it is working
-```
-
-.. [or using ES6?](#how-do-i-use-dotenv-with-import)
-
-```javascript
-import 'dotenv/config'
-```
-
-ES6 import if you need to set config options:
-
-```javascript
-import dotenv from 'dotenv'
-
-dotenv.config({ path: '/custom/path/to/.env' })
-```
-
-That's it. `process.env` now has the keys and values you defined in your `.env` file:
-
-```javascript
-require('dotenv').config()
-// or import 'dotenv/config' if you're using ES6
-
-...
-
-s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
-```
 
 &nbsp;
 
