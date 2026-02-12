@@ -18,6 +18,7 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 * [🏗️ Usage (.env)](#%EF%B8%8F-usage)
 * [🌴 Multiple Environments 🆕](#-manage-multiple-environments)
 * [🚀 Deploying (encryption) 🆕](#-deploying)
+* [🤖 Agents (AS2) 🆕](#-agents-as2)
 * [📚 Examples](#-examples)
 * [📖 Docs](#-documentation)
 * [❓ FAQ](#-faq)
@@ -253,6 +254,33 @@ Hello Production
 ```
 
 [learn more](https://github.com/dotenvx/dotenvx?tab=readme-ov-file#encryption)
+
+## 🤖 Agents (AS2)
+
+<a href="https://dotenvx.com/as2">AS2</a> is agentic secret storage from Dotenvx.
+
+> Secrets designed for agents. No logins. No consoles. Pure cryptography.
+
+### Quickstart
+
+Install <a href="https://github.com/vestauth/vestauth">vestauth</a> and initialize your agent. (AS2 uses vestauth to authenticate agents.)
+
+```bash
+npm i -g vestauth
+vestauth agent init
+```
+
+Your agent can `set` secrets:
+
+```bash
+vestauth agent curl -X POST https://as2.dotenvx.com/set '{"KEY":"value"}'
+```
+
+Your agent can `get` secrets:
+
+```bash
+vestauth agent curl https://as2.dotenvx.com/get?key=KEY
+```
 
 ## 📚 Examples
 
