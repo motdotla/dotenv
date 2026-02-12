@@ -318,13 +318,15 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 
 ## Agents
 
-<a href="https://dotenvx.com/as2">AS2</a> is agentic secret storage from Dotenvx.
-
-> Secrets designed for agents. No logins. No consoles. Pure cryptography.
+> If you are doing agentic coding you need:
+> 1. A way for secrets to travel with your agent
+> 2. A way for your agent to access them without juggling API Keys and OAuth tokens.
+>
+> Plaintext `.env` files are not a good solution for this. Instead, use [dotenvx as2](https://dotenvx.com/as2).
 
 ### Quickstart
 
-Install <a href="https://github.com/vestauth/vestauth">vestauth</a> and initialize your agent. (AS2 uses vestauth to authenticate agents.)
+Install <a href="https://github.com/vestauth/vestauth">vestauth</a> and initialize your agent.
 
 ```bash
 npm i -g vestauth
