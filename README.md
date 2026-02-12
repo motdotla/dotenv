@@ -350,7 +350,7 @@ And your agent `get`s secrets with a simple `curl` endpoint:
 vestauth agent curl https://as2.dotenvx.com/get?key=KEY
 ```
 
-That's it! This new primitive unlocks secrets access for agents without human in the loop, oauth flows, or API keys. It's the future for agents.
+That's it! This new primitive unlocks secrets access for agents without human-in-the-loop, oauth flows, or API keys. It's the future for agents.
 
 &nbsp;
 
