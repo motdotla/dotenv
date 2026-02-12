@@ -4,9 +4,9 @@
 
 Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](https://12factor.net/config) methodology.
 
-&nbsp;
-
 [Watch the tutorial](https://www.youtube.com/watch?v=YtkZR0NFd1g)
+
+&nbsp;
 
 ## Usage
 
@@ -54,12 +54,16 @@ import dotenv from 'dotenv'
 dotenv.config({ path: '/custom/path/to/.env' })
 ```
 
+&nbsp;
+
 </details>
 <details><summary>bun</summary><br>
 
 ```sh
 bun add dotenv
 ```
+
+&nbsp;
 
 </details>
 <details><summary>yarn</summary><br>
@@ -68,12 +72,16 @@ bun add dotenv
 yarn add dotenv
 ```
 
+&nbsp;
+
 </details>
 <details><summary>pnpm</summary><br>
 
 ```sh
 pnpm add dotenv
 ```
+
+&nbsp;
 
 </details>
 
@@ -86,6 +94,8 @@ For monorepos with a structure like `apps/backend/app.js`, put it the `.env` fil
 S3_BUCKET="YOURS3BUCKET"
 SECRET_KEY="YOURSECRETKEYGOESHERE"
 ```
+
+&nbsp;
 
 </details>
 <details><summary>Multiline Values</summary><br>
@@ -106,6 +116,8 @@ Alternatively, you can double quote strings and use the `\n` character:
 PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nKh9NV...\n-----END RSA PRIVATE KEY-----\n"
 ```
 
+&nbsp;
+
 </details>
 <details><summary>Comments</summary><br>
 
@@ -119,6 +131,8 @@ SECRET_HASH="something-with-a-#-hash"
 
 Comments begin where a `#` exists, so if your value contains a `#` please wrap it in quotes. This is a breaking change from `>= v15.0.0` and on.
 
+&nbsp;
+
 </details>
 <details><summary>Parsing</summary><br>
 
@@ -130,6 +144,8 @@ const buf = Buffer.from('BASIC=basic')
 const config = dotenv.parse(buf) // will return an object
 console.log(typeof config, config) // object { BASIC : 'basic' }
 ```
+
+&nbsp;
 
 </details>
 <details><summary>Preload</summary><br>
@@ -160,6 +176,8 @@ $ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
 $ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
 
+&nbsp;
+
 </details>
 <details><summary>Variable Expansion</summary><br>
 
@@ -182,6 +200,8 @@ $ dotenvx run --debug -- node index.js
 DATABASE_URL postgres://username@localhost/my_database
 ```
 
+&nbsp;
+
 </details>
 <details><summary>Command Substitution</summary><br>
 
@@ -203,21 +223,29 @@ $ dotenvx run --debug -- node index.js
 DATABASE_URL postgres://yourusername@localhost/my_database
 ```
 
+&nbsp;
+
 </details>
 <details><summary>Syncing</summary><br>
 
 You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt your `.env` files and safely include them in source control. This still subscribes to the twelve-factor app rules by generating a decryption key separate from code.
+
+&nbsp;
 
 </details>
 <details><summary>Multiple Environments</summary><br>
 
 Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate `.env.ci`, `.env.production` files, and more.
 
+&nbsp;
+
 </details>
 
 <details><summary>Deploying</summary><br>
 
 You need to deploy your secrets in a cloud-agnostic manner? Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate a private decryption key that is set on your production server.
+
+&nbsp;
 
 </details>
 
