@@ -545,6 +545,18 @@ Unless you encrypt it with [dotenvx](https://github.com/dotenvx/dotenvx). Then w
 Use [dotenvx](https://github.com/dotenvx/dotenvx).
 
 </details>
+<details><summary>Should I have multiple `.env` files?</summary><br/>
+
+We recommend creating one `.env` file per environment. Use `.env` for local/development, `.env.production` for production and so on. This still follows the twelve factor principles as each is attributed individually to its own environment. Avoid custom set ups that work in inheritance somehow (`.env.production` inherits values form `.env` for example). It is better to duplicate values if necessary across each `.env.environment` file.
+
+> In a twelve-factor app, env vars are granular controls, each fully orthogonal to other env vars. They are never grouped together as “environments”, but instead are independently managed for each deploy. This is a model that scales up smoothly as the app naturally expands into more deploys over its lifetime.
+>
+> – [The Twelve-Factor App](http://12factor.net/config)
+
+Additionally, we recommend using [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt and manage these.
+
+</details>
+
 <details><summary>How do I use dotenv with `import`?</summary><br/>
 
 Simply..
@@ -602,17 +614,6 @@ There are two alternatives to this approach:
 2. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
 </details>
 
-<details><summary>Should I have multiple `.env` files?</summary><br/>
-
-We recommend creating one `.env` file per environment. Use `.env` for local/development, `.env.production` for production and so on. This still follows the twelve factor principles as each is attributed individually to its own environment. Avoid custom set ups that work in inheritance somehow (`.env.production` inherits values form `.env` for example). It is better to duplicate values if necessary across each `.env.environment` file.
-
-> In a twelve-factor app, env vars are granular controls, each fully orthogonal to other env vars. They are never grouped together as “environments”, but instead are independently managed for each deploy. This is a model that scales up smoothly as the app naturally expands into more deploys over its lifetime.
->
-> – [The Twelve-Factor App](http://12factor.net/config)
-
-Additionally, we recommend using [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt and manage these.
-
-</details>
 <details><summary>Can I customize/write plugins for dotenv?</summary><br/>
 
 Yes! `dotenv.config()` returns an object representing the parsed `.env` file. This gives you everything you need to continue setting values on `process.env`. For example:
