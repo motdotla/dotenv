@@ -2,7 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.2.4...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.3.0...master)
+
+## [17.3.0](https://github.com/motdotla/dotenv/compare/v17.2.4...v17.3.0) (2026-02-12)
+
+### Added
+
+* Add a new README section on dotenv’s approach to the agentic future.
+
+### Changed
+
+* Rewrite README to get humans started more quickly with less noise while simultaneously making more accessible for llms and agents to go deeper into details.
 
 ## [17.2.4](https://github.com/motdotla/dotenv/compare/v17.2.3...v17.2.4) (2026-02-05)
 
