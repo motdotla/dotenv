@@ -34,7 +34,6 @@ console.log(process.env) // remove this after you've confirmed it is working
 
 That's it. `process.env` now has the keys and values you defined in your `.env` file:
 
-
 &nbsp;
 
 ## Advanced
@@ -346,191 +345,6 @@ vestauth agent curl https://as2.dotenvx.com/get?key=KEY
 
 &nbsp;
 
-## Documentation
-
-Dotenv exposes four functions:
-
-* `config`
-* `parse`
-* `populate`
-
-### Config
-
-`config` will read your `.env` file, parse the contents, assign it to
-[`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
-and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
-
-```js
-const result = dotenv.config()
-
-if (result.error) {
-  throw result.error
-}
-
-console.log(result.parsed)
-```
-
-You can additionally, pass options to `config`.
-
-#### Options
-
-##### path
-
-Default: `path.resolve(process.cwd(), '.env')`
-
-Specify a custom path if your file containing environment variables is located elsewhere.
-
-```js
-require('dotenv').config({ path: '/custom/path/to/.env' })
-```
-
-By default, `config` will look for a file called .env in the current working directory.
-
-Pass in multiple files as an array, and they will be parsed in order and combined with `process.env` (or `option.processEnv`, if set). The first value set for a variable will win, unless the `options.override` flag is set, in which case the last value set will win.  If a value already exists in `process.env` and the `options.override` flag is NOT set, no changes will be made to that value. 
-
-```js  
-require('dotenv').config({ path: ['.env.local', '.env'] })
-```
-
-##### quiet
-
-Default: `false`
-
-Suppress runtime logging message.
-
-```js
-// index.js
-require('dotenv').config({ quiet: false }) // change to true to suppress
-console.log(`Hello ${process.env.HELLO}`)
-```
-
-```ini
-# .env
-HELLO=World
-```
-
-```sh
-$ node index.js
-[dotenv@17.0.0] injecting env (1) from .env
-Hello World
-```
-
-##### encoding
-
-Default: `utf8`
-
-Specify the encoding of your file containing environment variables.
-
-```js
-require('dotenv').config({ encoding: 'latin1' })
-```
-
-##### debug
-
-Default: `false`
-
-Turn on logging to help debug why certain keys or values are not being set as you expect.
-
-```js
-require('dotenv').config({ debug: process.env.DEBUG })
-```
-
-##### override
-
-Default: `false`
-
-Override any environment variables that have already been set on your machine with values from your .env file(s). If multiple files have been provided in `option.path` the override will also be used as each file is combined with the next. Without `override` being set, the first value wins. With `override` set the last value wins. 
-
-```js
-require('dotenv').config({ override: true })
-```
-
-##### processEnv
-
-Default: `process.env`
-
-Specify an object to write your environment variables to. Defaults to `process.env` environment variables.
-
-```js
-const myObject = {}
-require('dotenv').config({ processEnv: myObject })
-
-console.log(myObject) // values from .env
-console.log(process.env) // this was not changed or written to
-```
-
-### Parse
-
-The engine which parses the contents of your file containing environment
-variables is available to use. It accepts a String or Buffer and will return
-an Object with the parsed keys and values.
-
-```js
-const dotenv = require('dotenv')
-const buf = Buffer.from('BASIC=basic')
-const config = dotenv.parse(buf) // will return an object
-console.log(typeof config, config) // object { BASIC : 'basic' }
-```
-
-#### Options
-
-##### debug
-
-Default: `false`
-
-Turn on logging to help debug why certain keys or values are not being set as you expect.
-
-```js
-const dotenv = require('dotenv')
-const buf = Buffer.from('hello world')
-const opt = { debug: true }
-const config = dotenv.parse(buf, opt)
-// expect a debug message because the buffer is not in KEY=VAL form
-```
-
-### Populate
-
-The engine which populates the contents of your .env file to `process.env` is available for use. It accepts a target, a source, and options. This is useful for power users who want to supply their own objects.
-
-For example, customizing the source:
-
-```js
-const dotenv = require('dotenv')
-const parsed = { HELLO: 'world' }
-
-dotenv.populate(process.env, parsed)
-
-console.log(process.env.HELLO) // world
-```
-
-For example, customizing the source AND target:
-
-```js
-const dotenv = require('dotenv')
-const parsed = { HELLO: 'universe' }
-const target = { HELLO: 'world' } // empty object
-
-dotenv.populate(target, parsed, { override: true, debug: true })
-
-console.log(target) // { HELLO: 'universe' }
-```
-
-#### options
-
-##### Debug
-
-Default: `false`
-
-Turn on logging to help debug why certain keys or values are not being populated as you expect.
-
-##### override
-
-Default: `false`
-
-Override any environment variables that have already been set.
-
-&nbsp;
-
 ## FAQ
 
 <details><summary>Should I commit my `.env` file?</summary><br/>
@@ -753,9 +567,188 @@ Alternatively, just use [dotenv-webpack](https://github.com/mrsteele/dotenv-webp
 
 &nbsp;
 
-## Contributing Guide
+## Docs
 
-See [CONTRIBUTING.md](CONTRIBUTING.md)
+Dotenv exposes four functions:
+
+* `config`
+* `parse`
+* `populate`
+
+### Config
+
+`config` will read your `.env` file, parse the contents, assign it to
+[`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
+and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
+
+```js
+const result = dotenv.config()
+
+if (result.error) {
+  throw result.error
+}
+
+console.log(result.parsed)
+```
+
+You can additionally, pass options to `config`.
+
+#### Options
+
+##### path
+
+Default: `path.resolve(process.cwd(), '.env')`
+
+Specify a custom path if your file containing environment variables is located elsewhere.
+
+```js
+require('dotenv').config({ path: '/custom/path/to/.env' })
+```
+
+By default, `config` will look for a file called .env in the current working directory.
+
+Pass in multiple files as an array, and they will be parsed in order and combined with `process.env` (or `option.processEnv`, if set). The first value set for a variable will win, unless the `options.override` flag is set, in which case the last value set will win.  If a value already exists in `process.env` and the `options.override` flag is NOT set, no changes will be made to that value. 
+
+```js  
+require('dotenv').config({ path: ['.env.local', '.env'] })
+```
+
+##### quiet
+
+Default: `false`
+
+Suppress runtime logging message.
+
+```js
+// index.js
+require('dotenv').config({ quiet: false }) // change to true to suppress
+console.log(`Hello ${process.env.HELLO}`)
+```
+
+```ini
+# .env
+HELLO=World
+```
+
+```sh
+$ node index.js
+[dotenv@17.0.0] injecting env (1) from .env
+Hello World
+```
+
+##### encoding
+
+Default: `utf8`
+
+Specify the encoding of your file containing environment variables.
+
+```js
+require('dotenv').config({ encoding: 'latin1' })
+```
+
+##### debug
+
+Default: `false`
+
+Turn on logging to help debug why certain keys or values are not being set as you expect.
+
+```js
+require('dotenv').config({ debug: process.env.DEBUG })
+```
+
+##### override
+
+Default: `false`
+
+Override any environment variables that have already been set on your machine with values from your .env file(s). If multiple files have been provided in `option.path` the override will also be used as each file is combined with the next. Without `override` being set, the first value wins. With `override` set the last value wins. 
+
+```js
+require('dotenv').config({ override: true })
+```
+
+##### processEnv
+
+Default: `process.env`
+
+Specify an object to write your environment variables to. Defaults to `process.env` environment variables.
+
+```js
+const myObject = {}
+require('dotenv').config({ processEnv: myObject })
+
+console.log(myObject) // values from .env
+console.log(process.env) // this was not changed or written to
+```
+
+### Parse
+
+The engine which parses the contents of your file containing environment
+variables is available to use. It accepts a String or Buffer and will return
+an Object with the parsed keys and values.
+
+```js
+const dotenv = require('dotenv')
+const buf = Buffer.from('BASIC=basic')
+const config = dotenv.parse(buf) // will return an object
+console.log(typeof config, config) // object { BASIC : 'basic' }
+```
+
+#### Options
+
+##### debug
+
+Default: `false`
+
+Turn on logging to help debug why certain keys or values are not being set as you expect.
+
+```js
+const dotenv = require('dotenv')
+const buf = Buffer.from('hello world')
+const opt = { debug: true }
+const config = dotenv.parse(buf, opt)
+// expect a debug message because the buffer is not in KEY=VAL form
+```
+
+### Populate
+
+The engine which populates the contents of your .env file to `process.env` is available for use. It accepts a target, a source, and options. This is useful for power users who want to supply their own objects.
+
+For example, customizing the source:
+
+```js
+const dotenv = require('dotenv')
+const parsed = { HELLO: 'world' }
+
+dotenv.populate(process.env, parsed)
+
+console.log(process.env.HELLO) // world
+```
+
+For example, customizing the source AND target:
+
+```js
+const dotenv = require('dotenv')
+const parsed = { HELLO: 'universe' }
+const target = { HELLO: 'world' } // empty object
+
+dotenv.populate(target, parsed, { override: true, debug: true })
+
+console.log(target) // { HELLO: 'universe' }
+```
+
+#### options
+
+##### Debug
+
+Default: `false`
+
+Turn on logging to help debug why certain keys or values are not being populated as you expect.
+
+##### override
+
+Default: `false`
+
+Override any environment variables that have already been set.
 
 &nbsp;
 
