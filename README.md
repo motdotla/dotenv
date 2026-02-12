@@ -226,9 +226,23 @@ DATABASE_URL postgres://yourusername@localhost/my_database
 &nbsp;
 
 </details>
-<details><summary>Syncing</summary><br>
 
-You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt your `.env` files and safely include them in source control. This still subscribes to the twelve-factor app rules by generating a decryption key separate from code.
+<details><summary>Encryption</summary><br>
+
+Use [dotenvx](https://github.com/dotenvx/dotenvx).
+
+Add encryption to your `.env` files with a single command. Pass the `--encrypt` flag.
+
+```
+$ dotenvx set HELLO Production --encrypt -f .env.production
+$ echo "console.log('Hello ' + process.env.HELLO)" > index.js
+
+$ DOTENV_PRIVATE_KEY_PRODUCTION="<.env.production private key>" dotenvx run -- node index.js
+[dotenvx] injecting env (2) from .env.production
+Hello Production
+```
+
+[learn more](https://github.com/dotenvx/dotenvx?tab=readme-ov-file#encryption)
 
 &nbsp;
 
@@ -264,32 +278,46 @@ Hello local
 &nbsp;
 
 </details>
-<details><summary>Deploying</summary><br>
+<details><summary>Production</summary><br>
 
-You need to deploy your secrets in a cloud-agnostic manner? Use [dotenvx](https://github.com/dotenvx/dotenvx) to generate a private decryption key that is set on your production server.
+Use [dotenvx](https://github.com/dotenvx/dotenvx)
+
+Create a `.env.production` file.
+
+```sh
+$ echo "HELLO=production" > .env.production
+```
+
+Encrypt it.
+
+```sh
+$ dotenvx encrypt -f .env.production
+```
+
+Set `DOTENV_PRIVATE_KEY_PRODUCTION` (found in `.env.keys`) on your server.
+
+```
+$ heroku config:set DOTENV_PRIVATE_KEY_PRODUCTION=value
+```
+
+Commit your `.env.production` file to code and deploy.
+
+```
+$ git add .env.production
+$ git commit -m "encrypted .env.production"
+$ git push heroku main
+```
 
 &nbsp;
 
 </details>
+<details><summary>Syncing</summary><br>
+
+You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt your `.env` files and safely include them in source control. This still subscribes to the twelve-factor app rules by generating a decryption key separate from code.
 
 &nbsp;
 
-## Deploying
-
-Use [dotenvx](https://github.com/dotenvx/dotenvx).
-
-Add encryption to your `.env` files with a single command. Pass the `--encrypt` flag.
-
-```
-$ dotenvx set HELLO Production --encrypt -f .env.production
-$ echo "console.log('Hello ' + process.env.HELLO)" > index.js
-
-$ DOTENV_PRIVATE_KEY_PRODUCTION="<.env.production private key>" dotenvx run -- node index.js
-[dotenvx] injecting env (2) from .env.production
-Hello Production
-```
-
-[learn more](https://github.com/dotenvx/dotenvx?tab=readme-ov-file#encryption)
+</details>
 
 &nbsp;
 
