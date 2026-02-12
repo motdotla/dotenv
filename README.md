@@ -4,25 +4,19 @@
 
 &nbsp;
 
-# dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv)
+# dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv) [![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard) [![codecov](https://codecov.io/gh/motdotla/dotenv-expand/graph/badge.svg?token=pawWEyaMfg)](https://codecov.io/gh/motdotla/dotenv-expand)
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.svg" alt="dotenv" align="right" width="200" />
 
 Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). Storing configuration in the environment separate from code is based on [The Twelve-Factor App](https://12factor.net/config) methodology.
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
-[![LICENSE](https://img.shields.io/github/license/motdotla/dotenv.svg)](LICENSE)
-[![codecov](https://codecov.io/gh/motdotla/dotenv-expand/graph/badge.svg?token=pawWEyaMfg)](https://codecov.io/gh/motdotla/dotenv-expand)
+&nbsp;
 
-* [Install](#install)
-* [Usage](#usage)
-* [Multiple Environments](#multiple-environments)
-* [Deploying](#deploying)
-* [Agents (AS2) 🆕](#agents-as2)
+### Quickstart
 
-## Install
+Install and use it in code just like `dotenv`.
 
-```bash
+```sh
 npm install dotenv --save
 ```
 
@@ -34,7 +28,51 @@ bun add dotenv
 pnpm add dotenv
 ```
 
+Create a `.env` file in the root of your project (if using a monorepo structure like `apps/backend/app.js`, put it in the root of the folder where your `app.js` process runs):
+
+```dosini
+S3_BUCKET="YOURS3BUCKET"
+SECRET_KEY="YOURSECRETKEYGOESHERE"
+```
+
+As early as possible in your application, import and configure dotenv:
+
+```javascript
+require('dotenv').config()
+console.log(process.env) // remove this after you've confirmed it is working
+```
+
+.. [or using ES6?](#how-do-i-use-dotenv-with-import)
+
+```javascript
+import 'dotenv/config'
+```
+
+ES6 import if you need to set config options:
+
+```javascript
+import dotenv from 'dotenv'
+
+dotenv.config({ path: '/custom/path/to/.env' })
+```
+
+That's it. `process.env` now has the keys and values you defined in your `.env` file:
+
+```javascript
+require('dotenv').config()
+// or import 'dotenv/config' if you're using ES6
+
+...
+
+s3.getBucketCors({Bucket: process.env.S3_BUCKET}, function(err, data) {})
+```
+
 &nbsp;
+
+* [Usage](#usage)
+* [Multiple Environments](#multiple-environments)
+* [Deploying](#deploying)
+* [Agents (AS2) 🆕](#agents-as2)
 
 ## Usage
 
