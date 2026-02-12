@@ -533,23 +533,21 @@ Override any environment variables that have already been set.
 
 ## FAQ
 
-<details>
-<summary>What about variable expansion?</summary>
+<details><summary>What about variable expansion?</summary><br/>
 
 Try [dotenv-expand](https://github.com/motdotla/dotenv-expand)
-</details>
 
-<details>
-<summary>Should I commit my `.env` file?</summary>
+</details>
+<details><summary>Should I commit my `.env` file?</summary><br/>
 
 No. We **strongly** recommend against committing your `.env` file to version
+
 control. It should only include environment-specific values such as database
 passwords or API keys. Your production database should have a different
 password than your development database.
-</details>
 
-<details>
-<summary>How do I use dotenv with `import`?</summary>
+</details>
+<details><summary>How do I use dotenv with `import`?</summary><br/>
 
 Simply..
 
@@ -606,8 +604,7 @@ There are two alternatives to this approach:
 2. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
 </details>
 
-<details>
-<summary>Should I have multiple `.env` files?</summary>
+<details><summary>Should I have multiple `.env` files?</summary><br/>
 
 We recommend creating one `.env` file per environment. Use `.env` for local/development, `.env.production` for production and so on. This still follows the twelve factor principles as each is attributed individually to its own environment. Avoid custom set ups that work in inheritance somehow (`.env.production` inherits values form `.env` for example). It is better to duplicate values if necessary across each `.env.environment` file.
 
@@ -615,9 +612,7 @@ We recommend creating one `.env` file per environment. Use `.env` for local/deve
 >
 > – [The Twelve-Factor App](http://12factor.net/config)
 </details>
-
-<details>
-<summary>Can I customize/write plugins for dotenv?</summary>
+<details><summary>Can I customize/write plugins for dotenv?</summary><br/>
 
 Yes! `dotenv.config()` returns an object representing the parsed `.env` file. This gives you everything you need to continue setting values on `process.env`. For example:
 
@@ -628,9 +623,7 @@ const myEnv = dotenv.config()
 variableExpansion(myEnv)
 ```
 </details>
-
-<details>
-<summary>What rules does the parsing engine follow?</summary>
+<details><summary>What rules does the parsing engine follow?</summary><br/>
 
 The parsing engine currently supports the following rules:
 
@@ -651,16 +644,14 @@ line'}
 ```
 
 - backticks are supported (`` BACKTICK_KEY=`This has 'single' and "double" quotes inside of it.` ``)
-</details>
 
-<details>
-<summary>What about syncing and securing .env files?</summary>
+</details>
+<details><summary>What about syncing and securing .env files?</summary><br/>
 
 Use [dotenvx](https://github.com/dotenvx/dotenvx) to unlock syncing encrypted .env files over git.
-</details>
 
-<details>
-<summary>What if I accidentally commit my `.env` file to code?</summary>
+</details>
+<details><summary>What if I accidentally commit my `.env` file to code?</summary><br/>
 
 Remove it, [remove git history](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository) and then install the [git pre-commit hook](https://github.com/dotenvx/dotenvx#pre-commit) to prevent this from ever happening again. 
 
@@ -668,10 +659,9 @@ Remove it, [remove git history](https://docs.github.com/en/authentication/keepin
 brew install dotenvx/brew/dotenvx
 dotenvx precommit --install
 ```
-</details>
 
-<details>
-<summary>What happens to environment variables that were already set?</summary>
+</details>
+<details><summary>What happens to environment variables that were already set?</summary><br/>
 
 By default, we will never modify any environment variables that have already been set. In particular, if there is a variable in your `.env` file which collides with one that already exists in your environment, then that variable will be skipped.
 
@@ -680,10 +670,9 @@ If instead, you want to override `process.env` use the `override` option.
 ```javascript
 require('dotenv').config({ override: true })
 ```
-</details>
 
-<details>
-<summary>How can I prevent committing my `.env` file to a Docker build?</summary>
+</details>
+<details><summary>How can I prevent committing my `.env` file to a Docker build?</summary><br/>
 
 Use the [docker prebuild hook](https://dotenvx.com/docs/features/prebuild).
 
@@ -695,20 +684,18 @@ RUN curl -fsS https://dotenvx.sh/ | sh
 RUN dotenvx prebuild
 CMD ["dotenvx", "run", "--", "node", "index.js"]
 ```
-</details>
 
-<details>
-<summary>How come my environment variables are not showing up for React?</summary>
+</details>
+<details><summary>How come my environment variables are not showing up for React?</summary><br/>
 
 Your React code is run in Webpack, where the `fs` module or even the `process` global itself are not accessible out-of-the-box. `process.env` can only be injected through Webpack configuration.
 
 If you are using [`react-scripts`](https://www.npmjs.com/package/react-scripts), which is distributed through [`create-react-app`](https://create-react-app.dev/), it has dotenv built in but with a quirk. Preface your environment variables with `REACT_APP_`. See [this stack overflow](https://stackoverflow.com/questions/42182577/is-it-possible-to-use-dotenv-in-a-react-project) for more details.
 
 If you are using other frameworks (e.g. Next.js, Gatsby...), you need to consult their documentation for how to inject environment variables into the client.
-</details>
 
-<details>
-<summary>Why is the `.env` file not loading my environment variables successfully?</summary>
+</details>
+<details><summary>Why is the `.env` file not loading my environment variables successfully?</summary><br/>
 
 Most likely your `.env` file is not in the correct place. [See this stack overflow](https://stackoverflow.com/questions/42335016/dotenv-file-is-not-loading-environment-variables).
 
@@ -719,10 +706,9 @@ require('dotenv').config({ debug: true })
 ```
 
 You will receive a helpful error outputted to your console.
-</details>
 
-<details>
-<summary>Why am I getting the error `Module not found: Error: Can't resolve 'crypto|os|path'`?</summary>
+</details>
+<details><summary>Why am I getting the error `Module not found: Error: Can't resolve 'crypto|os|path'`?</summary><br/>
 
 You are using dotenv on the front-end and have not included a polyfill. Webpack < 5 used to include these for you. Do the following:
 
@@ -759,6 +745,7 @@ module.exports = {
 ```
 
 Alternatively, just use [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack) which does this and more behind the scenes for you.
+
 </details>
 
 ## Contributing Guide
