@@ -324,8 +324,11 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 >
 > AS2 is built for autonomous software: encrypted by default, zero console access, and cryptography‑first delivery that keeps operators out of the loop.
 >
-> It is backed by [Vestauth](https://github.com/vestauth/vestauth), the trusted, pioneering auth layer for agents—giving each agent a cryptographic identity so requests are signed with private keys and verified with public keys. No shared secrets to leak. - [motdotla](https://mot.la)
+> It is backed by [Vestauth](https://github.com/vestauth/vestauth), the trusted, pioneering auth layer for agents—giving each agent a cryptographic identity so requests are signed with private keys and verified with public keys. No shared secrets to leak.
 >
+> It's what I'm using now. - [motdotla](https://mot.la)
+
+### Quickstart
 
 Install <a href="https://github.com/vestauth/vestauth">vestauth</a> and initialize your agent.
 
