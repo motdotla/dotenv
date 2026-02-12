@@ -54,16 +54,12 @@ import dotenv from 'dotenv'
 dotenv.config({ path: '/custom/path/to/.env' })
 ```
 
-&nbsp;
-
 </details>
 <details><summary>bun</summary><br>
 
 ```sh
 bun add dotenv
 ```
-
-&nbsp;
 
 </details>
 <details><summary>yarn</summary><br>
@@ -72,8 +68,6 @@ bun add dotenv
 yarn add dotenv
 ```
 
-&nbsp;
-
 </details>
 <details><summary>pnpm</summary><br>
 
@@ -81,10 +75,7 @@ yarn add dotenv
 pnpm add dotenv
 ```
 
-&nbsp;
-
 </details>
-
 <details><summary>Monorepos</summary><br>
 
 For monorepos with a structure like `apps/backend/app.js`, put it the `.env` file in the root of the folder where your `app.js` process runs.
@@ -94,8 +85,6 @@ For monorepos with a structure like `apps/backend/app.js`, put it the `.env` fil
 S3_BUCKET="YOURS3BUCKET"
 SECRET_KEY="YOURSECRETKEYGOESHERE"
 ```
-
-&nbsp;
 
 </details>
 <details><summary>Multiline Values</summary><br>
@@ -116,8 +105,6 @@ Alternatively, you can double quote strings and use the `\n` character:
 PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nKh9NV...\n-----END RSA PRIVATE KEY-----\n"
 ```
 
-&nbsp;
-
 </details>
 <details><summary>Comments</summary><br>
 
@@ -131,8 +118,6 @@ SECRET_HASH="something-with-a-#-hash"
 
 Comments begin where a `#` exists, so if your value contains a `#` please wrap it in quotes. This is a breaking change from `>= v15.0.0` and on.
 
-&nbsp;
-
 </details>
 <details><summary>Parsing</summary><br>
 
@@ -144,8 +129,6 @@ const buf = Buffer.from('BASIC=basic')
 const config = dotenv.parse(buf) // will return an object
 console.log(typeof config, config) // object { BASIC : 'basic' }
 ```
-
-&nbsp;
 
 </details>
 <details><summary>Preload</summary><br>
@@ -176,8 +159,6 @@ $ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
 $ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
 
-&nbsp;
-
 </details>
 <details><summary>Variable Expansion</summary><br>
 
@@ -200,8 +181,6 @@ $ dotenvx run --debug -- node index.js
 DATABASE_URL postgres://username@localhost/my_database
 ```
 
-&nbsp;
-
 </details>
 <details><summary>Command Substitution</summary><br>
 
@@ -223,10 +202,7 @@ $ dotenvx run --debug -- node index.js
 DATABASE_URL postgres://yourusername@localhost/my_database
 ```
 
-&nbsp;
-
 </details>
-
 <details><summary>Encryption</summary><br>
 
 Use [dotenvx](https://github.com/dotenvx/dotenvx) for encryption.
@@ -243,8 +219,6 @@ Hello Production
 ```
 
 [learn more](https://github.com/dotenvx/dotenvx?tab=readme-ov-file#encryption)
-
-&nbsp;
 
 </details>
 <details><summary>Multiple Environments</summary><br>
@@ -274,8 +248,6 @@ Hello local
 ```
 
 [more environment examples](https://dotenvx.com/docs/quickstart/environments)
-
-&nbsp;
 
 </details>
 <details><summary>Production</summary><br>
@@ -310,8 +282,6 @@ $ git push heroku main
 
 Dotenvx will decrypt and inject the secrets at runtime using `dotenvx run -- node index.js`.
 
-&nbsp;
-
 </details>
 <details><summary>Syncing</summary><br>
 
@@ -320,8 +290,6 @@ Use [dotenvx](https://github.com/dotenvx/dotenvx) to sync your .env files.
 Encrypt them with `dotenvx encrypt -f .env` and safely include them in source control. Your secrets are securely synced with your git.
 
 This still subscribes to the twelve-factor app rules by generating a decryption key separate from code.
-
-&nbsp;
 
 </details>
 <details><summary>More Examples</summary><br>
@@ -345,13 +313,11 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [nestjs](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nestjs)
 * [fastify](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-fastify)
 
-&nbsp;
-
 </details>
 
 &nbsp;
 
-## Agents (AS2)
+## Agents
 
 <a href="https://dotenvx.com/as2">AS2</a> is agentic secret storage from Dotenvx.
 
