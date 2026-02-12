@@ -52,7 +52,7 @@ SECRET_KEY="YOURSECRETKEYGOESHERE"
 
 </details>
 
-As early as possible in your application, import and configure dotenv:
+And as early as possible in your application, import and configure dotenv:
 
 ```javascript
 require('dotenv').config()
@@ -76,6 +76,8 @@ dotenv.config({ path: '/custom/path/to/.env' })
 ```
 
 </details>
+
+&nbsp;
 
 That's it. `process.env` now has the keys and values you defined in your `.env` file:
 
