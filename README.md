@@ -181,7 +181,7 @@ $ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config y
 </details>
 <details><summary>Variable Expansion</summary><br>
 
-Use [dotenvx](https://github.com/dotenvx/dotenvx) to use variable expansion.
+Use [dotenvx](https://github.com/dotenvx/dotenvx) for variable expansion.
 
 Reference and expand variables already on your machine for use in your .env file.
 
@@ -205,7 +205,7 @@ DATABASE_URL postgres://username@localhost/my_database
 </details>
 <details><summary>Command Substitution</summary><br>
 
-Use [dotenvx](https://github.com/dotenvx/dotenvx) to use command substitution.
+Use [dotenvx](https://github.com/dotenvx/dotenvx) for command substitution.
 
 Add the output of a command to one of your variables in your .env file.
 
@@ -229,12 +229,12 @@ DATABASE_URL postgres://yourusername@localhost/my_database
 
 <details><summary>Encryption</summary><br>
 
-Use [dotenvx](https://github.com/dotenvx/dotenvx).
+Use [dotenvx](https://github.com/dotenvx/dotenvx) for encryption.
 
-Add encryption to your `.env` files with a single command. Pass the `--encrypt` flag.
+Add encryption to your `.env` files with a single command.
 
 ```
-$ dotenvx set HELLO Production --encrypt -f .env.production
+$ dotenvx set HELLO Production -f .env.production
 $ echo "console.log('Hello ' + process.env.HELLO)" > index.js
 
 $ DOTENV_PRIVATE_KEY_PRODUCTION="<.env.production private key>" dotenvx run -- node index.js
@@ -249,15 +249,15 @@ Hello Production
 </details>
 <details><summary>Multiple Environments</summary><br>
 
-Use [dotenvx](https://github.com/dotenvx/dotenvx)
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to manage multiple environments.
 
-Run any environment locally. Create a `.env.ENVIRONMENT` file and use `--env-file` to load it. It's straightforward, yet flexible.
+Run any environment locally. Create a `.env.ENVIRONMENT` file and use `-f` to load it. It's straightforward, yet flexible.
 
 ```bash
 $ echo "HELLO=production" > .env.production
 $ echo "console.log('Hello ' + process.env.HELLO)" > index.js
 
-$ dotenvx run --env-file=.env.production -- node index.js
+$ dotenvx run -f=.env.production -- node index.js
 Hello production
 > ^^
 ```
@@ -269,7 +269,7 @@ $ echo "HELLO=local" > .env.local
 $ echo "HELLO=World" > .env
 $ echo "console.log('Hello ' + process.env.HELLO)" > index.js
 
-$ dotenvx run --env-file=.env.local --env-file=.env -- node index.js
+$ dotenvx run -f=.env.local -f=.env -- node index.js
 Hello local
 ```
 
@@ -280,7 +280,7 @@ Hello local
 </details>
 <details><summary>Production</summary><br>
 
-Use [dotenvx](https://github.com/dotenvx/dotenvx)
+Use [dotenvx](https://github.com/dotenvx/dotenvx) for production deploys.
 
 Create a `.env.production` file.
 
@@ -308,12 +308,42 @@ $ git commit -m "encrypted .env.production"
 $ git push heroku main
 ```
 
+Dotenvx will decrypt and inject the secrets at runtime using `dotenvx run -- node index.js`.
+
 &nbsp;
 
 </details>
 <details><summary>Syncing</summary><br>
 
-You need to keep `.env` files in sync between machines, environments, or team members? Use [dotenvx](https://github.com/dotenvx/dotenvx) to encrypt your `.env` files and safely include them in source control. This still subscribes to the twelve-factor app rules by generating a decryption key separate from code.
+Use [dotenvx](https://github.com/dotenvx/dotenvx) to sync your .env files.
+
+Encrypt them with `dotenvx encrypt -f .env` and safely include them in source control. Your secrets are securely synced with your git.
+
+This still subscribes to the twelve-factor app rules by generating a decryption key separate from code.
+
+&nbsp;
+
+</details>
+<details><summary>More Examples</summary><br>
+
+See [examples](https://github.com/dotenv-org/examples) of using dotenv with various frameworks, languages, and configurations.
+
+* [nodejs](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs)
+* [nodejs (debug on)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs-debug)
+* [nodejs (override on)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs-override)
+* [nodejs (processEnv override)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-custom-target)
+* [esm](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-esm)
+* [esm (preload)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-esm-preload)
+* [typescript](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript)
+* [typescript parse](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript-parse)
+* [typescript config](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript-config)
+* [webpack](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-webpack)
+* [webpack (plugin)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-webpack2)
+* [react](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-react)
+* [react (typescript)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-react-typescript)
+* [express](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-express)
+* [nestjs](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nestjs)
+* [fastify](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-fastify)
 
 &nbsp;
 
@@ -348,26 +378,7 @@ Your agent can `get` secrets:
 vestauth agent curl https://as2.dotenvx.com/get?key=KEY
 ```
 
-## 📚 Examples
-
-See [examples](https://github.com/dotenv-org/examples) of using dotenv with various frameworks, languages, and configurations.
-
-* [nodejs](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs)
-* [nodejs (debug on)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs-debug)
-* [nodejs (override on)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs-override)
-* [nodejs (processEnv override)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-custom-target)
-* [esm](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-esm)
-* [esm (preload)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-esm-preload)
-* [typescript](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript)
-* [typescript parse](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript-parse)
-* [typescript config](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript-config)
-* [webpack](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-webpack)
-* [webpack (plugin)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-webpack2)
-* [react](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-react)
-* [react (typescript)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-react-typescript)
-* [express](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-express)
-* [nestjs](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nestjs)
-* [fastify](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-fastify)
+&nbsp;
 
 ## Documentation
 
