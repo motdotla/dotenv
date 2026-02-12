@@ -82,6 +82,9 @@ t.equal(parsed.SPACED_KEY, 'parsed', 'parses keys and values surrounded by space
 const payload = dotenv.parse(Buffer.from('BUFFER=true'))
 t.equal(payload.BUFFER, 'true', 'should parse a buffer into an object')
 
+const duplicate = dotenv.parse(Buffer.from('DUP=one\nDUP=two'))
+t.equal(duplicate.DUP, 'two', 'last duplicate key wins')
+
 const expectedPayload = { SERVER: 'localhost', PASSWORD: 'password', DB: 'tests' }
 
 const RPayload = dotenv.parse(Buffer.from('SERVER=localhost\rPASSWORD=password\rDB=tests\r'))
