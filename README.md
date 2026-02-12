@@ -318,13 +318,9 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 
 ## Agents
 
-> If you are doing agentic coding you need:
-> 1. A way for secrets to travel with your agent
-> 2. A way for your agent to access them without juggling API Keys and OAuth tokens.
->
-> Plaintext `.env` files are not a good solution for this. Instead, use [dotenvx as2](https://dotenvx.com/as2).
-
-### Quickstart
+> Software is changing, and dotenv must change with it—that is why we built [dotenvx as2](https://dotenvx.com/as2). Agents run code without humans at terminals, so plaintext `.env` files are the wrong primitive. AS2 is built for autonomous software: encrypted by default, zero console access, and cryptography‑first delivery that keeps operators out of the loop. It is backed by Vestauth, the trusted, pioneering auth layer for agents—giving each agent a cryptographic identity so requests are signed with private keys and verified with public keys. No shared secrets to leak.
+> 
+> If you are writing agentic code here is how to get started:
 
 Install <a href="https://github.com/vestauth/vestauth">vestauth</a> and initialize your agent.
 
@@ -333,13 +329,13 @@ npm i -g vestauth
 vestauth agent init
 ```
 
-Your agent can `set` secrets:
+Your agent can `set` secrets in as2:
 
 ```bash
 vestauth agent curl -X POST https://as2.dotenvx.com/set '{"KEY":"value"}'
 ```
 
-Your agent can `get` secrets:
+And your agent can `get` secrets:
 
 ```bash
 vestauth agent curl https://as2.dotenvx.com/get?key=KEY
