@@ -9,7 +9,7 @@ const dotenv = require('../lib/main')
 let logStub
 
 function hasLoggedTip (stub) {
-  return stub.getCalls().some(call => call.args[0] && call.args[0].includes('tip:'))
+  return stub.getCalls().some(call => call.args[0] && call.args[0].includes('-- tip:'))
 }
 
 t.beforeEach(() => {
