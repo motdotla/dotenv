@@ -28,6 +28,10 @@ export interface DotenvConfigOptions {
    *
    * Specify a custom path if your file containing environment variables is located elsewhere.
    * Can also be an array of strings, specifying multiple paths.
+   * If multiple paths are provided and some cannot be read, dotenv will continue processing subsequent paths.
+   * If one or more paths fail, dotenv will return the error from the last path in the array that failed,
+   * so `error` may be set even if other files were processed successfully.
+   * Environment variables from files that were read successfully will still be applied (subject to the `override` option).
    *
    * example: `require('dotenv').config({ path: '/custom/path/to/.env' })`
    * example: `require('dotenv').config({ path: ['/path/to/first.env', '/path/to/second.env'] })`
@@ -65,6 +69,7 @@ export interface DotenvConfigOptions {
    * Default: `false`
    *
    * Override any environment variables that have already been set on your machine with values from your .env file.
+   * If multiple files have been provided in `options.path`, the override will be used as each successfully read file is combined with the next.
    *
    * example: `require('dotenv').config({ override: true })`
    */
@@ -95,7 +100,7 @@ export interface DotenvConfigOutput {
 }
 
 type DotenvError = Error & {
-  code: 
+  code:
     | 'MISSING_DATA'
     | 'INVALID_DOTENV_KEY'
     | 'NOT_FOUND_DOTENV_ENVIRONMENT'

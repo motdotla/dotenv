@@ -588,7 +588,7 @@ Dotenv exposes four functions:
 
 `config` will read your `.env` file, parse the contents, assign it to
 [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env),
-and return an Object with a `parsed` key containing the loaded content or an `error` key if it failed.
+and return an Object with a `parsed` key containing the loaded content (if any). If dotenv encounters an error while reading or parsing, it will also return it in an `error` key.
 
 ```js
 const result = dotenv.config()
@@ -617,6 +617,12 @@ require('dotenv').config({ path: '/custom/path/to/.env' })
 By default, `config` will look for a file called .env in the current working directory.
 
 Pass in multiple files as an array, and they will be parsed in order and combined with `process.env` (or `option.processEnv`, if set). The first value set for a variable will win, unless the `options.override` flag is set, in which case the last value set will win.  If a value already exists in `process.env` and the `options.override` flag is NOT set, no changes will be made to that value. 
+
+If a file in `options.path` cannot be read (for example, it does not exist), dotenv will continue processing subsequent paths.
+
+If one or more paths fail, dotenv will return the error from the last path in the array that failed, so `error` may be set even if other files were processed successfully.
+
+Environment variables from files that were read successfully will still be applied to `process.env` (subject to the `override` option). `parsed` will only contain variables from files that were successfully processed (or be empty if none were processed successfully).
 
 ```js  
 require('dotenv').config({ path: ['.env.local', '.env'] })
