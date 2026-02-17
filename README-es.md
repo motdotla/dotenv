@@ -356,19 +356,19 @@ vestauth agent curl "https://as2.dotenvx.com/get?key=KEY"
 
 ## FAQ
 
-<details><summary>¿Por qué no funciona dotenv cuando se instala globalmente?</summary><br/>
+<details><summary>Why doesn't dotenv work when installed globally?</summary><br/>
 
-Dotenv es una dependencia de librería, no una herramienta CLI, y debe instalarse **localmente** en tu proyecto, no globalmente.
+Dotenv is a library dependency, not a CLI tool, and should be installed **locally** in your project, not globally.
 
-Cuando instalas un paquete globalmente con `npm install -g dotenv`, hace que los comandos CLI estén disponibles en todo el sistema, pero **no** hace que el módulo esté disponible para las declaraciones `require()` o `import` en tu código. Node.js solo busca módulos en el directorio local `node_modules` de tu proyecto cuando usas `require('dotenv')` o `import 'dotenv/config'`.
+When you install a package globally with `npm install -g dotenv`, it makes CLI commands available system-wide, but it does **not** make the module available for `require()` or `import` statements in your code. Node.js only looks for modules in your project's local `node_modules` directory when you use `require('dotenv')` or `import 'dotenv/config'`.
 
-**Solución:** Instala dotenv localmente en tu proyecto:
+**Solution:** Install dotenv locally in your project:
 
 ```sh
 npm install dotenv --save
 ```
 
-o con otros gestores de paquetes:
+or with other package managers:
 
 ```sh
 # yarn
@@ -381,15 +381,15 @@ pnpm add dotenv
 bun add dotenv
 ```
 
-Después de la instalación local, puedes usar dotenv en tu código:
+After local installation, you can use dotenv in your code:
 
 ```javascript
 require('dotenv').config()
-// o
+// or
 import 'dotenv/config'
 ```
 
-**Nota:** Si necesitas ejecutar comandos dotenv globalmente, usa [dotenvx](https://github.com/dotenvx/dotenvx) en su lugar, que está diseñado como una herramienta CLI:
+**Note:** If you need to run dotenv commands globally, use [dotenvx](https://github.com/dotenvx/dotenvx) instead, which is designed as a CLI tool:
 
 ```sh
 npm install -g @dotenvx/dotenvx
