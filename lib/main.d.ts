@@ -56,6 +56,7 @@ export interface DotenvConfigOptions {
    * Default: `true`
    *
    * Include a random tip in the runtime log message.
+   * Can be overridden via `DOTENV_CONFIG_TIPS` in the environment or `.env`.
    *
    * example: `require('dotenv').config({ tips: false })`
    */

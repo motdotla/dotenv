@@ -8,6 +8,10 @@ const dotenv = require('../lib/main')
 
 let logStub
 
+function hasLoggedTip (stub) {
+  return stub.getCalls().some(call => call.args[0] && call.args[0].includes('tip:'))
+}
+
 t.beforeEach(() => {
   logStub = null
   delete process.env.BASIC // reset
@@ -432,15 +436,7 @@ t.test('does not display tips if tips flag passed false', ct => {
   dotenv.config({ path: testPath, tips: false })
   ct.ok(logStub.called)
 
-  let foundTip = false
-  for (const call of logStub.getCalls()) {
-    if (call.args[0] && call.args[0].includes('tip:')) {
-      foundTip = true
-      break
-    }
-  }
-
-  ct.notOk(foundTip, 'Should not display a tip')
+  ct.notOk(hasLoggedTip(logStub), 'Should not display a tip')
   ct.end()
 })
 
@@ -454,15 +450,7 @@ t.test('does not display tips if process.env.DOTENV_CONFIG_TIPS is false', ct =>
   dotenv.config({ path: testPath })
   ct.ok(logStub.called)
 
-  let foundTip = false
-  for (const call of logStub.getCalls()) {
-    if (call.args[0] && call.args[0].includes('tip:')) {
-      foundTip = true
-      break
-    }
-  }
-
-  ct.notOk(foundTip, 'Should not display a tip')
+  ct.notOk(hasLoggedTip(logStub), 'Should not display a tip')
   delete process.env.DOTENV_CONFIG_TIPS
   ct.end()
 })
