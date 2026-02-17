@@ -26,6 +26,12 @@ t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_override=
   quiet: 'true'
 })
 
+// matches tips option
+t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_tips=false']), {
+  tips: 'false',
+  quiet: 'true'
+})
+
 // ignores empty values
 t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_path=']), { quiet: 'true' })
 

@@ -423,6 +423,50 @@ t.test('displays random tips from the tips array with fallback for isTTY false',
   ct.end()
 })
 
+t.test('does not display tips if tips flag passed false', ct => {
+  ct.plan(2)
+
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, tips: false })
+  ct.ok(logStub.called)
+
+  let foundTip = false
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('tip:')) {
+      foundTip = true
+      break
+    }
+  }
+
+  ct.notOk(foundTip, 'Should not display a tip')
+  ct.end()
+})
+
+t.test('does not display tips if process.env.DOTENV_CONFIG_TIPS is false', ct => {
+  ct.plan(2)
+
+  process.env.DOTENV_CONFIG_TIPS = 'false'
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+  ct.ok(logStub.called)
+
+  let foundTip = false
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('tip:')) {
+      foundTip = true
+      break
+    }
+  }
+
+  ct.notOk(foundTip, 'Should not display a tip')
+  delete process.env.DOTENV_CONFIG_TIPS
+  ct.end()
+})
+
 t.test('logs when no path is set', ct => {
   ct.plan(1)
 

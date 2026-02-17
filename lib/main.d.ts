@@ -53,6 +53,15 @@ export interface DotenvConfigOptions {
   quiet?: boolean;
 
   /**
+   * Default: `true`
+   *
+   * Include a random tip in the runtime log message.
+   *
+   * example: `require('dotenv').config({ tips: false })`
+   */
+  tips?: boolean;
+
+  /**
    * Default: `false`
    *
    * Turn on logging to help debug why certain keys or values are not being set as you expect.

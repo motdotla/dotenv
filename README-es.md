@@ -645,6 +645,16 @@ $ node index.js
 Hello World
 ```
 
+##### tips
+
+Default: `true`
+
+Include a random tip in the runtime logging message.
+
+```js
+require('dotenv').config({ tips: false }) // or set DOTENV_CONFIG_TIPS=false
+```
+
 ##### encoding
 
 Default: `utf8`
