@@ -356,6 +356,47 @@ vestauth agent curl "https://as2.dotenvx.com/get?key=KEY"
 
 ## FAQ
 
+<details><summary>¿Por qué no funciona dotenv cuando se instala globalmente?</summary><br/>
+
+Dotenv es una dependencia de librería, no una herramienta CLI, y debe instalarse **localmente** en tu proyecto, no globalmente.
+
+Cuando instalas un paquete globalmente con `npm install -g dotenv`, hace que los comandos CLI estén disponibles en todo el sistema, pero **no** hace que el módulo esté disponible para las declaraciones `require()` o `import` en tu código. Node.js solo busca módulos en el directorio local `node_modules` de tu proyecto cuando usas `require('dotenv')` o `import 'dotenv/config'`.
+
+**Solución:** Instala dotenv localmente en tu proyecto:
+
+```sh
+npm install dotenv --save
+```
+
+o con otros gestores de paquetes:
+
+```sh
+# yarn
+yarn add dotenv
+
+# pnpm
+pnpm add dotenv
+
+# bun
+bun add dotenv
+```
+
+Después de la instalación local, puedes usar dotenv en tu código:
+
+```javascript
+require('dotenv').config()
+// o
+import 'dotenv/config'
+```
+
+**Nota:** Si necesitas ejecutar comandos dotenv globalmente, usa [dotenvx](https://github.com/dotenvx/dotenvx) en su lugar, que está diseñado como una herramienta CLI:
+
+```sh
+npm install -g @dotenvx/dotenvx
+dotenvx run -- node index.js
+```
+
+</details>
 <details><summary>Should I commit my `.env` file?</summary><br/>
 
 No.
