@@ -356,6 +356,18 @@ vestauth agent curl "https://as2.dotenvx.com/get?key=KEY"
 
 ## FAQ
 
+<details><summary>Why doesn't dotenv work when installed globally?</summary><br/>
+
+Dotenv is not designed to be installed globally. Instead install [dotenvx](https://github.com/dotenvx/dotenvx).
+
+```sh
+npm install -g @dotenvx/dotenvx
+dotenvx run -- node index.js
+```
+
+[Learn more](https://github.com/dotenvx/dotenvx)
+
+</details>
 <details><summary>Should I commit my `.env` file?</summary><br/>
 
 No.
