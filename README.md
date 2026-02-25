@@ -576,6 +576,48 @@ Alternatively, just use [dotenv-webpack](https://github.com/mrsteele/dotenv-webp
 
 &nbsp;
 
+## Troubleshooting
+
+<details><summary>My environment variable is not being updated — it already exists in my shell</summary><br/>
+
+By design, dotenv **never overwrites** a variable that already exists in `process.env`. This prevents accidental overrides of variables set by your CI/CD system, Docker environment, or shell profile.
+
+**Why?** If you have `PORT=3000` set in your shell and `PORT=8080` in your `.env` file, your app will see `PORT=3000`. This matches The Twelve-Factor App recommendation that the environment always wins.
+
+To deliberately override existing variables, use the `override` option:
+
+```js
+require('dotenv').config({ override: true })
+```
+
+Or with the preload flag:
+
+```bash
+DOTENV_CONFIG_OVERRIDE=true node -r dotenv/config your_script.js
+```
+
+> **Tip:** On Windows, system variables like `USERNAME`, `COMPUTERNAME`, and `PATH` are pre-set and will **not** be overwritten unless `override: true` is used.
+
+</details>
+<details><summary>My `.env` file is not loading — variables are undefined</summary><br/>
+
+Enable debug mode to get detailed output about what dotenv is doing:
+
+```js
+require('dotenv').config({ debug: true })
+```
+
+Common causes:
+- **Wrong working directory** — dotenv looks for `.env` relative to `process.cwd()`. Make sure you run your app from the project root.
+- **Typo in file name** — the file must be named `.env` (with a leading dot), not `env` or `.env.txt`.
+- **Incorrect path option** — if using a custom path, double-check it resolves correctly.
+
+Use `{ path: '/absolute/path/to/.env' }` to specify an exact location.
+
+</details>
+
+&nbsp;
+
 ## Docs
 
 Dotenv exposes four functions:
