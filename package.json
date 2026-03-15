@@ -10,8 +10,14 @@
       "require": "./lib/main.js",
       "default": "./lib/main.js"
     },
-    "./config": "./config.js",
-    "./config.js": "./config.js",
+    "./config": {
+      "types": "./config.d.ts",
+      "default": "./config.js"
+    },
+    "./config.js": {
+      "types": "./config.d.ts",
+      "default": "./config.js"
+    },
     "./lib/env-options": "./lib/env-options.js",
     "./lib/env-options.js": "./lib/env-options.js",
     "./lib/cli-options": "./lib/cli-options.js",
