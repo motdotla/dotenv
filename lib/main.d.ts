@@ -163,7 +163,7 @@ export function configDotenv(options?: DotenvConfigOptions): DotenvConfigOutput;
 export function populate(
   processEnv: DotenvPopulateInput,
   parsed: DotenvPopulateInput,
-  options?: DotenvConfigOptions
+  options?: DotenvPopulateOptions
 ): DotenvPopulateOutput;
 
 /**
