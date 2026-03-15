@@ -89,6 +89,42 @@ t.test('logs populating when debug mode and override turned on', ct => {
   logStub.restore()
 })
 
+t.test('returns object with only newly set keys', ct => {
+  ct.plan(2)
+
+  const processEnv = {}
+  const parsed = { NEW_KEY: 'new_value', ANOTHER: 'another_value' }
+
+  const result = dotenv.populate(processEnv, parsed)
+
+  ct.same(result, { NEW_KEY: 'new_value', ANOTHER: 'another_value' })
+  ct.same(processEnv, { NEW_KEY: 'new_value', ANOTHER: 'another_value' })
+})
+
+t.test('returns object excluding keys that already existed without override', ct => {
+  ct.plan(2)
+
+  const processEnv = { EXISTING: 'original' }
+  const parsed = { EXISTING: 'new_value', FRESH: 'fresh_value' }
+
+  const result = dotenv.populate(processEnv, parsed)
+
+  ct.same(result, { FRESH: 'fresh_value' })
+  ct.equal(processEnv.EXISTING, 'original')
+})
+
+t.test('returns object including overridden keys when override is true', ct => {
+  ct.plan(2)
+
+  const processEnv = { EXISTING: 'original' }
+  const parsed = { EXISTING: 'new_value', FRESH: 'fresh_value' }
+
+  const result = dotenv.populate(processEnv, parsed, { override: true })
+
+  ct.same(result, { EXISTING: 'new_value', FRESH: 'fresh_value' })
+  ct.equal(processEnv.EXISTING, 'new_value')
+})
+
 t.test('returns any errors thrown on passing not json type', ct => {
   ct.plan(1)
 
