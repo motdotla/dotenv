@@ -26,6 +26,25 @@ t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_override=
   quiet: 'true'
 })
 
+// matches quiet option
+t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_quiet=true']), {
+  quiet: 'true'
+})
+
+// matches quiet option set to false (overrides default)
+t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_quiet=false']), {
+  quiet: 'false'
+})
+
+// matches DOTENV_KEY option
+t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_DOTENV_KEY=dotenv://:key_1234@dotenvx.com/vault/.env.vault?environment=development']), {
+  DOTENV_KEY: 'dotenv://:key_1234@dotenvx.com/vault/.env.vault?environment=development',
+  quiet: 'true'
+})
+
+// defaults quiet to true when no quiet option provided
+t.same(options(['node', '-e', "'console.log(testing)'"]), { quiet: 'true' })
+
 // ignores empty values
 t.same(options(['node', '-e', "'console.log(testing)'", 'dotenv_config_path=']), { quiet: 'true' })
 
