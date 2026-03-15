@@ -95,3 +95,9 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+const colonParsed = dotenv.parse('KEY: value')
+t.equal(colonParsed.KEY, 'value', 'parses colon-separated values')
+
+const colonQuoted = dotenv.parse('KEY: "quoted value"')
+t.equal(colonQuoted.KEY, 'quoted value', 'parses colon-separated quoted values')
