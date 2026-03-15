@@ -5,3 +5,5 @@ coverage/
 node_modules/
 .idea/
 .vscode
+*.tgz
+*.log
