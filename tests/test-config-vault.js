@@ -35,29 +35,35 @@ t.test('does log when testPath calls to .env.vault directly (interpret what the 
 })
 
 t.test('warns if DOTENV_KEY exists but .env.vault does not exist', ct => {
-  ct.plan(1)
+  ct.plan(2)
 
   const testPath = 'tests/.env'
   logStub = sinon.stub(console, 'log')
+  const errorStub = sinon.stub(console, 'error')
 
   const existsSync = sinon.stub(fs, 'existsSync').returns(false) // make .env.vault not exist
   dotenv.config({ path: testPath })
   ct.ok(logStub.called)
+  ct.ok(errorStub.called, 'should warn via console.error')
   existsSync.restore()
+  errorStub.restore()
 
   ct.end()
 })
 
 t.test('warns if DOTENV_KEY exists but .env.vault does not exist (set as array)', ct => {
-  ct.plan(1)
+  ct.plan(2)
 
   const testPath = 'tests/.env'
   logStub = sinon.stub(console, 'log')
+  const errorStub = sinon.stub(console, 'error')
 
   const existsSync = sinon.stub(fs, 'existsSync').returns(false) // make .env.vault not exist
   dotenv.config({ path: [testPath] })
   ct.ok(logStub.called)
+  ct.ok(errorStub.called, 'should warn via console.error')
   existsSync.restore()
+  errorStub.restore()
 
   ct.end()
 })
