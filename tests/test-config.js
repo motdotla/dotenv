@@ -505,3 +505,14 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('multi-path with override writes over existing process.env values', ct => {
+  process.env.BASIC = 'existing'
+
+  const testPath = ['tests/.env.local', 'tests/.env']
+  const env = dotenv.config({ path: testPath, override: true })
+
+  ct.equal(env.parsed.BASIC, 'basic', 'second file overrides first in parsed')
+  ct.equal(process.env.BASIC, 'basic', 'process.env overridden despite existing value')
+  ct.end()
+})
