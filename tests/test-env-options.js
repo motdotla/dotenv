@@ -55,6 +55,36 @@ testOption('DOTENV_CONFIG_OVERRIDE', 'true', { override: 'true' })
 // sets DOTENV_KEY option
 testOption('DOTENV_CONFIG_DOTENV_KEY', 'dotenv://:key_ddcaa26504cd70a@dotenvx.com/vault/.env.vault?environment=development', { DOTENV_KEY: 'dotenv://:key_ddcaa26504cd70a@dotenvx.com/vault/.env.vault?environment=development' })
 
+// includes empty string values (env var set but empty)
+testOption('DOTENV_CONFIG_PATH', '', { path: '' })
+
+// sets quiet to false string
+testOption('DOTENV_CONFIG_QUIET', 'false', { quiet: 'false' })
+
+// sets debug to false string
+testOption('DOTENV_CONFIG_DEBUG', 'false', { debug: 'false' })
+
+// sets override to false string
+testOption('DOTENV_CONFIG_OVERRIDE', 'false', { override: 'false' })
+
+// handles multiple options set simultaneously
+delete process.env.DOTENV_CONFIG_ENCODING
+delete process.env.DOTENV_CONFIG_PATH
+delete process.env.DOTENV_CONFIG_QUIET
+delete process.env.DOTENV_CONFIG_DEBUG
+delete process.env.DOTENV_CONFIG_OVERRIDE
+delete process.env.DOTENV_CONFIG_DOTENV_KEY
+
+process.env.DOTENV_CONFIG_PATH = '/custom/.env'
+process.env.DOTENV_CONFIG_DEBUG = 'true'
+process.env.DOTENV_CONFIG_OVERRIDE = 'true'
+
+t.same(options(), { path: '/custom/.env', debug: 'true', override: 'true' })
+
+delete process.env.DOTENV_CONFIG_PATH
+delete process.env.DOTENV_CONFIG_DEBUG
+delete process.env.DOTENV_CONFIG_OVERRIDE
+
 // restore existing env
 process.env.DOTENV_CONFIG_ENCODING = e
 process.env.DOTENV_CONFIG_PATH = p
