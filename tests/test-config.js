@@ -505,3 +505,32 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('returns parsed values and error when some files in array fail', ct => {
+  logStub = sinon.stub(console, 'log')
+
+  const testPath = ['tests/.env', '/nonexistent/path/.env']
+  const env = dotenv.config({ path: testPath })
+
+  // parsed should contain values from the successful file
+  ct.equal(env.parsed.BASIC, 'basic')
+  ct.equal(process.env.BASIC, 'basic')
+
+  // error should be set from the failed file
+  ct.type(env.error, Error)
+
+  ct.end()
+})
+
+t.test('returns parsed values from valid file when first path fails', ct => {
+  logStub = sinon.stub(console, 'log')
+
+  const testPath = ['/nonexistent/.env', 'tests/.env']
+  const env = dotenv.config({ path: testPath })
+
+  ct.equal(env.parsed.BASIC, 'basic')
+  ct.equal(process.env.BASIC, 'basic')
+  ct.type(env.error, Error)
+
+  ct.end()
+})
