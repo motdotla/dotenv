@@ -505,3 +505,57 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('debug logs encoding message when no encoding specified', ct => {
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: 'tests/.env', debug: true })
+
+  let foundEncodingMsg = false
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('UTF-8')) {
+      foundEncodingMsg = true
+      break
+    }
+  }
+
+  ct.ok(foundEncodingMsg, 'should log UTF-8 encoding debug message')
+
+  ct.end()
+})
+
+t.test('debug logs do not include encoding message when encoding is specified', ct => {
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: 'tests/.env', debug: true, encoding: 'utf8' })
+
+  let foundEncodingMsg = false
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('No encoding')) {
+      foundEncodingMsg = true
+      break
+    }
+  }
+
+  ct.notOk(foundEncodingMsg, 'should not log encoding debug message when encoding is set')
+
+  ct.end()
+})
+
+t.test('debug logs failed file path on missing file', ct => {
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: '/nonexistent/.env', debug: true })
+
+  let foundFailMsg = false
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('Failed to load')) {
+      foundFailMsg = true
+      break
+    }
+  }
+
+  ct.ok(foundFailMsg, 'should log failed file path in debug mode')
+
+  ct.end()
+})
