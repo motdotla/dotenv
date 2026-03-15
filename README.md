@@ -578,11 +578,13 @@ Alternatively, just use [dotenv-webpack](https://github.com/mrsteele/dotenv-webp
 
 ## Docs
 
-Dotenv exposes four functions:
+Dotenv exposes five functions:
 
 * `config`
+* `configDotenv`
 * `parse`
 * `populate`
+* `decrypt`
 
 ### Config
 
@@ -700,22 +702,6 @@ const dotenv = require('dotenv')
 const buf = Buffer.from('BASIC=basic')
 const config = dotenv.parse(buf) // will return an object
 console.log(typeof config, config) // object { BASIC : 'basic' }
-```
-
-#### Options
-
-##### debug
-
-Default: `false`
-
-Turn on logging to help debug why certain keys or values are not being set as you expect.
-
-```js
-const dotenv = require('dotenv')
-const buf = Buffer.from('hello world')
-const opt = { debug: true }
-const config = dotenv.parse(buf, opt)
-// expect a debug message because the buffer is not in KEY=VAL form
 ```
 
 ### Populate
