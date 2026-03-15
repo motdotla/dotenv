@@ -98,3 +98,39 @@ t.test('returns any errors thrown on passing not json type', ct => {
     ct.equal(e.message, 'OBJECT_REQUIRED: Please check the processEnv argument being passed to populate')
   }
 })
+
+t.test('handles process.env as target with undefined values', ct => {
+  ct.plan(2)
+
+  const key = 'DOTENV_TEST_POPULATE_' + Date.now()
+  const parsed = {}
+  parsed[key] = 'test_value'
+
+  dotenv.populate(process.env, parsed)
+
+  ct.equal(process.env[key], 'test_value')
+
+  // cleanup
+  delete process.env[key]
+  ct.equal(process.env[key], undefined)
+})
+
+t.test('throws OBJECT_REQUIRED for number parsed argument', ct => {
+  ct.plan(1)
+
+  try {
+    dotenv.populate(process.env, 123)
+  } catch (e) {
+    ct.equal(e.code, 'OBJECT_REQUIRED')
+  }
+})
+
+t.test('throws OBJECT_REQUIRED for boolean parsed argument', ct => {
+  ct.plan(1)
+
+  try {
+    dotenv.populate(process.env, true)
+  } catch (e) {
+    ct.equal(e.code, 'OBJECT_REQUIRED')
+  }
+})
