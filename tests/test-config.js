@@ -505,3 +505,11 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('processEnv null defaults to process.env', ct => {
+  const testPath = 'tests/.env'
+  dotenv.config({ path: testPath, processEnv: null })
+
+  ct.equal(process.env.BASIC, 'basic', 'writes to process.env when processEnv is null')
+  ct.end()
+})
