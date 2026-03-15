@@ -98,3 +98,24 @@ t.test('returns any errors thrown on passing not json type', ct => {
     ct.equal(e.message, 'OBJECT_REQUIRED: Please check the processEnv argument being passed to populate')
   }
 })
+
+t.test('returns empty object when parsed is empty', ct => {
+  ct.plan(2)
+
+  const processEnv = { EXISTING: 'keep' }
+  const result = dotenv.populate(processEnv, {})
+
+  ct.same(result, {}, 'returns empty object when no keys to populate')
+  ct.equal(processEnv.EXISTING, 'keep', 'does not modify existing keys')
+})
+
+t.test('does not modify processEnv keys that are not in parsed', ct => {
+  ct.plan(2)
+
+  const processEnv = { ALPHA: 'original', BETA: 'original' }
+  const parsed = { GAMMA: 'new' }
+  dotenv.populate(processEnv, parsed)
+
+  ct.equal(processEnv.ALPHA, 'original', 'existing key ALPHA unchanged')
+  ct.equal(processEnv.GAMMA, 'new', 'new key GAMMA added')
+})
