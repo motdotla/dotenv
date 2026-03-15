@@ -1,4 +1,4 @@
-import { config, parse } from "dotenv";
+import { config, parse, DotenvError } from "dotenv";
 
 const env = config();
 const dbUrl: string | null =
@@ -22,3 +22,9 @@ config({
   // make sure the type accepts process.env (it didn't in the past)
   processEnv: process.env,
 });
+
+// make sure DotenvError is accessible for typed error handling
+const result = config();
+if (result.error) {
+  const errorCode: DotenvError["code"] = result.error.code;
+}

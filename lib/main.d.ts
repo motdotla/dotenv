@@ -94,7 +94,7 @@ export interface DotenvConfigOutput {
   parsed?: DotenvParseOutput;
 }
 
-type DotenvError = Error & {
+export type DotenvError = Error & {
   code: 
     | 'MISSING_DATA'
     | 'INVALID_DOTENV_KEY'
