@@ -505,3 +505,63 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('does not log if DOTENV_CONFIG_QUIET is 0', ct => {
+  ct.plan(1)
+
+  process.env.DOTENV_CONFIG_QUIET = '0'
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+  ct.ok(logStub.called)
+  delete process.env.DOTENV_CONFIG_QUIET
+})
+
+t.test('does not log if DOTENV_CONFIG_QUIET is no', ct => {
+  ct.plan(1)
+
+  process.env.DOTENV_CONFIG_QUIET = 'no'
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+  ct.ok(logStub.called)
+  delete process.env.DOTENV_CONFIG_QUIET
+})
+
+t.test('does not log if DOTENV_CONFIG_QUIET is off', ct => {
+  ct.plan(1)
+
+  process.env.DOTENV_CONFIG_QUIET = 'off'
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+  ct.ok(logStub.called)
+  delete process.env.DOTENV_CONFIG_QUIET
+})
+
+t.test('suppresses log if DOTENV_CONFIG_QUIET is 1', ct => {
+  ct.plan(1)
+
+  process.env.DOTENV_CONFIG_QUIET = '1'
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+  ct.ok(logStub.notCalled)
+  delete process.env.DOTENV_CONFIG_QUIET
+})
+
+t.test('suppresses log if DOTENV_CONFIG_QUIET is yes', ct => {
+  ct.plan(1)
+
+  process.env.DOTENV_CONFIG_QUIET = 'yes'
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+  ct.ok(logStub.notCalled)
+  delete process.env.DOTENV_CONFIG_QUIET
+})
