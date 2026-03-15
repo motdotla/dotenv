@@ -357,6 +357,28 @@ t.test('raises error if some other uncaught decryption error', ct => {
   ct.end()
 })
 
+t.test('does not log when quiet is true', ct => {
+  ct.plan(2)
+
+  logStub = sinon.stub(console, 'log')
+
+  const result = dotenv.config({ path: testPath, quiet: true })
+
+  ct.same(result.parsed, { ALPHA: 'zeta' })
+  ct.ok(logStub.notCalled)
+})
+
+t.test('does log when quiet is true but debug is also true', ct => {
+  ct.plan(2)
+
+  logStub = sinon.stub(console, 'log')
+
+  const result = dotenv.config({ path: testPath, quiet: true, debug: true })
+
+  ct.same(result.parsed, { ALPHA: 'zeta' })
+  ct.ok(logStub.called)
+})
+
 t.test('_parseVault when empty args', ct => {
   ct.plan(1)
 
