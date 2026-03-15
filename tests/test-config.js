@@ -505,3 +505,14 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('suppresses log when DOTENV_CONFIG_QUIET is set inside .env file', ct => {
+  ct.plan(2)
+
+  logStub = sinon.stub(console, 'log')
+
+  const env = dotenv.config({ path: 'tests/.env.quiet' })
+
+  ct.equal(env.parsed.HELLO, 'world')
+  ct.ok(logStub.notCalled)
+})
