@@ -13,5 +13,5 @@
       "dotenv": ["../../lib/main.d.ts"]
     }
   },
-  "include": ["./test.ts", "../../main.d.ts"]
+  "include": ["./test.ts", "../../lib/main.d.ts"]
 }
