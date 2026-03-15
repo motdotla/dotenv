@@ -505,3 +505,20 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('debug message includes [DEBUG] prefix', ct => {
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, debug: true })
+
+  let foundDebugPrefix = false
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('[DEBUG]')) {
+      foundDebugPrefix = true
+      break
+    }
+  }
+  ct.ok(foundDebugPrefix, 'at least one log message includes [DEBUG] prefix')
+  ct.end()
+})
