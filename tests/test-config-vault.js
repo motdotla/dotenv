@@ -28,7 +28,7 @@ t.afterEach(() => {
 t.test('does log when testPath calls to .env.vault directly (interpret what the user meant)', ct => {
   ct.plan(1)
 
-  logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'error')
 
   dotenv.config({ path: `${testPath}.vault` })
   ct.ok(logStub.called)
@@ -38,7 +38,7 @@ t.test('warns if DOTENV_KEY exists but .env.vault does not exist', ct => {
   ct.plan(1)
 
   const testPath = 'tests/.env'
-  logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'error')
 
   const existsSync = sinon.stub(fs, 'existsSync').returns(false) // make .env.vault not exist
   dotenv.config({ path: testPath })
@@ -52,7 +52,7 @@ t.test('warns if DOTENV_KEY exists but .env.vault does not exist (set as array)'
   ct.plan(1)
 
   const testPath = 'tests/.env'
-  logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'error')
 
   const existsSync = sinon.stub(fs, 'existsSync').returns(false) // make .env.vault not exist
   dotenv.config({ path: [testPath] })
@@ -65,7 +65,7 @@ t.test('warns if DOTENV_KEY exists but .env.vault does not exist (set as array)'
 t.test('logs when testPath calls to .env.vault directly (interpret what the user meant) and debug true', ct => {
   ct.plan(1)
 
-  logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'error')
 
   dotenv.config({ path: `${testPath}.vault`, debug: true })
   ct.ok(logStub.called)
@@ -260,7 +260,7 @@ t.test('can write to a different object rather than process.env', ct => {
 
   process.env.ALPHA = 'other' // reset process.env
 
-  logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'error')
 
   const myObject = {}
 
@@ -273,7 +273,7 @@ t.test('can write to a different object rather than process.env', ct => {
 t.test('logs when debug and override are turned on', ct => {
   ct.plan(1)
 
-  logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'error')
 
   dotenv.config({ path: testPath, override: true, debug: true })
 
@@ -283,7 +283,7 @@ t.test('logs when debug and override are turned on', ct => {
 t.test('logs when debug is on and override is false', ct => {
   ct.plan(1)
 
-  logStub = sinon.stub(console, 'log')
+  logStub = sinon.stub(console, 'error')
 
   dotenv.config({ path: testPath, override: false, debug: true })
 
