@@ -95,3 +95,13 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+// unicode values
+const unicodePayload = dotenv.parse(Buffer.from('EMOJI="Hello 🌍"'))
+t.equal(unicodePayload.EMOJI, 'Hello 🌍', 'parses emoji characters in double-quoted values')
+
+const arabicPayload = dotenv.parse(Buffer.from('ARABIC="مرحبا"'))
+t.equal(arabicPayload.ARABIC, 'مرحبا', 'parses Arabic characters')
+
+const cjkPayload = dotenv.parse(Buffer.from('CJK="你好世界"'))
+t.equal(cjkPayload.CJK, '你好世界', 'parses CJK characters')
