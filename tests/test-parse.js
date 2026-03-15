@@ -95,3 +95,12 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+const dottedKey = dotenv.parse('api.host=localhost')
+t.equal(dottedKey['api.host'], 'localhost', 'parses keys with dots')
+
+const hyphenKey = dotenv.parse('my-key=value')
+t.equal(hyphenKey['my-key'], 'value', 'parses keys with hyphens')
+
+const dottedHyphenKey = dotenv.parse('my-app.port=3000')
+t.equal(dottedHyphenKey['my-app.port'], '3000', 'parses keys with dots and hyphens')
