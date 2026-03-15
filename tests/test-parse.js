@@ -95,3 +95,39 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+// Edge case: empty string returns empty object
+const empty = dotenv.parse('')
+t.same(empty, {}, 'returns empty object for empty string')
+
+// Edge case: only comments returns empty object
+const commentsOnly = dotenv.parse('# this is a comment\n# another comment')
+t.same(commentsOnly, {}, 'returns empty object for comments-only input')
+
+// Edge case: export prefix
+const exported = dotenv.parse('export FOO=bar')
+t.equal(exported.FOO, 'bar', 'handles export prefix')
+
+// Edge case: keys with hyphens
+const hyphenKey = dotenv.parse('my-key=value')
+t.equal(hyphenKey['my-key'], 'value', 'handles keys with hyphens')
+
+// Edge case: keys with dots
+const dotKey = dotenv.parse('my.key=value')
+t.equal(dotKey['my.key'], 'value', 'handles keys with dots')
+
+// Edge case: Unicode characters in values
+const unicode = dotenv.parse('GREETING=こんにちは')
+t.equal(unicode.GREETING, 'こんにちは', 'handles unicode in values')
+
+// Edge case: UTF-8 BOM at start of file
+const bom = dotenv.parse('\uFEFFBOM_KEY=bom_value')
+t.equal(bom.BOM_KEY, 'bom_value', 'handles UTF-8 BOM at start of input')
+
+// Edge case: escaped carriage return in double quotes
+const escapedCR = dotenv.parse('CR="line1\\rline2"')
+t.equal(escapedCR.CR, 'line1\rline2', 'expands escaped carriage return in double quotes')
+
+// Edge case: tabs around key and value
+const tabbed = dotenv.parse('\tTABBED\t=\ttabbed_value')
+t.equal(tabbed.TABBED, 'tabbed_value', 'handles tabs around keys and values')
