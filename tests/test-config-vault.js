@@ -357,6 +357,25 @@ t.test('raises error if some other uncaught decryption error', ct => {
   ct.end()
 })
 
+t.test('warn message goes to console.error with [WARN] prefix', ct => {
+  ct.plan(2)
+
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+  const errorStub = sinon.stub(console, 'error')
+
+  const existsSync = sinon.stub(fs, 'existsSync').returns(false)
+  dotenv.config({ path: testPath })
+
+  ct.ok(errorStub.called, 'console.error was called')
+  const warnMessage = errorStub.getCall(0).args[0]
+  ct.ok(warnMessage.includes('[WARN]'), 'warn message contains [WARN] prefix')
+
+  existsSync.restore()
+  errorStub.restore()
+  ct.end()
+})
+
 t.test('_parseVault when empty args', ct => {
   ct.plan(1)
 
