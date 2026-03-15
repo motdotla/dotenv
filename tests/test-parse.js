@@ -95,3 +95,13 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+// special characters in values
+const urlValue = dotenv.parse(Buffer.from('DB_URL="postgres://user:pass@host:5432/db?ssl=true"'))
+t.equal(urlValue.DB_URL, 'postgres://user:pass@host:5432/db?ssl=true', 'parses URLs with query params in double quotes')
+
+const base64Value = dotenv.parse(Buffer.from('SECRET="dGVzdA=="'))
+t.equal(base64Value.SECRET, 'dGVzdA==', 'parses base64 values with trailing equals signs')
+
+const semicolonValue = dotenv.parse(Buffer.from('PATHS="/usr/bin;/usr/local/bin"'))
+t.equal(semicolonValue.PATHS, '/usr/bin;/usr/local/bin', 'parses values with semicolons')
