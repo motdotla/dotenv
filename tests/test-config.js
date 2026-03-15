@@ -505,3 +505,14 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('log message shows relative path to .env file', ct => {
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+
+  const logMessage = logStub.getCall(0).args[0]
+  ct.ok(logMessage.includes('tests/.env'), 'log message includes relative path')
+  ct.end()
+})
