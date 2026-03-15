@@ -95,3 +95,13 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+// escaped quotes inside same-type quotes (backslashes are retained in parsed output)
+const escapedDouble = dotenv.parse(Buffer.from('KEY="say \\"hello\\""'))
+t.equal(escapedDouble.KEY, 'say \\"hello\\"', 'retains backslash in escaped double quotes inside double-quoted values')
+
+const escapedSingle = dotenv.parse(Buffer.from("KEY='it\\'s here'"))
+t.equal(escapedSingle.KEY, "it\\'s here", 'retains backslash in escaped single quotes inside single-quoted values')
+
+const escapedBacktick = dotenv.parse(Buffer.from('KEY=`tick \\`mark\\``'))
+t.equal(escapedBacktick.KEY, 'tick \\`mark\\`', 'retains backslash in escaped backticks inside backtick-quoted values')
