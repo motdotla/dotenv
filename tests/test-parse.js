@@ -95,3 +95,12 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+const expandCR = dotenv.parse('KEY="expand\\rcarriage"')
+t.equal(expandCR.KEY, 'expand\rcarriage', 'expands \\r in double quoted values')
+
+const noExpandCRUnquoted = dotenv.parse('KEY=expand\\rcarriage')
+t.equal(noExpandCRUnquoted.KEY, 'expand\\rcarriage', 'does not expand \\r in unquoted values')
+
+const noExpandCRSingle = dotenv.parse("KEY='expand\\rcarriage'")
+t.equal(noExpandCRSingle.KEY, 'expand\\rcarriage', 'does not expand \\r in single quoted values')
