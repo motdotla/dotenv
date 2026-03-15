@@ -95,3 +95,15 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+// key without equals sign is ignored
+const keyOnly = dotenv.parse(Buffer.from('KEY_ONLY'))
+t.same(keyOnly, {}, 'key without equals sign is not parsed')
+
+// key with equals but no value is empty string
+const keyEquals = dotenv.parse(Buffer.from('KEY_EMPTY='))
+t.equal(keyEquals.KEY_EMPTY, '', 'key with trailing equals sign has empty string value')
+
+// key with equals and trailing whitespace is empty string
+const keyEqualsSpace = dotenv.parse(Buffer.from('KEY_SPACE= '))
+t.equal(keyEqualsSpace.KEY_SPACE, '', 'key with equals and trailing space has empty string value')
