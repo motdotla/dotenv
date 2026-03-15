@@ -95,3 +95,12 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+const whitespaceOnly = dotenv.parse(Buffer.from('   \n  \n\t\n'))
+t.same(whitespaceOnly, {}, 'whitespace-only input returns empty object')
+
+const blankLines = dotenv.parse(Buffer.from('\n\n\n'))
+t.same(blankLines, {}, 'blank lines return empty object')
+
+const mixedWhitespace = dotenv.parse(Buffer.from('  \t\nKEY=value\n  \n'))
+t.equal(mixedWhitespace.KEY, 'value', 'parses values between blank/whitespace lines')
