@@ -21,7 +21,7 @@ function spawn (cmd, options = {}) {
   return stdout
 }
 
-t.plan(3)
+t.plan(4)
 
 // dotenv/config enables preloading
 t.equal(
@@ -69,6 +69,26 @@ t.equal(
     {
       env: {
         DOTENV_CONFIG_PATH: '/tmp/dne/path/.env.should.break'
+      }
+    }
+  ),
+  'basic\n'
+)
+
+// dotenv/config supports override via CLI args
+t.equal(
+  spawn(
+    [
+      '-r',
+      './config',
+      '-e',
+      'console.log(process.env.BASIC)',
+      'dotenv_config_path=./tests/.env',
+      'dotenv_config_override=true'
+    ],
+    {
+      env: {
+        BASIC: 'existing'
       }
     }
   ),
