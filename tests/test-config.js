@@ -505,3 +505,16 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('configDotenv returns same result as config without DOTENV_KEY', ct => {
+  const testPath = 'tests/.env'
+  const myEnv1 = {}
+  const myEnv2 = {}
+
+  const result1 = dotenv.config({ path: testPath, processEnv: myEnv1 })
+  const result2 = dotenv.configDotenv({ path: testPath, processEnv: myEnv2 })
+
+  ct.same(result1.parsed, result2.parsed, 'config and configDotenv return same parsed output')
+  ct.same(myEnv1, myEnv2, 'config and configDotenv populate same values')
+  ct.end()
+})
