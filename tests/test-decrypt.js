@@ -12,3 +12,26 @@ t.test('can decrypt', ct => {
 
   ct.equal(result, '# development@v6\nALPHA="zeta"')
 })
+
+t.test('decrypted output is parseable by parse()', ct => {
+  ct.plan(1)
+
+  const encrypted = 's7NYXa809k/bVSPwIAmJhPJmEGTtU0hG58hOZy7I0ix6y5HP8LsHBsZCYC/gw5DDFy5DgOcyd18R'
+  const keyStr = 'ddcaa26504cd70a6fef9801901c3981538563a1767c297cb8416e8a38c62fe00'
+
+  const decrypted = dotenv.decrypt(encrypted, keyStr)
+  const parsed = dotenv.parse(decrypted)
+
+  ct.equal(parsed.ALPHA, 'zeta')
+})
+
+t.test('returns a string type', ct => {
+  ct.plan(1)
+
+  const encrypted = 's7NYXa809k/bVSPwIAmJhPJmEGTtU0hG58hOZy7I0ix6y5HP8LsHBsZCYC/gw5DDFy5DgOcyd18R'
+  const keyStr = 'ddcaa26504cd70a6fef9801901c3981538563a1767c297cb8416e8a38c62fe00'
+
+  const result = dotenv.decrypt(encrypted, keyStr)
+
+  ct.type(result, 'string')
+})
