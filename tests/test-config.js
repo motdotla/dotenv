@@ -505,3 +505,28 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('combines override and processEnv options together', ct => {
+  logStub = sinon.stub(console, 'log')
+
+  const myObject = { BASIC: 'original' }
+  const env = dotenv.config({ path: 'tests/.env', override: true, processEnv: myObject })
+
+  ct.equal(env.parsed.BASIC, 'basic')
+  ct.equal(myObject.BASIC, 'basic', 'should override value in custom processEnv')
+  ct.equal(process.env.BASIC, undefined, 'should not touch process.env when processEnv is set')
+
+  ct.end()
+})
+
+t.test('config returns parsed key even when all files fail', ct => {
+  logStub = sinon.stub(console, 'log')
+
+  const env = dotenv.config({ path: '/nonexistent/.env' })
+
+  ct.type(env.error, Error)
+  ct.type(env.parsed, Object, 'parsed should still be an object')
+  ct.same(env.parsed, {}, 'parsed should be empty when file fails')
+
+  ct.end()
+})
