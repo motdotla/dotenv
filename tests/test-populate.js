@@ -89,6 +89,31 @@ t.test('logs populating when debug mode and override turned on', ct => {
   logStub.restore()
 })
 
+t.test('returns only the keys that were actually set', ct => {
+  ct.plan(2)
+
+  const processEnv = { EXISTING: 'keep' }
+  const parsed = { EXISTING: 'overwrite', NEW_KEY: 'new' }
+
+  const result = dotenv.populate(processEnv, parsed)
+
+  // EXISTING was skipped (no override), NEW_KEY was set
+  ct.equal(result.NEW_KEY, 'new')
+  ct.notOk(result.EXISTING)
+})
+
+t.test('returns all keys when override is true', ct => {
+  ct.plan(2)
+
+  const processEnv = { EXISTING: 'keep' }
+  const parsed = { EXISTING: 'overwrite', NEW_KEY: 'new' }
+
+  const result = dotenv.populate(processEnv, parsed, { override: true })
+
+  ct.equal(result.EXISTING, 'overwrite')
+  ct.equal(result.NEW_KEY, 'new')
+})
+
 t.test('returns any errors thrown on passing not json type', ct => {
   ct.plan(1)
 
