@@ -505,3 +505,16 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('log message contains version and injecting info', ct => {
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath })
+
+  const logMessage = logStub.getCall(0).args[0]
+  ct.ok(logMessage.includes('[dotenv@'), 'log message includes version prefix')
+  ct.ok(logMessage.includes('injecting env'), 'log message includes injecting info')
+
+  ct.end()
+})
