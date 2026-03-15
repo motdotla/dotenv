@@ -505,3 +505,16 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('log message shows correct populated key count', ct => {
+  const myEnv = {}
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: 'tests/.env', processEnv: myEnv })
+
+  const logMessage = logStub.getCall(0).args[0]
+  const keyCount = Object.keys(myEnv).length
+  ct.ok(logMessage.includes(`(${keyCount})`), `log message includes key count (${keyCount})`)
+
+  ct.end()
+})
