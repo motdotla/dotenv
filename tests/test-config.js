@@ -505,3 +505,37 @@ t.test('logs if debug set', ct => {
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
 })
+
+t.test('debug logs encoding message when no encoding specified', ct => {
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, debug: true })
+
+  let foundEncodingMsg = false
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('UTF-8')) {
+      foundEncodingMsg = true
+      break
+    }
+  }
+  ct.ok(foundEncodingMsg, 'logs UTF-8 default encoding message in debug mode')
+  ct.end()
+})
+
+t.test('debug does not log encoding message when encoding is specified', ct => {
+  const testPath = 'tests/.env'
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: testPath, debug: true, encoding: 'utf8' })
+
+  let foundEncodingMsg = false
+  for (const call of logStub.getCalls()) {
+    if (call.args[0] && call.args[0].includes('UTF-8')) {
+      foundEncodingMsg = true
+      break
+    }
+  }
+  ct.notOk(foundEncodingMsg, 'does not log encoding message when encoding is specified')
+  ct.end()
+})
