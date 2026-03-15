@@ -366,3 +366,31 @@ t.test('_parseVault when empty args', ct => {
     ct.equal(e.message, 'NOT_FOUND_DOTENV_ENVIRONMENT: Cannot locate environment DOTENV_VAULT_DEVELOPMENT in your .env.vault file.')
   }
 })
+
+t.test('options.DOTENV_KEY takes precedence over process.env.DOTENV_KEY', ct => {
+  ct.plan(2)
+
+  // process.env.DOTENV_KEY is set to a wrong key via beforeEach stub
+  // but options.DOTENV_KEY is set to the correct key - it should win
+  envStub.restore()
+  envStub = sinon.stub(process.env, 'DOTENV_KEY').value('dotenv://:key_0000000000000000000000000000000000000000000000000000000000000000@dotenvx.com/vault/.env.vault?environment=development')
+
+  const result = dotenv.config({ path: testPath, DOTENV_KEY: dotenvKey })
+
+  ct.equal(result.parsed.ALPHA, 'zeta')
+  ct.equal(process.env.ALPHA, 'zeta')
+
+  ct.end()
+})
+
+t.test('process.env.DOTENV_KEY is used when options.DOTENV_KEY is not set', ct => {
+  ct.plan(2)
+
+  // process.env.DOTENV_KEY is set to the correct key via beforeEach stub
+  const result = dotenv.config({ path: testPath })
+
+  ct.equal(result.parsed.ALPHA, 'zeta')
+  ct.equal(process.env.ALPHA, 'zeta')
+
+  ct.end()
+})
