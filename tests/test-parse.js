@@ -95,3 +95,15 @@ t.same(NPayload, expectedPayload, 'can parse (\\n) line endings')
 
 const RNPayload = dotenv.parse(Buffer.from('SERVER=localhost\r\nPASSWORD=password\r\nDB=tests\r\n'))
 t.same(RNPayload, expectedPayload, 'can parse (\\r\\n) line endings')
+
+const exportParsed = dotenv.parse('export FOO=bar')
+t.equal(exportParsed.FOO, 'bar', 'handles export keyword prefix')
+
+const exportQuoted = dotenv.parse('export FOO="bar"')
+t.equal(exportQuoted.FOO, 'bar', 'handles export keyword with double quotes')
+
+const emptyParsed = dotenv.parse('')
+t.same(emptyParsed, {}, 'returns empty object for empty string')
+
+const commentOnly = dotenv.parse('# this is a comment\n# another comment')
+t.same(commentOnly, {}, 'returns empty object for comments-only input')
