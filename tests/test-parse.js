@@ -53,6 +53,12 @@ t.equal(parsed.DONT_EXPAND_UNQUOTED, 'dontexpand\\nnewlines', 'expands newlines 
 
 t.equal(parsed.DONT_EXPAND_SQUOTED, 'dontexpand\\nnewlines', 'expands newlines but only if double quoted')
 
+t.equal(parsed.EXPAND_TABS, 'expand\ttabs', 'expands tabs if double quoted')
+
+t.equal(parsed.DONT_EXPAND_TABS_UNQUOTED, 'dontexpand\\ttabs', 'does not expand tabs if unquoted')
+
+t.equal(parsed.DONT_EXPAND_TABS_SQUOTED, 'dontexpand\\ttabs', 'does not expand tabs if single quoted')
+
 t.notOk(parsed.COMMENTS, 'ignores commented lines')
 
 t.equal(parsed.INLINE_COMMENTS, 'inline comments', 'ignores inline comments')
