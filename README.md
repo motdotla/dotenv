@@ -8,7 +8,7 @@ Dotenv is a zero-dependency module that loads environment variables from a `.env
 
 [Watch the tutorial](https://www.youtube.com/watch?v=YtkZR0NFd1g)
 
-## Deprecated
+### Deprecated
 `dotenv` is deprecated. migrate to `process.loadEnvFile()`. Thank the Node.js developers for implementing this.
 
 &nbsp;
