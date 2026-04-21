@@ -1,8 +1,8 @@
 # Research Program
 
 cli_version: 0.5.2
-lead_github_login: motdotla
-maintainer_github_login: motdotla
+lead_github_login: alanzabihi
+maintainer_github_login: alanzabihi
 metric_tolerance: 0.01
 metric_direction: higher_is_better
 required_confirmations: 0
