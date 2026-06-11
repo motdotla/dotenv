@@ -154,6 +154,21 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 ```
 
 </details>
+<details><summary>Run</summary><br>
+
+Use `dotenv run --` to run a command with environment variables from your `.env` file.
+
+```bash
+$ dotenv run -- node index.js
+```
+
+Use `-f` to select one or more `.env` files.
+
+```bash
+$ dotenv run -f .env.local -f .env -- node index.js
+```
+
+</details>
 <details><summary>Preload</summary><br>
 
 > Note: Consider using [`dotenvx`](https://github.com/dotenvx/dotenvx) instead of preloading. I am now doing (and recommending) so.

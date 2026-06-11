@@ -3,6 +3,9 @@
   "version": "17.4.2",
   "description": "Loads environment variables from .env file",
   "main": "lib/main.js",
+  "bin": {
+    "dotenv": "./cli.js"
+  },
   "types": "lib/main.d.ts",
   "exports": {
     ".": {
