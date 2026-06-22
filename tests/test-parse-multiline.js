@@ -47,6 +47,10 @@ t.equal(parsed.MULTI_SINGLE_QUOTED, 'THIS\nIS\nA\nMULTILINE\nSTRING', 'parses mu
 
 t.equal(parsed.MULTI_BACKTICKED, 'THIS\nIS\nA\n"MULTILINE\'S"\nSTRING', 'parses multi-line strings when using backticks')
 
+t.equal(parsed.INLINE_COMMENTS_SPACE, 'inline comments start with a#number sign. no space required.', 'keeps # without leading whitespace as part of the value')
+
+t.equal(parsed.INLINE_COMMENTS_SPACE_BEFORE_HASH, 'inline comments start with a', 'treats # character as start of comment when preceded by whitespace')
+
 const multiPem = `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnNl1tL3QjKp3DZWM0T3u
 LgGJQwu9WqyzHKZ6WIA5T+7zPjO1L8l3S8k8YzBrfH4mqWOD1GBI8Yjq2L1ac3Y/
