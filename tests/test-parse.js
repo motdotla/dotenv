@@ -63,7 +63,9 @@ t.equal(parsed.INLINE_COMMENTS_DOUBLE_QUOTES, 'inline comments outside of #doubl
 
 t.equal(parsed.INLINE_COMMENTS_BACKTICKS, 'inline comments outside of #backticks', 'ignores inline comments and respects # character inside of backticks')
 
-t.equal(parsed.INLINE_COMMENTS_SPACE, 'inline comments start with a', 'treats # character as start of comment')
+t.equal(parsed.INLINE_COMMENTS_SPACE, 'inline comments start with a#number sign. no space required.', 'keeps # without leading whitespace as part of the value')
+
+t.equal(parsed.INLINE_COMMENTS_SPACE_BEFORE_HASH, 'inline comments start with a', 'treats # character as start of comment when preceded by whitespace')
 
 t.equal(parsed.EQUAL_SIGNS, 'equals==', 'respects equals signs in values')
 
