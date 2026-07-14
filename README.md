@@ -1,4 +1,4 @@
-<a href="https://dotenvx.com/?utm_source=github&utm_medium=readme&utm_campaign=motdotla-dotenv&utm_content=banner"><img src="https://dotenvx.com/dotenv-banner.png" alt="dotenvx" /></a>
+> [dotenvx](https://dotenvx.com/?utm_source=github&utm_medium=readme&utm_campaign=motdotla-dotenv&utm_content=banner) — a secure dotenv, from the creator of `dotenv` for the agentic age. Run anywhere, encrypt secrets, and commit safely.
 
 # dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv) [![downloads](https://img.shields.io/npm/dw/dotenv)](https://www.npmjs.com/package/dotenv)
 
@@ -158,6 +158,29 @@ const dotenv = require('dotenv')
 const buf = Buffer.from('BASIC=basic')
 const config = dotenv.parse(buf) // will return an object
 console.log(typeof config, config) // object { BASIC : 'basic' }
+```
+
+</details>
+<details><summary>Run</summary><br>
+
+Use `dotenv run --` to run a command with environment variables from your `.env` file.
+
+```bash
+$ dotenv run -- node index.js
+◇ injected env (2) from .env
+```
+
+Use `-f` to select one or more `.env` files.
+
+```bash
+$ dotenv run -f .env.local -f .env -- node index.js
+◇ injected env (2) from .env.local, .env
+```
+
+Use `--quiet` to suppress the injected env message.
+
+```bash
+$ dotenv run --quiet -- node index.js
 ```
 
 </details>
