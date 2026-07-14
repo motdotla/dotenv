@@ -21,7 +21,7 @@ function spawn (cmd, options = {}) {
   return stdout
 }
 
-t.plan(3)
+t.plan(6)
 
 // dotenv/config enables preloading
 t.equal(
@@ -34,6 +34,69 @@ t.equal(
       'dotenv_config_encoding=utf8',
       'dotenv_config_path=./tests/.env'
     ]
+  ),
+  'basic\n'
+)
+
+// dotenv/config preserves existing values when env override option is false
+t.equal(
+  spawn(
+    [
+      '-r',
+      './config',
+      '-e',
+      'console.log(process.env.BASIC)'
+    ],
+    {
+      env: {
+        BASIC: 'existing',
+        DOTENV_CONFIG_PATH: './tests/.env',
+        DOTENV_CONFIG_QUIET: 'true',
+        DOTENV_CONFIG_OVERRIDE: 'false'
+      }
+    }
+  ),
+  'existing\n'
+)
+
+// dotenv/config preserves existing values when CLI override option is false
+t.equal(
+  spawn(
+    [
+      '-r',
+      './config',
+      '-e',
+      'console.log(process.env.BASIC)',
+      'dotenv_config_path=./tests/.env',
+      'dotenv_config_quiet=true',
+      'dotenv_config_override=false'
+    ],
+    {
+      env: {
+        BASIC: 'existing'
+      }
+    }
+  ),
+  'existing\n'
+)
+
+// dotenv/config still overwrites existing values when env override option is true
+t.equal(
+  spawn(
+    [
+      '-r',
+      './config',
+      '-e',
+      'console.log(process.env.BASIC)'
+    ],
+    {
+      env: {
+        BASIC: 'existing',
+        DOTENV_CONFIG_PATH: './tests/.env',
+        DOTENV_CONFIG_QUIET: 'true',
+        DOTENV_CONFIG_OVERRIDE: 'true'
+      }
+    }
   ),
   'basic\n'
 )
