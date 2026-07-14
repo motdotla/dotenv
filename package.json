@@ -2,29 +2,38 @@
   "name": "dotenv",
   "version": "17.4.2",
   "description": "Loads environment variables from .env file",
-  "main": "lib/main.js",
+  "main": "dist/lib/main.js",
   "bin": {
-    "dotenv": "./cli.js"
+    "dotenv": "./dist/cli.js"
   },
-  "types": "lib/main.d.ts",
+  "types": "dist/lib/main.d.ts",
   "exports": {
     ".": {
-      "types": "./lib/main.d.ts",
-      "require": "./lib/main.js",
-      "default": "./lib/main.js"
+      "types": "./dist/lib/main.d.ts",
+      "require": "./dist/lib/main.js",
+      "default": "./dist/lib/main.js"
     },
-    "./config": "./config.js",
-    "./config.js": "./config.js",
-    "./lib/env-options": "./lib/env-options.js",
-    "./lib/env-options.js": "./lib/env-options.js",
-    "./lib/cli-options": "./lib/cli-options.js",
-    "./lib/cli-options.js": "./lib/cli-options.js",
+    "./config": "./dist/config.js",
+    "./config.js": "./dist/config.js",
+    "./lib/env-options": "./dist/lib/env-options.js",
+    "./lib/env-options.js": "./dist/lib/env-options.js",
+    "./lib/cli-options": "./dist/lib/cli-options.js",
+    "./lib/cli-options.js": "./dist/lib/cli-options.js",
     "./package.json": "./package.json"
   },
+  "files": [
+    "dist/**/*",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
+    "build": "node scripts/build.js",
     "dts-check": "tsc --project tests/types/tsconfig.json",
     "lint": "standard",
+    "pretest": "npm run build",
     "test": "npm run lint && npm run dts-check && tap run tests/**/*.js --allow-empty-coverage --disable-coverage --timeout=60000",
+    "prepack": "npm run build",
+    "prepublishOnly": "npm pack --dry-run",
     "prerelease": "npm test",
     "release": "standard-version"
   },
@@ -48,6 +57,7 @@
   "devDependencies": {
     "@types/node": "^18.11.3",
     "decache": "^4.6.2",
+    "esbuild": "^0.28.1",
     "sinon": "^14.0.1",
     "standard": "^17.0.0",
     "standard-version": "^9.5.0",
