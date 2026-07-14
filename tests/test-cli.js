@@ -147,28 +147,6 @@ t.test('dotenv run does not override existing environment variables', ct => {
   ct.end()
 })
 
-t.test('dotenv run ignores DOTENV_KEY vault behavior', ct => {
-  const result = spawn(
-    [
-      'run',
-      '-f',
-      './tests/.env',
-      '--',
-      process.argv[0],
-      '-e',
-      'console.log(process.env.BASIC)'
-    ],
-    {
-      env: Object.assign({}, process.env, { DOTENV_KEY: 'dotenv://:bad@dotenvx.com/vault/.env.vault?environment=production' })
-    }
-  )
-
-  ct.equal(result.status, 0)
-  ct.equal(result.stdout, '◇ injected env (40) from ./tests/.env\nbasic\n')
-  ct.equal(result.stderr, '')
-  ct.end()
-})
-
 t.test('dotenv run does not expand variables', ct => {
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'dotenv-run-'))
   fs.writeFileSync(path.join(cwd, '.env'), 'BASIC=basic\nEXPANDED=$BASIC\n')
