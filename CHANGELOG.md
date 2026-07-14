@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file. See [standa
 * Remove skill files ([#1032](https://github.com/motdotla/dotenv/pull/1032))
 * Remove Spanish README ([#1034](https://github.com/motdotla/dotenv/pull/1034))
 * Remove .env.vault support ([#1033](https://github.com/motdotla/dotenv/pull/1033))
+* Remove preloading. Instead use cli `dotenv run -- your-command` ([#1035](https://github.com/motdotla/dotenv/pull/1035))
 
 ## [17.4.2](https://github.com/motdotla/dotenv/compare/v17.4.1...v17.4.2) (2026-04-12)
 
