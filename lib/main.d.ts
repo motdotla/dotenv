@@ -79,14 +79,6 @@ export interface DotenvConfigOptions {
    */
   processEnv?: DotenvPopulateInput;
 
-  /**
-   * Default: `undefined`
-   *
-   * Pass the DOTENV_KEY directly to config options. Defaults to looking for process.env.DOTENV_KEY environment variable. Note this only applies to decrypting .env.vault files. If passed as null or undefined, or not passed at all, dotenv falls back to its traditional job of parsing a .env file.
-   *
-   * example: `require('dotenv').config({ DOTENV_KEY: 'dotenv://:key_1234…@dotenvx.com/vault/.env.vault?environment=production' })`
-   */
-  DOTENV_KEY?: string;
 }
 
 export interface DotenvConfigOutput {
@@ -95,12 +87,7 @@ export interface DotenvConfigOutput {
 }
 
 type DotenvError = Error & {
-  code:
-    | 'MISSING_DATA'
-    | 'INVALID_DOTENV_KEY'
-    | 'NOT_FOUND_DOTENV_ENVIRONMENT'
-    | 'DECRYPTION_FAILED'
-    | 'OBJECT_REQUIRED';
+  code: 'OBJECT_REQUIRED';
 }
 
 export interface DotenvPopulateOptions {
@@ -128,7 +115,7 @@ export interface DotenvPopulateInput {
 }
 
 /**
- * Loads `.env` file contents into process.env by default. If `DOTENV_KEY` is present, it smartly attempts to load encrypted `.env.vault` file contents into process.env.
+ * Loads `.env` file contents into process.env by default.
  *
  * See https://dotenvx.com/docs
  *
@@ -165,15 +152,3 @@ export function populate(
   parsed: DotenvPopulateInput,
   options?: DotenvPopulateOptions
 ): DotenvPopulateOutput;
-
-/**
- * Decrypt ciphertext
- *
- * See https://dotenvx.com/docs
- *
- * @param encrypted - the encrypted ciphertext string
- * @param keyStr - the decryption key string
- * @returns {string}
- *
- */
-export function decrypt(encrypted: string, keyStr: string): string;

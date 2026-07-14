@@ -588,7 +588,7 @@ require('dotenv').config({ debug: true })
 You will receive a helpful error outputted to your console.
 
 </details>
-<details><summary>Why am I getting the error `Module not found: Error: Can't resolve 'crypto|os|path'`?</summary><br/>
+<details><summary>Why am I getting the error `Module not found: Error: Can't resolve 'os|path'`?</summary><br/>
 
 You are using dotenv on the front-end and have not included a polyfill. Webpack < 5 used to include these for you. Do the following:
 

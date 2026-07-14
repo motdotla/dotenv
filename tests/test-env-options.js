@@ -10,7 +10,6 @@ const p = process.env.DOTENV_CONFIG_PATH
 const q = process.env.DOTENV_CONFIG_QUIET
 const d = process.env.DOTENV_CONFIG_DEBUG
 const o = process.env.DOTENV_CONFIG_OVERRIDE
-const dk = process.env.DOTENV_CONFIG_DOTENV_KEY
 
 // get fresh object for each test
 function options () {
@@ -33,7 +32,6 @@ delete process.env.DOTENV_CONFIG_PATH
 delete process.env.DOTENV_CONFIG_QUIET
 delete process.env.DOTENV_CONFIG_DEBUG
 delete process.env.DOTENV_CONFIG_OVERRIDE
-delete process.env.DOTENV_CONFIG_DOTENV_KEY
 
 t.same(options(), {})
 
@@ -52,13 +50,9 @@ testOption('DOTENV_CONFIG_DEBUG', 'true', { debug: 'true' })
 // sets override option
 testOption('DOTENV_CONFIG_OVERRIDE', 'true', { override: 'true' })
 
-// sets DOTENV_KEY option
-testOption('DOTENV_CONFIG_DOTENV_KEY', 'dotenv://:key_ddcaa26504cd70a@dotenvx.com/vault/.env.vault?environment=development', { DOTENV_KEY: 'dotenv://:key_ddcaa26504cd70a@dotenvx.com/vault/.env.vault?environment=development' })
-
 // restore existing env
 process.env.DOTENV_CONFIG_ENCODING = e
 process.env.DOTENV_CONFIG_PATH = p
 process.env.DOTENV_CONFIG_QUIET = q
 process.env.DOTENV_CONFIG_DEBUG = d
 process.env.DOTENV_CONFIG_OVERRIDE = o
-process.env.DOTENV_CONFIG_DOTENV_KEY = dk
