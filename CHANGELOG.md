@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.4.2...master)
 
-* Add skills tip ([#1012](https://github.com/motdotla/dotenv/pull/1012))
+### Removed
+
+* Remove tips ([#1031](https://github.com/motdotla/dotenv/pull/1031))
+* Remove skill files ([#1032](https://github.com/motdotla/dotenv/pull/1032))
+* Remove Spanish README ([#1034](https://github.com/motdotla/dotenv/pull/1034))
+* Remove .env.vault support ([#1033](https://github.com/motdotla/dotenv/pull/1033))
 
 ## [17.4.2](https://github.com/motdotla/dotenv/compare/v17.4.1...v17.4.2) (2026-04-12)
 
