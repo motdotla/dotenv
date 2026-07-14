@@ -99,6 +99,13 @@ pnpm add dotenv
 ```
 
 </details>
+<details><summary>deno</summary><br>
+
+```sh
+deno add dotenv
+```
+
+</details>
 <details><summary>Monorepos</summary><br>
 
 For monorepos with a structure like `apps/backend/app.js`, put it the `.env` file in the root of the folder where your `app.js` process runs.
