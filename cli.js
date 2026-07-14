@@ -8,18 +8,20 @@ const dotenv = require('./lib/main')
 
 function printHelp () {
   console.log([
-    'Usage: dotenv run [--help] [-f <path>] -- <command>',
+    'Usage: dotenv run [--help] [--quiet] [-f <path>] -- <command>',
     '',
     'Run a command with environment variables from a .env file.',
     '',
     'Options:',
-    '  -f <path>  path to your .env file (default: .env)'
+    '  -f <path>  path to your .env file (default: .env)',
+    '  --quiet    suppress the injected env message'
   ].join('\n'))
 }
 
 function parseRunArgs (args) {
   const paths = []
   let defaultPath = true
+  let quiet = false
   let commandIndex = -1
 
   for (let i = 0; i < args.length; i++) {
@@ -31,7 +33,12 @@ function parseRunArgs (args) {
     }
 
     if (arg === '--help' || arg === '-h') {
-      return { help: true, paths, command: [] }
+      return { help: true }
+    }
+
+    if (arg === '--quiet') {
+      quiet = true
+      continue
     }
 
     if (arg === '-f') {
@@ -64,18 +71,21 @@ function parseRunArgs (args) {
   return {
     paths: paths.length > 0 ? paths : ['.env'],
     defaultPath,
+    quiet,
     command
   }
 }
 
 function loadEnvFiles (paths, defaultPath) {
   const parsedAll = {}
+  const loadedPaths = []
 
   for (const filepath of paths) {
     const resolvedPath = path.resolve(process.cwd(), filepath)
     try {
       const parsed = dotenv.parse(fs.readFileSync(resolvedPath, { encoding: 'utf8' }))
       dotenv.populate(parsedAll, parsed)
+      loadedPaths.push(filepath)
     } catch (e) {
       if (!(defaultPath && e.code === 'ENOENT')) {
         throw e
@@ -83,7 +93,8 @@ function loadEnvFiles (paths, defaultPath) {
     }
   }
 
-  dotenv.populate(process.env, parsedAll)
+  const injected = dotenv.populate(process.env, parsedAll)
+  return { injected, loadedPaths }
 }
 
 function run (argv) {
@@ -120,7 +131,14 @@ function run (argv) {
   }
 
   try {
-    loadEnvFiles(parsed.paths, parsed.defaultPath)
+    const result = loadEnvFiles(parsed.paths, parsed.defaultPath)
+    if (!parsed.quiet) {
+      let message = `◇ injected env (${Object.keys(result.injected).length})`
+      if (result.loadedPaths.length > 0) {
+        message += ` from ${result.loadedPaths.join(', ')}`
+      }
+      console.log(message)
+    }
   } catch (e) {
     console.error(`dotenv: ${e.message}`)
     process.exitCode = 1

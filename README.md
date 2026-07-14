@@ -160,12 +160,20 @@ Use `dotenv run --` to run a command with environment variables from your `.env`
 
 ```bash
 $ dotenv run -- node index.js
+◇ injected env (2) from .env
 ```
 
 Use `-f` to select one or more `.env` files.
 
 ```bash
 $ dotenv run -f .env.local -f .env -- node index.js
+◇ injected env (2) from .env.local, .env
+```
+
+Use `--quiet` to suppress the injected env message.
+
+```bash
+$ dotenv run --quiet -- node index.js
 ```
 
 </details>

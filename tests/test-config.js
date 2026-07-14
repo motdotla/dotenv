@@ -301,117 +301,14 @@ t.test('path.relative fails somehow', ct => {
   ct.end()
 })
 
-t.test('displays random tips from the tips array', ct => {
-  ct.plan(2)
-
-  const originalTTY = process.stdout.isTTY
-  process.stdout.isTTY = true
-
+t.test('displays the injected env message without tips', ct => {
+  ct.plan(1)
   logStub = sinon.stub(console, 'log')
   const testPath = 'tests/.env'
 
-  // Test that tips are displayed (run config multiple times to see variation)
-  dotenv.config({ path: testPath })
-  dotenv.config({ path: testPath })
   dotenv.config({ path: testPath })
 
-  // Should have at least one call that contains a tip
-  let foundTip = false
-  for (const call of logStub.getCalls()) {
-    if (call.args[0] && call.args[0].includes('tip:')) {
-      foundTip = true
-      break
-    }
-  }
-
-  ct.ok(foundTip, 'Should display a tip')
-
-  // Test that the tip contains one of our expected tip messages
-  let foundExpectedTip = false
-  const expectedTips = [
-    '◈ encrypted .env [www.dotenvx.com]',
-    '◈ secrets for agents [www.dotenvx.com]',
-    '✦ add agent skills [npx skills add motdotla/dotenv]',
-    '⌁ auth for agents [www.vestauth.com]',
-    '⌘ custom filepath { path: \'/custom/path/.env\' }',
-    '⌘ enable debugging { debug: true }',
-    '⌘ override existing { override: true }',
-    '⌘ suppress logs { quiet: true }',
-    '⌘ multiple files { path: [\'.env.local\', \'.env\'] }'
-  ]
-
-  for (const call of logStub.getCalls()) {
-    if (call.args[0] && call.args[0].includes('tip:')) {
-      for (const expectedTip of expectedTips) {
-        if (call.args[0].includes(expectedTip)) {
-          foundExpectedTip = true
-          break
-        }
-      }
-    }
-  }
-
-  ct.ok(foundExpectedTip, 'Should display one of the expected tips')
-
-  // Restore
-  process.stdout.isTTY = originalTTY
-  ct.end()
-})
-
-t.test('displays random tips from the tips array with fallback for isTTY false', ct => {
-  ct.plan(2)
-
-  const originalTTY = process.stdout.isTTY
-  process.stdout.isTTY = undefined
-
-  logStub = sinon.stub(console, 'log')
-  const testPath = 'tests/.env'
-
-  // Test that tips are displayed (run config multiple times to see variation)
-  dotenv.config({ path: testPath })
-  dotenv.config({ path: testPath })
-  dotenv.config({ path: testPath })
-
-  // Should have at least one call that contains a tip
-  let foundTip = false
-  for (const call of logStub.getCalls()) {
-    if (call.args[0] && call.args[0].includes('tip:')) {
-      foundTip = true
-      break
-    }
-  }
-
-  ct.ok(foundTip, 'Should display a tip')
-
-  // Test that the tip contains one of our expected tip messages
-  let foundExpectedTip = false
-  const expectedTips = [
-    '◈ encrypted .env [www.dotenvx.com]',
-    '◈ secrets for agents [www.dotenvx.com]',
-    '✦ add agent skills [npx skills add motdotla/dotenv]',
-    '⌁ auth for agents [www.vestauth.com]',
-    '⌘ custom filepath { path: \'/custom/path/.env\' }',
-    '⌘ enable debugging { debug: true }',
-    '⌘ override existing { override: true }',
-    '⌘ suppress logs { quiet: true }',
-    '⌘ multiple files { path: [\'.env.local\', \'.env\'] }'
-  ]
-
-  for (const call of logStub.getCalls()) {
-    if (call.args[0] && call.args[0].includes('tip:')) {
-      for (const expectedTip of expectedTips) {
-        if (call.args[0].includes(expectedTip)) {
-          foundExpectedTip = true
-          break
-        }
-      }
-    }
-  }
-
-  ct.ok(foundExpectedTip, 'Should display one of the expected tips')
-
-  // Restore
-  process.stdout.isTTY = originalTTY
+  ct.match(logStub.firstCall.args[0], /^◇ injected env \(\d+\) from tests\/\.env$/)
   ct.end()
 })
 
