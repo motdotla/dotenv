@@ -4,7 +4,16 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.4.2...master)
 
-* Add skills tip ([#1012](https://github.com/motdotla/dotenv/pull/1012))
+### Added
+
+* Add cli `dotenv run --` ([#1022](https://github.com/motdotla/dotenv/pull/1022))
+
+### Removed
+
+* Remove tips ([#1031](https://github.com/motdotla/dotenv/pull/1031))
+* Remove skill files ([#1032](https://github.com/motdotla/dotenv/pull/1032))
+* Remove Spanish README ([#1034](https://github.com/motdotla/dotenv/pull/1034))
+* Remove .env.vault support ([#1033](https://github.com/motdotla/dotenv/pull/1033))
 
 ## [17.4.2](https://github.com/motdotla/dotenv/compare/v17.4.1...v17.4.2) (2026-04-12)
 
@@ -272,7 +281,6 @@ const TIPS = [
 - Add `populate` convenience method [#733](https://github.com/motdotla/dotenv/pull/733)
 - Accept URL as path option [#720](https://github.com/motdotla/dotenv/pull/720)
 - Add dotenv to `npm fund` command
-- Spanish language README [#698](https://github.com/motdotla/dotenv/pull/698)
 - Add `.env.vault` support. 🎉 ([#730](https://github.com/motdotla/dotenv/pull/730))
 
 ℹ️ `.env.vault` extends the `.env` file format standard with a localized encrypted vault file. Package it securely with your production code deploys. It's cloud agnostic so that you can deploy your secrets anywhere – without [risky third-party integrations](https://techcrunch.com/2023/01/05/circleci-breach/). [read more](https://github.com/motdotla/dotenv#-deploying)
