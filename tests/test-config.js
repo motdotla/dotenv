@@ -15,6 +15,39 @@ t.beforeEach(() => {
 
 t.afterEach(() => {
   if (logStub) logStub.restore()
+  delete process.env.DOTENV_CONFIG_ENCODING
+  delete process.env.DOTENV_CONFIG_PATH
+  delete process.env.DOTENV_CONFIG_QUIET
+  delete process.env.DOTENV_CONFIG_DEBUG
+  delete process.env.DOTENV_CONFIG_OVERRIDE
+})
+
+t.test('uses DOTENV_CONFIG_* values as config defaults', ct => {
+  process.env.DOTENV_CONFIG_PATH = 'tests/.env.local'
+  process.env.DOTENV_CONFIG_QUIET = 'true'
+  process.env.DOTENV_CONFIG_OVERRIDE = 'true'
+  const processEnv = { BASIC: 'existing' }
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ processEnv })
+
+  ct.equal(processEnv.BASIC, 'local_basic')
+  ct.ok(logStub.notCalled)
+  ct.end()
+})
+
+t.test('config options override DOTENV_CONFIG_* defaults', ct => {
+  process.env.DOTENV_CONFIG_PATH = 'tests/.env.local'
+  process.env.DOTENV_CONFIG_QUIET = 'true'
+  process.env.DOTENV_CONFIG_OVERRIDE = 'true'
+  const processEnv = { BASIC: 'existing' }
+  logStub = sinon.stub(console, 'log')
+
+  dotenv.config({ path: 'tests/.env', quiet: false, override: false, processEnv })
+
+  ct.equal(processEnv.BASIC, 'existing')
+  ct.ok(logStub.called)
+  ct.end()
 })
 
 t.test('takes string for path option', ct => {
@@ -341,18 +374,6 @@ t.test('does not log if quiet flag passed true', ct => {
   ct.ok(logStub.notCalled)
 })
 
-t.test('does not log if process.env.DOTENV_CONFIG_QUIET is true', ct => {
-  ct.plan(1)
-
-  process.env.DOTENV_CONFIG_QUIET = 'true'
-  const testPath = 'tests/.env'
-  logStub = sinon.stub(console, 'log')
-
-  dotenv.config({ path: testPath })
-  ct.ok(logStub.notCalled)
-  delete process.env.DOTENV_CONFIG_QUIET
-})
-
 t.test('does log if quiet flag false', ct => {
   ct.plan(1)
 
@@ -361,18 +382,6 @@ t.test('does log if quiet flag false', ct => {
 
   dotenv.config({ path: testPath, quiet: false })
   ct.ok(logStub.called)
-})
-
-t.test('does log if process.env.DOTENV_CONFIG_QUIET is false', ct => {
-  ct.plan(1)
-
-  process.env.DOTENV_CONFIG_QUIET = 'false'
-  const testPath = 'tests/.env'
-  logStub = sinon.stub(console, 'log')
-
-  dotenv.config({ path: testPath })
-  ct.ok(logStub.called)
-  delete process.env.DOTENV_CONFIG_QUIET
 })
 
 t.test('does log if quiet flag present and undefined/null', ct => {

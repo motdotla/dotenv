@@ -55,12 +55,7 @@ Import with [ES6](#how-do-i-use-dotenv-with-import):
 import 'dotenv/config'
 ```
 
-ES6 import if you need to set config options:
-
-```javascript
-import dotenv from 'dotenv'
-dotenv.config({ path: '/custom/path/to/.env' })
-```
+`DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, and `DOTENV_CONFIG_OVERRIDE` provide defaults for `config()`. Options passed directly to `config()` take precedence.
 
 </details>
 <details><summary>bun</summary><br>
@@ -166,35 +161,6 @@ Use `--quiet` to suppress the injected env message.
 
 ```bash
 $ dotenv run --quiet -- node index.js
-```
-
-</details>
-<details><summary>Preload</summary><br>
-
-> Note: Consider using [`dotenvx`](https://github.com/dotenvx/dotenvx) instead of preloading. I am now doing (and recommending) so.
->
-> It serves the same purpose (you do not need to require and load dotenv), adds better debugging, and works with ANY language, framework, or platform. – [motdotla](https://not.la)
-
-You can use the `--require` (`-r`) [command line option](https://nodejs.org/api/cli.html#-r---require-module) to preload dotenv. By doing this, you do not need to require and load dotenv in your application code.
-
-```bash
-$ node -r dotenv/config your_script.js
-```
-
-The configuration options below are supported as command line arguments in the format `dotenv_config_<option>=value`
-
-```bash
-$ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env dotenv_config_debug=true
-```
-
-Additionally, you can use environment variables to set configuration options. Command line arguments will precede these.
-
-```bash
-$ DOTENV_CONFIG_<OPTION>=value node -r dotenv/config your_script.js
-```
-
-```bash
-$ DOTENV_CONFIG_ENCODING=latin1 DOTENV_CONFIG_DEBUG=true node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 ```
 
 </details>
@@ -339,7 +305,6 @@ See [examples](https://github.com/dotenv-org/examples) of using dotenv with vari
 * [nodejs (override on)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-nodejs-override)
 * [nodejs (processEnv override)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-custom-target)
 * [esm](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-esm)
-* [esm (preload)](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-esm-preload)
 * [typescript](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript)
 * [typescript parse](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript-parse)
 * [typescript config](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-typescript-config)
@@ -383,59 +348,19 @@ Additionally, we recommend using [dotenvx](https://github.com/dotenvx/dotenvx) t
 
 <details><summary>How do I use dotenv with `import`?</summary><br/>
 
-Simply..
+Import `dotenv/config` before modules that read environment variables.
 
 ```javascript
 // index.mjs (ESM)
-import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import 'dotenv/config'
 import express from 'express'
 ```
 
-A little background..
+This loads environment variables before the rest of your application modules are initialized. You can also use the CLI to inject them before Node starts:
 
-> When you run a module containing an `import` declaration, the modules it imports are loaded first, then each module body is executed in a depth-first traversal of the dependency graph, avoiding cycles by skipping anything already executed.
->
-> – [ES6 In Depth: Modules](https://hacks.mozilla.org/2015/08/es6-in-depth-modules/)
-
-What does this mean in plain language? It means you would think the following would work but it won't.
-
-`errorReporter.mjs`:
-```js
-class Client {
-  constructor (apiKey) {
-    console.log('apiKey', apiKey)
-
-    this.apiKey = apiKey
-  }
-}
-
-export default new Client(process.env.API_KEY)
+```bash
+dotenv run -- node index.mjs
 ```
-`index.mjs`:
-```js
-// Note: this is INCORRECT and will not work
-import * as dotenv from 'dotenv'
-dotenv.config()
-
-import errorReporter from './errorReporter.mjs' // process.env.API_KEY will be blank!
-```
-
-`process.env.API_KEY` will be blank.
-
-Instead, `index.mjs` should be written as..
-
-```js
-import 'dotenv/config'
-
-import errorReporter from './errorReporter.mjs'
-```
-
-Does that make sense? It's a bit unintuitive, but it is how importing of ES6 modules work. Here is a [working example of this pitfall](https://github.com/dotenv-org/examples/tree/master/usage/dotenv-es6-import-pitfall).
-
-There are two alternatives to this approach:
-
-1. Preload with dotenvx: `dotenvx run -- node index.js` (_Note: you do not need to `import` dotenv with this approach_)
-2. Create a separate file that will execute `config` first as outlined in [this comment on #133](https://github.com/motdotla/dotenv/issues/133#issuecomment-255298822)
 </details>
 
 <details><summary>Can I customize/write plugins for dotenv?</summary><br/>
@@ -480,9 +405,7 @@ Use [dotenvx](https://github.com/dotenvx/dotenvx) to unlock syncing encrypted .e
 </details>
 <details><summary>How do I specify config options with ES6 import?</summary><br/>
 
-When using `import 'dotenv/config'`, you can't pass options directly. Here are a few ways to handle it.
-
-**Option 1: Import and call `config()` yourself (Recommended)**
+Pass options directly to `config()`.
 
 ```javascript
 // index.mjs
@@ -493,25 +416,10 @@ dotenv.config({
   debug: true
 })
 
-// Now import everything else
 import express from 'express'
 ```
 
-Because ES6 imports are hoisted, put the `dotenv` import and `config()` call at the very top, before any other imports that rely on `process.env`.
-
-**Option 2: Use environment variables**
-
-```bash
-DOTENV_CONFIG_DEBUG=true DOTENV_CONFIG_PATH=/custom/path/to/.env node index.mjs
-```
-
-Then in your code you can keep the shorthand:
-
-```javascript
-import 'dotenv/config'
-```
-
-**Option 3: A tiny wrapper file**
+If imported modules read environment variables during initialization, use a tiny wrapper file.
 
 Create `load-env.mjs`:
 
@@ -526,8 +434,6 @@ Then in your main file:
 import './load-env.mjs'
 import express from 'express'
 ```
-
-Not the most elegant, but it works reliably when hoisting gets in the way.
 
 </details>
 <details><summary>What if I accidentally commit my `.env` file to code?</summary><br/>
