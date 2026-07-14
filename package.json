@@ -2,23 +2,17 @@
   "name": "dotenv",
   "version": "17.4.2",
   "description": "Loads environment variables from .env file",
-  "main": "dist/lib/main.js",
+  "main": "dist/index.cjs",
   "bin": {
-    "dotenv": "./dist/cli.js"
+    "dotenv": "./dist/index.cjs"
   },
-  "types": "dist/lib/main.d.ts",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/lib/main.d.ts",
-      "require": "./dist/lib/main.js",
-      "default": "./dist/lib/main.js"
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.cjs"
     },
-    "./config": "./dist/config.js",
-    "./config.js": "./dist/config.js",
-    "./lib/env-options": "./dist/lib/env-options.js",
-    "./lib/env-options.js": "./dist/lib/env-options.js",
-    "./lib/cli-options": "./dist/lib/cli-options.js",
-    "./lib/cli-options.js": "./dist/lib/cli-options.js",
     "./package.json": "./package.json"
   },
   "files": [

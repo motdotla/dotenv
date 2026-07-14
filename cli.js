@@ -164,4 +164,8 @@ function run (argv) {
   })
 }
 
-run(process.argv.slice(2))
+module.exports = run
+
+if (require.main === module) {
+  run(process.argv.slice(2))
+}

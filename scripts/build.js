@@ -8,22 +8,15 @@ const dist = path.join(root, 'dist')
 fs.rmSync(dist, { recursive: true, force: true })
 
 esbuild.buildSync({
-  entryPoints: [
-    path.join(root, 'lib/main.js'),
-    path.join(root, 'lib/env-options.js'),
-    path.join(root, 'lib/cli-options.js'),
-    path.join(root, 'config.js'),
-    path.join(root, 'cli.js')
-  ],
+  entryPoints: [path.join(root, 'index.js')],
+  bundle: true,
   platform: 'node',
   format: 'cjs',
   target: 'node12',
-  outdir: dist,
-  outbase: root,
+  outfile: path.join(dist, 'index.cjs'),
   legalComments: 'none',
   minify: true
 })
 
-fs.copyFileSync(path.join(root, 'lib/main.d.ts'), path.join(dist, 'lib/main.d.ts'))
-fs.copyFileSync(path.join(root, 'config.d.ts'), path.join(dist, 'config.d.ts'))
-fs.chmodSync(path.join(dist, 'cli.js'), 0o755)
+fs.copyFileSync(path.join(root, 'lib/main.d.ts'), path.join(dist, 'index.d.ts'))
+fs.chmodSync(path.join(dist, 'index.cjs'), 0o755)
