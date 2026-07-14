@@ -43,21 +43,6 @@ Eso es todo. `process.env` ahora tiene las claves y valores que definiste en tu 
 
 &nbsp;
 
-## Uso con agentes
-
-Instala este repositorio como paquete de habilidad para tu agente:
-
-```sh
-npx skills add motdotla/dotenv
-```
-```sh
-# luego dile a Claude/Codex cosas como:
-configura dotenv
-actualiza dotenv a dotenvx
-```
-
-&nbsp;
-
 ## Avanzado
 
 <details><summary>ES6</summary><br>
