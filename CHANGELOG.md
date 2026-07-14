@@ -272,7 +272,6 @@ const TIPS = [
 - Add `populate` convenience method [#733](https://github.com/motdotla/dotenv/pull/733)
 - Accept URL as path option [#720](https://github.com/motdotla/dotenv/pull/720)
 - Add dotenv to `npm fund` command
-- Spanish language README [#698](https://github.com/motdotla/dotenv/pull/698)
 - Add `.env.vault` support. 🎉 ([#730](https://github.com/motdotla/dotenv/pull/730))
 
 ℹ️ `.env.vault` extends the `.env` file format standard with a localized encrypted vault file. Package it securely with your production code deploys. It's cloud agnostic so that you can deploy your secrets anywhere – without [risky third-party integrations](https://techcrunch.com/2023/01/05/circleci-breach/). [read more](https://github.com/motdotla/dotenv#-deploying)
