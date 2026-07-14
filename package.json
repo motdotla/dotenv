@@ -25,7 +25,6 @@
     "dts-check": "tsc --project tests/types/tsconfig.json",
     "lint": "standard",
     "test": "npm run lint && npm run dts-check && tap run tests/**/*.js --allow-empty-coverage --disable-coverage --timeout=60000",
-    "test:coverage": "tap run tests/**/*.js --show-full-coverage --timeout=60000 --coverage-report=text --coverage-report=lcov",
     "prerelease": "npm test",
     "release": "standard-version"
   },
