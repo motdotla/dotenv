@@ -659,6 +659,13 @@ Specify a custom path if your file containing environment variables is located e
 ```js
 require('dotenv').config({ path: '/custom/path/to/.env' })
 ```
+You can also pass a `URL` object:
+
+```js
+const fileUrl = new URL('file:///custom/path/to/.env')
+
+require('dotenv').config({ path: fileUrl })
+```
 
 By default, `config` will look for a file called .env in the current working directory.
 
