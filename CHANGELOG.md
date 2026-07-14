@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.4.2...master)
 
+### Added
+
+* Add cli `dotenv run --` ([#1022](https://github.com/motdotla/dotenv/pull/1022))
+
 ### Removed
 
 * Remove tips ([#1031](https://github.com/motdotla/dotenv/pull/1031))
