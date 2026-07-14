@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 * Add cli `dotenv run --` ([#1022](https://github.com/motdotla/dotenv/pull/1022))
 
+### Changed
+
+* Simplify automatic loading: use `import 'dotenv/config'` or `dotenv run -- yourcommand` ([#1035](https://github.com/motdotla/dotenv/pull/1035))
+
 ### Removed
 
 * Remove tips ([#1031](https://github.com/motdotla/dotenv/pull/1031))

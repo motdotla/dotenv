@@ -13,6 +13,8 @@
       "require": "./dist/index.cjs",
       "default": "./dist/index.cjs"
     },
+    "./config": "./dist/config.cjs",
+    "./config.js": "./dist/config.cjs",
     "./package.json": "./package.json"
   },
   "files": [

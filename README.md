@@ -31,6 +31,7 @@ As early as possible in your application, import and configure dotenv:
 ```javascript
 // index.js
 require('dotenv').config()
+// or import 'dotenv/config' // for esm
 
 console.log(`Hello ${process.env.HELLO}`)
 ```
@@ -51,8 +52,7 @@ That's it. `process.env` now has the keys and values you defined in your `.env` 
 Import with [ES6](#how-do-i-use-dotenv-with-import):
 
 ```javascript
-import dotenv from 'dotenv'
-dotenv.config()
+import 'dotenv/config'
 ```
 
 `DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, and `DOTENV_CONFIG_OVERRIDE` provide defaults for `config()`. Options passed directly to `config()` take precedence.
@@ -348,17 +348,15 @@ Additionally, we recommend using [dotenvx](https://github.com/dotenvx/dotenvx) t
 
 <details><summary>How do I use dotenv with `import`?</summary><br/>
 
-Import dotenv and call `config()` before reading environment variables.
+Import `dotenv/config` before modules that read environment variables.
 
 ```javascript
 // index.mjs (ESM)
-import dotenv from 'dotenv'
+import 'dotenv/config'
 import express from 'express'
-
-dotenv.config()
 ```
 
-ES module imports are evaluated before the rest of the current module. If another imported module reads `process.env` during initialization, use the CLI so dotenv runs first:
+This loads environment variables before the rest of your application modules are initialized. You can also use the CLI to inject them before Node starts:
 
 ```bash
 dotenv run -- node index.mjs
