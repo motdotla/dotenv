@@ -137,7 +137,7 @@ function run (argv) {
       if (result.loadedPaths.length > 0) {
         message += ` from ${result.loadedPaths.join(', ')}`
       }
-      console.log(message)
+      console.error(message)
     }
   } catch (e) {
     console.error(`dotenv: ${e.message}`)

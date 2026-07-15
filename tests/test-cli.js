@@ -47,8 +47,8 @@ t.test('dotenv run loads .env by default', ct => {
   removeDir(cwd)
 
   ct.equal(result.status, 0)
-  ct.equal(result.stdout, '◇ injected env (1) from .env\nbasic\n')
-  ct.equal(result.stderr, '')
+  ct.equal(result.stdout, 'basic\n')
+  ct.equal(result.stderr, '◇ injected env (1) from .env\n')
   ct.end()
 })
 
@@ -68,8 +68,8 @@ t.test('dotenv run continues when default .env is missing', ct => {
   removeDir(cwd)
 
   ct.equal(result.status, 0)
-  ct.equal(result.stdout, '◇ injected env (0)\nok\n')
-  ct.equal(result.stderr, '')
+  ct.equal(result.stdout, 'ok\n')
+  ct.equal(result.stderr, '◇ injected env (0)\n')
   ct.end()
 })
 
@@ -85,8 +85,8 @@ t.test('dotenv run supports -f path', ct => {
   ])
 
   ct.equal(result.status, 0)
-  ct.equal(result.stdout, '◇ injected env (2) from ./tests/.env.local\nlocal_basic\n')
-  ct.equal(result.stderr, '')
+  ct.equal(result.stdout, 'local_basic\n')
+  ct.equal(result.stderr, '◇ injected env (2) from ./tests/.env.local\n')
   ct.end()
 })
 
@@ -101,8 +101,8 @@ t.test('dotenv run supports -f=path', ct => {
   ])
 
   ct.equal(result.status, 0)
-  ct.equal(result.stdout, '◇ injected env (2) from ./tests/.env.local\nlocal_basic\n')
-  ct.equal(result.stderr, '')
+  ct.equal(result.stdout, 'local_basic\n')
+  ct.equal(result.stderr, '◇ injected env (2) from ./tests/.env.local\n')
   ct.end()
 })
 
@@ -120,8 +120,8 @@ t.test('dotenv run supports multiple -f paths without override', ct => {
   ])
 
   ct.equal(result.status, 0)
-  ct.equal(result.stdout, '◇ injected env (41) from ./tests/.env.local, ./tests/.env\nlocal_basic\n')
-  ct.equal(result.stderr, '')
+  ct.equal(result.stdout, 'local_basic\n')
+  ct.equal(result.stderr, '◇ injected env (41) from ./tests/.env.local, ./tests/.env\n')
   ct.end()
 })
 
@@ -142,8 +142,8 @@ t.test('dotenv run does not override existing environment variables', ct => {
   )
 
   ct.equal(result.status, 0)
-  ct.equal(result.stdout, '◇ injected env (39) from ./tests/.env\nexisting\n')
-  ct.equal(result.stderr, '')
+  ct.equal(result.stdout, 'existing\n')
+  ct.equal(result.stderr, '◇ injected env (39) from ./tests/.env\n')
   ct.end()
 })
 
@@ -164,8 +164,8 @@ t.test('dotenv run does not expand variables', ct => {
   removeDir(cwd)
 
   ct.equal(result.status, 0)
-  ct.equal(result.stdout, '◇ injected env (2) from .env\n$BASIC\n')
-  ct.equal(result.stderr, '')
+  ct.equal(result.stdout, '$BASIC\n')
+  ct.equal(result.stderr, '◇ injected env (2) from .env\n')
   ct.end()
 })
 

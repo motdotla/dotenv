@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Changed
 
 * Simplify automatic loading: use `import 'dotenv/config'` or `dotenv run -- yourcommand` ([#1035](https://github.com/motdotla/dotenv/pull/1035))
+* Injecting message sent to stderr rather than stdout ([#1037](https://github.com/motdotla/dotenv/pull/1037))
 
 ### Removed
 
