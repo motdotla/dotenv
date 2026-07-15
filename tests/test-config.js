@@ -7,14 +7,17 @@ const t = require('tap')
 const dotenv = require('../lib/main')
 
 let logStub
+let errorStub
 
 t.beforeEach(() => {
   logStub = null
+  errorStub = null
   delete process.env.BASIC // reset
 })
 
 t.afterEach(() => {
   if (logStub) logStub.restore()
+  if (errorStub) errorStub.restore()
   delete process.env.DOTENV_CONFIG_ENCODING
   delete process.env.DOTENV_CONFIG_PATH
   delete process.env.DOTENV_CONFIG_QUIET
@@ -27,12 +30,12 @@ t.test('uses DOTENV_CONFIG_* values as config defaults', ct => {
   process.env.DOTENV_CONFIG_QUIET = 'true'
   process.env.DOTENV_CONFIG_OVERRIDE = 'true'
   const processEnv = { BASIC: 'existing' }
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   dotenv.config({ processEnv })
 
   ct.equal(processEnv.BASIC, 'local_basic')
-  ct.ok(logStub.notCalled)
+  ct.ok(errorStub.notCalled)
   ct.end()
 })
 
@@ -41,12 +44,12 @@ t.test('config options override DOTENV_CONFIG_* defaults', ct => {
   process.env.DOTENV_CONFIG_QUIET = 'true'
   process.env.DOTENV_CONFIG_OVERRIDE = 'true'
   const processEnv = { BASIC: 'existing' }
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   dotenv.config({ path: 'tests/.env', quiet: false, override: false, processEnv })
 
   ct.equal(processEnv.BASIC, 'existing')
-  ct.ok(logStub.called)
+  ct.ok(errorStub.called)
   ct.end()
 })
 
@@ -287,7 +290,7 @@ t.test('logs any errors parsing when in debug and override mode', ct => {
 })
 
 t.test('deals with file:// path', ct => {
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   const testPath = 'file:///tests/.env'
   const env = dotenv.config({ path: testPath })
@@ -296,7 +299,7 @@ t.test('deals with file:// path', ct => {
   ct.equal(process.env.BASIC, undefined)
   ct.equal(env.error.message, "ENOENT: no such file or directory, open 'file:///tests/.env'")
 
-  ct.ok(logStub.called)
+  ct.ok(errorStub.called)
 
   ct.end()
 })
@@ -336,62 +339,62 @@ t.test('path.relative fails somehow', ct => {
 
 t.test('displays the injected env message without tips', ct => {
   ct.plan(1)
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
   const testPath = 'tests/.env'
 
   dotenv.config({ path: testPath })
 
-  ct.match(logStub.firstCall.args[0], /^◇ injected env \(\d+\) from tests\/\.env$/)
+  ct.match(errorStub.firstCall.args[0], /^◇ injected env \(\d+\) from tests\/\.env$/)
   ct.end()
 })
 
 t.test('logs when no path is set', ct => {
   ct.plan(1)
 
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   dotenv.config()
-  ct.ok(logStub.called)
+  ct.ok(errorStub.called)
 })
 
 t.test('does log by default', ct => {
   ct.plan(1)
 
   const testPath = 'tests/.env'
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   dotenv.config({ path: testPath })
-  ct.ok(logStub.called)
+  ct.ok(errorStub.called)
 })
 
 t.test('does not log if quiet flag passed true', ct => {
   ct.plan(1)
 
   const testPath = 'tests/.env'
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   dotenv.config({ path: testPath, quiet: true })
-  ct.ok(logStub.notCalled)
+  ct.ok(errorStub.notCalled)
 })
 
 t.test('does log if quiet flag false', ct => {
   ct.plan(1)
 
   const testPath = 'tests/.env'
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   dotenv.config({ path: testPath, quiet: false })
-  ct.ok(logStub.called)
+  ct.ok(errorStub.called)
 })
 
 t.test('does log if quiet flag present and undefined/null', ct => {
   ct.plan(1)
 
   const testPath = 'tests/.env'
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   dotenv.config({ path: testPath, quiet: undefined })
-  ct.ok(logStub.called)
+  ct.ok(errorStub.called)
 })
 
 t.test('logs if debug set', ct => {
