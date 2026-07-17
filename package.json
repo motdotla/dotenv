@@ -45,7 +45,11 @@
     "environment",
     "variables",
     "config",
-    "settings"
+    "settings",
+    "env vars",
+    "environment variables",
+    "secret-management",
+    "secrets"
   ],
   "readmeFilename": "README.md",
   "license": "BSD-2-Clause",
