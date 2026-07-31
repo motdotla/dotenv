@@ -23,6 +23,8 @@ t.afterEach(() => {
   delete process.env.DOTENV_CONFIG_QUIET
   delete process.env.DOTENV_CONFIG_DEBUG
   delete process.env.DOTENV_CONFIG_OVERRIDE
+  delete process.env.DOTENV_CONFIG_SECURE
+  delete process.env.DOTENV_CONFIG_FAST
 })
 
 t.test('uses DOTENV_CONFIG_* values as config defaults', ct => {
@@ -405,4 +407,41 @@ t.test('logs if debug set', ct => {
 
   dotenv.config({ path: testPath, debug: true })
   ct.ok(logStub.called)
+})
+
+t.test('config({ secure: true }) errors when dotenvx is not installed', ct => {
+  errorStub = sinon.stub(console, 'error')
+
+  const result = dotenv.config({ secure: true, quiet: true })
+
+  ct.equal(result.error.code, 'SECURE_REQUIRES_DOTENVX')
+  ct.match(errorStub.firstCall.args[0], /secure requires dotenvx/)
+  ct.end()
+})
+
+t.test('DOTENV_CONFIG_SECURE=true errors when dotenvx is not installed', ct => {
+  process.env.DOTENV_CONFIG_SECURE = 'true'
+  errorStub = sinon.stub(console, 'error')
+
+  const result = dotenv.config({ quiet: true })
+
+  ct.equal(result.error.code, 'SECURE_REQUIRES_DOTENVX')
+  ct.end()
+})
+
+t.test('config warns when encrypted values are present without secure', ct => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'dotenv-secure-'))
+  const envPath = path.join(dir, '.env')
+  fs.writeFileSync(envPath, 'HELLO="encrypted:abc123"\n')
+  errorStub = sinon.stub(console, 'error')
+
+  const processEnv = {}
+  const result = dotenv.config({ path: envPath, processEnv })
+
+  ct.equal(processEnv.HELLO, 'encrypted:abc123')
+  ct.equal(result.parsed.HELLO, 'encrypted:abc123')
+  ct.ok(errorStub.calledWith('┆ encrypted values detected — use: require(\'dotenv\').config({ secure: true })'))
+
+  fs.rmSync(dir, { recursive: true, force: true })
+  ct.end()
 })

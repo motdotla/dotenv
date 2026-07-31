@@ -55,7 +55,7 @@ Import with [ES6](#how-do-i-use-dotenv-with-import):
 import 'dotenv/config'
 ```
 
-`DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, and `DOTENV_CONFIG_OVERRIDE` provide defaults for `config()` and `dotenv run`. Options/flags passed directly take precedence.
+`DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, `DOTENV_CONFIG_OVERRIDE`, `DOTENV_CONFIG_SECURE`, and `DOTENV_CONFIG_FAST` provide defaults for `config()` and `dotenv run`. Options/flags passed directly take precedence.
 
 </details>
 <details><summary>bun</summary><br>
@@ -169,13 +169,45 @@ Use `--override` to overwrite existing environment variables, and `--debug` for 
 $ dotenv run --override --debug -- node index.js
 ```
 
+Use `--secure` or `config({ secure: true })` to decrypt via [dotenvx](https://dotenvx.com).
+
+```bash
+$ npm i @dotenvx/dotenvx
+$ dotenv run --secure -- node index.js
+```
+
+```js
+require('dotenv').config({ secure: true })
+```
+
+Or with an environment variable:
+
+```bash
+$ DOTENV_CONFIG_SECURE=true dotenv run -- node index.js
+$ DOTENV_CONFIG_SECURE=true node -e "require('dotenv').config()"
+```
+
+`dotenv run --secure` resolves local `@dotenvx/dotenvx` then `dotenvx` on your `PATH`. `config({ secure: true })` requires a local `@dotenvx/dotenvx` install.
+
+If your `.env` contains `encrypted:` values and you run without `--secure` / `secure: true`, dotenv warns and leaves them encrypted.
+
 The same `DOTENV_CONFIG_*` environment variables formerly used by preload still work with the CLI. CLI flags take precedence.
 
 ```bash
 $ DOTENV_CONFIG_PATH=./.env.local DOTENV_CONFIG_QUIET=true dotenv run -- node index.js
 ```
 
-Supported: `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, `DOTENV_CONFIG_OVERRIDE`.
+Use `--fast` (or `config({ fast: true })`) for the faster character-scanner parser (~2x). Default remains the classic regex parser.
+
+```bash
+$ dotenv run --fast -- node index.js
+```
+
+```js
+require('dotenv').config({ fast: true })
+```
+
+Supported: `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, `DOTENV_CONFIG_OVERRIDE`, `DOTENV_CONFIG_SECURE`, `DOTENV_CONFIG_FAST`.
 
 </details>
 <details><summary>Variable Expansion</summary><br>
@@ -653,6 +685,26 @@ Override any environment variables that have already been set on your machine wi
 
 ```js
 require('dotenv').config({ override: true })
+```
+
+##### secure
+
+Default: `false`
+
+Decrypt via [dotenvx](https://dotenvx.com). Requires a local `@dotenvx/dotenvx` install.
+
+```js
+require('dotenv').config({ secure: true })
+```
+
+##### fast
+
+Default: `false`
+
+Use the faster character-scanner parser (~2x). Default remains the classic regex parser.
+
+```js
+require('dotenv').config({ fast: true })
 ```
 
 ##### processEnv

@@ -11,6 +11,7 @@ config({
 });
 
 parse("test");
+parse("test", { fast: true });
 
 const parsed = parse("NODE_ENV=production\nDB_HOST=a.b.c");
 const dbHost: string = parsed["DB_HOST"];
@@ -21,6 +22,11 @@ const justice: string = parsedFromBuffer["JUSTICE"];
 config({
   // make sure the type accepts process.env (it didn't in the past)
   processEnv: process.env,
+});
+
+config({
+  secure: true,
+  fast: true,
 });
 
 // populate() should accept DotenvPopulateOptions (debug + override only),

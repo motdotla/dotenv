@@ -10,16 +10,29 @@ export interface DotenvPopulateOutput {
   [name: string]: string;
 }
 
+export interface DotenvParseOptions {
+  /**
+   * Default: `false`
+   *
+   * Use the faster character-scanner parser (from PR #1010).
+   *
+   * example: `require('dotenv').parse(src, { fast: true })`
+   */
+  fast?: boolean;
+}
+
 /**
  * Parses a string or buffer in the .env file format into an object.
  *
  * See https://dotenvx.com/docs
  *
  * @param src - contents to be parsed. example: `'DB_HOST=localhost'`
+ * @param options - parse options. example: `{ fast: true }`
  * @returns an object with keys and values based on `src`. example: `{ DB_HOST : 'localhost' }`
  */
 export function parse<T extends DotenvParseOutput = DotenvParseOutput>(
-  src: string | Buffer
+  src: string | Buffer,
+  options?: DotenvParseOptions
 ): T;
 
 export interface DotenvConfigOptions {
@@ -71,6 +84,24 @@ export interface DotenvConfigOptions {
   override?: boolean;
 
   /**
+   * Default: `false`
+   *
+   * Decrypt via dotenvx. Requires a local `@dotenvx/dotenvx` install.
+   *
+   * example: `require('dotenv').config({ secure: true })`
+   */
+  secure?: boolean;
+
+  /**
+   * Default: `false`
+   *
+   * Use the faster character-scanner parser.
+   *
+   * example: `require('dotenv').config({ fast: true })`
+   */
+  fast?: boolean;
+
+  /**
    * Default: `process.env`
    *
    * Specify an object to write your secrets to. Defaults to process.env environment variables.
@@ -87,7 +118,7 @@ export interface DotenvConfigOutput {
 }
 
 type DotenvError = Error & {
-  code: 'OBJECT_REQUIRED';
+  code: 'OBJECT_REQUIRED' | 'SECURE_REQUIRES_DOTENVX';
 }
 
 export interface DotenvPopulateOptions {
