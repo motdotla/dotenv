@@ -169,20 +169,27 @@ Use `--override` to overwrite existing environment variables, and `--debug` for 
 $ dotenv run --override --debug -- node index.js
 ```
 
-Use `--secure` to decrypt via [dotenvx](https://dotenvx.com) (requires dotenvx installed locally or on your `PATH`).
+Use `--secure` or `config({ secure: true })` to decrypt via [dotenvx](https://dotenvx.com).
 
 ```bash
 $ npm i @dotenvx/dotenvx
 $ dotenv run --secure -- node index.js
 ```
 
+```js
+require('dotenv').config({ secure: true })
+```
+
 Or with an environment variable:
 
 ```bash
 $ DOTENV_CONFIG_SECURE=true dotenv run -- node index.js
+$ DOTENV_CONFIG_SECURE=true node -e "require('dotenv').config()"
 ```
 
-If your `.env` contains `encrypted:` values and you run without `--secure`, dotenv warns and leaves them encrypted.
+`dotenv run --secure` resolves local `@dotenvx/dotenvx` then `dotenvx` on your `PATH`. `config({ secure: true })` requires a local `@dotenvx/dotenvx` install.
+
+If your `.env` contains `encrypted:` values and you run without `--secure` / `secure: true`, dotenv warns and leaves them encrypted.
 
 The same `DOTENV_CONFIG_*` environment variables formerly used by preload still work with the CLI. CLI flags take precedence.
 
@@ -668,6 +675,16 @@ Override any environment variables that have already been set on your machine wi
 
 ```js
 require('dotenv').config({ override: true })
+```
+
+##### secure
+
+Default: `false`
+
+Decrypt via [dotenvx](https://dotenvx.com). Requires a local `@dotenvx/dotenvx` install.
+
+```js
+require('dotenv').config({ secure: true })
 ```
 
 ##### processEnv

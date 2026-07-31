@@ -71,6 +71,15 @@ export interface DotenvConfigOptions {
   override?: boolean;
 
   /**
+   * Default: `false`
+   *
+   * Decrypt via dotenvx. Requires a local `@dotenvx/dotenvx` install.
+   *
+   * example: `require('dotenv').config({ secure: true })`
+   */
+  secure?: boolean;
+
+  /**
    * Default: `process.env`
    *
    * Specify an object to write your secrets to. Defaults to process.env environment variables.
@@ -87,7 +96,7 @@ export interface DotenvConfigOutput {
 }
 
 type DotenvError = Error & {
-  code: 'OBJECT_REQUIRED';
+  code: 'OBJECT_REQUIRED' | 'SECURE_REQUIRES_DOTENVX';
 }
 
 export interface DotenvPopulateOptions {
