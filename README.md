@@ -1,4 +1,4 @@
-> [dotenvx](https://dotenvx.com/?utm_source=github&utm_medium=readme&utm_campaign=motdotla-dotenv&utm_content=banner) — a secure dotenv, from the creator of `dotenv` for the agentic age. Run anywhere, encrypt secrets, and commit safely.
+> If you like dotenv, you will probably love [dotenvx](https://github.com/dotenvx/dotenvx) – for encrypting your `.env` files. Thank you for using dotenv. 🙏
 
 # dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv) [![downloads](https://img.shields.io/npm/dw/dotenv)](https://www.npmjs.com/package/dotenv)
 
