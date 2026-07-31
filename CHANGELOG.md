@@ -17,7 +17,9 @@ All notable changes to this project will be documented in this file. See [standa
 ### Added
 
 * Add cli `dotenv run --` ([#1022](https://github.com/motdotla/dotenv/pull/1022))
-* CLI supports `--debug`, `--override`, and the same `DOTENV_CONFIG_*` environment variables formerly used by preload (`PATH`, `ENCODING`, `QUIET`, `DEBUG`, `OVERRIDE`)
+* CLI supports `--debug`, `--override`, `--secure`, and the same `DOTENV_CONFIG_*` environment variables formerly used by preload (`PATH`, `ENCODING`, `QUIET`, `DEBUG`, `OVERRIDE`, `SECURE`)
+* `--secure` / `DOTENV_CONFIG_SECURE=true` hands off to dotenvx for decryption (local `@dotenvx/dotenvx`, then `PATH`)
+* Warn when `encrypted:` values are present without `--secure`
 
 ### Changed
 

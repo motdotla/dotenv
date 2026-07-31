@@ -16,7 +16,7 @@ function parseBoolean (value) {
 
 function printHelp () {
   console.log([
-    'Usage: dotenv run [--help] [--quiet] [--debug] [--override] [-f <path>] -- <command>',
+    'Usage: dotenv run [--help] [--quiet] [--debug] [--override] [--secure] [-f <path>] -- <command>',
     '',
     'Run a command with environment variables from a .env file.',
     '',
@@ -25,10 +25,11 @@ function printHelp () {
     '  --quiet     suppress the injected env message',
     '  --debug     enable debug logging',
     '  --override  override existing environment variables',
+    '  --secure    decrypt via dotenvx (requires dotenvx)',
     '',
     'Environment variables (same as former preload):',
     '  DOTENV_CONFIG_PATH, DOTENV_CONFIG_ENCODING, DOTENV_CONFIG_QUIET,',
-    '  DOTENV_CONFIG_DEBUG, DOTENV_CONFIG_OVERRIDE'
+    '  DOTENV_CONFIG_DEBUG, DOTENV_CONFIG_OVERRIDE, DOTENV_CONFIG_SECURE'
   ].join('\n'))
 }
 
@@ -38,6 +39,7 @@ function parseRunArgs (args) {
   let quiet
   let debug
   let override
+  let secure
   let commandIndex = -1
 
   for (let i = 0; i < args.length; i++) {
@@ -64,6 +66,11 @@ function parseRunArgs (args) {
 
     if (arg === '--override') {
       override = true
+      continue
+    }
+
+    if (arg === '--secure') {
+      secure = true
       continue
     }
 
@@ -100,6 +107,7 @@ function parseRunArgs (args) {
     quiet,
     debug,
     override,
+    secure,
     command
   }
 }
@@ -126,6 +134,9 @@ function optionsFromEnv () {
   if (process.env.DOTENV_CONFIG_OVERRIDE != null) {
     options.override = parseBoolean(process.env.DOTENV_CONFIG_OVERRIDE)
   }
+  if (process.env.DOTENV_CONFIG_SECURE != null) {
+    options.secure = parseBoolean(process.env.DOTENV_CONFIG_SECURE)
+  }
 
   return options
 }
@@ -137,6 +148,7 @@ function resolveRunOptions (parsed) {
     quiet: envOptions.quiet === true,
     debug: envOptions.debug === true,
     override: envOptions.override === true,
+    secure: envOptions.secure === true,
     paths: ['.env'],
     defaultPath: true
   }
@@ -153,8 +165,97 @@ function resolveRunOptions (parsed) {
   if (parsed.quiet != null) options.quiet = parsed.quiet
   if (parsed.debug != null) options.debug = parsed.debug
   if (parsed.override != null) options.override = parsed.override
+  if (parsed.secure != null) options.secure = parsed.secure
 
   return options
+}
+
+function resolveDotenvx () {
+  try {
+    const pkgPath = require.resolve('@dotenvx/dotenvx/package.json', { paths: [process.cwd()] })
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, { encoding: 'utf8' }))
+    const bin = typeof pkg.bin === 'string' ? pkg.bin : (pkg.bin && pkg.bin.dotenvx)
+    if (bin) {
+      return {
+        command: process.execPath,
+        args: [path.resolve(path.dirname(pkgPath), bin)]
+      }
+    }
+  } catch (_) {}
+
+  const which = process.platform === 'win32' ? 'where' : 'which'
+  const result = cp.spawnSync(which, ['dotenvx'], { encoding: 'utf8' })
+  if (result.status === 0) {
+    const binPath = result.stdout.split(/\r?\n/).filter(Boolean)[0]
+    if (binPath) {
+      return {
+        command: binPath,
+        args: []
+      }
+    }
+  }
+
+  return null
+}
+
+function buildDotenvxArgs (options, command) {
+  const args = ['run']
+
+  for (const filepath of options.paths) {
+    args.push('-f', filepath)
+  }
+  if (options.quiet) args.push('--quiet')
+  if (options.debug) args.push('--debug')
+  if (options.override) args.push('--overload')
+  args.push('--')
+  for (const part of command) {
+    args.push(part)
+  }
+
+  return args
+}
+
+function printSecureMissingError () {
+  console.error('dotenv: --secure requires dotenvx')
+  console.error('  npm i @dotenvx/dotenvx')
+  console.error('  # or: curl -sfS https://dotenvx.sh | sh')
+}
+
+function runSecure (options, command) {
+  const resolved = resolveDotenvx()
+  if (!resolved) {
+    printSecureMissingError()
+    process.exitCode = 1
+    return
+  }
+
+  const child = cp.spawn(resolved.command, resolved.args.concat(buildDotenvxArgs(options, command)), {
+    stdio: 'inherit',
+    shell: process.platform === 'win32'
+  })
+
+  child.on('error', function (e) {
+    console.error(`dotenv: ${e.message}`)
+    process.exitCode = 1
+  })
+
+  child.on('exit', function (exitCode, signal) {
+    if (typeof exitCode === 'number') {
+      process.exit(exitCode)
+    } else {
+      process.kill(process.pid, signal)
+    }
+  })
+}
+
+function hasEncryptedValues (parsed) {
+  for (const key of Object.keys(parsed)) {
+    const value = parsed[key]
+    if (typeof value === 'string' && value.indexOf('encrypted:') === 0) {
+      return true
+    }
+  }
+  return false
 }
 
 function loadEnvFiles (options) {
@@ -181,8 +282,9 @@ function loadEnvFiles (options) {
     }
   }
 
+  const encrypted = hasEncryptedValues(parsedAll)
   const injected = dotenv.populate(process.env, parsedAll, populateOptions)
-  return { injected, loadedPaths }
+  return { injected, loadedPaths, encrypted }
 }
 
 function run (argv) {
@@ -220,6 +322,11 @@ function run (argv) {
 
   const options = resolveRunOptions(parsed)
 
+  if (options.secure) {
+    runSecure(options, parsed.command)
+    return
+  }
+
   try {
     const result = loadEnvFiles(options)
     if (!options.quiet) {
@@ -228,6 +335,9 @@ function run (argv) {
         message += ` from ${result.loadedPaths.join(', ')}`
       }
       console.error(message)
+    }
+    if (result.encrypted) {
+      console.error('┆ encrypted values detected — use: dotenv run --secure -- <command>')
     }
   } catch (e) {
     console.error(`dotenv: ${e.message}`)
