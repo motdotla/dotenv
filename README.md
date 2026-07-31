@@ -1,4 +1,4 @@
-> If you like dotenv, you will probably love [dotenvx](https://github.com/dotenvx/dotenvx) – for encrypting your `.env` files. Thank you for using dotenv. 🙏
+> If you like dotenv, you will probably love [dotenvx](https://github.com/dotenvx/dotenvx) – for encrypting `.env` files. Thank you for using dotenv. 🙏
 
 # dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv) [![downloads](https://img.shields.io/npm/dw/dotenv)](https://www.npmjs.com/package/dotenv)
 
