@@ -4,9 +4,20 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.4.2...master)
 
+```
+     _       _                     ____   ___   ___   ___
+  __| | ___ | |_ ___ _ ____   __  |___ \ / _ \ / _ \ / _ \
+ / _` |/ _ \| __/ _ \ '_ \ \ / /    __) | | | | | | | | | |
+| (_| | (_) | ||  __/ | | \ V /    / __/| |_| | |_| | |_| |
+ \__,_|\___/ \__\___|_| |_|\_/    |_____|\___/ \___/ \___/
+
+  ◇ injected env from .env
+```
+
 ### Added
 
 * Add cli `dotenv run --` ([#1022](https://github.com/motdotla/dotenv/pull/1022))
+* CLI supports `--debug`, `--override`, and the same `DOTENV_CONFIG_*` environment variables formerly used by preload (`PATH`, `ENCODING`, `QUIET`, `DEBUG`, `OVERRIDE`)
 
 ### Changed
 

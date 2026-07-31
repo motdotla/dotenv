@@ -55,7 +55,7 @@ Import with [ES6](#how-do-i-use-dotenv-with-import):
 import 'dotenv/config'
 ```
 
-`DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, and `DOTENV_CONFIG_OVERRIDE` provide defaults for `config()`. Options passed directly to `config()` take precedence.
+`DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, and `DOTENV_CONFIG_OVERRIDE` provide defaults for `config()` and `dotenv run`. Options/flags passed directly take precedence.
 
 </details>
 <details><summary>bun</summary><br>
@@ -162,6 +162,20 @@ Use `--quiet` to suppress the injected env message.
 ```bash
 $ dotenv run --quiet -- node index.js
 ```
+
+Use `--override` to overwrite existing environment variables, and `--debug` for debug logging.
+
+```bash
+$ dotenv run --override --debug -- node index.js
+```
+
+The same `DOTENV_CONFIG_*` environment variables formerly used by preload still work with the CLI. CLI flags take precedence.
+
+```bash
+$ DOTENV_CONFIG_PATH=./.env.local DOTENV_CONFIG_QUIET=true dotenv run -- node index.js
+```
+
+Supported: `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, `DOTENV_CONFIG_OVERRIDE`.
 
 </details>
 <details><summary>Variable Expansion</summary><br>
