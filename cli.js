@@ -16,7 +16,7 @@ function parseBoolean (value) {
 
 function printHelp () {
   console.log([
-    'Usage: dotenv run [--help] [--quiet] [--debug] [--override] [--secure] [-f <path>] -- <command>',
+    'Usage: dotenv run [--help] [--quiet] [--debug] [--override] [--secure] [--fast] [-f <path>] -- <command>',
     '',
     'Run a command with environment variables from a .env file.',
     '',
@@ -26,10 +26,12 @@ function printHelp () {
     '  --debug     enable debug logging',
     '  --override  override existing environment variables',
     '  --secure    decrypt via dotenvx (requires dotenvx)',
+    '  --fast      use the faster character-scanner parser',
     '',
     'Environment variables (same as former preload):',
     '  DOTENV_CONFIG_PATH, DOTENV_CONFIG_ENCODING, DOTENV_CONFIG_QUIET,',
-    '  DOTENV_CONFIG_DEBUG, DOTENV_CONFIG_OVERRIDE, DOTENV_CONFIG_SECURE'
+    '  DOTENV_CONFIG_DEBUG, DOTENV_CONFIG_OVERRIDE, DOTENV_CONFIG_SECURE,',
+    '  DOTENV_CONFIG_FAST'
   ].join('\n'))
 }
 
@@ -40,6 +42,7 @@ function parseRunArgs (args) {
   let debug
   let override
   let secure
+  let fast
   let commandIndex = -1
 
   for (let i = 0; i < args.length; i++) {
@@ -71,6 +74,11 @@ function parseRunArgs (args) {
 
     if (arg === '--secure') {
       secure = true
+      continue
+    }
+
+    if (arg === '--fast') {
+      fast = true
       continue
     }
 
@@ -108,6 +116,7 @@ function parseRunArgs (args) {
     debug,
     override,
     secure,
+    fast,
     command
   }
 }
@@ -137,6 +146,9 @@ function optionsFromEnv () {
   if (process.env.DOTENV_CONFIG_SECURE != null) {
     options.secure = parseBoolean(process.env.DOTENV_CONFIG_SECURE)
   }
+  if (process.env.DOTENV_CONFIG_FAST != null) {
+    options.fast = parseBoolean(process.env.DOTENV_CONFIG_FAST)
+  }
 
   return options
 }
@@ -149,6 +161,7 @@ function resolveRunOptions (parsed) {
     debug: envOptions.debug === true,
     override: envOptions.override === true,
     secure: envOptions.secure === true,
+    fast: envOptions.fast === true,
     paths: ['.env'],
     defaultPath: true
   }
@@ -166,6 +179,7 @@ function resolveRunOptions (parsed) {
   if (parsed.debug != null) options.debug = parsed.debug
   if (parsed.override != null) options.override = parsed.override
   if (parsed.secure != null) options.secure = parsed.secure
+  if (parsed.fast != null) options.fast = parsed.fast
 
   return options
 }
@@ -269,7 +283,7 @@ function loadEnvFiles (options) {
   for (const filepath of options.paths) {
     const resolvedPath = path.resolve(process.cwd(), resolveHome(filepath))
     try {
-      const parsed = dotenv.parse(fs.readFileSync(resolvedPath, { encoding: options.encoding }))
+      const parsed = dotenv.parse(fs.readFileSync(resolvedPath, { encoding: options.encoding }), { fast: options.fast })
       dotenv.populate(parsedAll, parsed, populateOptions)
       loadedPaths.push(filepath)
     } catch (e) {

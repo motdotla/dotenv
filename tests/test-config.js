@@ -24,6 +24,7 @@ t.afterEach(() => {
   delete process.env.DOTENV_CONFIG_DEBUG
   delete process.env.DOTENV_CONFIG_OVERRIDE
   delete process.env.DOTENV_CONFIG_SECURE
+  delete process.env.DOTENV_CONFIG_FAST
 })
 
 t.test('uses DOTENV_CONFIG_* values as config defaults', ct => {

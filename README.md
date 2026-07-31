@@ -55,7 +55,7 @@ Import with [ES6](#how-do-i-use-dotenv-with-import):
 import 'dotenv/config'
 ```
 
-`DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, `DOTENV_CONFIG_OVERRIDE`, and `DOTENV_CONFIG_SECURE` provide defaults for `config()` and `dotenv run`. Options/flags passed directly take precedence.
+`DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, `DOTENV_CONFIG_OVERRIDE`, `DOTENV_CONFIG_SECURE`, and `DOTENV_CONFIG_FAST` provide defaults for `config()` and `dotenv run`. Options/flags passed directly take precedence.
 
 </details>
 <details><summary>bun</summary><br>
@@ -197,7 +197,17 @@ The same `DOTENV_CONFIG_*` environment variables formerly used by preload still 
 $ DOTENV_CONFIG_PATH=./.env.local DOTENV_CONFIG_QUIET=true dotenv run -- node index.js
 ```
 
-Supported: `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, `DOTENV_CONFIG_OVERRIDE`, `DOTENV_CONFIG_SECURE`.
+Use `--fast` (or `config({ fast: true })`) for the faster character-scanner parser (~2x). Default remains the classic regex parser.
+
+```bash
+$ dotenv run --fast -- node index.js
+```
+
+```js
+require('dotenv').config({ fast: true })
+```
+
+Supported: `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, `DOTENV_CONFIG_OVERRIDE`, `DOTENV_CONFIG_SECURE`, `DOTENV_CONFIG_FAST`.
 
 </details>
 <details><summary>Variable Expansion</summary><br>
@@ -685,6 +695,16 @@ Decrypt via [dotenvx](https://dotenvx.com). Requires a local `@dotenvx/dotenvx` 
 
 ```js
 require('dotenv').config({ secure: true })
+```
+
+##### fast
+
+Default: `false`
+
+Use the faster character-scanner parser (~2x). Default remains the classic regex parser.
+
+```js
+require('dotenv').config({ fast: true })
 ```
 
 ##### processEnv

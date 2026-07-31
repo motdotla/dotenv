@@ -17,10 +17,11 @@ All notable changes to this project will be documented in this file. See [standa
 ### Added
 
 * Add cli `dotenv run --` ([#1022](https://github.com/motdotla/dotenv/pull/1022))
-* CLI supports `--debug`, `--override`, `--secure`, and the same `DOTENV_CONFIG_*` environment variables formerly used by preload (`PATH`, `ENCODING`, `QUIET`, `DEBUG`, `OVERRIDE`, `SECURE`)
+* CLI supports `--debug`, `--override`, `--secure`, `--fast`, and the same `DOTENV_CONFIG_*` environment variables formerly used by preload (`PATH`, `ENCODING`, `QUIET`, `DEBUG`, `OVERRIDE`, `SECURE`, `FAST`)
 * `--secure` / `config({ secure: true })` / `DOTENV_CONFIG_SECURE=true` hands off to dotenvx for decryption
 * CLI resolves dotenvx from local `@dotenvx/dotenvx` then `PATH`; `config({ secure: true })` requires local `@dotenvx/dotenvx`
 * Warn when `encrypted:` values are present without `--secure` / `secure: true`
+* `--fast` / `config({ fast: true })` / `parse(src, { fast: true })` / `DOTENV_CONFIG_FAST=true` opts into the ~2x character-scanner parser ([#1010](https://github.com/motdotla/dotenv/pull/1010)). Benchmark with `node scripts/parse-perf.js`.
 
 ### Changed
 
