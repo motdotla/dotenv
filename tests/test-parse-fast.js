@@ -47,6 +47,40 @@ t.test('fast parse matches classic parse for edge cases', ct => {
   ct.end()
 })
 
+t.test('fast parse matches classic parse for a leading UTF-8 BOM', ct => {
+  const cases = [
+    '\uFEFFBASIC=basic',
+    '\uFEFFBASIC=basic\nSECOND=two\n',
+    '\uFEFFexport BASIC=basic\n',
+    '\uFEFF# comment first\nBASIC=basic\n',
+    '\uFEFF',
+    '\n\uFEFFBASIC=basic\n',
+    'FIRST=one\n\uFEFFSECOND=two\n'
+  ]
+
+  for (const src of cases) {
+    assertSameParse(ct, src, JSON.stringify(src))
+  }
+
+  // pin the behaviour, so the two parsers can't agree by both being wrong
+  ct.same(dotenv.parse('\uFEFFBASIC=basic', { fast: true }), { BASIC: 'basic' })
+  ct.end()
+})
+
+t.test('config({ fast: true }) reads a .env written with a BOM', ct => {
+  const processEnv = {}
+  const result = dotenv.config({
+    path: 'tests/.env.bom',
+    quiet: true,
+    fast: true,
+    processEnv
+  })
+
+  ct.equal(processEnv.BASIC, 'basic')
+  ct.equal(result.parsed.BASIC, 'basic')
+  ct.end()
+})
+
 t.test('config({ fast: true }) loads with fast parser', ct => {
   const processEnv = {}
   const result = dotenv.config({
