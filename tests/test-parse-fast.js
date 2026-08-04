@@ -67,6 +67,34 @@ t.test('fast parse matches classic parse for a leading UTF-8 BOM', ct => {
   ct.end()
 })
 
+t.test('fast parse matches classic parse for an escaped backslash before the closing quote', ct => {
+  const cases = [
+    'KEY="\\\\"',
+    'KEY="\\\\"\nNEXT=ok\n',
+    "KEY='\\\\'\nNEXT=ok\n",
+    'KEY=`\\\\`\nNEXT=ok\n',
+    'WINDIR="C:\\\\Users\\\\me\\\\"\nAPI_KEY=secret\nPORT=3000\n',
+    'KEY="a\\\\b"\nNEXT=ok\n',
+    'KEY="\\\\\\\\"\nNEXT=ok\n',
+    'A="\\\\"\nB=plain\nC="quoted"\nD=last\n'
+  ]
+
+  for (const src of cases) {
+    assertSameParse(ct, src, JSON.stringify(src))
+  }
+
+  // pin the behaviour, so the two parsers can't agree by both being wrong.
+  // dotenv does not unescape \\, so the value keeps both backslashes — the point
+  // is that the value ends at its own closing quote and the later keys survive.
+  ct.same(dotenv.parse('A="\\\\"\nB=plain\nC="quoted"\nD=last\n', { fast: true }), {
+    A: '\\\\',
+    B: 'plain',
+    C: 'quoted',
+    D: 'last'
+  })
+  ct.end()
+})
+
 t.test('config({ fast: true }) reads a .env written with a BOM', ct => {
   const processEnv = {}
   const result = dotenv.config({
