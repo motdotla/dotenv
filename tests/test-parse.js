@@ -52,6 +52,11 @@ t.equal(parsed.EXPAND_NEWLINES, 'expand\nnew\nlines', 'expands newlines but only
 t.equal(parsed.DONT_EXPAND_UNQUOTED, 'dontexpand\\nnewlines', 'expands newlines but only if double quoted')
 
 t.equal(parsed.DONT_EXPAND_SQUOTED, 'dontexpand\\nnewlines', 'expands newlines but only if double quoted')
+t.equal(parsed.ESCAPED_BACKSLASH_N, 'keep\\nraw', 'treats \\\\n in double quotes as literal backslash-n, not newline')
+
+t.equal(parsed.ESCAPED_BACKSLASH_R, 'keep\\rraw', 'treats \\\\r in double quotes as literal backslash-r, not carriage return')
+
+t.equal(parsed.ESCAPED_DOUBLE_BACKSLASH, 'keep\\\\slashes', 'collapses \\\\\\\\ in double quotes to \\\\')
 
 t.notOk(parsed.COMMENTS, 'ignores commented lines')
 
