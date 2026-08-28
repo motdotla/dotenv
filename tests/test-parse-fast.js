@@ -95,6 +95,52 @@ t.test('fast parse matches classic parse for an escaped backslash before the clo
   ct.end()
 })
 
+t.test('fast parse matches classic parse when quoted values start on a later line', ct => {
+  const cases = [
+    'A=\n\n"hello\nworld"',
+    "A=\n'b'",
+    'A=\n  `value`\nB=two'
+  ]
+
+  for (const src of cases) {
+    assertSameParse(ct, src, JSON.stringify(src))
+  }
+
+  ct.same(dotenv.parse('A=\n\n"hello\nworld"', { fast: true }), { A: 'hello\nworld' })
+  ct.end()
+})
+
+t.test('fast parse matches classic parse for JavaScript whitespace', ct => {
+  const cases = [
+    '\fA=1',
+    '\vA=1',
+    '\u00A0A=1',
+    'A=\f"value"',
+    'A=\u00A0"value"'
+  ]
+
+  for (const src of cases) {
+    assertSameParse(ct, src, JSON.stringify(src))
+  }
+
+  ct.end()
+})
+
+t.test('fast parse matches classic parse for junk after a closing quote', ct => {
+  const cases = [
+    'TOKEN="abc" oops',
+    "TOKEN='abc' oops # comment",
+    'TOKEN=`abc` oops\nNEXT=ok'
+  ]
+
+  for (const src of cases) {
+    assertSameParse(ct, src, JSON.stringify(src))
+  }
+
+  ct.same(dotenv.parse('TOKEN="abc" oops', { fast: true }), { TOKEN: '"abc" oops' })
+  ct.end()
+})
+
 t.test('config({ fast: true }) reads a .env written with a BOM', ct => {
   const processEnv = {}
   const result = dotenv.config({
