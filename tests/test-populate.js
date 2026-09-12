@@ -98,3 +98,23 @@ t.test('returns any errors thrown on passing not json type', ct => {
     ct.equal(e.message, 'OBJECT_REQUIRED: Please check the processEnv argument being passed to populate')
   }
 })
+
+t.test('throws OBJECT_REQUIRED instead of TypeError when parsed is null', ct => {
+  ct.plan(1)
+
+  try {
+    dotenv.populate(process.env, null)
+  } catch (e) {
+    ct.equal(e.code, 'OBJECT_REQUIRED')
+  }
+})
+
+t.test('throws OBJECT_REQUIRED instead of TypeError when processEnv is null', ct => {
+  ct.plan(1)
+
+  try {
+    dotenv.populate(null, { test: 'foo' })
+  } catch (e) {
+    ct.equal(e.code, 'OBJECT_REQUIRED')
+  }
+})
