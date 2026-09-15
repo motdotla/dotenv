@@ -36,3 +36,8 @@ populate(target, { DB_HOST: "localhost" });
 populate(target, { DB_HOST: "localhost" }, { debug: true });
 populate(target, { DB_HOST: "localhost" }, { override: true });
 populate(target, { DB_HOST: "localhost" }, { debug: true, override: false });
+
+// config() reports a missing .env file by returning the ENOENT that fs threw,
+// so comparing error.code against it must type-check
+if (env.error?.code === "ENOENT") {
+}

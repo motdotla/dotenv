@@ -118,7 +118,9 @@ export interface DotenvConfigOutput {
 }
 
 type DotenvError = Error & {
-  code: 'OBJECT_REQUIRED' | 'SECURE_REQUIRES_DOTENVX';
+  // `config()` also returns whatever `fs` threw for a path it could not read,
+  // most often `ENOENT`, so these two codes are not the full set.
+  code: 'OBJECT_REQUIRED' | 'SECURE_REQUIRES_DOTENVX' | (string & {});
 }
 
 export interface DotenvPopulateOptions {
