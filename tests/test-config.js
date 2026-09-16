@@ -6,6 +6,15 @@ const t = require('tap')
 
 const dotenv = require('../lib/main')
 
+// the message depends on the platform, e.g. Windows reports the resolved path
+function readFileErrorMessage (filePath) {
+  try {
+    fs.readFileSync(filePath)
+  } catch (e) {
+    return e.message
+  }
+}
+
 let logStub
 let errorStub
 
@@ -299,7 +308,7 @@ t.test('deals with file:// path', ct => {
 
   ct.equal(env.parsed.BASIC, undefined)
   ct.equal(process.env.BASIC, undefined)
-  ct.equal(env.error.message, "ENOENT: no such file or directory, open 'file:///tests/.env'")
+  ct.equal(env.error.message, readFileErrorMessage(testPath))
 
   ct.ok(errorStub.called)
 
@@ -314,7 +323,7 @@ t.test('deals with file:// path and debug true', ct => {
 
   ct.equal(env.parsed.BASIC, undefined)
   ct.equal(process.env.BASIC, undefined)
-  ct.equal(env.error.message, "ENOENT: no such file or directory, open 'file:///tests/.env'")
+  ct.equal(env.error.message, readFileErrorMessage(testPath))
 
   ct.ok(logStub.called)
 
@@ -346,7 +355,8 @@ t.test('displays the injected env message without tips', ct => {
 
   dotenv.config({ path: testPath })
 
-  ct.match(errorStub.firstCall.args[0], /^◇ injected env \(\d+\) from tests\/\.env$/)
+  const shortPath = path.join('tests', '.env').replace(/[\\.]/g, '\\$&')
+  ct.match(errorStub.firstCall.args[0], new RegExp(`^◇ injected env \\(\\d+\\) from ${shortPath}$`))
   ct.end()
 })
 
