@@ -13,8 +13,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Changed
 
-* Fix Windows CLI argument quoting: spawn native executables directly and escape batch-file and npm-shim arguments without adding dependencies.
-
 * Injecting message sent to stderr rather than stdout and tips removed ([#1037](https://github.com/motdotla/dotenv/pull/1037))
 
 ### Removed
