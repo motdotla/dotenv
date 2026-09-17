@@ -8,8 +8,21 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Added
 
-* Add cli support! `dotenv run -- your-command` ([#1022](https://github.com/motdotla/dotenv/pull/1022))
-* Add fast parser from @homanp of [superagent.sh](https://superagent.sh). Pass `config({ fast: true })`, flag `--fast`, or set `DOTENV_FAST=true` to opt-in to ~2x faster character-scanner parser. ([#1010](https://github.com/motdotla/dotenv/pull/1010))
+* NEW: Dotenv now has a CLI. ([#1022](https://github.com/motdotla/dotenv/pull/1022))
+
+```sh
+$ dotenv run -- node index.js
+◇ injected env (2) from .env
+Hello Dotenv
+```
+
+* NEW: Dotenv now has a fast parser thanks to @homanp of [superagent.sh](https://superagent.sh). Pass `config({ fast: true })`, flag `--fast`, or set `DOTENV_FAST=true` to opt-in to ~2x faster character-scanner parser. ([#1010](https://github.com/motdotla/dotenv/pull/1010))
+
+```sh
+$ dotenv run --fast -- node index.js
+◇ injected env (2) from .env
+Hello Dotenv
+```
 
 ### Changed
 

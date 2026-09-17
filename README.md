@@ -45,6 +45,21 @@ That's it. `process.env` now has the keys and values you defined in your `.env` 
 
 &nbsp;
 
+## CLI Usage
+
+**NEW:** Dotenv now has a CLI! Great for your coding agent.
+
+```javascript
+// index.js
+console.log(`Hello ${process.env.HELLO}`)
+```
+
+```
+$ npx dotenv run -- node index.js
+◇ injected env (2) from .env
+Hello Dotenv
+```
+
 ## Advanced
 
 <details><summary>ES6</summary><br>
@@ -144,8 +159,6 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 <details><summary>Run</summary><br>
 
 Use `dotenv run` to run a command with environment variables from your `.env` file. The `--` separator is optional. Put dotenv options before the command; everything after the command is passed through as its arguments.
-
-On macOS and Linux, dotenv forwards termination signals and waits for the command to exit, preserving its exit code or signal. Noninteractive runs forward signals to the command's process group, including its subprocesses. In a terminal, Ctrl-C reaches the command directly; a second Ctrl-C requests termination and a third forces it to stop. On Windows, termination uses `taskkill /T /F` to stop the command tree.
 
 ```bash
 $ dotenv run node index.js
