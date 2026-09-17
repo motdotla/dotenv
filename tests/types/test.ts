@@ -25,7 +25,6 @@ config({
 });
 
 config({
-  secure: true,
   fast: true,
 });
 

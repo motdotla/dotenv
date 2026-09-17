@@ -7,31 +7,26 @@ const cp = require('child_process')
 
 const dotenv = require('./lib/main')
 
-function parseBoolean (value) {
-  if (typeof value === 'string') {
-    return !['false', '0', 'no', 'off', ''].includes(value.toLowerCase())
-  }
-  return Boolean(value)
-}
+const { optionsFromEnv } = require('./lib/config-options')
 
 function printHelp () {
   console.log([
-    'Usage: dotenv run [--help] [--quiet] [--debug] [--override] [--secure] [--fast] [-f <path>] -- <command>',
+    'Usage: dotenv run [--help] [-q|--quiet] [--debug] [--override] [--fast] [-f|--file <paths>] [--] <command> [args...]',
     '',
     'Run a command with environment variables from a .env file.',
+    'Place dotenv options before the command; all following arguments go to the command.',
     '',
     'Options:',
-    '  -f <path>   path to your .env file (default: .env)',
-    '  --quiet     suppress the injected env message',
+    '  -f, --file <paths>  .env paths, comma-separated or repeated (default: .env)',
+    '  -q, --quiet suppress the injected env message',
     '  --debug     enable debug logging',
     '  --override  override existing environment variables',
-    '  --secure    decrypt via dotenvx (requires dotenvx)',
     '  --fast      use the faster character-scanner parser',
     '',
-    'Environment variables (same as former preload):',
-    '  DOTENV_CONFIG_PATH, DOTENV_CONFIG_ENCODING, DOTENV_CONFIG_QUIET,',
-    '  DOTENV_CONFIG_DEBUG, DOTENV_CONFIG_OVERRIDE, DOTENV_CONFIG_SECURE,',
-    '  DOTENV_CONFIG_FAST'
+    'Environment variables (DOTENV_CONFIG_* names remain as fallbacks):',
+    '  DOTENV_PATH, DOTENV_ENCODING, DOTENV_QUIET,',
+    '  DOTENV_DEBUG, DOTENV_OVERRIDE,',
+    '  DOTENV_FAST'
   ].join('\n'))
 }
 
@@ -41,7 +36,6 @@ function parseRunArgs (args) {
   let quiet
   let debug
   let override
-  let secure
   let fast
   let commandIndex = -1
 
@@ -57,7 +51,7 @@ function parseRunArgs (args) {
       return { help: true }
     }
 
-    if (arg === '--quiet') {
+    if (arg === '--quiet' || arg === '-q') {
       quiet = true
       continue
     }
@@ -72,40 +66,35 @@ function parseRunArgs (args) {
       continue
     }
 
-    if (arg === '--secure') {
-      secure = true
-      continue
-    }
-
     if (arg === '--fast') {
       fast = true
       continue
     }
 
-    if (arg === '-f') {
-      const filepath = args[i + 1]
-      if (!filepath || filepath === '--') {
-        return { error: '-f requires a path' }
+    if (arg === '-f' || arg === '--file' || arg.startsWith('-f=') || arg.startsWith('--file=')) {
+      const equalsIndex = arg.indexOf('=')
+      const flag = equalsIndex === -1 ? arg : arg.slice(0, equalsIndex)
+      const value = equalsIndex === -1 ? args[++i] : arg.slice(equalsIndex + 1)
+      if (!value || value === '--') {
+        return { error: `${flag} requires a path` }
       }
 
-      paths.push(filepath)
-      pathSet = true
-      i++
-      continue
-    }
-
-    if (arg.startsWith('-f=')) {
-      const filepath = arg.slice(3)
-      if (!filepath) {
-        return { error: '-f requires a path' }
+      const filepaths = value.split(',').map(filepath => filepath.trim()).filter(Boolean)
+      if (filepaths.length === 0) {
+        return { error: `${flag} requires a path` }
       }
 
-      paths.push(filepath)
+      paths.push(...filepaths)
       pathSet = true
       continue
     }
 
-    return { error: `unknown option: ${arg}` }
+    if (arg.startsWith('-')) {
+      return { error: `unknown option: ${arg}` }
+    }
+
+    commandIndex = i
+    break
   }
 
   const command = commandIndex === -1 ? [] : args.slice(commandIndex)
@@ -115,7 +104,6 @@ function parseRunArgs (args) {
     quiet,
     debug,
     override,
-    secure,
     fast,
     command
   }
@@ -125,34 +113,6 @@ function resolveHome (envPath) {
   return envPath[0] === '~' ? path.join(os.homedir(), envPath.slice(1)) : envPath
 }
 
-function optionsFromEnv () {
-  const options = {}
-
-  if (process.env.DOTENV_CONFIG_ENCODING != null) {
-    options.encoding = process.env.DOTENV_CONFIG_ENCODING
-  }
-  if (process.env.DOTENV_CONFIG_PATH != null) {
-    options.path = process.env.DOTENV_CONFIG_PATH
-  }
-  if (process.env.DOTENV_CONFIG_QUIET != null) {
-    options.quiet = parseBoolean(process.env.DOTENV_CONFIG_QUIET)
-  }
-  if (process.env.DOTENV_CONFIG_DEBUG != null) {
-    options.debug = parseBoolean(process.env.DOTENV_CONFIG_DEBUG)
-  }
-  if (process.env.DOTENV_CONFIG_OVERRIDE != null) {
-    options.override = parseBoolean(process.env.DOTENV_CONFIG_OVERRIDE)
-  }
-  if (process.env.DOTENV_CONFIG_SECURE != null) {
-    options.secure = parseBoolean(process.env.DOTENV_CONFIG_SECURE)
-  }
-  if (process.env.DOTENV_CONFIG_FAST != null) {
-    options.fast = parseBoolean(process.env.DOTENV_CONFIG_FAST)
-  }
-
-  return options
-}
-
 function resolveRunOptions (parsed) {
   const envOptions = optionsFromEnv()
   const options = {
@@ -160,7 +120,6 @@ function resolveRunOptions (parsed) {
     quiet: envOptions.quiet === true,
     debug: envOptions.debug === true,
     override: envOptions.override === true,
-    secure: envOptions.secure === true,
     fast: envOptions.fast === true,
     paths: ['.env'],
     defaultPath: true
@@ -178,98 +137,9 @@ function resolveRunOptions (parsed) {
   if (parsed.quiet != null) options.quiet = parsed.quiet
   if (parsed.debug != null) options.debug = parsed.debug
   if (parsed.override != null) options.override = parsed.override
-  if (parsed.secure != null) options.secure = parsed.secure
   if (parsed.fast != null) options.fast = parsed.fast
 
   return options
-}
-
-function resolveDotenvx () {
-  try {
-    const pkgPath = require.resolve('@dotenvx/dotenvx/package.json', { paths: [process.cwd()] })
-    const pkg = JSON.parse(fs.readFileSync(pkgPath, { encoding: 'utf8' }))
-    const bin = typeof pkg.bin === 'string' ? pkg.bin : (pkg.bin && pkg.bin.dotenvx)
-    if (bin) {
-      return {
-        command: process.execPath,
-        args: [path.resolve(path.dirname(pkgPath), bin)]
-      }
-    }
-  } catch (_) {}
-
-  const which = process.platform === 'win32' ? 'where' : 'which'
-  const result = cp.spawnSync(which, ['dotenvx'], { encoding: 'utf8' })
-  if (result.status === 0) {
-    const binPath = result.stdout.split(/\r?\n/).filter(Boolean)[0]
-    if (binPath) {
-      return {
-        command: binPath,
-        args: []
-      }
-    }
-  }
-
-  return null
-}
-
-function buildDotenvxArgs (options, command) {
-  const args = ['run']
-
-  for (const filepath of options.paths) {
-    args.push('-f', filepath)
-  }
-  if (options.quiet) args.push('--quiet')
-  if (options.debug) args.push('--debug')
-  if (options.override) args.push('--overload')
-  args.push('--')
-  for (const part of command) {
-    args.push(part)
-  }
-
-  return args
-}
-
-function printSecureMissingError () {
-  console.error('dotenv: --secure requires dotenvx')
-  console.error('  npm i @dotenvx/dotenvx')
-  console.error('  # or: curl -sfS https://dotenvx.sh | sh')
-}
-
-function runSecure (options, command) {
-  const resolved = resolveDotenvx()
-  if (!resolved) {
-    printSecureMissingError()
-    process.exitCode = 1
-    return
-  }
-
-  const child = cp.spawn(resolved.command, resolved.args.concat(buildDotenvxArgs(options, command)), {
-    stdio: 'inherit',
-    shell: process.platform === 'win32'
-  })
-
-  child.on('error', function (e) {
-    console.error(`dotenv: ${e.message}`)
-    process.exitCode = 1
-  })
-
-  child.on('exit', function (exitCode, signal) {
-    if (typeof exitCode === 'number') {
-      process.exit(exitCode)
-    } else {
-      process.kill(process.pid, signal)
-    }
-  })
-}
-
-function hasEncryptedValues (parsed) {
-  for (const key of Object.keys(parsed)) {
-    const value = parsed[key]
-    if (typeof value === 'string' && value.indexOf('encrypted:') === 0) {
-      return true
-    }
-  }
-  return false
 }
 
 function loadEnvFiles (options) {
@@ -296,9 +166,8 @@ function loadEnvFiles (options) {
     }
   }
 
-  const encrypted = hasEncryptedValues(parsedAll)
   const injected = dotenv.populate(process.env, parsedAll, populateOptions)
-  return { injected, loadedPaths, encrypted }
+  return { injected, loadedPaths }
 }
 
 function run (argv) {
@@ -336,11 +205,6 @@ function run (argv) {
 
   const options = resolveRunOptions(parsed)
 
-  if (options.secure) {
-    runSecure(options, parsed.command)
-    return
-  }
-
   try {
     const result = loadEnvFiles(options)
     if (!options.quiet) {
@@ -350,29 +214,77 @@ function run (argv) {
       }
       console.error(message)
     }
-    if (result.encrypted) {
-      console.error('┆ encrypted values detected — use: dotenv run --secure -- <command>')
-    }
   } catch (e) {
     console.error(`dotenv: ${e.message}`)
     process.exitCode = 1
     return
   }
 
+  const interactive = Boolean(process.stdin.isTTY)
+  // A separate group lets services/CI stop descendants too. Interactive children
+  // stay in the terminal's foreground group so stdin and Ctrl-C work normally.
+  const useProcessGroup = process.platform !== 'win32' && !interactive
   const child = cp.spawn(parsed.command[0], parsed.command.slice(1), {
     stdio: 'inherit',
+    detached: useProcessGroup,
     shell: process.platform === 'win32'
   })
 
+  const handlers = new Map()
+  let interrupts = 0
+
+  function forward (signal) {
+    if (!child.pid || child.exitCode !== null || child.signalCode !== null) return
+
+    if (process.platform === 'win32') {
+      // Windows has no POSIX process-group signals; include the shell's children.
+      cp.spawnSync('taskkill', ['/pid', String(child.pid), '/T', '/F'], { stdio: 'ignore' })
+      return
+    }
+
+    try {
+      process.kill(useProcessGroup ? -child.pid : child.pid, signal)
+    } catch (error) {
+      if (error.code !== 'ESRCH') throw error
+    }
+  }
+
+  function cleanup () {
+    for (const [signal, handler] of handlers) process.removeListener(signal, handler)
+  }
+
+  for (const signal of ['SIGINT', 'SIGTERM', 'SIGHUP', 'SIGQUIT']) {
+    const handler = () => {
+      if (signal === 'SIGINT') {
+        interrupts++
+        // The terminal already delivers Ctrl-C to the foreground child. Further
+        // interrupts escalate instead of duplicating its graceful shutdown.
+        if (interactive && process.platform !== 'win32' && interrupts === 1) return
+        if (interrupts > 1) {
+          forward(interrupts === 2 ? 'SIGTERM' : 'SIGKILL')
+          return
+        }
+      }
+      forward(signal)
+    }
+    handlers.set(signal, handler)
+    process.on(signal, handler)
+  }
+
   child.on('error', function (e) {
+    cleanup()
     console.error(`dotenv: ${e.message}`)
     process.exitCode = 1
   })
 
   child.on('exit', function (exitCode, signal) {
+    cleanup()
     if (typeof exitCode === 'number') {
       process.exit(exitCode)
     } else {
+      // Keep the event loop alive until the re-raised signal terminates us.
+      // Otherwise Node can finish normally before delivery and report exit 0.
+      setInterval(() => {}, 1000)
       process.kill(process.pid, signal)
     }
   })

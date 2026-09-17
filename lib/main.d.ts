@@ -86,15 +86,6 @@ export interface DotenvConfigOptions {
   /**
    * Default: `false`
    *
-   * Decrypt via dotenvx. Requires a local `@dotenvx/dotenvx` install.
-   *
-   * example: `require('dotenv').config({ secure: true })`
-   */
-  secure?: boolean;
-
-  /**
-   * Default: `false`
-   *
    * Use the faster character-scanner parser.
    *
    * example: `require('dotenv').config({ fast: true })`
@@ -119,8 +110,8 @@ export interface DotenvConfigOutput {
 
 type DotenvError = Error & {
   // `config()` also returns whatever `fs` threw for a path it could not read,
-  // most often `ENOENT`, so these two codes are not the full set.
-  code: 'OBJECT_REQUIRED' | 'SECURE_REQUIRES_DOTENVX' | (string & {});
+  // most often `ENOENT`, so OBJECT_REQUIRED is not the only possible code.
+  code: 'OBJECT_REQUIRED' | (string & {});
 }
 
 export interface DotenvPopulateOptions {
