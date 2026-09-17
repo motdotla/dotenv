@@ -2,31 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v17.4.2...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.0...master)
 
-```
-     _       _                     ____   ___   ___   ___
-  __| | ___ | |_ ___ _ ____   __  |___ \ / _ \ / _ \ / _ \
- / _` |/ _ \| __/ _ \ '_ \ \ / /    __) | | | | | | | | | |
-| (_| | (_) | ||  __/ | | \ V /    / __/| |_| | |_| | |_| |
- \__,_|\___/ \__\___|_| |_|\_/    |_____|\___/ \___/ \___/
-
-  ◇ injected env from .env
-```
+## [18.0.0](https://github.com/motdotla/dotenv/compare/v17.4.2...v18.0.0) (2026-09-17)
 
 ### Added
 
-* Add cli `dotenv run --` ([#1022](https://github.com/motdotla/dotenv/pull/1022))
-* CLI supports `--debug`, `--override`, `--secure`, `--fast`, and the same `DOTENV_CONFIG_*` environment variables formerly used by preload (`PATH`, `ENCODING`, `QUIET`, `DEBUG`, `OVERRIDE`, `SECURE`, `FAST`)
-* `--secure` / `config({ secure: true })` / `DOTENV_CONFIG_SECURE=true` hands off to dotenvx for decryption
-* CLI resolves dotenvx from local `@dotenvx/dotenvx` then `PATH`; `config({ secure: true })` requires local `@dotenvx/dotenvx`
-* Warn when `encrypted:` values are present without `--secure` / `secure: true`
-* `--fast` / `config({ fast: true })` / `parse(src, { fast: true })` / `DOTENV_CONFIG_FAST=true` opts into the ~2x character-scanner parser ([#1010](https://github.com/motdotla/dotenv/pull/1010)). Benchmark with `node scripts/parse-perf.js`.
+* Add cli support! `dotenv run -- your-command` ([#1022](https://github.com/motdotla/dotenv/pull/1022))
+* Add fast parser from @homanp of [superagent.sh](https://superagent.sh). Pass `config({ fast: true })`, flag `--fast`, or set `DOTENV_FAST=true` to opt-in to ~2x faster character-scanner parser. ([#1010](https://github.com/motdotla/dotenv/pull/1010))
 
 ### Changed
 
-* Simplify automatic loading: use `import 'dotenv/config'` or `dotenv run -- yourcommand` ([#1035](https://github.com/motdotla/dotenv/pull/1035))
-* Injecting message sent to stderr rather than stdout ([#1037](https://github.com/motdotla/dotenv/pull/1037))
+* Injecting message sent to stderr rather than stdout and tips removed ([#1037](https://github.com/motdotla/dotenv/pull/1037))
 
 ### Removed
 

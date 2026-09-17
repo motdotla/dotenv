@@ -55,7 +55,7 @@ Import with [ES6](#how-do-i-use-dotenv-with-import):
 import 'dotenv/config'
 ```
 
-`DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, `DOTENV_CONFIG_OVERRIDE`, `DOTENV_CONFIG_SECURE`, and `DOTENV_CONFIG_FAST` provide defaults for `config()` and `dotenv run`. Options/flags passed directly take precedence.
+`DOTENV_ENCODING`, `DOTENV_PATH`, `DOTENV_QUIET`, `DOTENV_DEBUG`, `DOTENV_OVERRIDE`, and `DOTENV_FAST` provide defaults for `config()` and `dotenv run`. Options/flags passed directly take precedence, followed by `DOTENV_*`, then the legacy `DOTENV_CONFIG_*` names. Empty values and false values do not fall back.
 
 </details>
 <details><summary>bun</summary><br>
@@ -143,24 +143,26 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 </details>
 <details><summary>Run</summary><br>
 
-Use `dotenv run --` to run a command with environment variables from your `.env` file.
+Use `dotenv run` to run a command with environment variables from your `.env` file. The `--` separator is optional. Put dotenv options before the command; everything after the command is passed through as its arguments.
+
+On macOS and Linux, dotenv forwards termination signals and waits for the command to exit, preserving its exit code or signal. Noninteractive runs forward signals to the command's process group, including its subprocesses. In a terminal, Ctrl-C reaches the command directly; a second Ctrl-C requests termination and a third forces it to stop. On Windows, termination uses `taskkill /T /F` to stop the command tree.
 
 ```bash
-$ dotenv run -- node index.js
+$ dotenv run node index.js
 ◇ injected env (2) from .env
 ```
 
-Use `-f` to select one or more `.env` files.
+Use `-f` or `--file` to select one or more `.env` files. Separate paths with commas or repeat either flag; files are loaded in the order given. The first value wins unless `--override` is set.
 
 ```bash
-$ dotenv run -f .env.local -f .env -- node index.js
+$ dotenv run --file .env.local,.env node index.js
 ◇ injected env (2) from .env.local, .env
 ```
 
-Use `--quiet` to suppress the injected env message.
+Use `-q` or `--quiet` to suppress the injected env message.
 
 ```bash
-$ dotenv run --quiet -- node index.js
+$ dotenv run -q node index.js
 ```
 
 Use `--override` to overwrite existing environment variables, and `--debug` for debug logging.
@@ -169,32 +171,10 @@ Use `--override` to overwrite existing environment variables, and `--debug` for 
 $ dotenv run --override --debug -- node index.js
 ```
 
-Use `--secure` or `config({ secure: true })` to decrypt via [dotenvx](https://dotenvx.com).
+The legacy `DOTENV_CONFIG_*` environment variables formerly used by preload still work as fallbacks for `DOTENV_*`. CLI flags take precedence over both.
 
 ```bash
-$ npm i @dotenvx/dotenvx
-$ dotenv run --secure -- node index.js
-```
-
-```js
-require('dotenv').config({ secure: true })
-```
-
-Or with an environment variable:
-
-```bash
-$ DOTENV_CONFIG_SECURE=true dotenv run -- node index.js
-$ DOTENV_CONFIG_SECURE=true node -e "require('dotenv').config()"
-```
-
-`dotenv run --secure` resolves local `@dotenvx/dotenvx` then `dotenvx` on your `PATH`. `config({ secure: true })` requires a local `@dotenvx/dotenvx` install.
-
-If your `.env` contains `encrypted:` values and you run without `--secure` / `secure: true`, dotenv warns and leaves them encrypted.
-
-The same `DOTENV_CONFIG_*` environment variables formerly used by preload still work with the CLI. CLI flags take precedence.
-
-```bash
-$ DOTENV_CONFIG_PATH=./.env.local DOTENV_CONFIG_QUIET=true dotenv run -- node index.js
+$ DOTENV_PATH=./.env.local DOTENV_QUIET=true dotenv run -- node index.js
 ```
 
 Use `--fast` (or `config({ fast: true })`) for the faster character-scanner parser (~2x). Default remains the classic regex parser.
@@ -207,7 +187,7 @@ $ dotenv run --fast -- node index.js
 require('dotenv').config({ fast: true })
 ```
 
-Supported: `DOTENV_CONFIG_PATH`, `DOTENV_CONFIG_ENCODING`, `DOTENV_CONFIG_QUIET`, `DOTENV_CONFIG_DEBUG`, `DOTENV_CONFIG_OVERRIDE`, `DOTENV_CONFIG_SECURE`, `DOTENV_CONFIG_FAST`.
+Supported: `DOTENV_PATH`, `DOTENV_ENCODING`, `DOTENV_QUIET`, `DOTENV_DEBUG`, `DOTENV_OVERRIDE`, `DOTENV_FAST`, with matching `DOTENV_CONFIG_*` fallbacks.
 
 </details>
 <details><summary>Variable Expansion</summary><br>
@@ -685,16 +665,6 @@ Override any environment variables that have already been set on your machine wi
 
 ```js
 require('dotenv').config({ override: true })
-```
-
-##### secure
-
-Default: `false`
-
-Decrypt via [dotenvx](https://dotenvx.com). Requires a local `@dotenvx/dotenvx` install.
-
-```js
-require('dotenv').config({ secure: true })
 ```
 
 ##### fast
