@@ -4,6 +4,7 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const cp = require('child_process')
+const spawnCommand = require('./lib/spawn-command')
 
 const dotenv = require('./lib/main')
 
@@ -224,10 +225,9 @@ function run (argv) {
   // A separate group lets services/CI stop descendants too. Interactive children
   // stay in the terminal's foreground group so stdin and Ctrl-C work normally.
   const useProcessGroup = process.platform !== 'win32' && !interactive
-  const child = cp.spawn(parsed.command[0], parsed.command.slice(1), {
+  const child = spawnCommand(parsed.command[0], parsed.command.slice(1), {
     stdio: 'inherit',
-    detached: useProcessGroup,
-    shell: process.platform === 'win32'
+    detached: useProcessGroup
   })
 
   const handlers = new Map()

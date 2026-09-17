@@ -87,3 +87,50 @@ t.test('file flags reject missing or empty lists', ct => {
   }
   ct.end()
 })
+
+t.test('preserves spaces, quotes, empty arguments, and shell metacharacters', ct => {
+  const args = ['two words', 'a"quote', '', 'trailing\\', 'a&b', 'x|y', '<input>', '%PATH%', '!name!', '(value)', '^caret']
+  const result = run([
+    '-q', process.execPath, '-e', 'console.log(JSON.stringify(process.argv.slice(1)))', '--', ...args
+  ])
+  ct.equal(result.status, 0, result.stderr)
+  ct.equal(result.stdout, JSON.stringify(args) + '\n')
+  ct.equal(result.stderr, '')
+  ct.end()
+})
+
+t.test('Windows resolves executables and batch shims with spaces in their paths', { skip: process.platform !== 'win32' }, ct => {
+  const fs = require('fs')
+  const os = require('os')
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'dotenv windows '))
+  ct.teardown(() => fs.rmSync(dir, { recursive: true, force: true }))
+  const bin = path.join(dir, 'node_modules', '.bin')
+  fs.mkdirSync(bin, { recursive: true })
+  const script = path.join(dir, 'print args.cjs')
+  fs.writeFileSync(script, 'console.log(JSON.stringify(process.argv.slice(2)))')
+  const batch = `@echo off\r\n"${process.execPath}" "${script}" %*\r\n`
+  // npm's command shims contain a command chain, requiring a second escape pass.
+  const shim = `@echo off\r\nsetlocal\r\nendlocal & goto #_undefined_# 2>NUL || title %COMSPEC% & "${process.execPath}" "${script}" %*\r\n`
+  fs.writeFileSync(path.join(bin, 'probe.cmd'), shim)
+  fs.writeFileSync(path.join(dir, 'probe.bat'), batch)
+  const env = { ...process.env }
+  for (const key of Object.keys(env)) {
+    if (key.toUpperCase() === 'PATH') delete env[key]
+  }
+  env.Path = bin
+  env.PATHEXT = '.COM;.EXE;.BAT;.CMD'
+  const args = ['two words', 'a"quote', '', 'trailing\\', 'a&b', 'x|y', '(value)']
+  for (const command of ['probe', path.join(bin, 'probe.cmd'), path.join(dir, 'probe.bat')]) {
+    const result = run(['-q', command, ...args], env)
+    ct.equal(result.status, 0, result.stderr)
+    ct.equal(result.stdout, JSON.stringify(args) + '\n')
+    ct.equal(result.stderr, '')
+  }
+  const native = path.join(dir, 'node copy.exe')
+  fs.copyFileSync(process.execPath, native)
+  const result = run(['-q', native, script, ...args], env)
+  ct.equal(result.status, 0, result.stderr)
+  ct.equal(result.stdout, JSON.stringify(args) + '\n')
+  ct.equal(result.stderr, '')
+  ct.end()
+})
