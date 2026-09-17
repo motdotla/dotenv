@@ -113,6 +113,7 @@ t.test('Windows resolves executables and batch shims with spaces in their paths'
   const shim = `@echo off\r\nsetlocal\r\nendlocal & goto #_undefined_# 2>NUL || title %COMSPEC% & "${process.execPath}" "${script}" %*\r\n`
   fs.writeFileSync(path.join(bin, 'probe.cmd'), shim)
   fs.writeFileSync(path.join(dir, 'probe.bat'), batch)
+  fs.writeFileSync(path.join(dir, 'plain.cmd'), batch)
   const env = { ...process.env }
   for (const key of Object.keys(env)) {
     if (key.toUpperCase() === 'PATH') delete env[key]
@@ -120,11 +121,11 @@ t.test('Windows resolves executables and batch shims with spaces in their paths'
   env.Path = bin
   env.PATHEXT = '.COM;.EXE;.BAT;.CMD'
   const args = ['two words', 'a"quote', '', 'trailing\\', 'a&b', 'x|y', '(value)']
-  for (const command of ['probe', path.join(bin, 'probe.cmd'), path.join(dir, 'probe.bat')]) {
+  for (const command of ['probe', path.join(bin, 'probe.cmd'), path.join(dir, 'probe.bat'), path.join(dir, 'plain.cmd')]) {
     const result = run(['-q', command, ...args], env)
-    ct.equal(result.status, 0, result.stderr)
-    ct.equal(result.stdout, JSON.stringify(args) + '\n')
-    ct.equal(result.stderr, '')
+    ct.equal(result.status, 0, `${command}: ${result.stderr}`)
+    ct.equal(result.stdout, JSON.stringify(args) + '\n', `${command}: preserves arguments`)
+    ct.equal(result.stderr, '', `${command}: no shell errors`)
   }
   const native = path.join(dir, 'node copy.exe')
   fs.copyFileSync(process.execPath, native)
