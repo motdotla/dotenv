@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.0...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.1...master)
+
+## [18.0.1](https://github.com/motdotla/dotenv/compare/v18.0.0...v18.0.1) (2026-09-18)
+
+### Changed
+
+* Handle file urls in config logging ([#1054](https://github.com/motdotla/dotenv/pull/1054))
 
 ## [18.0.0](https://github.com/motdotla/dotenv/compare/v17.4.2...v18.0.0) (2026-09-17)
 
