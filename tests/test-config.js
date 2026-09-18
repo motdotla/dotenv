@@ -1,6 +1,7 @@
 const fs = require('fs')
 const os = require('os')
 const path = require('path')
+const { pathToFileURL } = require('url')
 const sinon = require('sinon')
 const t = require('tap')
 
@@ -129,13 +130,45 @@ t.test('sets values from both .env.local and .env. but none is used as value exi
 
 t.test('takes URL for path option', ct => {
   const envPath = path.resolve(__dirname, '.env')
-  const fileUrl = new URL(`file://${envPath}`)
+  const fileUrl = pathToFileURL(envPath)
+  errorStub = sinon.stub(console, 'error')
 
   const env = dotenv.config({ path: fileUrl })
 
   ct.equal(env.parsed.BASIC, 'basic')
   ct.equal(process.env.BASIC, 'basic')
+  ct.equal(env.error, undefined)
+  ct.ok(errorStub.calledWithMatch(`from ${path.relative(process.cwd(), envPath)}`))
 
+  ct.end()
+})
+
+t.test('logs decoded file URL paths in debug mode', ct => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'dotenv-url-'))
+  ct.teardown(() => fs.rmSync(dir, { recursive: true, force: true }))
+  const envPath = path.join(dir, 'with space %.env')
+  fs.writeFileSync(envPath, 'URL_VALUE=loaded\n')
+  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
+
+  const env = dotenv.config({ path: pathToFileURL(envPath), processEnv: {}, debug: true })
+
+  ct.equal(env.parsed.URL_VALUE, 'loaded')
+  ct.equal(env.error, undefined)
+  ct.ok(errorStub.calledWithMatch(`from ${path.relative(process.cwd(), envPath)}`))
+  ct.end()
+})
+
+t.test('preserves file read errors for URL paths', ct => {
+  errorStub = sinon.stub(console, 'error')
+  const envPath = path.resolve(__dirname, 'missing-url.env')
+  const fileUrl = pathToFileURL(envPath)
+
+  const env = dotenv.config({ path: fileUrl, processEnv: {} })
+
+  ct.equal(env.error.code, 'ENOENT')
+  ct.equal(env.error.message, readFileErrorMessage(fileUrl))
+  ct.ok(errorStub.calledWithMatch(`from ${path.relative(process.cwd(), envPath)}`))
   ct.end()
 })
 
