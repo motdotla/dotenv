@@ -839,6 +839,7 @@ The legacy `DOTENV_CONFIG_*` names remain fallbacks when the corresponding `DOTE
 
 ## Related Tools
 
+* [Expand environment variables with dotenv-expand](https://github.com/dotenvx/dotenv-expand)
 * [Cloak your secrets in VS Code](https://marketplace.visualstudio.com/items?itemName=dotenv.dotenv-vscode)
 * [Encrypt your .env files with dotenvx](https://github.com/dotenvx/dotenvx)
 
