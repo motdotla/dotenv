@@ -177,6 +177,41 @@ t.test('fast parse handles whitespace without consuming the next assignment', ct
   ct.end()
 })
 
+t.test('fast parse matches classic for colon newlines and export keys', ct => {
+  const cases = [
+    { src: 'A:\nfoo', expected: { A: 'foo' } },
+    { src: 'A:\r\nfoo\nNEXT=ok', expected: { A: 'foo', NEXT: 'ok' } },
+    { src: 'export =value', expected: { export: 'value' } },
+    { src: 'export\t=value', expected: { export: 'value' } },
+    { src: 'export : value\nNEXT=ok', expected: { NEXT: 'ok' } },
+    { src: 'export KEY=value', expected: { KEY: 'value' } }
+  ]
+  for (const { src, expected } of cases) {
+    ct.same(dotenv.parse(src), expected, `classic: ${JSON.stringify(src)}`)
+    ct.same(dotenv.parse(src, { fast: true }), expected, `fast: ${JSON.stringify(src)}`)
+  }
+  ct.end()
+})
+
+t.test('fast parse respects Unicode line separators around quotes and comments', ct => {
+  for (const separator of ['\u2028', '\u2029']) {
+    const cases = [
+      { src: `A="x"${separator}B=ok`, expected: { A: 'x', B: 'ok' } },
+      { src: `# comment${separator}B=ok`, expected: { B: 'ok' } },
+      { src: `A="x" # comment${separator}B=ok`, expected: { A: 'x', B: 'ok' } },
+      { src: `A=x # comment${separator}B=ok`, expected: { A: 'x', B: 'ok' } },
+      { src: `invalid${separator}B=ok`, expected: { B: 'ok' } },
+      { src: `A=x${separator}B=ok`, expected: { A: `x${separator}B=ok` } }
+    ]
+    for (const { src, expected } of cases) {
+      const label = JSON.stringify(src).split(separator).join(`\\u${separator.charCodeAt(0).toString(16)}`)
+      ct.same(dotenv.parse(src), expected, `classic: ${label}`)
+      ct.same(dotenv.parse(src, { fast: true }), expected, `fast: ${label}`)
+    }
+  }
+  ct.end()
+})
+
 t.test('config({ fast: true }) reads a .env written with a BOM', ct => {
   const processEnv = {}
   const result = dotenv.config({
