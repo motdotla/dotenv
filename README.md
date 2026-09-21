@@ -1,5 +1,3 @@
-> If you like dotenv, you will love [dotenvx](https://github.com/dotenvx/dotenvx) – for encrypting `.env` files that can travel with your code. 🙏
-
 # dotenv [![NPM version](https://img.shields.io/npm/v/dotenv.svg?style=flat-square)](https://www.npmjs.com/package/dotenv) [![downloads](https://img.shields.io/npm/dw/dotenv)](https://www.npmjs.com/package/dotenv)
 
 <img src="https://raw.githubusercontent.com/motdotla/dotenv/master/dotenv.svg" alt="dotenv" align="right" width="200" />
@@ -775,6 +773,13 @@ Turn on logging to help debug why certain keys or values are not being populated
 Default: `false`
 
 Override any environment variables that have already been set.
+
+&nbsp;
+
+## Supporting Tools
+
+* [Cloak your secrets in VS Code](https://marketplace.visualstudio.com/items?itemName=dotenv.dotenv-vscode)
+* [Encrypt your .env files with dotenvx](https://github.com/dotenvx/dotenvx)
 
 &nbsp;
 
