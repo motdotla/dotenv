@@ -151,6 +151,10 @@ for (const { name, src, expected } of parityRegressions) {
   t.test(`issue #1043: ${name}`, ct => {
     ct.same(dotenv.parse(src), expected, 'classic parser returns the expected value')
     ct.same(dotenv.parse(src, { fast: true }), expected, 'fast parser returns the same expected value')
+    const surrounded = Buffer.from(`BEFORE=one\n${src}\nAFTER=two\n`)
+    const expectedSurrounded = { BEFORE: 'one', ...expected, AFTER: 'two' }
+    ct.same(dotenv.parse(surrounded), expectedSurrounded, 'classic parser preserves surrounding keys in a buffer')
+    ct.same(dotenv.parse(surrounded, { fast: true }), expectedSurrounded, 'fast parser fallback preserves surrounding keys in a buffer')
     ct.end()
   })
 }
