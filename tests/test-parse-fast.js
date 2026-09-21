@@ -212,6 +212,39 @@ t.test('fast parse respects Unicode line separators around quotes and comments',
   ct.end()
 })
 
+t.test('fast parse handles backslashes before quotes on a later line', ct => {
+  for (const quote of ['"', "'", '`']) {
+    for (const count of [1, 2, 3, 4]) {
+      const slashes = '\\'.repeat(count)
+      for (const suffix of ['', '\nB=ok', '\nB="b"', '# comment']) {
+        const following = suffix.startsWith('\n') ? { B: suffix.includes('"') ? 'b' : 'ok' } : {}
+        const cases = [
+          { src: `A=\n${quote}a${slashes}${quote}${suffix}`, expected: { A: `a${slashes}`, ...following } },
+          { src: `A=\n${quote}a${slashes}${quote}b${quote}${suffix}`, expected: { A: `a${slashes}${quote}b`, ...following } }
+        ]
+        for (const { src, expected } of cases) {
+          ct.same(dotenv.parse(src), expected, `classic: ${JSON.stringify(src)}`)
+          ct.same(dotenv.parse(src, { fast: true }), expected, `fast: ${JSON.stringify(src)}`)
+        }
+      }
+    }
+  }
+  ct.end()
+})
+
+t.test('fast parse matches classic across quoted value combinations', ct => {
+  const values = ['', 'plain', '"a"', "'a'", '`a`', '"a" "b"', '"a\\n', '"a\\r', '"a\\"', '"a\\\\"', '"a\\\\"b"', '"a\nb"', '"a\nb"junk', '"a\\"#x"', '"a\n"b"\nc"']
+  for (const separator of ['=', '= ', '=\n', ': ', ':\n', ':\t']) {
+    for (const value of values) {
+      for (const suffix of ['', '\nB=ok', '\nB="b"', '#end', ' junk']) {
+        const src = `A${separator}${value}${suffix}`
+        assertSameParse(ct, src, JSON.stringify(src))
+      }
+    }
+  }
+  ct.end()
+})
+
 t.test('config({ fast: true }) reads a .env written with a BOM', ct => {
   const processEnv = {}
   const result = dotenv.config({
