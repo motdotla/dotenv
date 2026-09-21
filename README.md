@@ -47,6 +47,8 @@ That's it. `process.env` now has the keys and values you defined in your `.env` 
 
 **NEW:** Dotenv now has a CLI! Great for your coding agent.
 
+https://github.com/user-attachments/assets/79395e92-5ce0-430d-b8b5-31631aac25bb
+
 ```javascript
 // index.js
 console.log(`Hello ${process.env.HELLO}`)
