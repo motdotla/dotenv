@@ -95,6 +95,66 @@ t.test('fast parse matches classic parse for an escaped backslash before the clo
   ct.end()
 })
 
+// Regressions reported in https://github.com/motdotla/dotenv/issues/1043,
+// including the unterminated quote and separate quoted segments follow-up.
+// Pin the classic result next to each fast assertion so parity cannot pass
+// simply because both parsers return the same incorrect result.
+const parityRegressions = [
+  {
+    name: 'blank line before a quoted multiline value',
+    src: 'A=\n\n"hello\nworld"',
+    expected: { A: 'hello\nworld' }
+  },
+  {
+    name: 'quoted value on the next line',
+    src: "A=\n'b'",
+    expected: { A: 'b' }
+  },
+  {
+    name: 'form feed before a key',
+    src: '\fA=1',
+    expected: { A: '1' }
+  },
+  {
+    name: 'vertical tab before a key',
+    src: '\vA=1',
+    expected: { A: '1' }
+  },
+  {
+    name: 'non-breaking space before a key',
+    src: '\u00A0A=1',
+    expected: { A: '1' }
+  },
+  {
+    name: 'trailing junk after a closing quote',
+    src: 'TOKEN="abc" oops',
+    expected: { TOKEN: '"abc" oops' }
+  },
+  {
+    name: 'escaped newline in an unterminated double-quoted value',
+    src: 'KEY="line one\\nline two',
+    expected: { KEY: '"line one\nline two' }
+  },
+  {
+    name: 'escaped carriage return in an unterminated double-quoted value',
+    src: 'KEY="line one\\rline two',
+    expected: { KEY: '"line one\rline two' }
+  },
+  {
+    name: 'separate quoted segments on one line',
+    src: 'KEY="a" "b"',
+    expected: { KEY: 'a" "b' }
+  }
+]
+
+for (const { name, src, expected } of parityRegressions) {
+  t.test(`issue #1043: ${name}`, ct => {
+    ct.same(dotenv.parse(src), expected, 'classic parser returns the expected value')
+    ct.same(dotenv.parse(src, { fast: true }), expected, 'fast parser returns the same expected value')
+    ct.end()
+  })
+}
+
 t.test('config({ fast: true }) reads a .env written with a BOM', ct => {
   const processEnv = {}
   const result = dotenv.config({
