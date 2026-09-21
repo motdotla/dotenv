@@ -584,7 +584,9 @@ Alternatively, just use [dotenv-webpack](https://github.com/mrsteele/dotenv-webp
 
 ## Docs
 
-Dotenv exposes four functions:
+### SDK
+
+Dotenv exposes three functions:
 
 * `config`
 * `parse`
@@ -780,6 +782,58 @@ Turn on logging to help debug why certain keys or values are not being populated
 Default: `false`
 
 Override any environment variables that have already been set.
+
+&nbsp;
+
+### CLI
+
+The `dotenv` command is included with the package. Run it with `npx dotenv`, or use `dotenv` directly in npm scripts.
+
+#### run
+
+Load environment variables from `.env`, then run a command with those variables available.
+
+```sh
+npx dotenv run [options] -- <command> [args...]
+```
+
+```sh
+npx dotenv run -- node index.js
+npx dotenv run -f .env.local -- node index.js
+npx dotenv run -f .env.local -f .env -- npm test
+```
+
+Put dotenv options before the command. The `--` separator is optional; all arguments after the command are passed to that command.
+
+#### Options
+
+| Option | Description |
+| --- | --- |
+| `-f, --file <paths>` | Load one or more files. Repeat the flag or separate paths with commas. Defaults to `.env`. |
+| `-q, --quiet` | Suppress the injected environment variables message. |
+| `--debug` | Enable debug logging. |
+| `--override` | Overwrite existing environment variables. When loading multiple files, the last value wins. |
+| `--fast` | Use the faster character-scanner parser. |
+| `-h, --help` | Show help. Also available as `dotenv --help`. |
+
+Without `--override`, existing environment variables take precedence and the first value found across files wins. With `--override`, values from the files replace existing variables, and later files override earlier ones.
+
+The CLI forwards the command's exit status. A missing default `.env` is allowed; a missing file explicitly selected with `-f` stops the command from running.
+
+#### Environment defaults
+
+Use these environment variables to set defaults. CLI flags take precedence over them.
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `DOTENV_PATH` | `.env` | Path to the file to load. |
+| `DOTENV_ENCODING` | `utf8` | File encoding. |
+| `DOTENV_QUIET` | `false` | Suppress the injected environment variables message. |
+| `DOTENV_DEBUG` | `false` | Enable debug logging. |
+| `DOTENV_OVERRIDE` | `false` | Overwrite existing environment variables. |
+| `DOTENV_FAST` | `false` | Use the faster parser. |
+
+The legacy `DOTENV_CONFIG_*` names remain fallbacks when the corresponding `DOTENV_*` variable is unset. For boolean settings, `false`, `0`, `no`, `off`, and an empty value disable the setting.
 
 &nbsp;
 
