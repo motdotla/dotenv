@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.1...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.2...master)
+
+## [18.0.2](https://github.com/motdotla/dotenv/compare/v18.0.1...v18.0.2) (2026-09-21)
+
+* Patch additional edge cases for the fast parser ([#1056](https://github.com/motdotla/dotenv/pull/1056))
 
 ## [18.0.1](https://github.com/motdotla/dotenv/compare/v18.0.0...v18.0.1) (2026-09-18)
 
