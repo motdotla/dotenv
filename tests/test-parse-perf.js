@@ -1,9 +1,11 @@
 'use strict'
 // Performance check for `dotenv.parse()`.
-// Not run as part of `npm test` (no TAP assertions); invoke directly:
+// No TAP assertions; invoke directly for standalone timing:
 //   node tests/test-parse-perf.js
-// Reports median ms over 7 runs of 5000 parse() calls on a representative .env.
+// Compares classic and fast parsing of strings and buffers, reporting median
+// ms over 7 runs of 5000 calls on a representative .env. Timing is not a CI gate.
 
+const assert = require('assert')
 const dotenv = require('../lib/main.js')
 
 const sample = [
@@ -34,16 +36,31 @@ const sample = [
   ''
 ].join('\n').repeat(8)
 
-const buf = Buffer.from(sample)
 const N = 5000
+const fastOptions = { fast: true }
 
-for (let i = 0; i < 200; i++) dotenv.parse(buf)
-
-const runs = []
-for (let r = 0; r < 7; r++) {
-  const t = process.hrtime.bigint()
-  for (let i = 0; i < N; i++) dotenv.parse(buf)
-  runs.push(Number(process.hrtime.bigint() - t) / 1e6)
+for (const [format, src] of [['Buffer', Buffer.from(sample)], ['string', sample]]) {
+  const parsers = [
+    { name: 'classic', parse: () => dotenv.parse(src), runs: [] },
+    { name: 'fast', parse: () => dotenv.parse(src, fastOptions), runs: [] }
+  ]
+  assert.deepStrictEqual(parsers[1].parse(), parsers[0].parse())
+  for (const parser of parsers) {
+    for (let i = 0; i < 1000; i++) parser.parse()
+  }
+  for (let r = 0; r < 7; r++) {
+    // Alternate order so either parser can run first in a round.
+    for (let offset = 0; offset < parsers.length; offset++) {
+      const parser = parsers[(r + offset) % parsers.length]
+      const start = process.hrtime.bigint()
+      for (let i = 0; i < N; i++) parser.parse()
+      parser.runs.push(Number(process.hrtime.bigint() - start) / 1e6)
+    }
+  }
+  for (const parser of parsers) {
+    parser.runs.sort((a, b) => a - b)
+    parser.median = parser.runs[3]
+    console.log(`${format} ${parser.name} x ${N}: median ${parser.median.toFixed(2)} ms`)
+  }
+  console.log(`${format} speedup: ${(parsers[0].median / parsers[1].median).toFixed(2)}x`)
 }
-runs.sort(function (a, b) { return a - b })
-console.log('parse() x ' + N + ': median ' + runs[Math.floor(runs.length / 2)].toFixed(2) + ' ms')
