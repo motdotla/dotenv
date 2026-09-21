@@ -154,10 +154,28 @@ for (const { name, src, expected } of parityRegressions) {
     const surrounded = Buffer.from(`BEFORE=one\n${src}\nAFTER=two\n`)
     const expectedSurrounded = { BEFORE: 'one', ...expected, AFTER: 'two' }
     ct.same(dotenv.parse(surrounded), expectedSurrounded, 'classic parser preserves surrounding keys in a buffer')
-    ct.same(dotenv.parse(surrounded, { fast: true }), expectedSurrounded, 'fast parser fallback preserves surrounding keys in a buffer')
+    ct.same(dotenv.parse(surrounded, { fast: true }), expectedSurrounded, 'fast parser preserves surrounding keys in a buffer')
     ct.end()
   })
 }
+
+t.test('fast parse handles whitespace without consuming the next assignment', ct => {
+  const cases = [
+    { src: 'EMPTY=\nNEXT=ok', expected: { EMPTY: '', NEXT: 'ok' } },
+    { src: 'INVALID\nNEXT=ok', expected: { NEXT: 'ok' } },
+    { src: 'KEY\n=ok', expected: { KEY: 'ok' } },
+    { src: 'export\u00A0KEY\f=\vvalue\u00A0', expected: { KEY: 'value' } },
+    { src: 'KEY:\u00A0value', expected: { KEY: 'value' } },
+    { src: 'KEY=\n\n`one\ntwo`\nNEXT=ok', expected: { KEY: 'one\ntwo', NEXT: 'ok' } },
+    { src: 'KEY="abc" # comment\nNEXT=ok', expected: { KEY: 'abc', NEXT: 'ok' } },
+    { src: 'KEY=\n"unterminated\nNEXT=ok', expected: { KEY: '', NEXT: 'ok' } }
+  ]
+  for (const { src, expected } of cases) {
+    ct.same(dotenv.parse(src), expected, `classic: ${JSON.stringify(src)}`)
+    ct.same(dotenv.parse(src, { fast: true }), expected, `fast: ${JSON.stringify(src)}`)
+  }
+  ct.end()
+})
 
 t.test('config({ fast: true }) reads a .env written with a BOM', ct => {
   const processEnv = {}
