@@ -776,6 +776,13 @@ Override any environment variables that have already been set.
 
 &nbsp;
 
+## Supporting Tools
+
+* [Cloak your secrets in VS Code](https://marketplace.visualstudio.com/items?itemName=dotenv.dotenv-vscode)
+* [Encrypt your .env files with dotenvx](https://github.com/dotenvx/dotenvx)
+
+&nbsp;
+
 ## CHANGELOG
 
 See [CHANGELOG.md](CHANGELOG.md)
@@ -787,14 +794,3 @@ See [CHANGELOG.md](CHANGELOG.md)
 [These npm modules depend on it.](https://www.npmjs.com/browse/depended/dotenv)
 
 Projects that expand it often use the [keyword "dotenv" on npm](https://www.npmjs.com/search?q=keywords:dotenv).
-
-&nbsp;
-
-## Supporting Tools
-
-* [Cloak your secrets in VS Code](https://marketplace.visualstudio.com/items?itemName=dotenv.dotenv-vscode)
-* [Encrypt your .env files with dotenvx](https://github.com/dotenvx/dotenvx)
-
-&nbsp;
-
-
