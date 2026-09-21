@@ -776,7 +776,7 @@ Override any environment variables that have already been set.
 
 &nbsp;
 
-## Supporting Tools
+## Related Tools
 
 * [Cloak your secrets in VS Code](https://marketplace.visualstudio.com/items?itemName=dotenv.dotenv-vscode)
 * [Encrypt your .env files with dotenvx](https://github.com/dotenvx/dotenvx)
