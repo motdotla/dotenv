@@ -19,6 +19,8 @@ const cases = [
   { name: 'true inside .env suppresses the first startup message', file: 'DOTENV_QUIET=true\n', value: 'true', quiet: true },
   { name: '1 inside .env suppresses the first startup message', file: 'DOTENV_QUIET=1\n', value: '1', quiet: true },
   { name: 'true in the shell suppresses the startup message', file: '', env: { DOTENV_QUIET: 'true' }, value: 'true', quiet: true },
+  { name: 'false in the shell takes precedence over .env', file: 'DOTENV_QUIET=true\n', env: { DOTENV_QUIET: 'false' }, value: 'false', quiet: false },
+  { name: 'legacy quiet inside .env suppresses the startup message', file: 'DOTENV_CONFIG_QUIET=true\n', value: 'undefined', quiet: true },
   { name: 'false inside .env keeps the startup message', file: 'DOTENV_QUIET=false\n', value: 'false', quiet: false },
   { name: 'no quiet setting keeps the startup message', file: '', value: 'undefined', quiet: false }
 ]
@@ -43,4 +45,26 @@ for (const [mode, args] of Object.entries(modes)) {
       ct.end()
     })
   }
+}
+
+for (const testCase of [
+  { name: 'explicit false takes precedence over .env', options: '{ quiet: false }', quiet: false },
+  { name: 'custom processEnv honors quiet from .env', options: '{ processEnv: {} }', quiet: true }
+]) {
+  t.test(testCase.name, ct => {
+    const cwd = ct.testdir({ '.env': 'DOTENV_QUIET=true\n' })
+    const result = cp.spawnSync(process.execPath, [
+      '-e',
+      `const result = require(${JSON.stringify(entry)}).config(${testCase.options}); console.log(result.parsed.DOTENV_QUIET)`
+    ], { cwd, encoding: 'utf8', env: cleanEnv })
+
+    ct.equal(result.status, 0, 'process exits successfully')
+    ct.equal(result.stdout, 'true\n', 'file is parsed successfully')
+    if (testCase.quiet) {
+      ct.equal(result.stderr, '', 'first load emits no startup message')
+    } else {
+      ct.match(result.stderr, /injected env \(1\) from \.env/, 'explicit false keeps logging enabled')
+    }
+    ct.end()
+  })
 }
