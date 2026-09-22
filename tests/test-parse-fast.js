@@ -184,7 +184,9 @@ t.test('fast parse matches classic for colon newlines and export keys', ct => {
     { src: 'export =value', expected: { export: 'value' } },
     { src: 'export\t=value', expected: { export: 'value' } },
     { src: 'export : value\nNEXT=ok', expected: { NEXT: 'ok' } },
-    { src: 'export KEY=value', expected: { KEY: 'value' } }
+    { src: 'export KEY=value', expected: { KEY: 'value' } },
+    { src: 'export\nexport KEY=value', expected: { KEY: 'value' } },
+    { src: 'export \n\nexport KEY=value\nNEXT=ok', expected: { KEY: 'value', NEXT: 'ok' } }
   ]
   for (const { src, expected } of cases) {
     ct.same(dotenv.parse(src), expected, `classic: ${JSON.stringify(src)}`)
