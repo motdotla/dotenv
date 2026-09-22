@@ -2,9 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.2...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.3...master)
+
+## [18.0.3](https://github.com/motdotla/dotenv/compare/v18.0.2...v18.0.3) (2026-09-22)
+
+### Changed
+
+* Patch `DOTENV_QUIET` setting when inside .env file ([#1059](https://github.com/motdotla/dotenv/pull/1059))
 
 ## [18.0.2](https://github.com/motdotla/dotenv/compare/v18.0.1...v18.0.2) (2026-09-21)
+
+### Changed
 
 * Patch additional edge cases for the fast parser ([#1056](https://github.com/motdotla/dotenv/pull/1056))
 
