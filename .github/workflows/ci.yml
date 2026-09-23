@@ -23,3 +23,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm test
+      - name: Require at least 1.5x parser speedup
+        run: npm run test:perf
