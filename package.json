@@ -27,6 +27,7 @@
     "dts-check": "tsc --project tests/types/tsconfig.json",
     "lint": "standard",
     "test": "npm run build && npm run lint && npm run dts-check && tap run tests/**/*.js --allow-empty-coverage --disable-coverage --timeout=60000",
+    "test:perf": "node scripts/parse-perf.js",
     "prepack": "npm run build",
     "prepublishOnly": "npm pack --dry-run",
     "prerelease": "npm test",
