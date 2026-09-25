@@ -58,6 +58,7 @@
     "@types/node": "^18.11.3",
     "decache": "^4.6.2",
     "esbuild": "^0.28.1",
+    "process-on-spawn": "^1.1.0",
     "sinon": "^14.0.1",
     "standard": "^17.0.0",
     "standard-version": "^9.5.0",

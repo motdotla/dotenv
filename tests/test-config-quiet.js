@@ -1,6 +1,14 @@
 const cp = require('child_process')
 const path = require('path')
 const t = require('tap')
+const processOnSpawn = require('process-on-spawn')
+
+// TAP injects a loader through NODE_OPTIONS at spawn time. On Node 20/22,
+// its loader worker reruns -r preloads, adding a second dotenv load and logs.
+// These assertions need the output of an ordinary, uninstrumented Node process.
+const isolateNodeOptions = options => { delete options.env.NODE_OPTIONS }
+processOnSpawn.addListener(isolateNodeOptions)
+t.teardown(() => processOnSpawn.removeListener(isolateNodeOptions))
 
 // Isolate startup options and loaded values from the test runner's environment.
 const cleanEnv = Object.fromEntries(Object.entries(process.env).filter(([key]) => {
