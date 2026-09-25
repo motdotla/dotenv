@@ -641,7 +641,7 @@ require('dotenv').config({ path: ['.env.local', '.env'] })
 
 Default: `false`
 
-Suppress runtime logging message.
+Suppress runtime logging message. `dotenv/config` imports and preloads default to `true`; set `DOTENV_QUIET=false` (or `DOTENV_CONFIG_QUIET=false`) in the shell to enable their startup message.
 
 ```js
 // index.js

@@ -2,6 +2,10 @@ const cp = require('child_process')
 const path = require('path')
 const t = require('tap')
 
+const cleanEnv = Object.fromEntries(Object.entries(process.env).filter(([key]) => {
+  return !key.toUpperCase().startsWith('DOTENV_') && key !== 'BASIC'
+}))
+
 t.test('built package supports named, default, and namespace ESM imports', ct => {
   const result = cp.spawnSync(process.execPath, [
     '--input-type=module',
@@ -37,23 +41,30 @@ t.test('built package supports named, default, and namespace ESM imports', ct =>
   ct.end()
 })
 
-t.test("import 'dotenv/config' loads env before application code", ct => {
-  const result = cp.spawnSync(process.execPath, [
-    '--input-type=module',
-    '--eval',
-    "import 'dotenv/config'; console.log(process.env.BASIC)"
-  ], {
-    cwd: path.resolve(__dirname, '..'),
-    encoding: 'utf8',
-    env: {
-      ...process.env,
-      DOTENV_CONFIG_PATH: 'tests/.env',
-      DOTENV_CONFIG_QUIET: 'true'
-    }
-  })
+// Regression: https://github.com/motdotla/dotenv/issues/1062
+const program = 'console.log(process.env.BASIC)'
+const modes = {
+  import: ['--input-type=module', '-e', `import 'dotenv/config'; ${program}`],
+  'import .js alias': ['--input-type=module', '-e', `import 'dotenv/config.js'; ${program}`],
+  require: ['-e', `require('dotenv/config'); ${program}`],
+  preload: ['-r', 'dotenv/config', '-e', program],
+  source: ['-r', './config.js', '-e', program]
+}
 
-  ct.equal(result.status, 0)
-  ct.equal(result.stdout, 'basic\n')
-  ct.equal(result.stderr, '')
-  ct.end()
-})
+for (const [mode, args] of Object.entries(modes)) {
+  t.test(`${mode} loads env quietly by default`, ct => {
+    const result = cp.spawnSync(process.execPath, args, {
+      cwd: path.resolve(__dirname, '..'),
+      encoding: 'utf8',
+      env: {
+        ...cleanEnv,
+        DOTENV_CONFIG_PATH: 'tests/.env'
+      }
+    })
+
+    ct.equal(result.status, 0)
+    ct.equal(result.stdout, 'basic\n')
+    ct.equal(result.stderr, '')
+    ct.end()
+  })
+}
