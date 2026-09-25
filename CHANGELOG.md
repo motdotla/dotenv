@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.3...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.4...master)
+
+## [18.0.4](https://github.com/motdotla/dotenv/compare/v18.0.3...v18.0.4) (2026-09-25)
+
+### Changed
+
+* `import dotenv/config` should default quiet: true ([#1063](https://github.com/motdotla/dotenv/pull/1063))
 
 ## [18.0.3](https://github.com/motdotla/dotenv/compare/v18.0.2...v18.0.3) (2026-09-22)
 
