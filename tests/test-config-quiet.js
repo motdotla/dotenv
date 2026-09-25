@@ -21,8 +21,10 @@ const cases = [
   { name: 'true in the shell suppresses the startup message', file: '', env: { DOTENV_QUIET: 'true' }, value: 'true', quiet: true },
   { name: 'false in the shell takes precedence over .env', file: 'DOTENV_QUIET=true\n', env: { DOTENV_QUIET: 'false' }, value: 'false', quiet: false },
   { name: 'legacy quiet inside .env suppresses the startup message', file: 'DOTENV_CONFIG_QUIET=true\n', value: 'undefined', quiet: true },
-  { name: 'false inside .env keeps the startup message', file: 'DOTENV_QUIET=false\n', value: 'false', quiet: false },
-  { name: 'no quiet setting keeps the startup message', file: '', value: 'undefined', quiet: false }
+  { name: 'legacy false in the shell enables the startup message', file: '', env: { DOTENV_CONFIG_QUIET: 'false' }, value: 'undefined', quiet: false },
+  { name: 'debug enables logging even with quiet', file: '', env: { DOTENV_DEBUG: 'true', DOTENV_QUIET: 'true' }, value: 'true', quiet: false, debug: true },
+  { name: 'false inside .env respects the entry point default', file: 'DOTENV_QUIET=false\n', value: 'false', quiet: false, preloadQuiet: true },
+  { name: 'no quiet setting uses the entry point default', file: '', value: 'undefined', quiet: false, preloadQuiet: true }
 ]
 
 for (const [mode, args] of Object.entries(modes)) {
@@ -36,8 +38,13 @@ for (const [mode, args] of Object.entries(modes)) {
       })
 
       ct.equal(result.status, 0, 'process exits successfully')
-      ct.equal(result.stdout, `${testCase.value}\n`, 'application sees the loaded setting without startup output')
-      if (testCase.quiet) {
+      if (testCase.debug) {
+        ct.match(result.stdout, /no encoding is specified/, 'debug output remains enabled')
+        ct.ok(result.stdout.endsWith(`${testCase.value}\n`), 'application sees the loaded setting')
+      } else {
+        ct.equal(result.stdout, `${testCase.value}\n`, 'application sees the loaded setting without startup output')
+      }
+      if (testCase.quiet || (mode === 'preload' && testCase.preloadQuiet)) {
         ct.equal(result.stderr, '', 'first load emits no startup message')
       } else {
         ct.match(result.stderr, /injected env \(\d+\) from \.env/, 'startup logging remains enabled')
