@@ -42,11 +42,14 @@ Hello Dotenv
 
 * NEW: Dotenv now has a fast parser thanks to @homanp of [superagent.sh](https://superagent.sh). Pass `config({ fast: true })`, flag `--fast`, or set `DOTENV_FAST=true` to opt-in to ~2x faster character-scanner parser. ([#1010](https://github.com/motdotla/dotenv/pull/1010))
 
+
 ```sh
 $ dotenv run --fast -- node index.js
 ◇ injected env (2) from .env
 Hello Dotenv
 ```
+
+[faster than Node native parseEnv!](https://dotenvx.com/blog/2026/09/28/dotenv-fast.html)
 
 ### Changed
 
