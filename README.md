@@ -699,6 +699,8 @@ Use the faster character-scanner parser (~2x). Default remains the classic regex
 require('dotenv').config({ fast: true })
 ```
 
+[Watch the video](https://github.com/user-attachments/assets/8f69bf7a-e7f1-49b9-8650-c0dcb37809e6)
+
 ##### processEnv
 
 Default: `process.env`
@@ -813,7 +815,7 @@ Put dotenv options before the command. The `--` separator is optional; all argum
 | `-q, --quiet` | Suppress the injected environment variables message. |
 | `--debug` | Enable debug logging. |
 | `--override` | Overwrite existing environment variables. When loading multiple files, the last value wins. |
-| `--fast` | Use the faster character-scanner parser. |
+| `--fast` | Use the faster character-scanner parser.<br>[Watch the video](https://github.com/user-attachments/assets/8f69bf7a-e7f1-49b9-8650-c0dcb37809e6) |
 | `-h, --help` | Show help. Also available as `dotenv --help`. |
 
 Without `--override`, existing environment variables take precedence and the first value found across files wins. With `--override`, values from the files replace existing variables, and later files override earlier ones.
