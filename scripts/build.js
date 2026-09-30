@@ -21,4 +21,5 @@ esbuild.buildSync({
 fs.copyFileSync(path.join(root, 'lib/main.d.ts'), path.join(dist, 'index.d.ts'))
 const config = fs.readFileSync(path.join(root, 'config.js'), 'utf8')
 fs.writeFileSync(path.join(dist, 'config.cjs'), config.replace("require('./lib/main')", "require('./index.cjs')"))
+fs.copyFileSync(path.join(root, 'config.d.ts'), path.join(dist, 'config.d.ts'))
 fs.chmodSync(path.join(dist, 'index.cjs'), 0o755)
