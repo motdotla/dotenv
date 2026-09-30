@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.4...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.5...master)
+
+## [18.0.5](https://github.com/motdotla/dotenv/compare/v18.0.4...v18.0.5) (2026-09-30)
+
+### Changed
+
+* Fix missing typescript module declaration ([#1068](https://github.com/motdotla/dotenv/pull/1068))
+* Improve performance for large .env files ([#1066](https://github.com/motdotla/dotenv/pull/1066))
 
 ## [18.0.4](https://github.com/motdotla/dotenv/compare/v18.0.3...v18.0.4) (2026-09-25)
 
