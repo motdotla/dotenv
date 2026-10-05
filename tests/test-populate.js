@@ -56,6 +56,32 @@ t.test('does write over keys already in processEnv if override turned on', ct =>
   ct.equal(process.env.test, parsed.test)
 })
 
+t.test('does not write over keys already in processEnv if override is the string false', ct => {
+  ct.plan(1)
+
+  const processEnv = { test: 'bar' }
+  const parsed = { test: 'test' }
+
+  dotenv.populate(processEnv, parsed, { override: 'false' })
+
+  ct.equal(processEnv.test, 'bar')
+})
+
+t.test('does not log when debug is the string false', ct => {
+  ct.plan(1)
+
+  const logStub = sinon.stub(console, 'log')
+
+  const processEnv = { test: 'bar' }
+  const parsed = { test: 'test' }
+
+  dotenv.populate(processEnv, parsed, { debug: 'false' })
+
+  ct.notOk(logStub.called)
+
+  logStub.restore()
+})
+
 t.test('logs any errors populating when in debug mode but override turned off', ct => {
   ct.plan(2)
 
