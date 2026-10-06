@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.5...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.6...master)
+
+## [18.0.6](https://github.com/motdotla/dotenv/compare/v18.0.5...v18.0.6) (2026-10-06)
+
+### Changed
+
+* Use smarter `parseBoolean` not Boolean() to fix override ([#1069](https://github.com/motdotla/dotenv/pull/1069))
 
 ## [18.0.5](https://github.com/motdotla/dotenv/compare/v18.0.4...v18.0.5) (2026-09-30)
 
