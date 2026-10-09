@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.6...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.7...master)
+
+## [18.0.7](https://github.com/motdotla/dotenv/compare/v18.0.6...v18.0.7) (2026-10-09)
+
+### Changed
+
+* Treat undefined settings like `quiet: true` as null rather than falsey ([#1070](https://github.com/motdotla/dotenv/pull/1070))
+* CLI should honor `DOTENV_QUIET` setting in `.env` file ([#1071](https://github.com/motdotla/dotenv/pull/1071))
 
 ## [18.0.6](https://github.com/motdotla/dotenv/compare/v18.0.5...v18.0.6) (2026-10-06)
 
