@@ -77,6 +77,20 @@ t.test('undefined options do not override DOTENV_CONFIG_* defaults', ct => {
   ct.end()
 })
 
+t.test('null options use environment defaults', ct => {
+  process.env.DOTENV_CONFIG_PATH = 'tests/.env.local'
+  process.env.DOTENV_CONFIG_QUIET = 'true'
+  errorStub = sinon.stub(console, 'error')
+
+  const result = dotenv.config(null)
+
+  ct.equal(result.error, undefined)
+  ct.equal(result.parsed.BASIC, 'local_basic')
+  ct.equal(process.env.BASIC, 'local_basic')
+  ct.ok(errorStub.notCalled)
+  ct.end()
+})
+
 t.test('takes string for path option', ct => {
   const testPath = 'tests/.env'
   const env = dotenv.config({ path: testPath })
