@@ -135,3 +135,32 @@ t.test('Windows resolves executables and batch shims with spaces in their paths'
   ct.equal(result.stderr, '')
   ct.end()
 })
+
+for (const testCase of [
+  { name: 'quiet from .env', file: 'DOTENV_QUIET=true\n', quiet: true },
+  { name: 'legacy quiet from .env', file: 'DOTENV_CONFIG_QUIET=1\n', quiet: true },
+  { name: 'false from .env', file: 'DOTENV_QUIET=false\n', quiet: false },
+  { name: 'no quiet setting', file: '', quiet: false },
+  { name: 'shell false before file true', file: 'DOTENV_QUIET=true\n', env: { DOTENV_QUIET: 'false' }, quiet: false },
+  { name: 'legacy shell false before file true', file: 'DOTENV_QUIET=true\n', env: { DOTENV_CONFIG_QUIET: 'false' }, quiet: false },
+  { name: 'shell false with override', file: 'DOTENV_QUIET=true\n', env: { DOTENV_QUIET: 'false' }, flags: ['--override'], quiet: false },
+  { name: 'flag before shell and file false', file: 'DOTENV_QUIET=false\n', env: { DOTENV_QUIET: 'false' }, flags: ['--quiet'], quiet: true }
+]) {
+  t.test(`CLI startup logging respects ${testCase.name}`, ct => {
+    const cwd = ct.testdir({ '.env': testCase.file })
+    const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.toUpperCase().startsWith('DOTENV_')))
+    const result = cp.spawnSync(process.execPath, [
+      path.resolve(__dirname, '../dist/index.cjs'), 'run', ...(testCase.flags || []),
+      process.execPath, '-e', 'console.log("child ran")'
+    ], { cwd, encoding: 'utf8', env: { ...env, ...testCase.env } })
+
+    ct.equal(result.status, 0, result.stderr)
+    ct.equal(result.stdout, 'child ran\n', 'runs the child normally')
+    if (testCase.quiet) {
+      ct.equal(result.stderr, '', 'suppresses the first startup message')
+    } else {
+      ct.match(result.stderr, /injected env \(\d+\) from \.env/, 'keeps the startup message enabled')
+    }
+    ct.end()
+  })
+}

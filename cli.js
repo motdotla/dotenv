@@ -118,7 +118,7 @@ function resolveRunOptions (parsed) {
   const envOptions = optionsFromEnv()
   const options = {
     encoding: envOptions.encoding || 'utf8',
-    quiet: envOptions.quiet === true,
+    quiet: envOptions.quiet,
     debug: envOptions.debug === true,
     override: envOptions.override === true,
     fast: envOptions.fast === true,
@@ -208,7 +208,8 @@ function run (argv) {
 
   try {
     const result = loadEnvFiles(options)
-    if (!options.quiet) {
+    const quiet = options.quiet == null ? optionsFromEnv().quiet : options.quiet
+    if (!quiet) {
       let message = `◇ injected env (${Object.keys(result.injected).length})`
       if (result.loadedPaths.length > 0) {
         message += ` from ${result.loadedPaths.join(', ')}`
