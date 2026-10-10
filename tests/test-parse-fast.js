@@ -274,3 +274,27 @@ t.test('config({ fast: true }) loads with fast parser', ct => {
   ct.equal(result.parsed.BASIC, 'basic')
   ct.end()
 })
+
+t.test('fast parse matches classic unquoting at Unicode line boundaries', ct => {
+  for (const separator of ['\u2028', '\u2029']) {
+    for (const quote of ['"', "'", '`']) {
+      const cases = [
+        { value: `prefix${separator}${quote}${quote}`, expected: `prefix${separator}` },
+        { value: `prefix${separator}${quote}suffix${quote}`, expected: `prefix${separator}suffix` },
+        { value: `prefix${separator}${quote}suffix${quote}${separator}tail`, expected: `prefix${separator}suffix${separator}tail` },
+        { value: `${quote}prefix${separator}suffix${quote}`, expected: `prefix${separator}suffix` },
+        { value: `prefix${separator}${quote}unterminated`, expected: `prefix${separator}${quote}unterminated` }
+      ]
+      for (const { value, expected } of cases) {
+        for (const buffer of [false, true]) {
+          const input = `BEFORE=one\nA=${value}\nAFTER=two\n`
+          const src = buffer ? Buffer.from(input) : input
+          const result = { BEFORE: 'one', A: expected, AFTER: 'two' }
+          ct.same(dotenv.parse(src), result, 'classic preserves its established unquoting rules')
+          ct.same(dotenv.parse(src, { fast: true }), result, 'fast matches classic at Unicode boundaries')
+        }
+      }
+    }
+  }
+  ct.end()
+})
