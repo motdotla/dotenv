@@ -30,6 +30,18 @@ t.test('takes processEnv and check if all keys applied to processEnv', ct => {
   ct.same(parsed, processEnv)
 })
 
+t.test('preserves undefined input values in the target and returned object', ct => {
+  for (const processEnv of [{}, { OPTIONAL: 'existing' }]) {
+    const populated = dotenv.populate(processEnv, { OPTIONAL: undefined }, { override: true })
+
+    ct.same(processEnv, { OPTIONAL: undefined })
+    ct.same(populated, { OPTIONAL: undefined })
+    ct.ok(Object.prototype.hasOwnProperty.call(processEnv, 'OPTIONAL'))
+    ct.ok(Object.prototype.hasOwnProperty.call(populated, 'OPTIONAL'))
+  }
+  ct.end()
+})
+
 t.test('does not write over keys already in processEnv', ct => {
   ct.plan(1)
 
