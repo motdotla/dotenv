@@ -7,7 +7,7 @@ export interface DotenvParseOutput {
 }
 
 export interface DotenvPopulateOutput {
-  [name: string]: string;
+  [name: string]: string | undefined;
 }
 
 export interface DotenvParseOptions {

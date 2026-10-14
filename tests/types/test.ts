@@ -36,6 +36,15 @@ populate(target, { DB_HOST: "localhost" }, { debug: true });
 populate(target, { DB_HOST: "localhost" }, { override: true });
 populate(target, { DB_HOST: "localhost" }, { debug: true, override: false });
 
+// populate() preserves undefined values from DotenvPopulateInput in its result.
+const populated = populate({}, { OPTIONAL: undefined });
+const optionalValue: string | undefined = populated["OPTIONAL"];
+// @ts-expect-error A populated value is not guaranteed to be a string.
+const requiredValue: string = populated["OPTIONAL"];
+if (optionalValue !== undefined) {
+  optionalValue.trim();
+}
+
 // config() reports a missing .env file by returning the ENOENT that fs threw,
 // so comparing error.code against it must type-check
 if (env.error?.code === "ENOENT") {
