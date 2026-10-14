@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.7...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.8...master)
+
+## [18.0.8](https://github.com/motdotla/dotenv/compare/v18.0.7...v18.0.8) (2026-10-14)
+
+### Changed
+
+* Fast parser should strip appended extra quotes ([#1073](https://github.com/motdotla/dotenv/pull/1073))
 
 ## [18.0.7](https://github.com/motdotla/dotenv/compare/v18.0.6...v18.0.7) (2026-10-09)
 
