@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Changed
 
 * Fast parser should strip appended extra quotes ([#1073](https://github.com/motdotla/dotenv/pull/1073))
+* Type detail improvement ([#1074](https://github.com/motdotla/dotenv/pull/1074))
 
 ## [18.0.7](https://github.com/motdotla/dotenv/compare/v18.0.6...v18.0.7) (2026-10-09)
 
