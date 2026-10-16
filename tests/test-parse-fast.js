@@ -298,3 +298,77 @@ t.test('fast parse matches classic unquoting at Unicode line boundaries', ct => 
   }
   ct.end()
 })
+
+t.test('fast parse finds comments the same way on either side of the 4096 character threshold', ct => {
+  // Unquoted values locate the comment marker with indexOf below 4096
+  // characters and with a manual scan at or above it. Trailing comment lines
+  // change the length of the source without changing its assignments, so
+  // both paths have to agree.
+  const cases = [
+    { value: 'v', expected: 'v' },
+    { value: 'v#c', expected: 'v' },
+    { value: 'v #c', expected: 'v' },
+    { value: '#c', expected: '' },
+    { value: 'a#b#c', expected: 'a' },
+    { value: ' v ', expected: 'v' },
+    { value: 'a b', expected: 'a b' },
+    { value: '"v"x', expected: '"v"x' },
+    { value: 'a"b', expected: 'a"b' }
+  ]
+
+  for (const { value, expected } of cases) {
+    const small = `A=${value}\nB=second\n`
+    let padding = ''
+    while (small.length + padding.length < 4096) {
+      padding += `# padding ${padding.length}\n`
+    }
+    const large = small + padding
+    const result = { A: expected, B: 'second' }
+
+    ct.ok(small.length < 4096, `${JSON.stringify(value)} stays under the threshold`)
+    ct.ok(large.length >= 4096, `${JSON.stringify(value)} crosses the threshold`)
+    assertSameParse(ct, small, `small: ${JSON.stringify(small)}`)
+    assertSameParse(ct, large, `large: ${JSON.stringify(value)}`)
+    ct.same(dotenv.parse(small, { fast: true }), result, `small pins ${JSON.stringify(value)}`)
+    ct.same(dotenv.parse(large, { fast: true }), result, `large pins ${JSON.stringify(value)}`)
+  }
+  ct.end()
+})
+
+t.test('fast parse keeps export in the key when no whitespace follows it', ct => {
+  const cases = [
+    { src: 'export=1', expected: { export: '1' } },
+    { src: 'export=', expected: { export: '' } },
+    { src: 'export: 1', expected: { export: '1' } },
+    { src: 'exports=1', expected: { exports: '1' } },
+    { src: 'exportFOO=bar', expected: { exportFOO: 'bar' } },
+    { src: 'exported=yes\nB=2', expected: { exported: 'yes', B: '2' } },
+    { src: 'export:1', expected: {} },
+    { src: 'export', expected: {} }
+  ]
+
+  for (const { src, expected } of cases) {
+    assertSameParse(ct, src, JSON.stringify(src))
+    ct.same(dotenv.parse(src, { fast: true }), expected, `pins ${JSON.stringify(src)}`)
+  }
+  ct.end()
+})
+
+t.test('fast parse ignores a key whose whitespace runs to the end of the input', ct => {
+  // The separator lookahead has to cope with running out of input while
+  // skipping whitespace, without discarding neighbouring assignments.
+  const cases = [
+    { src: 'A ', expected: {} },
+    { src: 'A\t', expected: {} },
+    { src: 'A  ', expected: {} },
+    { src: 'export A ', expected: {} },
+    { src: 'B=1\nA ', expected: { B: '1' } },
+    { src: 'A \nB=2', expected: { B: '2' } }
+  ]
+
+  for (const { src, expected } of cases) {
+    assertSameParse(ct, src, JSON.stringify(src))
+    ct.same(dotenv.parse(src, { fast: true }), expected, `pins ${JSON.stringify(src)}`)
+  }
+  ct.end()
+})
