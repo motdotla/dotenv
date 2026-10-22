@@ -214,6 +214,24 @@ t.test('takes option for path along with home directory char ~', ct => {
   ct.end()
 })
 
+t.test('expands home directory paths in the path array', ct => {
+  const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('FROM_HOME=home')
+  const mockedHomedir = '/Users/dummy'
+  const homedirStub = sinon.stub(os, 'homedir').returns(mockedHomedir)
+
+  const processEnv = {}
+  const result = dotenv.config({ path: ['~/.env'], processEnv, quiet: true })
+
+  ct.equal(result.parsed.FROM_HOME, 'home')
+  ct.equal(processEnv.FROM_HOME, 'home')
+  ct.equal(readFileSyncStub.firstCall.args[0], path.join(mockedHomedir, '.env'))
+  ct.ok(homedirStub.calledOnce)
+
+  homedirStub.restore()
+  readFileSyncStub.restore()
+  ct.end()
+})
+
 t.test('takes option for encoding', ct => {
   const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
 
