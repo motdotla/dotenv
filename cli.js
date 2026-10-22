@@ -126,7 +126,8 @@ function resolveRunOptions (parsed) {
     defaultPath: true
   }
 
-  if (envOptions.path != null) {
+  // Like config(), an empty path keeps the default .env.
+  if (envOptions.path) {
     options.paths = [envOptions.path]
     options.defaultPath = false
   }
