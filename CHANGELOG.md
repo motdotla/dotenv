@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.8...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.9...master)
+
+## [18.0.9](https://github.com/motdotla/dotenv/compare/v18.0.8...v18.0.9) (2026-10-14)
+
+### Changed
+
+* Permit DOTENV_PATH being empty string with the CLI ([#1076](https://github.com/motdotla/dotenv/pull/1076))
 
 ## [18.0.8](https://github.com/motdotla/dotenv/compare/v18.0.7...v18.0.8) (2026-10-14)
 
