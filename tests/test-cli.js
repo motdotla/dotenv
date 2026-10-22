@@ -88,6 +88,23 @@ t.test('file flags reject missing or empty lists', ct => {
   ct.end()
 })
 
+t.test('empty path environment variables load the default .env like config()', ct => {
+  const cwd = ct.testdir({ '.env': 'BASIC=default_basic\n' })
+  const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.toUpperCase().startsWith('DOTENV_')))
+  delete env.BASIC
+  for (const name of ['DOTENV_PATH', 'DOTENV_CONFIG_PATH']) {
+    const result = cp.spawnSync(process.execPath, [
+      path.resolve(__dirname, '../dist/index.cjs'), 'run', '-q',
+      process.execPath, '-e', 'console.log(process.env.BASIC)'
+    ], { cwd, encoding: 'utf8', env: { ...env, [name]: '' } })
+
+    ct.equal(result.status, 0, `${name}: ${result.stderr}`)
+    ct.equal(result.stdout, 'default_basic\n', `${name}: loads .env`)
+    ct.equal(result.stderr, '', `${name}: no error`)
+  }
+  ct.end()
+})
+
 t.test('preserves spaces, quotes, empty arguments, and shell metacharacters', ct => {
   const args = ['two words', 'a"quote', '', 'trailing\\', 'a&b', 'x|y', '<input>', '%PATH%', '!name!', '(value)', '^caret']
   const result = run([
