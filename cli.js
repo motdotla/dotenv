@@ -286,7 +286,9 @@ function run (argv) {
     } else {
       // Keep the event loop alive until the re-raised signal terminates us.
       // Otherwise Node can finish normally before delivery and report exit 0.
-      setInterval(() => {}, 1000)
+      // Node ignores some signals (SIGPIPE), so fall back to the shell's
+      // 128 + signal number status instead of waiting forever.
+      setTimeout(() => process.exit(128 + os.constants.signals[signal]), 1000)
       process.kill(process.pid, signal)
     }
   })
