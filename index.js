@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const dotenv = require('./lib/main')
 const run = require('./cli')
 

@@ -1,10 +1,22 @@
 const cp = require('child_process')
+const fs = require('fs')
+const { createRequire, wrap } = require('module')
 const path = require('path')
+const vm = require('vm')
 const t = require('tap')
 
 const cleanEnv = Object.fromEntries(Object.entries(process.env).filter(([key]) => {
   return !key.toUpperCase().startsWith('DOTENV_') && key !== 'BASIC'
 }))
+
+t.test('built library can be wrapped by a bundler', ct => {
+  const filename = require.resolve('dotenv')
+  const load = vm.runInThisContext(wrap(fs.readFileSync(filename, 'utf8')), { filename })
+  const entry = { exports: {} }
+  load(entry.exports, createRequire(filename), entry, filename, path.dirname(filename))
+  ct.same(entry.exports.parse('HELLO=world'), { HELLO: 'world' })
+  ct.end()
+})
 
 t.test('built package supports named, default, and namespace ESM imports', ct => {
   const result = cp.spawnSync(process.execPath, [
