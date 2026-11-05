@@ -52,6 +52,25 @@ t.test('help before the command still shows dotenv help', ct => {
   ct.end()
 })
 
+for (const testCase of [
+  { name: 'an existing environment variable', files: { '.env': 'BASIC=file\n' }, diagnostic: /"BASIC" is already defined and was NOT overwritten/ },
+  { name: 'a missing default file', files: {}, diagnostic: /failed to load \.env/ }
+]) {
+  t.test(`CLI debug logging for ${testCase.name} goes to stderr`, ct => {
+    const cwd = ct.testdir(testCase.files)
+    const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.toUpperCase().startsWith('DOTENV_')))
+    const result = cp.spawnSync(process.execPath, [
+      path.resolve(__dirname, '../dist/index.cjs'), 'run', '--debug', '--quiet',
+      process.execPath, '-e', 'console.log(JSON.stringify({ basic: process.env.BASIC }))'
+    ], { cwd, encoding: 'utf8', env: { ...env, BASIC: 'original' } })
+
+    ct.equal(result.status, 0, result.stderr)
+    ct.equal(result.stdout, '{"basic":"original"}\n')
+    ct.match(result.stderr, testCase.diagnostic)
+    ct.end()
+  })
+}
+
 const fileSelections = [
   ['-f', 'tests/.env.local,tests/.env'],
   ['--file', 'tests/.env.local,tests/.env'],
