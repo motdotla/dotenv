@@ -156,11 +156,11 @@ function loadEnvFiles (options) {
     const resolvedPath = path.resolve(process.cwd(), resolveHome(filepath))
     try {
       const parsed = dotenv.parse(fs.readFileSync(resolvedPath, { encoding: options.encoding }), { fast: options.fast })
-      dotenv.populate(parsedAll, parsed, populateOptions)
+      dotenv.populate(parsedAll, parsed, populateOptions, console.error)
       loadedPaths.push(filepath)
     } catch (e) {
       if (options.debug) {
-        console.log(`┆ failed to load ${filepath} ${e.message}`)
+        console.error(`┆ failed to load ${filepath} ${e.message}`)
       }
       if (!(options.defaultPath && e.code === 'ENOENT')) {
         throw e
@@ -168,7 +168,7 @@ function loadEnvFiles (options) {
     }
   }
 
-  const injected = dotenv.populate(process.env, parsedAll, populateOptions)
+  const injected = dotenv.populate(process.env, parsedAll, populateOptions, console.error)
   return { injected, loadedPaths }
 }
 
