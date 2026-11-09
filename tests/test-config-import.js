@@ -14,9 +14,12 @@ t.test('built package supports named, default, and namespace ESM imports', ct =>
       import assert from 'assert'
       import dotenv, { config, configDotenv, parse, populate } from 'dotenv'
       import * as namespace from 'dotenv'
+      import { readFileSync } from 'fs'
       import { createRequire } from 'module'
 
       const require = createRequire(import.meta.url)
+      // Bundlers can prepend code to the library entry (#1079).
+      assert.strictEqual(readFileSync(require.resolve('dotenv'), 'utf8').startsWith('#!'), false)
       assert.strictEqual(dotenv, require('dotenv'))
       for (const [name, fn] of Object.entries({ config, configDotenv, parse, populate })) {
         assert.strictEqual(typeof fn, 'function')

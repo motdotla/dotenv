@@ -3,7 +3,7 @@ const path = require('path')
 const t = require('tap')
 
 function run (args, env = process.env) {
-  return cp.spawnSync(process.execPath, ['dist/index.cjs', 'run', ...args], {
+  return cp.spawnSync(process.execPath, ['dist/cli.cjs', 'run', ...args], {
     cwd: path.resolve(__dirname, '..'),
     encoding: 'utf8',
     env
@@ -94,7 +94,7 @@ t.test('empty path environment variables load the default .env like config()', c
   delete env.BASIC
   for (const name of ['DOTENV_PATH', 'DOTENV_CONFIG_PATH']) {
     const result = cp.spawnSync(process.execPath, [
-      path.resolve(__dirname, '../dist/index.cjs'), 'run', '-q',
+      path.resolve(__dirname, '../dist/cli.cjs'), 'run', '-q',
       process.execPath, '-e', 'console.log(process.env.BASIC)'
     ], { cwd, encoding: 'utf8', env: { ...env, [name]: '' } })
 
@@ -167,7 +167,7 @@ for (const testCase of [
     const cwd = ct.testdir({ '.env': testCase.file })
     const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.toUpperCase().startsWith('DOTENV_')))
     const result = cp.spawnSync(process.execPath, [
-      path.resolve(__dirname, '../dist/index.cjs'), 'run', ...(testCase.flags || []),
+      path.resolve(__dirname, '../dist/cli.cjs'), 'run', ...(testCase.flags || []),
       process.execPath, '-e', 'console.log("child ran")'
     ], { cwd, encoding: 'utf8', env: { ...env, ...testCase.env } })
 

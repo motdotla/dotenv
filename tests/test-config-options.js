@@ -41,7 +41,7 @@ const program = 'console.log(process.env.BASIC)'
 const modes = {
   config: ['-e', `require('dotenv').config(); ${program}`],
   import: ['--input-type=module', '-e', `import 'dotenv/config'; ${program}`],
-  cli: ['dist/index.cjs', 'run', '--', process.execPath, '-e', program]
+  cli: ['dist/cli.cjs', 'run', '--', process.execPath, '-e', program]
 }
 
 for (const [mode, args] of Object.entries(modes)) {
@@ -78,7 +78,7 @@ t.test('explicit config options and CLI flags override both environment names', 
   }
   const commands = [
     ['-e', `require('dotenv').config({ path: 'tests/.env', quiet: true }); ${program}`],
-    ['dist/index.cjs', 'run', '-f', 'tests/.env', '--quiet', '--', process.execPath, '-e', program]
+    ['dist/cli.cjs', 'run', '-f', 'tests/.env', '--quiet', '--', process.execPath, '-e', program]
   ]
   delete env.BASIC
   for (const args of commands) {
