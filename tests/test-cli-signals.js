@@ -15,7 +15,7 @@ function kill (pid, signal = 'SIGKILL') {
 async function launch (ct, script, preload) {
   const args = preload ? ['--require', preload] : []
   const child = cp.spawn(process.execPath, [
-    ...args, 'dist/index.cjs', 'run', '-q', '--', process.execPath, '-e', script
+    ...args, 'dist/cli.cjs', 'run', '-q', '--', process.execPath, '-e', script
   ], {
     cwd: path.resolve(__dirname, '..'),
     detached: true,
@@ -77,7 +77,7 @@ t.test('POSIX signal forwarding', { skip: process.platform === 'win32' }, async 
 
   await ct.test('exits when the command dies from a signal Node ignores', async st => {
     // Node ignores SIGPIPE, so re-raising it does not stop dotenv (`dotenv run -- cmd | head`).
-    const result = cp.spawnSync(process.execPath, ['dist/index.cjs', 'run', '-q', '--', 'sh', '-c', 'kill -PIPE $$'], {
+    const result = cp.spawnSync(process.execPath, ['dist/cli.cjs', 'run', '-q', '--', 'sh', '-c', 'kill -PIPE $$'], {
       cwd: path.resolve(__dirname, '..'),
       encoding: 'utf8',
       timeout: 5000,

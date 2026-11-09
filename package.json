@@ -4,7 +4,7 @@
   "description": "Loads environment variables from .env file",
   "main": "dist/index.cjs",
   "bin": {
-    "dotenv": "./dist/index.cjs"
+    "dotenv": "./dist/cli.cjs"
   },
   "types": "dist/index.d.ts",
   "exports": {
