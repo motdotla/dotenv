@@ -82,22 +82,22 @@ t.test('does not write over keys already in processEnv if override is the string
 t.test('does not log when debug is the string false', ct => {
   ct.plan(1)
 
-  const logStub = sinon.stub(console, 'log')
+  const errorStub = sinon.stub(console, 'error')
 
   const processEnv = { test: 'bar' }
   const parsed = { test: 'test' }
 
   dotenv.populate(processEnv, parsed, { debug: 'false' })
 
-  ct.notOk(logStub.called)
+  ct.notOk(errorStub.called)
 
-  logStub.restore()
+  errorStub.restore()
 })
 
 t.test('logs any errors populating when in debug mode but override turned off', ct => {
   ct.plan(2)
 
-  const logStub = sinon.stub(console, 'log')
+  const errorStub = sinon.stub(console, 'error')
 
   const parsed = { test: false }
   process.env.test = true
@@ -105,26 +105,24 @@ t.test('logs any errors populating when in debug mode but override turned off', 
   dotenv.populate(process.env, parsed, { debug: true })
 
   ct.not(process.env.test, parsed.test)
-  ct.ok(logStub.called)
+  ct.ok(errorStub.calledWithMatch(/is already defined/))
 
-  logStub.restore()
+  errorStub.restore()
 })
 
 t.test('logs populating when debug mode and override turned on', ct => {
   ct.plan(1)
 
-  const logStub = sinon.stub(console, 'log')
+  const errorStub = sinon.stub(console, 'error')
 
   const parsed = { test: false }
   process.env.test = true
 
   dotenv.populate(process.env, parsed, { debug: true, override: true })
 
-  console.log('process', process.env.test, parsed.test)
+  ct.ok(errorStub.calledWithMatch(/is already defined/))
 
-  ct.ok(logStub.called)
-
-  logStub.restore()
+  errorStub.restore()
 })
 
 t.test('returns any errors thrown on passing not json type', ct => {

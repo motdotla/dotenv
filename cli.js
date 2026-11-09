@@ -10,8 +10,8 @@ const dotenv = require('./lib/main')
 
 const { optionsFromEnv } = require('./lib/config-options')
 
-function printHelp () {
-  console.log([
+function printHelp (output = console.log) {
+  output([
     'Usage: dotenv run [--help] [-q|--quiet] [--debug] [--override] [--fast] [-f|--file <paths>] [--] <command> [args...]',
     '',
     'Run a command with environment variables from a .env file.',
@@ -156,7 +156,7 @@ function loadEnvFiles (options) {
     const resolvedPath = path.resolve(process.cwd(), resolveHome(filepath))
     try {
       const parsed = dotenv.parse(fs.readFileSync(resolvedPath, { encoding: options.encoding }), { fast: options.fast })
-      dotenv.populate(parsedAll, parsed, populateOptions, console.error)
+      dotenv.populate(parsedAll, parsed, populateOptions)
       loadedPaths.push(filepath)
     } catch (e) {
       if (options.debug) {
@@ -168,7 +168,7 @@ function loadEnvFiles (options) {
     }
   }
 
-  const injected = dotenv.populate(process.env, parsedAll, populateOptions, console.error)
+  const injected = dotenv.populate(process.env, parsedAll, populateOptions)
   return { injected, loadedPaths }
 }
 
@@ -181,7 +181,7 @@ function run (argv) {
   }
 
   if (command !== 'run') {
-    printHelp()
+    printHelp(console.error)
     process.exitCode = 1
     return
   }
@@ -194,13 +194,13 @@ function run (argv) {
 
   if (parsed.error) {
     console.error(`dotenv: ${parsed.error}`)
-    printHelp()
+    printHelp(console.error)
     process.exitCode = 1
     return
   }
 
   if (parsed.command.length === 0) {
-    printHelp()
+    printHelp(console.error)
     process.exitCode = 1
     return
   }

@@ -16,17 +16,14 @@ function readFileErrorMessage (filePath) {
   }
 }
 
-let logStub
 let errorStub
 
 t.beforeEach(() => {
-  logStub = null
   errorStub = null
   delete process.env.BASIC // reset
 })
 
 t.afterEach(() => {
-  if (logStub) logStub.restore()
   if (errorStub) errorStub.restore()
   delete process.env.DOTENV_CONFIG_ENCODING
   delete process.env.DOTENV_CONFIG_PATH
@@ -175,7 +172,6 @@ t.test('logs decoded file URL paths in debug mode', ct => {
   ct.teardown(() => fs.rmSync(dir, { recursive: true, force: true }))
   const envPath = path.join(dir, 'with space %.env')
   fs.writeFileSync(envPath, 'URL_VALUE=loaded\n')
-  logStub = sinon.stub(console, 'log')
   errorStub = sinon.stub(console, 'error')
 
   const env = dotenv.config({ path: pathToFileURL(envPath), processEnv: {}, debug: true })
@@ -244,10 +240,10 @@ t.test('takes option for encoding', ct => {
 })
 
 t.test('takes option for debug', ct => {
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   dotenv.config({ debug: 'true' })
-  ct.ok(logStub.called)
+  ct.ok(errorStub.calledWithMatch(/^┆ /))
 
   ct.end()
 })
@@ -355,13 +351,13 @@ t.test('returns any errors thrown from reading file or parsing', ct => {
 t.test('logs any errors thrown from reading file or parsing when in debug mode', ct => {
   ct.plan(2)
 
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
   const readFileSyncStub = sinon.stub(fs, 'readFileSync').returns('test=foo')
 
   readFileSyncStub.throws()
   const env = dotenv.config({ debug: true })
 
-  ct.ok(logStub.called)
+  ct.ok(errorStub.calledWithMatch(/^┆ /))
   ct.type(env.error, Error)
 
   readFileSyncStub.restore()
@@ -370,11 +366,11 @@ t.test('logs any errors thrown from reading file or parsing when in debug mode',
 t.test('logs any errors parsing when in debug and override mode', ct => {
   ct.plan(1)
 
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   dotenv.config({ debug: true, override: true })
 
-  ct.ok(logStub.called)
+  ct.ok(errorStub.calledWithMatch(/^┆ /))
 })
 
 t.test('deals with file:// path', ct => {
@@ -393,7 +389,7 @@ t.test('deals with file:// path', ct => {
 })
 
 t.test('deals with file:// path and debug true', ct => {
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   const testPath = 'file:///tests/.env'
   const env = dotenv.config({ path: testPath, debug: true })
@@ -402,13 +398,13 @@ t.test('deals with file:// path and debug true', ct => {
   ct.equal(process.env.BASIC, undefined)
   ct.equal(env.error.message, readFileErrorMessage(testPath))
 
-  ct.ok(logStub.called)
+  ct.ok(errorStub.calledWithMatch(/^┆ /))
 
   ct.end()
 })
 
 t.test('path.relative fails somehow', ct => {
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
   const pathRelativeStub = sinon.stub(path, 'relative').throws(new Error('fail'))
 
   const testPath = 'file:///tests/.env'
@@ -418,7 +414,7 @@ t.test('path.relative fails somehow', ct => {
   ct.equal(process.env.BASIC, undefined)
   ct.equal(env.error.message, 'fail')
 
-  ct.ok(logStub.called)
+  ct.ok(errorStub.calledWithMatch(/^┆ /))
 
   pathRelativeStub.restore()
 
@@ -490,10 +486,10 @@ t.test('logs if debug set', ct => {
   ct.plan(1)
 
   const testPath = 'tests/.env'
-  logStub = sinon.stub(console, 'log')
+  errorStub = sinon.stub(console, 'error')
 
   dotenv.config({ path: testPath, debug: true })
-  ct.ok(logStub.called)
+  ct.ok(errorStub.calledWithMatch(/^┆ /))
 })
 
 t.test('config treats encrypted values as ordinary strings', ct => {

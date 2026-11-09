@@ -46,11 +46,9 @@ for (const [mode, args] of Object.entries(modes)) {
       })
 
       ct.equal(result.status, 0, 'process exits successfully')
+      ct.equal(result.stdout, `${testCase.value}\n`, 'application sees the loaded setting without startup output')
       if (testCase.debug) {
-        ct.match(result.stdout, /no encoding is specified/, 'debug output remains enabled')
-        ct.ok(result.stdout.endsWith(`${testCase.value}\n`), 'application sees the loaded setting')
-      } else {
-        ct.equal(result.stdout, `${testCase.value}\n`, 'application sees the loaded setting without startup output')
+        ct.match(result.stderr, /no encoding is specified/, 'debug output goes to stderr')
       }
       if (testCase.quiet || (mode === 'preload' && testCase.preloadQuiet)) {
         ct.equal(result.stderr, '', 'first load emits no startup message')

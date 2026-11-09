@@ -34,7 +34,9 @@ for (const separator of [[], ['--']]) {
 t.test('rejects unknown dotenv options before the command', ct => {
   const result = run(['--unknown', process.execPath, '-e', 'process.exit(42)'])
   ct.equal(result.status, 1)
+  ct.equal(result.stdout, '')
   ct.match(result.stderr, /unknown option: --unknown/)
+  ct.match(result.stderr, /Usage: dotenv run/)
   ct.end()
 })
 
@@ -49,6 +51,7 @@ t.test('help before the command still shows dotenv help', ct => {
   const result = run(['--help'])
   ct.equal(result.status, 0)
   ct.match(result.stdout, /Usage: dotenv run/)
+  ct.equal(result.stderr, '')
   ct.end()
 })
 
