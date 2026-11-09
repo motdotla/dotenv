@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.9...master)
+## [Unreleased](https://github.com/motdotla/dotenv/compare/v18.0.10...master)
+
+## [18.0.10](https://github.com/motdotla/dotenv/compare/v18.0.9...v18.0.10) (2026-11-08)
+
+### Changed
+
+* Fix dotenv.parse in Vite by moving the CLI shebang to a separate entry point ([#1082](https://github.com/motdotla/dotenv/pull/1082))
 
 ## [18.0.9](https://github.com/motdotla/dotenv/compare/v18.0.8...v18.0.9) (2026-10-14)
 
