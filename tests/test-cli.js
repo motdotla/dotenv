@@ -60,7 +60,7 @@ for (const testCase of [
     const cwd = ct.testdir(testCase.files)
     const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.toUpperCase().startsWith('DOTENV_')))
     const result = cp.spawnSync(process.execPath, [
-      path.resolve(__dirname, '../dist/index.cjs'), 'run', '--debug', '--quiet',
+      path.resolve(__dirname, '../dist/cli.cjs'), 'run', '--debug', '--quiet',
       process.execPath, '-e', 'console.log(JSON.stringify({ basic: process.env.BASIC }))'
     ], { cwd, encoding: 'utf8', env: { ...env, BASIC: 'original' } })
 
