@@ -730,18 +730,16 @@ console.log(typeof config, config) // object { BASIC : 'basic' }
 
 #### Options
 
-##### debug
+##### fast
 
 Default: `false`
 
-Turn on logging to help debug why certain keys or values are not being set as you expect.
+Use the faster character-scanner parser (~2x). Default remains the classic regex parser.
 
 ```js
 const dotenv = require('dotenv')
-const buf = Buffer.from('hello world')
-const opt = { debug: true }
-const config = dotenv.parse(buf, opt)
-// expect a debug message because the buffer is not in KEY=VAL form
+const config = dotenv.parse(Buffer.from('BASIC=basic'), { fast: true })
+console.log(config) // { BASIC: 'basic' }
 ```
 
 ### Populate
