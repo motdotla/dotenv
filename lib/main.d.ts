@@ -40,12 +40,13 @@ export interface DotenvConfigOptions {
    * Default: `path.resolve(process.cwd(), '.env')`
    *
    * Specify a custom path if your file containing environment variables is located elsewhere.
-   * Can also be an array of strings, specifying multiple paths.
+   * Can also be an array of strings or URLs, specifying multiple paths.
    *
    * example: `require('dotenv').config({ path: '/custom/path/to/.env' })`
    * example: `require('dotenv').config({ path: ['/path/to/first.env', '/path/to/second.env'] })`
+   * example: `require('dotenv').config({ path: [new URL('file:///path/to/.env')] })`
    */
-  path?: string | string[] | URL;
+  path?: string | URL | (string | URL)[];
 
   /**
    * Default: `utf8`

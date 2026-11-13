@@ -10,6 +10,10 @@ config({
   debug: true,
 });
 
+config({
+  path: [new URL("file:///path/to/.env")],
+});
+
 parse("test");
 parse("test", { fast: true });
 
