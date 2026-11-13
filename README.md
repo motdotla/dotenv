@@ -656,6 +656,7 @@ HELLO=World
 
 ```sh
 $ node index.js
+◇ injected env (1) from .env
 Hello World
 ```
 
