@@ -68,30 +68,63 @@ t.test('fast parse matches classic parse for a leading UTF-8 BOM', ct => {
 })
 
 t.test('fast parse matches classic parse for an escaped backslash before the closing quote', ct => {
-  const cases = [
-    'KEY="\\\\"',
-    'KEY="\\\\"\nNEXT=ok\n',
+  // Single quotes and backticks never expand escapes, so both parsers
+  // still agree on those.
+  const parityCases = [
     "KEY='\\\\'\nNEXT=ok\n",
-    'KEY=`\\\\`\nNEXT=ok\n',
-    'WINDIR="C:\\\\Users\\\\me\\\\"\nAPI_KEY=secret\nPORT=3000\n',
-    'KEY="a\\\\b"\nNEXT=ok\n',
-    'KEY="\\\\\\\\"\nNEXT=ok\n',
-    'A="\\\\"\nB=plain\nC="quoted"\nD=last\n'
+    'KEY=`\\\\`\nNEXT=ok\n'
   ]
 
-  for (const src of cases) {
+  for (const src of parityCases) {
     assertSameParse(ct, src, JSON.stringify(src))
   }
 
-  // pin the behaviour, so the two parsers can't agree by both being wrong.
-  // dotenv does not unescape \\, so the value keeps both backslashes — the point
-  // is that the value ends at its own closing quote and the later keys survive.
+  // Double-quoted values now collapse \\ to a single backslash, matching
+  // the classic parser once #1024 lands (see the test above). Until then
+  // these are pinned for the fast parser only.
+  const fastCases = [
+    { src: 'KEY="\\\\"', expected: { KEY: '\\' } },
+    { src: 'KEY="\\\\"\nNEXT=ok\n', expected: { KEY: '\\', NEXT: 'ok' } },
+    { src: 'WINDIR="C:\\\\Users\\\\me\\\\"\nAPI_KEY=secret\nPORT=3000\n', expected: { WINDIR: 'C:\\Users\\me\\', API_KEY: 'secret', PORT: '3000' } },
+    { src: 'KEY="a\\\\b"\nNEXT=ok\n', expected: { KEY: 'a\\b', NEXT: 'ok' } },
+    { src: 'KEY="\\\\\\\\"\nNEXT=ok\n', expected: { KEY: '\\\\', NEXT: 'ok' } }
+  ]
+
+  for (const { src, expected } of fastCases) {
+    ct.same(dotenv.parse(src, { fast: true }), expected, JSON.stringify(src))
+  }
+
+  // Pin the behaviour, so the two parsers can't agree by both being wrong.
+  // An escaped backslash is a single literal backslash — the point is that
+  // the value ends at its own closing quote and the later keys survive.
   ct.same(dotenv.parse('A="\\\\"\nB=plain\nC="quoted"\nD=last\n', { fast: true }), {
-    A: '\\\\',
+    A: '\\',
     B: 'plain',
     C: 'quoted',
     D: 'last'
   })
+  ct.end()
+})
+
+t.test('fast parse treats an escaped backslash before n/r like the classic parser (see #1024)', ct => {
+  // PR #1024 fixes the classic parser so that \\n and \\r inside a
+  // double-quoted value stay a literal backslash plus the letter, instead
+  // of collapsing into a newline/carriage return. The fast parser had the
+  // same two-replace bug, so apply the same single-pass expansion here.
+  // These values are pinned for the fast parser only: the classic parser
+  // returns the same values once #1024 lands.
+  const cases = [
+    { src: 'ESCAPED_BACKSLASH_N="keep\\\\nraw"', expected: { ESCAPED_BACKSLASH_N: 'keep\\nraw' } },
+    { src: 'ESCAPED_BACKSLASH_R="keep\\\\rraw"', expected: { ESCAPED_BACKSLASH_R: 'keep\\rraw' } },
+    { src: 'ESCAPED_DOUBLE_BACKSLASH="keep\\\\\\\\slashes"', expected: { ESCAPED_DOUBLE_BACKSLASH: 'keep\\\\slashes' } },
+    { src: 'EXPAND_NEWLINES="expand\\nnew\\nlines"', expected: { EXPAND_NEWLINES: 'expand\nnew\nlines' } },
+    { src: 'OTHER="a\\tb"', expected: { OTHER: 'a\\tb' } },
+    { src: 'TRAIL="abc\\\\"', expected: { TRAIL: 'abc\\' } }
+  ]
+
+  for (const { src, expected } of cases) {
+    ct.same(dotenv.parse(src, { fast: true }), expected, `fast: ${JSON.stringify(src)}`)
+  }
   ct.end()
 })
 
@@ -218,15 +251,25 @@ t.test('fast parse handles backslashes before quotes on a later line', ct => {
   for (const quote of ['"', "'", '`']) {
     for (const count of [1, 2, 3, 4]) {
       const slashes = '\\'.repeat(count)
+      // A double-quoted value collapses each \\ pair to one backslash
+      // (see #1024); single quotes and backticks never expand escapes,
+      // and a lone trailing backslash has nothing to pair with.
+      const fastSlashes = quote === '"' ? '\\'.repeat(Math.ceil(count / 2)) : slashes
       for (const suffix of ['', '\nB=ok', '\nB="b"', '# comment']) {
         const following = suffix.startsWith('\n') ? { B: suffix.includes('"') ? 'b' : 'ok' } : {}
         const cases = [
-          { src: `A=\n${quote}a${slashes}${quote}${suffix}`, expected: { A: `a${slashes}`, ...following } },
-          { src: `A=\n${quote}a${slashes}${quote}b${quote}${suffix}`, expected: { A: `a${slashes}${quote}b`, ...following } }
+          { src: `A=\n${quote}a${slashes}${quote}${suffix}`, expected: { A: `a${slashes}`, ...following }, fastExpected: { A: `a${fastSlashes}`, ...following } },
+          { src: `A=\n${quote}a${slashes}${quote}b${quote}${suffix}`, expected: { A: `a${slashes}${quote}b`, ...following }, fastExpected: { A: `a${fastSlashes}${quote}b`, ...following } }
         ]
-        for (const { src, expected } of cases) {
-          ct.same(dotenv.parse(src), expected, `classic: ${JSON.stringify(src)}`)
-          ct.same(dotenv.parse(src, { fast: true }), expected, `fast: ${JSON.stringify(src)}`)
+        for (const { src, expected, fastExpected } of cases) {
+          if (quote === '"' && count >= 2) {
+            // The classic parser still returns the uncollapsed value
+            // until #1024 lands; pin the fast parser only.
+            ct.same(dotenv.parse(src, { fast: true }), fastExpected, `fast: ${JSON.stringify(src)}`)
+          } else {
+            ct.same(dotenv.parse(src), expected, `classic: ${JSON.stringify(src)}`)
+            ct.same(dotenv.parse(src, { fast: true }), expected, `fast: ${JSON.stringify(src)}`)
+          }
         }
       }
     }
@@ -235,12 +278,47 @@ t.test('fast parse handles backslashes before quotes on a later line', ct => {
 })
 
 t.test('fast parse matches classic across quoted value combinations', ct => {
-  const values = ['', 'plain', '"a"', "'a'", '`a`', '"a" "b"', '"a\\n', '"a\\r', '"a\\"', '"a\\\\"', '"a\\\\"b"', '"a\nb"', '"a\nb"junk', '"a\\"#x"', '"a\n"b"\nc"']
+  // '"a\\\\"' and '"a\\\\"b"' contain an escaped backslash inside a
+  // double-quoted value: the fast parser now collapses \\ to one
+  // backslash (see #1024), so they are pinned separately below.
+  const values = ['', 'plain', '"a"', "'a'", '`a`', '"a" "b"', '"a\\n', '"a\\r', '"a\\"', '"a\nb"', '"a\nb"junk', '"a\\"#x"', '"a\n"b"\nc"']
   for (const separator of ['=', '= ', '=\n', ': ', ':\n', ':\t']) {
     for (const value of values) {
       for (const suffix of ['', '\nB=ok', '\nB="b"', '#end', ' junk']) {
         const src = `A${separator}${value}${suffix}`
         assertSameParse(ct, src, JSON.stringify(src))
+      }
+    }
+  }
+  ct.end()
+})
+
+t.test('fast parse collapses escaped backslashes in quoted value combinations (see #1024)', ct => {
+  // The classic parser still returns the uncollapsed value until #1024
+  // lands; pin the fast parser only.
+  for (const separator of ['=', '= ', '=\n', ': ', ':\n', ':\t']) {
+    for (const [value, collapsed] of [['"a\\\\"', 'a\\'], ['"a\\\\"b"', 'a\\"b']]) {
+      for (const suffix of ['', '\nB=ok', '\nB="b"', '#end', ' junk']) {
+        const src = `A${separator}${value}${suffix}`
+        let expected
+        if (suffix === ' junk') {
+          if (separator === '=\n') {
+            // With '=' the separator ends before the newline, so trailing
+            // junk breaks the quoted match and the unquoted fallback only
+            // sees the empty rest of the separator's own line. (With ':'
+            // the newline belongs to the separator, so the fallback reads
+            // the next line instead — see the branch below.)
+            expected = { A: '' }
+          } else {
+            // Trailing junk after the closing quote makes the whole value
+            // unquoted, so the surrounding quotes survive and only the
+            // backslash pair collapses.
+            expected = { A: `"${collapsed}" junk` }
+          }
+        } else {
+          expected = { A: collapsed, ...(suffix.startsWith('\n') ? { B: suffix.includes('"') ? 'b' : 'ok' } : {}) }
+        }
+        ct.same(dotenv.parse(src, { fast: true }), expected, `fast: ${JSON.stringify(src)}`)
       }
     }
   }
