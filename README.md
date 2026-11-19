@@ -506,7 +506,7 @@ require('dotenv').config({ override: true })
 </details>
 <details><summary>How can I prevent committing my `.env` file to a Docker build?</summary><br/>
 
-Use the [docker prebuild hook](https://dotenvx.com/docs/features/prebuild?utm_source=github&utm_medium=readme&utm_campaign=motdotla-dotenv&utm_content=docs-prebuild).
+Use the [docker prebuild hook](https://dotenvx.com/docs/cli/prebuild/?utm_source=github&utm_medium=readme&utm_campaign=motdotla-dotenv&utm_content=docs-prebuild).
 
 ```bash
 # Dockerfile
