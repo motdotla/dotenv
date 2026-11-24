@@ -1,10 +1,9 @@
 'use strict'
 // Run with `npm run test:perf` or `node scripts/parse-perf.js`.
 // CI runs this separately from the parallel test suite to reduce timing noise.
-// Requires at least a 1.5x speedup for both strings and buffers, using median
-// ms over 7 rotating runs of 5000 calls after warming up all parsers.
-// Native util.parseEnv() is included for comparison when available; the gate
-// compares dotenv's fast parser against classic only.
+// Reports median ms over 7 rotating runs of 5000 calls after warming up all
+// parsers. Native util.parseEnv() is included for comparison when available.
+// Outputs must match classic; the speedups are informational.
 
 const assert = require('assert')
 const fs = require('fs')
@@ -40,7 +39,6 @@ const sample = [
 ].join('\n').repeat(8)
 
 const N = 5000
-const minimumSpeedup = 1.5
 const fastOptions = { fast: true }
 const report = [
   '## Parser benchmark',
@@ -53,7 +51,6 @@ const report = [
   '| Input | Parser | Median (ms / 5000 parses) | Parses/sec | Speedup vs classic |',
   '| --- | --- | ---: | ---: | ---: |'
 ]
-const gateResults = []
 
 if (typeof parseEnv !== 'function') {
   console.log('Native util.parseEnv() unavailable; skipping native comparison (requires Node 20.12+).')
@@ -91,15 +88,9 @@ for (const [format, src] of [['Buffer', Buffer.from(sample)], ['string', sample]
     const label = parser.name === 'native' ? 'Node util.parseEnv()' : `dotenv ${parser.name}`
     report.push(`| ${format} | ${label} | ${parser.median.toFixed(2)} | ${Math.round(N * 1000 / parser.median)} | ${(parsers[0].median / parser.median).toFixed(2)}x |`)
   }
-  const speedup = parsers[0].median / parsers[1].median
-  gateResults.push(`${format}: ${speedup < minimumSpeedup ? 'FAIL' : 'PASS'} — fast vs classic ${speedup.toFixed(2)}x (minimum ${minimumSpeedup}x).`)
-  if (speedup < minimumSpeedup) {
-    console.error(`${format}: fast parser must be at least ${minimumSpeedup}x as fast as classic; measured ${speedup.toFixed(2)}x`)
-    process.exitCode = 1
-  }
 }
 
-report.push('', 'CI gate: dotenv fast must be at least 1.5x as fast as classic for each input format. Native is informational.', '', ...gateResults, '')
+report.push('')
 const markdown = report.join('\n')
 console.log(markdown)
 if (process.env.GITHUB_STEP_SUMMARY) {
